@@ -136,7 +136,7 @@ flowchart TD
 | `09744b5` | `US-19` | Sprint 1 | 2026-10-19 | Creación de directorios estándar CRISP-DM (`data/raw`, `data/processed`, `src/scraping`, `src/etl`, `src/models`, `src/chatbot`, `docs`). | Estructura de carpetas creada, versionada con `.gitkeep` y sincronizada con GitHub `origin/main`. |
 | `b112494` | `US-11` | Sprint 1 | 2026-10-19 | Documentación formal de la Fase 1 CRISP-DM (`docs/01_comprension_negocio.md`). | Problema de negocio, causa raíz (inventarios aislados y brecha digital), actor validado y pregunta analítica delimitados. |
 | `25a6a4a` | `US-22` | Sprint 1 | 2026-10-19 | Pipeline ETL en `src/etl/etl_insulinas.py`, generación de dataset maestro y bitácora de descartes. | 9 descartables/fármacos no insulina excluidos (`descartes_insumos_desechables.csv`); 43 medicamentos de insulina pura normalizados con 25 campos en `insulinas_master.csv` y `.json`. |
-| `2c238f0` | `US-19` / Ops | Sprint 1 | 2026-10-21 | Creación de `AGENT.md` con contexto operativo del proyecto, backlog de 18 US y protocolo obligatorio de commits. | Documento de alineación para colaboradores e IA creado con histórico retroactivo de commits y reglas de trazabilidad. |
+| `22c8056` | `US-19` / Ops | Sprint 1 | 2026-10-21 | Creación de `AGENT.md` con contexto operativo del proyecto, backlog de 18 US y protocolo obligatorio de commits. | Documento de alineación para colaboradores e IA creado con histórico retroactivo de commits y reglas de trazabilidad. |
 
 ---
 
