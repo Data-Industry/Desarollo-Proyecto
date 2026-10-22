@@ -1,69 +1,46 @@
 # Reestructuración del Backlog en Jira (Proyecto Insulina CRISP-DM)
 
-**Objetivo:** Mantener el Product Backlog en Jira Cloud (`SCRUM`, 18 Historias de Usuario, 96 Story Points en total) alineado con las 6 fases de la metodología **CRISP-DM** y la estrategia analítica de doble flujo (Web Scraping de Farmacias Retail + Ingesta Aduanera de Importaciones).
+**Tablero Oficial Jira Cloud:** [https://danielmerengue0.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog](https://danielmerengue0.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog)  
+**Estado:** 100% Auditado y Sincronizado (18 Historias de Usuario, 96 Story Points en total).
 
 ---
 
 ## Resumen de Cuadratura del Backlog (18 Historias / 96 SP)
 
-| Épica (Fase CRISP-DM) | Historias Incluidas | Cantidad | Suma de Story Points |
-| :--- | :--- | :---: | :---: |
-| **Fase 1: Comprensión del Negocio** | `US-19` (7), `US-11` (3), `US-14` (5) | 3 | **15 SP** |
-| **Fase 2: Comprensión de los Datos** | `US-20` (7), `US-21` (7), `US-16` (5), `US-03` (5) | 4 | **24 SP** |
-| **Fase 3: Preparación de los Datos** | `US-22` (5), `US-27` (5), `US-23` (5), `US-02` (3) | 4 | **18 SP** |
-| **Fase 4: Modelado** | `US-04` (5), `US-05` (8) | 2 | **13 SP** |
-| **Fase 5: Evaluación** | `US-24` (5), `US-25` (3) | 2 | **8 SP** |
-| **Fase 6: Despliegue** | `US-06` (5), `US-26` (8), `US-10` (5) | 3 | **18 SP** |
-| **TOTAL PROYECTO** | **18 Historias de Usuario** | **18** | **96 SP** |
+| Épica (Fase CRISP-DM) | Clave Épica | Historias Incluidas | Cantidad | Story Points |
+| :--- | :---: | :--- | :---: | :---: |
+| **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3), `SCRUM-18` (US-14: 5) | 3 | **15 SP** |
+| **Fase 2: Comprensión de los Datos** | `SCRUM-30` | `SCRUM-27` (US-20: 7), `SCRUM-23` (US-21: 7), `SCRUM-20` (US-16: 5), `SCRUM-7` (US-03: 5) | 4 | **24 SP** |
+| **Fase 3: Preparación de los Datos** | `SCRUM-31` | `SCRUM-36` (US-22: 5), `SCRUM-42` (US-27: 5), `SCRUM-37` (US-23: 5), `SCRUM-24` (US-02: 3) | 4 | **18 SP** |
+| **Fase 4: Modelado** | `SCRUM-33` | `SCRUM-8` (US-04: 5), `SCRUM-9` (US-05: 8) | 2 | **13 SP** |
+| **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-38` (US-24: 5), `SCRUM-39` (US-25: 3) | 2 | **8 SP** |
+| **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-10` (US-06: 5), `SCRUM-41` (US-26: 8), `SCRUM-40` (US-10: 5) | 3 | **18 SP** |
+| **TOTAL PROYECTO** | | **18 Historias de Usuario** | **18** | **96 SP** |
 
 ---
 
-## Distribución por Sprints
+## Distribución por Sprints en Jira
 
-- **Sprint 1 (Cerrado - 22 SP):**
-  - `US-19` (7 SP): Integración y estructuración CRISP-DM en GitHub.
-  - `US-11` (3 SP): Comprensión del negocio, causas raíz y actor validado.
-  - `US-20` (7 SP): Scraping automatizado de farmacias locales (Farmacorp, Chávez, Telchi).
-  - `US-22` (5 SP): Pipeline ETL de limpieza, normalización y dataset maestro `insulinas_master.csv`.
+### SCRUM Sprint 1 (Cerrado - 22 SP)
+- **`SCRUM-28` (US-19 - 7 SP):** Integración y automatización de repositorio GitHub con directorio local.
+- **`SCRUM-15` (US-11 - 3 SP):** Definición del problema de negocio, perfil de actores y pregunta de investigación (`docs/01_comprension_negocio.md`).
+- **`SCRUM-27` (US-20 - 7 SP):** Extracción automatizada (Web Scraping) de stock y precios en portales de farmacias (Farmacorp, Chávez, Telchi).
+- **`SCRUM-36` (US-22 - 5 SP):** Pipeline ETL de limpieza, estandarización de precios y normalización de insulinas (`insulinas_master.csv`).
 
-- **Sprint 2 (Activo - 22 SP):**
-  - `US-21` (7 SP): Ingesta, limpieza y normalización de importaciones públicas de insulina (Partida NANDINA `3004.31.00.00`).
-  - `US-16` (5 SP): Auditoría de calidad de datos y análisis exploratorio (EDA) multivariable.
-  - `US-03` (5 SP): Script de georreferenciación de sucursales y clasificación por anillos urbanos (1 al 8).
-  - `US-27` (5 SP): Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento.
+### SCRUM Sprint 2 (Activo - 22 SP)
+- **`SCRUM-23` (US-21 - 7 SP):** Ingesta y normalización de importaciones aduaneras de insulina (Partida NANDINA `3004.31.00.00`).
+- **`SCRUM-20` (US-16 - 5 SP):** Auditoría automatizada de calidad de datos y análisis exploratorio (EDA).
+- **`SCRUM-7` (US-03 - 5 SP):** Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8).
+- **`SCRUM-42` (US-27 - 5 SP):** Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento.
 
-- **Sprints Posteriores (52 SP):** Modelado predictivo, evaluación de Recall, chatbot conversacional y despliegue final.
-
----
-
-## Detalle Técnico de Historias de Usuario
-
-### Fase 1: Comprensión del Negocio (15 SP)
-- **`US-19` (7 SP) [Sprint 1]:** Conexión de directorio local con GitHub y arquitectura de carpetas CRISP-DM.
-- **`US-11` (3 SP) [Sprint 1]:** Formalización en `docs/01_comprension_negocio.md` del problema, actores y preguntas analíticas.
-- **`US-14` (5 SP):** Definición formal de metas de minería, priorización de métrica de Recall, ética y plan de contingencia.
-
-### Fase 2: Comprensión de los Datos (24 SP)
-- **`US-20` (7 SP) [Sprint 1]:** Web scraping automatizado multicanal de portales farmacéuticos en Santa Cruz.
-- **`US-21` (7 SP) [Sprint 2]:** Ingesta, filtrado y normalización de importaciones aduaneras de insulina (INE / Aduana Nacional, subpartida `3004.31.00.00`).
-- **`US-16` (5 SP) [Sprint 2]:** Perfilado, evaluación de completitud, dispersión de precios y EDA de datasets.
-- **`US-03` (5 SP) [Sprint 2]:** Geocodificación y mapeo territorial de sucursales en los 8 anillos de Santa Cruz de la Sierra.
-
-### Fase 3: Preparación de los Datos (18 SP)
-- **`US-22` (5 SP) [Sprint 1]:** Pipeline ETL en Python, descarte de descartables y generación de `insulinas_master.csv` con 25 campos.
-- **`US-27` (5 SP) [Sprint 2]:** Fusión de series temporales de importación con inventarios retail de farmacias y cálculo de lags logísticos de reposición.
-- **`US-23` (5 SP):** Imputación zonal de faltantes en anillos periféricos y cruce con calendario de pago de pensiones (Banco Unión).
-- **`US-02` (3 SP):** Feature Engineering y cálculo de matriz de correlación temporal y espacial.
-
-### Fase 4: Modelado (13 SP)
-- **`US-04` (5 SP):** Análisis espacial de densidad, proximidad y cobertura de farmacias con stock en los anillos 1 al 8.
-- **`US-05` (8 SP):** Entrenamiento y serialización de modelos supervisados (Árboles de Decisión, Regresión Logística) para clasificar probabilidad de existencia de stock ($P \ge 70\%$).
-
-### Fase 5: Evaluación (8 SP)
-- **`US-24` (5 SP):** Evaluación rigurosa con optimización estricta de Recall (Sensibilidad) para erradicar falsos positivos de stock para adultos mayores.
-- **`US-25` (3 SP):** Generación automatizada de reportes de desempeño, curvas ROC y análisis de importancia de variables (SHAP / Feature Importance).
-
-### Fase 6: Despliegue (18 SP)
-- **`US-06` (5 SP):** Motor lógico del semáforo predictivo preventivo (`VERDE`, `AMARILLO`, `ROJO`) en tiempo real.
-- **`US-26` (8 SP):** Chatbot conversacional accesible en lenguaje natural para consultas de stock, precios y farmacias cercanas.
-- **`US-10` (5 SP):** Sistema automatizado de alertas preventivas en el chatbot (5 a 7 días antes de agotar el frasco de insulina).
+### Product Backlog Priorizado (52 SP)
+- `SCRUM-18` (US-14 - 5 SP): Metas de minería, métricas de éxito (Recall) y cronograma.
+- `SCRUM-37` (US-23 - 5 SP): Imputación zonal de faltantes y cruce con calendario bancario Banco Unión.
+- `SCRUM-24` (US-02 - 3 SP): Feature Engineering y matriz de correlación temporal y espacial.
+- `SCRUM-8` (US-04 - 5 SP): Análisis espacial de cobertura y densidad por anillos urbanos.
+- `SCRUM-9` (US-05 - 8 SP): Entrenamiento de modelos supervisados de disponibilidad de stock.
+- `SCRUM-38` (US-24 - 5 SP): Evaluación con optimización de Recall para minimizar falsos positivos.
+- `SCRUM-39` (US-25 - 3 SP): Generación automatizada de reportes de desempeño y Feature Importance.
+- `SCRUM-10` (US-06 - 5 SP): Motor lógico del semáforo predictivo preventivo.
+- `SCRUM-41` (US-26 - 8 SP): Chatbot conversacional accesible para adultos mayores y cuidadores.
+- `SCRUM-40` (US-10 - 5 SP): Sistema de alertas preventivas tempranas (5 a 7 días antes de agotar).
