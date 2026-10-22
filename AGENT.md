@@ -151,7 +151,7 @@ flowchart TD
 | **#008** | `addfab6` | Ops / `US-19` | Sprint 1 | 2026-10-21 | Sincronización y ajuste inicial de bitácora en `AGENT.md`. | Trazabilidad alineada con GitHub. |
 | **#009** | `7b0c494` | Ops / Refactor | Sprint 1 | 2026-10-21 | Numeración ascendente secuencial (#001-#009), adición de `US-21` (7 SP) y `US-27` (5 SP) al Sprint 2 (22 SP), eliminación de US-08 redundante. | Backlog cuadrado en 96 SP (18 US), Sprint 2 configurado con 22 SP y protocolo de commits ordenado secuencialmente. |
 | **#010** | `f6932f1` | Ops / Sync | Sprint 1 | 2026-10-21 | Sincronización y ajuste de hashes git en la bitácora de `AGENT.md`. | Bitácora 100% consistente con la historia de git. |
-| **#011** | *(Pendiente)* | Ops / Jira Sync | Sprint 2 | 2026-10-22 | Limpieza y sincronización directa en Jira Cloud: eliminación de SCRUM-12, creación de SCRUM-42 (US-27), actualización de SCRUM-23 (US-21) a 7 SP y mapeo 1:1 de claves. | Tablero Jira Cloud auditado y 100% cuadrado en 18 US y 96 SP (Sprint 1: 22 SP, Sprint 2: 22 SP, Backlog: 52 SP). |
+| **#011** | `a4ae488` | Ops / Jira Sync | Sprint 2 | 2026-10-22 | Limpieza y sincronización directa en Jira Cloud: eliminación de SCRUM-12, creación de SCRUM-42 (US-27), actualización de SCRUM-23 (US-21) a 7 SP y mapeo 1:1 de claves. | Tablero Jira Cloud auditado y 100% cuadrado en 18 US y 96 SP (Sprint 1: 22 SP, Sprint 2: 22 SP, Backlog: 52 SP). |
 
 ---
 
