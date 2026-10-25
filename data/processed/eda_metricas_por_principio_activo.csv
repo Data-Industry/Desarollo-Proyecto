@@ -1,0 +1,11 @@
+﻿principio_activo,tipo_accion,formato_presentacion,total_skus,precio_min,precio_promedio,precio_max,precio_por_100ui_promedio
+Insulina Asparta,Acción Ultrarrápida (Prandial),Cartucho para Pluma Reutilizable,2,164.42,170.41,176.4,56.8
+Insulina Glargina,Acción Prolongada (Basal),Cartucho para Pluma Reutilizable,3,360.89,574.94,998.71,154.66
+Insulina Glargina,Acción Prolongada (Basal),Lapicero Prellenado (Pluma),3,434.96,574.35,660.3,191.45
+Insulina Glargina,Acción Prolongada (Basal),Vial / Frasco Ampolla,7,547.3,939.07,1390.35,179.13
+Insulina Glulisina,Acción Rápida (Prandial),Cartucho para Pluma Reutilizable,1,610.81,610.81,610.81,61.08
+Insulina Glulisina,Acción Rápida (Prandial),Lapicero Prellenado (Pluma),2,429.97,440.51,451.05,146.83
+Insulina Glulisina,Acción Rápida (Prandial),Vial / Frasco Ampolla,1,641.7,641.7,641.7,64.17
+Insulina Humana Mixta / Bifásica,Acción Mixta / Bifásica,Vial / Frasco Ampolla,5,251.75,323.62,399.81,32.36
+Insulina Humana NPH (N),Acción Intermedia (Basal),Vial / Frasco Ampolla,9,140.15,196.54,249.9,19.65
+Insulina Humana Regular (R),Acción Rápida (Prandial),Vial / Frasco Ampolla,10,143.13,215.62,305.39,21.56

@@ -1,0 +1,7 @@
+﻿pais_origen,codigo_iso_pais,total_despachos,total_kilos_netos,total_cif_usd,costo_cif_usd_kg_medio,costo_cif_bob_kg_medio,viales_totales_estimados
+Alemania,DEU,23,11966.0,3486241.0,288.89,2870.48,299150
+Francia,FRA,11,5770.0,1705600.0,294.55,2871.21,144250
+India,IND,12,5650.0,1314000.0,232.5,2360.3,141250
+Dinamarca,DNK,12,4360.0,1139500.0,260.32,2662.81,109000
+Argentina,ARG,6,1300.0,304200.0,233.33,2359.33,32500
+Estados Unidos,USA,6,1050.0,336500.0,318.33,3276.55,26250
