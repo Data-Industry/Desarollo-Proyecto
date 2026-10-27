@@ -1,0 +1,43 @@
+﻿fecha_periodo,farmacia,principio_activo,marca_comercial,productos_observados,productos_stock_normal,productos_agotados,productos_ultimas_unidades,productos_disponibles,tasa_disponibilidad
+2026-10,Farmacias Chávez,Insulina Asparta (Acción Ultrarrápida),Asparpen,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Glargina (Acción Prolongada),Basalog,4,0,0,4,4,1.0
+2026-10,Farmacias Chávez,Insulina Glargina (Acción Prolongada),Glaripen,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Glargina (Acción Prolongada),Glaritus,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Glargina (Acción Prolongada),Lantus,8,8,0,0,8,1.0
+2026-10,Farmacias Chávez,Insulina Glargina (Acción Prolongada),Toujeo,4,0,0,4,4,1.0
+2026-10,Farmacias Chávez,Insulina Glulisina (Acción Rápida),Apidra,8,8,0,0,8,1.0
+2026-10,Farmacias Chávez,Insulina Humana Mixta / Bifásica,Humodar C25,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana Mixta / Bifásica,Novolin 70/30,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana NPH (Acción Intermedia),Densulin N,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana NPH (Acción Intermedia),Glinux N,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana NPH (Acción Intermedia),Humodar NPH,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana NPH (Acción Intermedia),Novolin N,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana Regular / Rápida,Densulin R,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana Regular / Rápida,Humodar R,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana Regular / Rápida,Insugen,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insulina Humana Regular / Rápida,Novolin R,4,4,0,0,4,1.0
+2026-10,Farmacias Chávez,Insumo Médico (Jeringa / Aguja),Insulina Genérica,4,4,0,0,4,1.0
+2026-10,Farmacias Telchi,Insulina Humana Mixta / Bifásica,Novolin 70/30,2,2,0,0,2,1.0
+2026-10,Farmacias Telchi,Insulina Humana NPH (Acción Intermedia),Novolin N,2,2,0,0,2,1.0
+2026-10,Farmacias Telchi,Insulina Humana Regular / Rápida,Novolin R,2,2,0,0,2,1.0
+2026-10,Farmacias Telchi,Insumo Médico (Jeringa / Aguja),Insulina Genérica,6,6,0,0,6,1.0
+2026-10,Farmacorp,Insulina Asparta (Acción Ultrarrápida),Asparpen,4,0,4,0,0,0.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Basalog,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Densulent,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Glaripen,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Glaritus,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Lantus,8,8,0,0,8,1.0
+2026-10,Farmacorp,Insulina Glargina (Acción Prolongada),Toujeo,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Glulisina (Acción Rápida),Apidra,8,8,0,0,8,1.0
+2026-10,Farmacorp,Insulina Humana / Análogo,Humodar NPH,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Mixta / Bifásica,Humodar C25,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Mixta / Bifásica,Novolin 70/30,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana NPH (Acción Intermedia),Densulin N,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana NPH (Acción Intermedia),Glinux N,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana NPH (Acción Intermedia),Insugen,4,0,4,0,0,0.0
+2026-10,Farmacorp,Insulina Humana NPH (Acción Intermedia),Novolin N,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Regular / Rápida,Densulin R,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Regular / Rápida,Humodar R,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Regular / Rápida,Insugen,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insulina Humana Regular / Rápida,Novolin R,4,4,0,0,4,1.0
+2026-10,Farmacorp,Insumo Médico (Jeringa / Aguja),Insulina Genérica,20,17,3,0,17,0.85
