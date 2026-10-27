@@ -27,12 +27,12 @@
 - **`SCRUM-27` (US-20 - 7 SP):** Extracción automatizada (Web Scraping) de stock y precios en portales de farmacias (Farmacorp, Chávez, Telchi).
 - **`SCRUM-36` (US-22 - 5 SP):** Pipeline ETL de limpieza, estandarización de precios y normalización de insulinas (`insulinas_master.csv`).
 
-### SCRUM Sprint 2 (Activo / En Cierre - 25 SP)
-- **`SCRUM-23` (US-21 - 7 SP):** Ingesta y normalización de importaciones aduaneras de insulina (Partida NANDINA `3004.31.00.00`) con Tipo de Cambio Oficial del BCB. **[Completada]**
-- **`SCRUM-20` (US-16 - 5 SP):** Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) multivariable integrando la fusión de US-27 y geolocalización de US-03. **[Completada]**
-- **`SCRUM-7` (US-03 - 5 SP):** Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8) en Santa Cruz. **[Completada - Mía Wayar]**
-- **`SCRUM-42` (US-27 - 5 SP):** Fusión de fuentes (Scraping + Importaciones) y preparación de variables de rezago temporal de abastecimiento. **[Completada - Mía Wayar]**
-- **`SCRUM-43` (US-28 - 3 SP):** Ingesta automatizada del tipo de cambio oficial del BCB (`https://www.bcb.gob.bo/grafico_evolutivo/`) y serie histórica diaria (`Tipo_de_cambio.csv`). **[Completada]**
+### SCRUM Sprint 2 (Cerrado al 100% - 25 SP)
+- **`SCRUM-23` (US-21 - 7 SP):** Ingesta y normalización de importaciones aduaneras de insulina (Partida NANDINA `3004.31.00.00`) con Tipo de Cambio Oficial del BCB. **[Finalizada / Done]**
+- **`SCRUM-20` (US-16 - 5 SP):** Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) multivariable integrando la fusión de US-27 y geolocalización de US-03. **[Finalizada / Done]**
+- **`SCRUM-7` (US-03 - 5 SP):** Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8) en Santa Cruz. **[Finalizada / Done - Mía Wayar]**
+- **`SCRUM-42` (US-27 - 5 SP):** Fusión de fuentes (Scraping + Importaciones) y preparación de variables de rezago temporal de abastecimiento. **[Finalizada / Done - Mía Wayar]**
+- **`SCRUM-43` (US-28 - 3 SP):** Ingesta automatizada del tipo de cambio oficial del BCB (`https://www.bcb.gob.bo/grafico_evolutivo/`) y serie histórica diaria (`Tipo_de_cambio.csv`). **[Finalizada / Done]**
 
 ### Product Backlog Priorizado (52 SP)
 - `SCRUM-18` (US-14 - 5 SP): Metas de minería, métricas de éxito (Recall) y cronograma.
