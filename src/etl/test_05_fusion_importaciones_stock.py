@@ -11,16 +11,20 @@ PROJECT_DIR = CURRENT_DIR.parent.parent
 if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
-from fusion_importaciones_stock import (
-    RAW_DIR,
-    build_import_retail_mapping,
-    build_monthly_import_retail_fusion,
-    build_monthly_retail_summary,
-    build_prepared_import_lags,
-    build_retail_history,
-    build_santa_cruz_import_monthly,
-    normalize_stock_status,
-)
+import importlib
+try:
+    _fusion_mod = importlib.import_module("src.etl.05_fusion_importaciones_stock")
+except ImportError:
+    _fusion_mod = importlib.import_module("05_fusion_importaciones_stock")
+
+RAW_DIR = _fusion_mod.RAW_DIR
+build_import_retail_mapping = _fusion_mod.build_import_retail_mapping
+build_monthly_import_retail_fusion = _fusion_mod.build_monthly_import_retail_fusion
+build_monthly_retail_summary = _fusion_mod.build_monthly_retail_summary
+build_prepared_import_lags = _fusion_mod.build_prepared_import_lags
+build_retail_history = _fusion_mod.build_retail_history
+build_santa_cruz_import_monthly = _fusion_mod.build_santa_cruz_import_monthly
+normalize_stock_status = _fusion_mod.normalize_stock_status
 
 
 class TestFusionImportacionesStock(unittest.TestCase):

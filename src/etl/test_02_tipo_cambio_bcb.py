@@ -4,15 +4,19 @@ from pathlib import Path
 import unittest
 import pandas as pd
 
-from src.etl.ingesta_tipo_cambio_bcb import (
-    BCB_DAILY_PROCESSED_CSV,
-    BCB_MONTHLY_PROCESSED_CSV,
-    BCB_RAW_CSV,
-    get_official_exchange_rate,
-    load_raw_bcb_exchange_rate,
-    process_bcb_exchange_rates,
-    run_bcb_pipeline,
-)
+import importlib
+try:
+    _mod_bcb = importlib.import_module("src.etl.02_ingesta_tipo_cambio_bcb")
+except ImportError:
+    _mod_bcb = importlib.import_module("02_ingesta_tipo_cambio_bcb")
+
+BCB_DAILY_PROCESSED_CSV = _mod_bcb.BCB_DAILY_PROCESSED_CSV
+BCB_MONTHLY_PROCESSED_CSV = _mod_bcb.BCB_MONTHLY_PROCESSED_CSV
+BCB_RAW_CSV = _mod_bcb.BCB_RAW_CSV
+get_official_exchange_rate = _mod_bcb.get_official_exchange_rate
+load_raw_bcb_exchange_rate = _mod_bcb.load_raw_bcb_exchange_rate
+process_bcb_exchange_rates = _mod_bcb.process_bcb_exchange_rates
+run_bcb_pipeline = _mod_bcb.run_bcb_pipeline
 
 
 class TestIngestaTipoCambioBCB(unittest.TestCase):

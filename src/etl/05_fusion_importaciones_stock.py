@@ -16,7 +16,14 @@ from typing import Dict, Iterable, List, Tuple
 
 import pandas as pd
 
-from etl_insulinas import identify_brand_and_lab, identify_pharmacology, parse_presentation
+import importlib
+try:
+    _mod_etl = importlib.import_module("src.etl.01_etl_insulinas")
+except ImportError:
+    _mod_etl = importlib.import_module("01_etl_insulinas")
+identify_brand_and_lab = _mod_etl.identify_brand_and_lab
+identify_pharmacology = _mod_etl.identify_pharmacology
+parse_presentation = _mod_etl.parse_presentation
 
 
 CURRENT_DIR = Path(__file__).resolve().parent

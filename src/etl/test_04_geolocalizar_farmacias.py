@@ -9,11 +9,15 @@ PROJECT_DIR = CURRENT_DIR.parent.parent
 if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
-from geolocalizar_farmacias import (
-    asignar_anillo_por_direccion,
-    detectar_anillos_en_direccion,
-    procesar_registros,
-)
+import importlib
+try:
+    _geo_mod = importlib.import_module("src.etl.04_geolocalizar_farmacias")
+except ImportError:
+    _geo_mod = importlib.import_module("04_geolocalizar_farmacias")
+
+asignar_anillo_por_direccion = _geo_mod.asignar_anillo_por_direccion
+detectar_anillos_en_direccion = _geo_mod.detectar_anillos_en_direccion
+procesar_registros = _geo_mod.procesar_registros
 
 
 class TestGeolocalizarFarmacias(unittest.TestCase):

@@ -27,7 +27,7 @@ Con el fin de erradicar discrepancias y cumplir con los criterios de auditoría 
 
 ---
 
-## 3. Arquitectura del Pipeline ETL (`src/etl/ingesta_tipo_cambio_bcb.py`)
+## 3. Arquitectura del Pipeline ETL (`src/etl/02_ingesta_tipo_cambio_bcb.py`)
 
 El pipeline ejecuta las siguientes etapas automáticas:
 1. **Doble Mecanismo de Ingesta (Online / Offline):**

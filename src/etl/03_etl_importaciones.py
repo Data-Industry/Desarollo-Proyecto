@@ -36,16 +36,13 @@ import sys
 if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
 
+import importlib
 try:
-    from src.etl.ingesta_tipo_cambio_bcb import (
-        get_official_exchange_rate,
-        run_bcb_pipeline,
-    )
+    _mod_bcb = importlib.import_module("src.etl.02_ingesta_tipo_cambio_bcb")
 except ImportError:
-    from ingesta_tipo_cambio_bcb import (
-        get_official_exchange_rate,
-        run_bcb_pipeline,
-    )
+    _mod_bcb = importlib.import_module("02_ingesta_tipo_cambio_bcb")
+get_official_exchange_rate = _mod_bcb.get_official_exchange_rate
+run_bcb_pipeline = _mod_bcb.run_bcb_pipeline
 
 # Subpartida NANDINA objetivo
 PARTIDA_INSULINA_TARGET = "3004.31.00.00"

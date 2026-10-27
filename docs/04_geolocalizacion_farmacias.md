@@ -27,7 +27,7 @@ etiquetas generales de cobertura de los datasets de productos.
 
 ## Estrategia híbrida
 
-`src/etl/geolocalizar_farmacias.py` crea `data/processed/farmacias_geolocalizadas.csv` y aplica el siguiente orden:
+`src/etl/04_geolocalizar_farmacias.py` crea `data/processed/farmacias_geolocalizadas.csv` y aplica el siguiente orden:
 
 1. **Dirección explícita.** Reconoce únicamente expresiones de anillo del 1 al 8 escritas en la dirección oficial. Una sola referencia se registra como `ASIGNADO` con método `DIRECCION_EXPLICITA`.
 2. **Ambigüedad.** Si una dirección contiene dos anillos, como “entre 2do y 3er Anillo”, no asigna ningún valor y registra `AMBIGUO_EN_BORDE`.

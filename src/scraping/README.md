@@ -18,10 +18,11 @@ Este módulo implementa scripts automatizados y resilientes para la extracción 
 
 ```text
 src/scraping/
-├── scraper_farmacorp.py    # Scraper especializado para la cadena Farmacorp
-├── scraper_chavez.py       # Scraper automatizado con Playwright para Farmacias Chávez
-├── main_scraper.py         # Orquestador del pipeline, consolidación y exportación
-└── README.md               # Documentación técnica del módulo
+├── 01_scraper_farmacorp.py  # Scraper especializado para la cadena Farmacorp
+├── 02_scraper_chavez.py     # Scraper automatizado con Playwright para Farmacias Chávez
+├── 03_scraper_telchi.py     # Scraper para catálogo de Farmacias Telchi
+├── 04_main_scraper.py       # Orquestador del pipeline, consolidación y exportación
+└── README.md                # Documentación técnica del módulo
 ```
 
 ---
@@ -33,7 +34,7 @@ Los datos se exportan automáticamente en formato CSV y JSON estructurado:
 | Campo | Tipo | Descripción |
 | :--- | :---: | :--- |
 | `id_origen` | string | Identificador único del producto en el catálogo de la farmacia. |
-| `farmacia` | string | Cadena farmacéutica (`Farmacorp`, `Farmacias Chávez`). |
+| `farmacia` | string | Cadena farmacéutica (`Farmacorp`, `Farmacias Chávez`, `Farmacias Telchi`). |
 | `nombre_comercial` | string | Nombre y presentación comercial completa del fármaco. |
 | `principio_activo` | string | Clasificación farmacológica (ej. *Insulina Glargina*, *Insulina Humana NPH*). |
 | `marca_laboratorio` | string | Marca o laboratorio fabricante. |
@@ -53,7 +54,7 @@ Los datos se exportan automáticamente en formato CSV y JSON estructurado:
 Para ejecutar la extracción completa de forma manual o programada:
 
 ```powershell
-python src/scraping/main_scraper.py
+python src/scraping/04_main_scraper.py
 ```
 
 Los resultados consolidados se almacenan en:

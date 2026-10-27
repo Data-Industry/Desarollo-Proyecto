@@ -20,7 +20,7 @@ Se consolidan cuatro snapshots históricos reales: todos pertenecen al 19 de oct
 
 ## Consolidación histórica retail
 
-`src/etl/fusion_importaciones_stock.py` descubre todos los archivos `data/raw/insulina_precios_stock_*.csv`, deduplica archivos idénticos por SHA-256 y conserva `archivo_origen` y `snapshot_id` en `data/processed/retail_stock_historico_consolidado.csv`.
+`src/etl/05_fusion_importaciones_stock.py` descubre todos los archivos `data/raw/insulina_precios_stock_*.csv`, deduplica archivos idénticos por SHA-256 y conserva `archivo_origen` y `snapshot_id` en `data/processed/retail_stock_historico_consolidado.csv`.
 
 El resumen `data/processed/retail_stock_mensual_resumen.csv` se agrupa por período, farmacia, principio activo y, cuando existe, marca canónica. Cada fila de snapshot es una observación: `productos_observados` es su conteo total. Las categorías mutuamente excluyentes son `productos_stock_normal` (`DISPONIBLE`), `productos_ultimas_unidades` (`ULTIMAS_UNIDADES`) y `productos_agotados` (`AGOTADO`), por lo que su suma equivale a `productos_observados`.
 

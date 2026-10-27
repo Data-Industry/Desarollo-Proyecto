@@ -29,12 +29,12 @@ El módulo calcula métricas financieras, logísticas y un **semáforo predictiv
 
 ### Ejecutar el pipeline ETL:
 ```powershell
-python src/etl/etl_importaciones.py
+python src/etl/03_etl_importaciones.py
 ```
 
 ### Ejecutar las pruebas automatizadas de validación:
 ```powershell
-python -m unittest src/etl/test_importaciones.py
+python -m unittest src/etl/test_03_importaciones.py
 ```
 Salida esperada:
 ```text

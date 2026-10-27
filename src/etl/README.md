@@ -24,7 +24,7 @@ Este módulo implementa el pipeline de Extracción, Transformación y Carga (ETL
 
 ```mermaid
 flowchart TD
-    A["data/raw/insulina_precios_stock_latest.csv (52 registros)"] --> B["Pipeline ETL (src/etl/etl_insulinas.py)"]
+    A["data/raw/insulina_precios_stock_latest.csv (52 registros)"] --> B["Pipeline ETL (src/etl/01_etl_insulinas.py)"]
     
     B --> C{"Filtro de Exclusión"}
     C -- "Jeringas, agujas o fármacos no insulina" --> D["data/processed/descartes_insumos_desechables.csv (9 registros descartados)"]
@@ -90,7 +90,7 @@ Para ejecutar el pipeline ETL y actualizar el dataset maestro:
 
 ```powershell
 # Desde la raíz del repositorio:
-python src/etl/etl_insulinas.py
+python src/etl/01_etl_insulinas.py
 ```
 
 ### Salida esperada:

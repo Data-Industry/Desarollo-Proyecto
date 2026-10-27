@@ -17,9 +17,19 @@ PROJECT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
 if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
 
-from src.scraping.scraper_farmacorp import scrape_farmacorp
-from src.scraping.scraper_chavez import scrape_chavez
-from src.scraping.scraper_telchi import scrape_telchi
+import importlib
+try:
+    _mod_fcorp = importlib.import_module("src.scraping.01_scraper_farmacorp")
+    _mod_chavez = importlib.import_module("src.scraping.02_scraper_chavez")
+    _mod_telchi = importlib.import_module("src.scraping.03_scraper_telchi")
+except ImportError:
+    _mod_fcorp = importlib.import_module("01_scraper_farmacorp")
+    _mod_chavez = importlib.import_module("02_scraper_chavez")
+    _mod_telchi = importlib.import_module("03_scraper_telchi")
+
+scrape_farmacorp = _mod_fcorp.scrape_farmacorp
+scrape_chavez = _mod_chavez.scrape_chavez
+scrape_telchi = _mod_telchi.scrape_telchi
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("ScraperOrchestrator")

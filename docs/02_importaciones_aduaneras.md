@@ -48,7 +48,7 @@ En el marco de la Nomenclatura Arancelaria Común de los Países Miembros de la 
 
 ---
 
-## 2.4. Estructura y Flujo del Pipeline ETL (`src/etl/etl_importaciones.py`)
+## 2.4. Estructura y Flujo del Pipeline ETL (`src/etl/03_etl_importaciones.py`)
 
 ```mermaid
 flowchart TD
