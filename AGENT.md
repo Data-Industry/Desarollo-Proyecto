@@ -51,11 +51,12 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 1: Comprensión del Negocio** | `SCRUM-15` | `US-11` | Definición del problema de negocio, perfil de actores y pregunta de investigación | 3 | **Completada (Sprint 1)** |
 | **Fase 1: Comprensión del Negocio** | `SCRUM-18` | `US-14` | Objetivos de minería de datos, criterios de éxito, ética y plan CRISP-DM | 5 | Backlog (Fase 1) |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-27` | `US-20` | Extracción automatizada (Web Scraping) de stock y precios en portales de farmacias | 7 | **Completada (Sprint 1)** |
-| **Fase 2: Comprensión de los Datos** | `SCRUM-23` | `US-21` | Ingesta y normalización de importaciones aduaneras de insulina (Partida 3004.31.00.00) | 7 | **Sprint 2 (Activo)** |
-| **Fase 2: Comprensión de los Datos** | `SCRUM-20` | `US-16` | Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) | 5 | **Sprint 2 (Activo)** |
-| **Fase 2: Comprensión de los Datos** | `SCRUM-7` | `US-03` | Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8) | 5 | **Sprint 2 (Activo)** |
+| **Fase 2: Comprensión de los Datos** | `SCRUM-23` | `US-21` | Ingesta y normalización de importaciones aduaneras de insulina (Partida 3004.31.00.00) | 7 | **Completada (Sprint 2)** |
+| **Fase 2: Comprensión de los Datos** | `SCRUM-20` | `US-16` | Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) | 5 | **Completada (Sprint 2)** |
+| **Fase 2: Comprensión de los Datos** | `SCRUM-7` | `US-03` | Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8) | 5 | **Completada (Sprint 2 - Mía)** |
+| **Fase 2: Comprensión de los Datos** | `SCRUM-43` | `US-28` | Ingesta automatizada del tipo de cambio oficial del BCB y serie histórica diaria | 3 | **Completada (Sprint 2)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-36` | `US-22` | Pipeline ETL de limpieza, estandarización de precios y normalización de insulinas | 5 | **Completada (Sprint 1)** |
-| **Fase 3: Preparación de los Datos** | `SCRUM-42` | `US-27` | Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento | 5 | **Sprint 2 (Activo)** |
+| **Fase 3: Preparación de los Datos** | `SCRUM-42` | `US-27` | Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento | 5 | **Completada (Sprint 2 - Mía)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-37` | `US-23` | Script de imputación zonal de valores faltantes y cruce con calendario bancario | 5 | Backlog (Fase 3) |
 | **Fase 3: Preparación de los Datos** | `SCRUM-24` | `US-02` | Ingeniería de características (Feature Engineering) y matriz correlacional de variables | 3 | Backlog (Fase 3) |
 | **Fase 4: Modelado** | `SCRUM-8` | `US-04` | Análisis espacial de cobertura y densidad por anillos urbanos | 5 | Backlog (Fase 4) |
@@ -68,9 +69,9 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
-- **SCRUM Sprint 2 (Activo - 22 SP):** `SCRUM-23` (7 SP) + `SCRUM-20` (5 SP) + `SCRUM-7` (5 SP) + `SCRUM-42` (5 SP) = **22 Story Points**.
+- **SCRUM Sprint 2 (Activo / En Cierre - 25 SP):** `SCRUM-23` (7 SP) + `SCRUM-20` (5 SP) + `SCRUM-7` (5 SP) + `SCRUM-42` (5 SP) + `SCRUM-43` (3 SP) = **25 Story Points**.
 - **Product Backlog Restante:** 10 Historias = **52 Story Points**.
-- **Total Proyecto:** 18 Historias | **96 Story Points**.
+- **Total Proyecto:** 19 Historias | **99 Story Points**.
 
 ---
 
@@ -155,14 +156,22 @@ flowchart TD
 | **#012** | `2a431fb` | `US-21` (`SCRUM-23`) | Sprint 2 | 2026-10-25 | Pipeline ETL de importaciones aduaneras de insulina en Bolivia (NANDINA 3004.31.00.00), filtro estricto con auditoría de descartes no insulina, métricas financieras/clínicas y semáforo preventivo upstream en data/processed/. | 100% verificado: 70 despachos de insulina pura, 6 descartes auditados, dataset maestro CSV/JSON, resumen mensual con alertas tempranas y 8/8 pruebas unitarias aprobadas. |
 | **#013** | `2c34fb8` | `US-21` (`SCRUM-23`) | Sprint 2 | 2026-10-25 | Integración del régimen de Tipo de Cambio Fluctuante (BOB/USD) en el pipeline ETL de importaciones, exportación de matriz histórica de divisas y recálculo de costos de reposición farmacéutica en Bs. | Verificado con 8/8 tests aprobados: sustitución del 6.96 estático por cotización dinámica mensual/diaria, validación matemática de CIF BOB y documentación en docs/02_importaciones_aduaneras.md. |
 | **#014** | `dea2604` | `US-16` (`SCRUM-20`) | Sprint 2 | 2026-10-25 | Auditoría automatizada de calidad y EDA multifuente integrando scraping retail de farmacias e importaciones aduaneras con tipo de cambio fluctuante; generación de 5 figuras estadísticas en docs/figures/ y 4 tablas analíticas en data/processed/. | 100% verificado: 5/5 pruebas unitarias aprobadas, análisis de dispersión de precios entre cadenas (hasta 17.4% de brecha en Novolin), transmisión cambiaria (+91.6% en Bs/kg) y documentación formal en docs/03_analisis_exploratorio_datos.md. |
+| **#015** | `b8be429` | `US-03` (`SCRUM-7`) | Sprint 2 | 2026-10-26 | Implementación de script de geolocalización de sucursales farmacéuticas y clasificación espacial por anillos urbanos 1 al 8 en Santa Cruz de la Sierra (`farmacias_geolocalizadas.csv`). | Criterios de aceptación verificados: sucursales mapeadas por anillos concéntricos, manejo determinista de direcciones ambiguas y documentación formal en `docs/04_geolocalizacion_farmacias.md`. |
+| **#016** | `da5246d` | `US-27` (`SCRUM-42`) | Sprint 2 | 2026-10-26 | Fusión de fuentes de importaciones aduaneras y stock retail con preparación de variables temporales de rezago (`lag_0m` a `lag_3m`), deduplicación de snapshots por SHA-256 y correspondencia de catálogo. | Criterios verificados: snapshots consolidados sin duplicados, matriz de correspondencia de marcas y advertencia metodológica explícita de rezagos preparados en `docs/05_fusion_importaciones_stock_lags.md`. |
+| **#017** | `PENDING` | `US-28` / `US-21` / `US-16` | Sprint 2 | 2026-10-27 | Pipeline de ingesta oficial del tipo de cambio del BCB (`Tipo_de_cambio.csv` delimitado por `;`), eliminación de funciones sintéticas de cotización, actualización de costos CIF en importaciones y re-alineación completa del EDA multifuente consumiendo el dataset fusionado de US-27 y geolocalización de US-03. | Criterios 100% alcanzados: suite BCB (4/4 tests), importaciones aduaneras (8/8 tests), EDA multivariable (6/6 tests), 6 figuras estadísticas de alta resolución generadas y documentación sincronizada en docs/03 y docs/06. |
 
 ---
 
 ## 6. Próximo Paso en el Flujo de Trabajo
 
-- **Sprint Activo:** **SCRUM Sprint 2 (22 Story Points)**.
-- **Historias a Desarrollar:**
-  1. **`SCRUM-23` (`US-21`, 7 SP):** Ingesta, limpieza y normalización de importaciones aduaneras de insulina (Partida NANDINA `3004.31.00.00`).
-  2. **`SCRUM-20` (`US-16`, 5 SP):** Auditoría de calidad de datos y análisis exploratorio (EDA) multivariable.
-  3. **`SCRUM-7` (`US-03`, 5 SP):** Script de georreferenciación de sucursales y clasificación por anillos urbanos (1 al 8).
-  4. **`SCRUM-42` (`US-27`, 5 SP):** Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento.
+- **SCRUM Sprint 2 (25 Story Points):** **100% DESARROLLADO Y AUDITADO**.
+  - `SCRUM-23` (`US-21`, 7 SP): Ingesta y normalización de importaciones aduaneras con TC oficial BCB. **[Finalizada]**
+  - `SCRUM-20` (`US-16`, 5 SP): Auditoría de calidad y EDA multivariable consumiendo la fusión de US-27. **[Finalizada]**
+  - `SCRUM-7` (`US-03`, 5 SP): Geolocalización de farmacias y mapeo por anillos urbanos 1 al 8. **[Finalizada - Mía]**
+  - `SCRUM-42` (`US-27`, 5 SP): Fusión de importaciones-stock y preparación de variables de rezago. **[Finalizada - Mía]**
+  - `SCRUM-43` (`US-28`, 3 SP): Ingesta automatizada del tipo de cambio oficial del BCB y serie diaria. **[Finalizada]**
+- **Próximo Sprint a Planificar:** **SCRUM Sprint 3 (Fase 3: Preparación de Datos & Fase 4: Modelado)**:
+  1. `SCRUM-37` (`US-23`, 5 SP): Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión.
+  2. `SCRUM-24` (`US-02`, 3 SP): Ingeniería de características (Feature Engineering) y matriz correlacional ampliada.
+  3. `SCRUM-8` (`US-04`, 5 SP): Análisis espacial de cobertura y densidad por anillos urbanos en Santa Cruz.
+  4. `SCRUM-9` (`US-05`, 8 SP): Entrenamiento de modelos supervisados de clasificación de disponibilidad de stock.

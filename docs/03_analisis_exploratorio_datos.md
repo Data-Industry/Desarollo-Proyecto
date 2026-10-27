@@ -7,11 +7,14 @@
 
 ---
 
-## 3.1. Introducción y Enfoque Multifuente
+## 3.1. Introducción y Enfoque Multifuente Integrado
 
-Por primera vez en el ciclo del proyecto, este análisis integra de manera unificada las **dos fuentes primarias de datos** desarrolladas en el Sprint 1 y Sprint 2:
-1. **Flujo de Demanda y Disponibilidad Inmediata (Góndola Retail):** Dataset maestro [`data/processed/insulinas_master.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/insulinas_master.csv) con 43 medicamentos de insulina pura extraídos de las principales cadenas en Santa Cruz de la Sierra (**Farmacorp**, **Farmacias Chávez** y **Farmacias Telchi**).
-2. **Flujo de Oferta Macro y Arribos Internacionales (Upstream Supply):** Dataset maestro [`data/processed/importaciones_insulina_bolivia.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/importaciones_insulina_bolivia.csv) con 70 despachos aduaneros oficiales (INE / Aduana Nacional de Bolivia, subpartida NANDINA `3004.31.00.00`) cruzados con la serie del **Tipo de Cambio Fluctuante** (2021–2026).
+En cumplimiento de las directrices del Sprint 2 y del protocolo `AGENT.md`, este análisis exploratorio integra de manera armónica los artefactos analíticos de las historias del equipo:
+1. **Flujo de Disponibilidad Inmediata (Góndola Retail):** Dataset maestro [`data/processed/insulinas_master.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/insulinas_master.csv) (43 medicamentos de insulina pura) y la serie histórica consolidada de snapshots [`data/processed/retail_stock_historico_consolidado.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/retail_stock_historico_consolidado.csv) (196 observaciones auditadas entre **Farmacorp**, **Farmacias Chávez** y **Farmacias Telchi**).
+2. **Flujo de Oferta Macro y Arribos Upstream:** Dataset maestro [`data/processed/importaciones_insulina_bolivia.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/importaciones_insulina_bolivia.csv) (70 despachos oficiales bajo partida NANDINA `3004.31.00.00`).
+3. **Tipo de Cambio Oficial del Banco Central de Bolivia (US-28):** Series oficial diaria y mensual [`data/processed/tipo_cambio_diario_bcb.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/tipo_cambio_diario_bcb.csv) obtenidas del portal oficial del BCB (`https://www.bcb.gob.bo/grafico_evolutivo/`).
+4. **Fusión Mensual y Variables Temporales Preparadas (US-27):** Consolidación mensual [`data/processed/importaciones_stock_fusion_mensual.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/importaciones_stock_fusion_mensual.csv) y serie temporal de rezagos preparados [`data/processed/importaciones_stock_lags_preparados.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/importaciones_stock_lags_preparados.csv).
+5. **Geolocalización Territorial por Anillos Urbanos (US-03):** Cobertura geográfica de sucursales en [`data/processed/farmacias_geolocalizadas.csv`](file:///c:/Users/USUARIO/Desktop/Proyecto%20Integrador/data/processed/farmacias_geolocalizadas.csv).
 
 ---
 
@@ -20,6 +23,7 @@ Por primera vez en el ciclo del proyecto, este análisis integra de manera unifi
 ### 3.2.1. Completitud y Valores Faltantes
 - **Farmacias Retail:** 0% de valores nulos en variables clínicas críticas (`marca_comercial`, `principio_activo`, `tipo_accion`, `volumen_ml`, `concentracion_ui_ml`), económicas (`precio_venta_bs`, `precio_por_100ui_bs`) y de inventario (`estado_stock`, `stock_disponible_binario`, `semaforo_stock`).
 - **Importaciones Aduaneras:** 0% de valores nulos en atributos temporales (`gestion`, `mes`), logísticos (`pais_origen`, `aduana_ingreso`, `via_transporte`), ponderales (`kilos_netos`, `kilos_brutos`) y monetarios (`valor_cif_usd`, `valor_cif_bob`, `tipo_cambio_bob_usd`).
+- **Fusión Mensual:** 100% de consistencia entre los 196 registros observados de retail en octubre de 2026 y las variables de importación departamental para Santa Cruz con rezagos `lag_0m` a `lag_3m`.
 
 ### 3.2.2. Aislamiento Estricto de Descartes
 Se confirmó que el **100% de los insumos descartables y fármacos ajenos** permanecen aislados en sus respectivas bitácoras de auditoría:
@@ -32,24 +36,17 @@ Se confirmó que el **100% de los insumos descartables y fármacos ajenos** perm
 
 ---
 
-## 3.3. Transmisión Cambiaria y Encarecimiento de Costos
+## 3.3. Transmisión Cambiaria y Encarecimiento con Cotización Oficial BCB
 
-### 3.3.1. La Ruptura del Tipo de Cambio Fijo (6.96 Bs/USD)
-El análisis histórico demuestra que la inflación de la insulina en Santa Cruz está fuertemente correlacionada con la depreciación cambiaria efectiva:
+### 3.3.1. Evolución del Tipo de Cambio Oficial del BCB
+En sustitución de aproximaciones sintéticas arbitrarias, el cálculo de costos de reposición farmacéutica adopta la serie oficial del Banco Central de Bolivia:
+- **2021–2022:** Régimen de paridad fija a **6.86 Bs/USD**. El costo aduanero medio se situaba en **2,011 – 2,035 Bs./kg**.
+- **2023:** Inicio de divergencia en el último trimestre, cerrando en un promedio de **7.05 a 7.66 Bs/USD** (costo medio aduanero de **1,973 Bs./kg**).
+- **2024:** Transición hacia cotizaciones fluctuantes interbancarias, promediando **8.20 a 11.16 Bs/USD** (costo medio de **2,468 Bs./kg**).
+- **2025:** Mayor volatilidad del mercado de divisas, con un costo medio de **3,272 Bs./kg**.
+- **2026:** Régimen oficial diario fluctuante del BCB, iniciando en **8.78 Bs/USD** en enero y estabilizándose en **11.82 Bs/USD** en octubre de 2026 (máximo diario de 12.02 Bs/USD), desmintiendo supuestos de cotizaciones superiores a 16 Bs/USD y alineando el modelo a la realidad macroeconómica boliviana.
 
-```mermaid
-flowchart LR
-    A["Precio Internacional CIF en USD (~$252 - $296 USD/kg)"] --> B["Tipo de Cambio Fluctuante (6.96 -> 16.30 Bs/USD)"]
-    B --> C["Costo Aduanero en Bs. (+91.6% de incremento)"]
-    C --> D["Cadena de Frío Aérea + Visado AGEMED"]
-    D --> E["Precio Final al Jubilado en Farmacia (140 Bs. a 1,390 Bs.)"]
-```
-
-- En **2021–2022**, con el tipo de cambio fijo a 6.96, el costo aduanero medio se situaba en **2,041 – 2,065 Bs./kg**.
-- A partir de **2023–2024**, con la aparición de la cotización fluctuante y las comisiones bancarias de importación, el costo escaló a **2,785 Bs./kg**.
-- En **2025–2026**, bajo el régimen cambiario fluctuante consolidado (14.00 a 16.30 Bs/USD), el costo aduanero promedio trepó a **3,957.55 Bs./kg** (+91.6% en moneda nacional respecto a 2021).
-
-![Evolución de Costos y Tipo de Cambio](/docs/figures/eda_fig2_evolucion_costo_importacion_tc.png)
+![Evolución de Costos y Tipo de Cambio Oficial](/docs/figures/eda_fig2_evolucion_costo_importacion_tc.png)
 
 ---
 
@@ -92,9 +89,6 @@ Para habilitar comparaciones clínicas válidas entre presentaciones de 3ml (car
 
 ![Distribución de Precios y 100 UI](/docs/figures/eda_fig1_distribucion_precios_farmacias.png)
 
-> **Interpretación para el Jubilado:**  
-> Las insulinas humanas tradicionales (NPH y Regular) representan la opción más económica por unidad de tratamiento (~19.65 a 21.56 Bs. por cada 100 UI). En contraste, los análogos basales modernos (Glargina) multiplican el costo por dosis entre **7 y 9 veces** (~154 a 191 Bs. por 100 UI), representando una carga financiera crítica para pensiones fijas.
-
 ---
 
 ## 3.6. Concentración de Proveedores y Dependencia Logística
@@ -102,31 +96,44 @@ Para habilitar comparaciones clínicas válidas entre presentaciones de 3ml (car
 1. **Países Proveedores Clave:**
    - **Alemania (DEU):** 40.5% del volumen histórico (11,966 kg, $3.48M USD). Principalmente Sanofi-Aventis (*Lantus*, *Toujeo*).
    - **Francia (FRA):** 19.5% del volumen (5,770 kg, $1.70M USD). Sanofi-Aventis (*Apidra*, *Lantus*).
-   - **India (IND):** 19.1% del volumen (5,650 kg, $1.31M USD). Biocon Biologics y Wockhardt (*Basalog*, *Glaritus*, *Asparpen*). Es el proveedor con el menor costo medio CIF ($232.50 USD/kg).
+   - **India (IND):** 19.1% del volumen (5,650 kg, $1.31M USD). Biocon Biologics y Wockhardt (*Basalog*, *Glaritus*, *Asparpen*). Menor costo medio CIF ($232.50 USD/kg).
    - **Dinamarca (DNK):** 14.8% del volumen (4,360 kg, $1.13M USD). Novo Nordisk (*Novolin N*, *R*, *70/30*).
    - **Argentina (ARG):** 4.4% del volumen (1,300 kg, $0.30M USD). Denver Farma (*Densulin*, *Densulent*).
    - **Estados Unidos (USA):** 3.6% del volumen (1,050 kg, $0.33M USD). Eli Lilly (*Humulin*).
 
 ![Participación de Países de Origen](/docs/figures/eda_fig4_participacion_paises_origen.png)
 
-2. **Infraestructura y Aduana de Ingreso:**  
-   El **85.7%** del volumen importado ingresa por la **Aduana Aeropuerto Viru Viru (Santa Cruz)**, consolidando al departamento como la puerta de entrada estratégica del abastecimiento nacional de insulina bajo cadena de frío.
-
 ---
 
-## 3.7. Matriz de Correlación Multifuente
+## 3.7. Matriz de Correlación Multifuente y Lags Preparados (US-27)
 
-La matriz de correlación confirma relaciones determinantes para el modelado predictivo:
-- **Correlación $r = 0.88$** entre el Tipo de Cambio (`TC_BOB_USD`) y el Costo de Importación en Bolivianos (`Costo_Kg_BOB`).
-- **Correlación inversa $r = -0.62$** entre la Tasa de Variación Mensual de Importaciones y la activación de la Alerta de Quiebre Upstream.
-- **Correlación positiva $r = 0.94$** entre el volumen físico en kilos y el número total de dosis clínicas disponibles para el país.
+Integrando las variables de la fusión mensual de US-27 (`importaciones_stock_lags_preparados.csv`):
+- Los rezagos temporales (`Lag_1m_Kg`, `Lag_2m_Kg`, `Lag_3m_Kg`) reflejan desplazamientos analíticos de la oferta internacional hacia Santa Cruz.
+- **Advertencia Metodológica:** Conforme a lo establecido en `docs/05_fusion_importaciones_stock_lags.md`, estas variables constituyen **predictores preparados**, no un lag logístico estimado estadísticamente, debido a que el scraping retail actual representa lecturas de octubre de 2026.
+- Se observa correlación positiva ($r > 0.85$) entre los volúmenes en rezago trimestral y la estabilidad del aprovisionamiento, mientras que la alerta de quiebre binaria reacciona ante caídas superiores al 30% en la media móvil aduanera.
 
 ![Matriz de Correlación Multifuente](/docs/figures/eda_fig5_matriz_correlacion_multifuente.png)
 
 ---
 
-## 3.8. Conclusiones y Recomendaciones para las Siguientes Historias
+## 3.8. Cobertura Territorial por Anillos Urbanos en Santa Cruz (US-03)
 
-1. **Para `US-03` (Geolocalización por Anillos):** La dispersión de precios encontrada (hasta 17.4% para el mismo producto) hace imprescindible que el paciente conozca qué sucursal exacta dentro de su anillo de residencia ofrece el medicamento al menor precio y con stock garantizado.
-2. **Para `US-27` (Fusión Multifuente y Lags):** Existe un desfase temporal (*lag*) estimado entre 30 y 45 días desde que un lote aéreo es desaduanizado en Viru Viru y visado por AGEMED hasta su distribución en las sucursales farmacéuticas de Santa Cruz. Este desfase debe modelarse explícitamente como predictor en la tabla analítica unificada.
-3. **Para `US-05` y `US-06` (Modelado y Semáforo):** El semáforo debe combinar la señal adelantada de importaciones aduaneras (`VERDE`/`AMARILLO`/`ROJO`) con la disponibilidad inmediata en góndola extraída del scraping.
+El análisis espacial derivado de `farmacias_geolocalizadas.csv` demuestra:
+- Gran concentración de sucursales en los **Anillos 1 al 4** (zona central y primer cordón comercial).
+- Menor densidad relativa en los **Anillos 5 al 8**, obligando a pacientes jubilados periféricos a desplazarse mayores distancias.
+
+![Geolocalización por Anillos Urbanos](/docs/figures/eda_fig6_geolocalizacion_anillos_scz.png)
+
+---
+
+## 3.9. Tablas Analíticas Exportadas en `data/processed/`
+
+| Archivo Generado | Registros | Contenido Analítico |
+| :--- | :---: | :--- |
+| `eda_metricas_resumen_farmacias.csv` | 3 | Variedad, precios mínimo/mediana/máximo, descuentos y tasa de disponibilidad por cadena. |
+| `eda_metricas_por_principio_activo.csv` | 8 | Precios por formato físico y costo promedio normalizado por 100 UI. |
+| `eda_metricas_resumen_importaciones.csv` | 6 | Despachos, volumen en kilos, CIF USD/BOB y dosis estimadas por país de origen. |
+| `eda_dispersion_marcas_cadenas.csv` | 10 | Brechas monetarias y porcentuales para presentaciones comerciales compartidas. |
+| `eda_metricas_fusion_importaciones_stock.csv` | 1 | Resumen consolidado de disponibilidad góndola y rezagos aduaneros de US-27. |
+| `eda_metricas_cobertura_anillos.csv` | 6 | Distribución de sucursales georreferenciadas y estado de asignación por anillo. |
+| `eda_calidad_auditoria_completa.json` | 1 | Auditoría completa de nulos, atípicos IQR y rangos de las 11 tablas del proyecto. |

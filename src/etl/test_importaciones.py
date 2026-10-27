@@ -83,9 +83,10 @@ class TestImportacionesETL(unittest.TestCase):
         self.assertTrue(np.allclose(self.df_master["valor_cif_bob"], cif_esperado, atol=0.05),
                         "El cálculo de CIF BOB no coincide con el tipo de cambio fluctuante")
         
-        # Verificar que en 2026 el TC sea significativamente mayor a 6.96
+        # Verificar que en 2026 el TC refleje los valores oficiales del BCB (entre 8.0 y 13.0 Bs/USD, sin superar 13)
         tc_2026 = self.df_master[self.df_master["gestion"] == 2026]["tipo_cambio_bob_usd"].mean()
-        self.assertGreater(tc_2026, 14.0, "El tipo de cambio en 2026 debe reflejar el mercado fluctuante (>14)")
+        self.assertGreater(tc_2026, 8.0, "El tipo de cambio en 2026 debe reflejar la fluctuación oficial (>8.0)")
+        self.assertLess(tc_2026, 13.0, "El tipo de cambio oficial en 2026 rara vez superó 12-13 Bs/USD")
 
     def test_07_semaforo_preventivo_en_resumen_mensual(self):
         """Verifica la presencia y validez de la clasificación del semáforo preventivo."""

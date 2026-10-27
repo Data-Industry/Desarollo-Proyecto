@@ -17,18 +17,18 @@ La integración de las estadísticas oficiales de importación aduanera permite:
 
 ---
 
-## 2.2. Marco Cambiario y Económico: El Tipo de Cambio Fluctuante
+## 2.2. Marco Cambiario y Económico: El Tipo de Cambio Oficial del Banco Central de Bolivia (BCB)
 
-En Bolivia, el tipo de cambio oficial fijo de 6.96 Bs/USD dejó de regir el comercio exterior de medicamentos en los últimos años debido a la escasez de divisas y la aparición de cotizaciones fluctuantes en el mercado cambiario comercial e interbancario:
-- **2021 – 2022:** Tipo de cambio oficial histórico estable en 6.96 Bs/USD.
-- **2023:** Inicio de divergencias cambiarias y comisiones de transferencia internacional de divisas (tasa efectiva de 7.00 a 7.95 Bs/USD).
-- **2024:** Aceleración de la cotización fluctuante de importación (8.20 a 13.50 Bs/USD).
-- **2025:** Régimen de cotización fluctuante consolidado (13.60 a 15.20 Bs/USD).
-- **2026:** Mercado fluctuante diario de reposición farmacéutica (15.15 a 16.30+ Bs/USD).
+En Bolivia, el tipo de cambio oficial de paridad fija (6.86 / 6.96 Bs/USD) fue sustituido por una cotización oficial fluctuante diaria monitoreada por el Banco Central de Bolivia (BCB) a través de su plataforma de Gráfico Evolutivo (`https://www.bcb.gob.bo/grafico_evolutivo/`). Para garantizar total rigor técnico y reproducibilidad, el pipeline ETL de importaciones ingesta directamente los valores oficiales del BCB (`data/raw/Tipo_de_cambio.csv`), eliminando funciones sintéticas arbitrarias:
+- **2021 – 2022:** Régimen de paridad fija oficial estable en **6.86 Bs/USD**.
+- **2023:** Estabilidad durante la mayor parte del año (6.86 Bs/USD) con inicio de ajuste en el último trimestre (**7.05 a 7.66 Bs/USD**).
+- **2024:** Transición hacia cotizaciones fluctuantes (**7.90 a 11.16 Bs/USD**).
+- **2025:** Mayor dispersión y volatilidad cambiaria (**8.42 a 16.54 Bs/USD**).
+- **2026:** Cotización diaria oficial del BCB entre **8.78 y 11.82 Bs/USD** (con máximos diarios de 12.02 Bs/USD), desestimando supuestos empíricos de más de 16 Bs/USD en 2026 y ajustando los costos a la realidad macroeconómica oficial.
 
-> **Impacto Crítico en el Paciente:**  
-> Aunque el precio FOB/CIF internacional en dólares por kilogramo se redujo levemente (~$296 USD/kg en 2021 a ~$252 USD/kg en 2026), **el costo de importación en moneda nacional prácticamente se duplicó (de ~2,065 Bs/kg a ~3,957 Bs/kg)**.  
-> Este encarecimiento cambiario se traslada directamente a las farmacias de Santa Cruz, explicando por qué los precios al consumidor final alcanzan entre 140 Bs. (insulinas humanas tradicionales NPH/Regular) y más de 627 Bs. (análogos modernos como Lantus / Toujeo).
+> **Impacto Verificado en el Costo de Reposición del Paciente:**  
+> Con los datos oficiales del BCB, el costo de importación en moneda nacional pasó de **~2,011 – 2,035 Bs/kg** en 2021–2022 a **~2,564.94 Bs/kg** en 2026.  
+> Este ajuste cambiario explica de forma fidedigna la estructura de precios al consumidor final en las farmacias de Santa Cruz, donde los medicamentos oscilan entre 140.15 Bs. (insulinas humanas genéricas) y 660.30 Bs. (análogos en pluma Solostar).
 
 ---
 

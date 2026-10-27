@@ -32,64 +32,33 @@ PROJECT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
 RAW_DIR = os.path.join(PROJECT_DIR, "data", "raw")
 PROCESSED_DIR = os.path.join(PROJECT_DIR, "data", "processed")
 
+import sys
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
+
+try:
+    from src.etl.ingesta_tipo_cambio_bcb import (
+        get_official_exchange_rate,
+        run_bcb_pipeline,
+    )
+except ImportError:
+    from ingesta_tipo_cambio_bcb import (
+        get_official_exchange_rate,
+        run_bcb_pipeline,
+    )
+
 # Subpartida NANDINA objetivo
 PARTIDA_INSULINA_TARGET = "3004.31.00.00"
 
-# Mapeo histórico referencial del tipo de cambio fluctuante comercial/bancario para reposición farmacéutica en Bolivia.
-# Refleja la transición desde el tipo de cambio fijo previo (6.96) hacia el régimen de cotización fluctuante diaria/mensual.
-HISTORICAL_EXCHANGE_RATES: Dict[Tuple[int, int], float] = {
-    # 2021: Periodo de tipo de cambio oficial previo (6.96)
-    (2021, 1): 6.96, (2021, 2): 6.96, (2021, 3): 6.96, (2021, 4): 6.96, (2021, 5): 6.96, (2021, 6): 6.96,
-    (2021, 7): 6.96, (2021, 8): 6.96, (2021, 9): 6.96, (2021, 10): 6.96, (2021, 11): 6.96, (2021, 12): 6.96,
-    
-    # 2022: Mantenimiento del tipo de cambio fijo oficial
-    (2022, 1): 6.96, (2022, 2): 6.96, (2022, 3): 6.96, (2022, 4): 6.96, (2022, 5): 6.96, (2022, 6): 6.96,
-    (2022, 7): 6.96, (2022, 8): 6.96, (2022, 9): 6.96, (2022, 10): 6.96, (2022, 11): 6.96, (2022, 12): 6.96,
-    
-    # 2023: Inicio de divergencia cambiaria y comisiones bancarias de importación farmacéutica
-    (2023, 1): 6.98, (2023, 2): 7.05, (2023, 3): 7.15, (2023, 4): 7.25, (2023, 5): 7.35, (2023, 6): 7.45,
-    (2023, 7): 7.55, (2023, 8): 7.65, (2023, 9): 7.72, (2023, 10): 7.80, (2023, 11): 7.88, (2023, 12): 7.95,
-    
-    # 2024: Aceleración de la fluctuación cambiaria y presión en divisas para importadores
-    (2024, 1): 8.20, (2024, 2): 8.50, (2024, 3): 8.90, (2024, 4): 9.35, (2024, 5): 9.80, (2024, 6): 10.40,
-    (2024, 7): 11.20, (2024, 8): 12.10, (2024, 9): 12.60, (2024, 10): 12.95, (2024, 11): 13.20, (2024, 12): 13.50,
-    
-    # 2025: Consolidación del tipo de cambio fluctuante interbancario y paralelo de reposición
-    (2025, 1): 13.60, (2025, 2): 13.80, (2025, 3): 14.05, (2025, 4): 13.95, (2025, 5): 14.15, (2025, 6): 14.30,
-    (2025, 7): 14.45, (2025, 8): 14.60, (2025, 9): 14.75, (2025, 10): 14.90, (2025, 11): 15.05, (2025, 12): 15.20,
-    
-    # 2026: Cotización fluctuante diaria del mercado de divisas de reposición comercial
-    (2026, 1): 15.15, (2026, 2): 15.30, (2026, 3): 15.45, (2026, 4): 15.35, (2026, 5): 15.55, (2026, 6): 15.70,
-    (2026, 7): 15.80, (2026, 8): 15.95, (2026, 9): 16.15, (2026, 10): 16.30
-}
-
-def get_fluctuating_exchange_rate(gestion: int, mes: int, daily_rate_override: float = None) -> float:
+def get_import_exchange_rate(gestion: int, mes: int, daily_rate_override: float = None) -> float:
     """
-    Retorna el tipo de cambio fluctuante referencial (Bs. por USD) para el periodo,
-    permitiendo actualización dinámica diaria si se dispone de una cotización específica.
+    Retorna la cotización oficial del BCB (Bs. por USD) para el periodo,
+    obtenida directamente de la serie oficial histórica del Banco Central de Bolivia (US-28).
+    Permite anulación manual opcional (daily_rate_override) para simulaciones o cotizaciones específicas.
     """
     if daily_rate_override is not None and daily_rate_override > 0:
         return float(daily_rate_override)
-    return HISTORICAL_EXCHANGE_RATES.get((gestion, mes), 16.30 if gestion >= 2026 else 6.96)
-
-def export_exchange_rates_table() -> pd.DataFrame:
-    """Exporta la serie histórica del tipo de cambio fluctuante a data/processed/ para trazabilidad macro."""
-    records = []
-    for (gestion, mes), tc in sorted(HISTORICAL_EXCHANGE_RATES.items()):
-        regimen = "Fijo histórico (obsoleto)" if gestion <= 2022 else (
-            "Divergencia inicial" if gestion == 2023 else "Fluctuante de reposición farmacéutica"
-        )
-        records.append({
-            "gestion": gestion,
-            "mes": mes,
-            "fecha_periodo": f"{gestion}-{mes:02d}",
-            "tipo_cambio_bob_usd": tc,
-            "regimen_cambiario": regimen
-        })
-    df_tc = pd.DataFrame(records)
-    tc_csv = os.path.join(PROCESSED_DIR, "tipo_cambio_historico_bolivia.csv")
-    df_tc.to_csv(tc_csv, index=False, encoding="utf-8-sig")
-    return df_tc
+    return get_official_exchange_rate(gestion, mes)
 
 def generate_official_bolivia_import_dataset() -> pd.DataFrame:
     """
@@ -260,9 +229,9 @@ def run_importaciones_etl_pipeline(daily_rate_override: float = None) -> Tuple[p
     os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-    # 1. Exportar la matriz de tipo de cambio fluctuante
-    df_tc = export_exchange_rates_table()
-    logger.info(f"Matriz de tipo de cambio fluctuante exportada ({len(df_tc)} periodos)")
+    # 1. Ingesta y normalización del tipo de cambio oficial del BCB (US-28)
+    _, df_tc = run_bcb_pipeline(try_live_fetch=False)
+    logger.info(f"Serie de tipo de cambio oficial BCB sincronizada ({len(df_tc)} periodos)")
 
     # 2. Ingesta de datos crudos
     raw_df = generate_official_bolivia_import_dataset()
@@ -302,8 +271,8 @@ def run_importaciones_etl_pipeline(daily_rate_override: float = None) -> Tuple[p
         cif_usd = float(row["valor_cif_usd"])
         fob_usd = float(row["valor_fob_usd"])
 
-        # Aplicación del tipo de cambio fluctuante
-        tc_aplicado = get_fluctuating_exchange_rate(gestion, mes, daily_rate_override)
+        # Aplicación del tipo de cambio oficial del BCB (US-28)
+        tc_aplicado = get_import_exchange_rate(gestion, mes, daily_rate_override)
         cif_bob = round(cif_usd * tc_aplicado, 2)
         fob_bob = round(fob_usd * tc_aplicado, 2)
         
@@ -317,8 +286,8 @@ def run_importaciones_etl_pipeline(daily_rate_override: float = None) -> Tuple[p
         id_master = f"IMP-BOL-{len(cleaned_records) + 1:04d}"
         fecha_periodo = f"{gestion}-{mes:02d}"
 
-        regimen_tc = "Fijo histórico (obsoleto)" if gestion <= 2022 else (
-            "Divergencia inicial" if gestion == 2023 else "Fluctuante de reposición farmacéutica"
+        regimen_tc = "Paridad fija oficial (6.86/6.96)" if gestion <= 2022 else (
+            "Divergencia / Transición cambiaria" if gestion == 2023 else "Cotización oficial fluctuante BCB"
         )
 
         cleaned_records.append({
