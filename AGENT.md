@@ -41,7 +41,7 @@ Los pacientes jubilados con diabetes insulinodependientes en Santa Cruz de la Si
 
 ## 2. Metodología de Trabajo y Tablero de Control
 
-El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **Jira Cloud** (Clave `SCRUM`, 18 Historias de Usuario, 96 Story Points en total).
+El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **Jira Cloud** (Clave `SCRUM`, 18 Historias de Usuario, 94 Story Points en total).
 
 ### 2.1. Matriz Oficial del Product Backlog (Sincronizada con Jira Cloud)
 
@@ -49,7 +49,6 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | :--- | :---: | :---: | :--- | :---: | :--- |
 | **Fase 1: Comprensión del Negocio** | `SCRUM-28` | `US-19` | Integración y automatización de repositorio GitHub con directorio local | 7 | **Completada (Sprint 1)** |
 | **Fase 1: Comprensión del Negocio** | `SCRUM-15` | `US-11` | Definición del problema de negocio, perfil de actores y pregunta de investigación | 3 | **Completada (Sprint 1)** |
-| **Fase 1: Comprensión del Negocio** | `SCRUM-18` | `US-14` | Objetivos de minería de datos, criterios de éxito, ética y plan CRISP-DM | 5 | Backlog (Fase 1) |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-27` | `US-20` | Extracción automatizada (Web Scraping) de stock y precios en portales de farmacias | 7 | **Completada (Sprint 1)** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-23` | `US-21` | Ingesta y normalización de importaciones aduaneras de insulina (Partida 3004.31.00.00) | 7 | **Completada (Sprint 2)** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-20` | `US-16` | Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) | 5 | **Completada (Sprint 2)** |
@@ -57,21 +56,22 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 2: Comprensión de los Datos** | `SCRUM-43` | `US-28` | Ingesta automatizada del tipo de cambio oficial del BCB y serie histórica diaria | 3 | **Completada (Sprint 2)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-36` | `US-22` | Pipeline ETL de limpieza, estandarización de precios y normalización de insulinas | 5 | **Completada (Sprint 1)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-42` | `US-27` | Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento | 5 | **Completada (Sprint 2 - Mía)** |
-| **Fase 3: Preparación de los Datos** | `SCRUM-37` | `US-23` | Script de imputación zonal de valores faltantes y cruce con calendario bancario | 5 | Backlog (Fase 3) |
-| **Fase 3: Preparación de los Datos** | `SCRUM-24` | `US-02` | Ingeniería de características (Feature Engineering) y matriz correlacional de variables | 3 | Backlog (Fase 3) |
-| **Fase 4: Modelado** | `SCRUM-8` | `US-04` | Análisis espacial de cobertura y densidad por anillos urbanos | 5 | Backlog (Fase 4) |
-| **Fase 4: Modelado** | `SCRUM-9` | `US-05` | Entrenamiento de modelo supervisado de clasificación de disponibilidad de stock | 8 | Backlog (Fase 4) |
-| **Fase 5: Evaluación** | `SCRUM-38` | `US-24` | Evaluación de modelos con optimización de Recall (Sensibilidad) y validación cruzada | 5 | Backlog (Fase 5) |
-| **Fase 5: Evaluación** | `SCRUM-39` | `US-25` | Script de generación automatizada de reportes de desempeño y Feature Importance | 3 | Backlog (Fase 5) |
-| **Fase 6: Despliegue** | `SCRUM-10` | `US-06` | Motor lógico del semáforo predictivo conectado a las salidas de los modelos | 5 | Backlog (Fase 6) |
-| **Fase 6: Despliegue** | `SCRUM-41` | `US-26` | Desarrollo e integración del Chatbot conversacional para consulta de stock y precios | 8 | Backlog (Fase 6) |
-| **Fase 6: Despliegue** | `SCRUM-40` | `US-10` | Sistema automatizado de alertas preventivas de compra anticipada vía Chatbot | 5 | Backlog (Fase 6) |
+| **Fase 3: Preparación de los Datos** | `SCRUM-37` | `US-23` | Script de imputación zonal de valores faltantes y cruce con calendario bancario | 5 | **Planificada (Sprint 3)** |
+| **Fase 3: Preparación de los Datos** | `SCRUM-24` | `US-02` | Ingeniería de características (Feature Engineering) y matriz correlacional de variables | 3 | **Planificada (Sprint 3)** |
+| **Fase 4: Modelado** | `SCRUM-9` | `US-05` | Entrenamiento de modelo supervisado de clasificación de disponibilidad de stock | 8 | **Planificada (Sprint 3)** |
+| **Fase 6: Despliegue** | `SCRUM-44` | `US-29` | MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados | 5 | **Planificada (Sprint 3)** |
+| **Fase 5: Evaluación** | `SCRUM-38` | `US-24` | Evaluación de modelos con optimización de Recall (Sensibilidad) y validación cruzada | 5 | Backlog (Sprint 4) |
+| **Fase 5: Evaluación** | `SCRUM-39` | `US-25` | Script de generación automatizada de reportes de desempeño y Feature Importance | 3 | Backlog (Sprint 4) |
+| **Fase 6: Despliegue** | `SCRUM-10` | `US-06` | Motor lógico del semáforo predictivo conectado a las salidas de los modelos | 5 | Backlog (Sprint 4) |
+| **Fase 6: Despliegue** | `SCRUM-41` | `US-26` | Desarrollo e integración del Chatbot conversacional para consulta de stock y precios | 8 | Backlog (Sprint 4) |
+| **Fase 6: Despliegue** | `SCRUM-40` | `US-10` | Sistema automatizado de alertas preventivas de compra anticipada vía Chatbot | 5 | Backlog (Sprint 4) |
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
-- **SCRUM Sprint 2 (Activo / En Cierre - 25 SP):** `SCRUM-23` (7 SP) + `SCRUM-20` (5 SP) + `SCRUM-7` (5 SP) + `SCRUM-42` (5 SP) + `SCRUM-43` (3 SP) = **25 Story Points**.
-- **Product Backlog Restante:** 10 Historias = **52 Story Points**.
-- **Total Proyecto:** 19 Historias | **99 Story Points**.
+- **SCRUM Sprint 2 (Cerrado al 100% - 25 SP):** `SCRUM-23` (7 SP) + `SCRUM-20` (5 SP) + `SCRUM-7` (5 SP) + `SCRUM-42` (5 SP) + `SCRUM-43` (3 SP) = **25 Story Points**.
+- **SCRUM Sprint 3 (Planificado / Activo - 21 SP):** `SCRUM-37` (5 SP) + `SCRUM-24` (3 SP) + `SCRUM-9` (8 SP) + `SCRUM-44` (5 SP) = **21 Story Points**.
+- **SCRUM Sprint 4 (Backlog Priorizado: Evaluación y Despliegue - 26 SP):** `SCRUM-38` (5 SP) + `SCRUM-39` (3 SP) + `SCRUM-10` (5 SP) + `SCRUM-41` (8 SP) + `SCRUM-40` (5 SP) = **26 Story Points**.
+- **Total Proyecto:** 18 Historias | **94 Story Points**.
 
 ---
 
@@ -117,9 +117,22 @@ flowchart TD
 
 ### Detalle de los Pasos:
 
-1. **Lectura de Requisitos:** Identificar la Historia de Usuario (`US-XX`), su Clave Jira (`SCRUM-XX`), su Épica y sus Criterios de Aceptación.
+1. **Lectura y Estructura de Requisitos (Formato Ágil Obligatorio):**
+   Toda Historia de Usuario (`US-XX`) creada o actualizada en Jira y en la documentación DEBE estar redactada estrictamente bajo la estructura estándar ágil:
+   ```markdown
+   **Como** [rol: Jubilado con diabetes en Santa Cruz / Ingeniero de Datos / Científico de Datos / Product Owner],
+   **Quiero** [funcionalidad, pipeline, análisis o entrega técnica concreta],
+   **Para** [beneficio medible, valor de negocio o impacto clínico/económico en el usuario].
+
+   **Criterios de Aceptación / Validación:**
+   - [ ] Criterio 1: [Requisito verificable / prueba unitaria / archivo generado]
+   - [ ] Criterio 2: [Métricas de calidad / tolerancias / reglas de negocio]
+   - [ ] Criterio 3: [Documentación técnica y reproducibilidad]
+   ```
+   *Nota:* No se aceptan historias de usuario formuladas como simples tareas técnicas impersonales sin rol ni beneficio explícito.
+
 2. **Implementación:** Crear o modificar el código, scripts o documentación respetando la estructura CRISP-DM.
-3. **Validación Técnica:** Ejecutar los scripts en el entorno local y comprobar de forma explícita que se satisfacen todos los criterios de aceptación sin errores.
+3. **Validación Técnica:** Ejecutar los scripts en el entorno local y comprobar de forma explícita que se satisfacen todos los criterios de aceptación sin errores (pruebas unitarias automatizadas).
 4. **Git Commit:** Crear el commit en la rama `main` siguiendo la convención:
    - Formato: `#NNN - <tipo>(<alcance>): <descripción concisa>` (e.g. `#011 - feat(etl): implement public import pipeline for insulin NANDINA 3004.31.00.00`).
    - Tipos válidos: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`.
@@ -160,7 +173,8 @@ flowchart TD
 | **#016** | `da5246d` | `US-27` (`SCRUM-42`) | Sprint 2 | 2026-10-26 | Fusión de fuentes de importaciones aduaneras y stock retail con preparación de variables temporales de rezago (`lag_0m` a `lag_3m`), deduplicación de snapshots por SHA-256 y correspondencia de catálogo. | Criterios verificados: snapshots consolidados sin duplicados, matriz de correspondencia de marcas y advertencia metodológica explícita de rezagos preparados en `docs/05_fusion_importaciones_stock_lags.md`. |
 | **#017** | `fc9eb9a` | `US-28` / `US-21` / `US-16` | Sprint 2 | 2026-10-27 | Pipeline de ingesta oficial del tipo de cambio del BCB (`Tipo_de_cambio.csv` delimitado por `;`), eliminación de funciones sintéticas de cotización, actualización de costos CIF en importaciones y re-alineación completa del EDA multifuente consumiendo el dataset fusionado de US-27 y geolocalización de US-03. | Criterios 100% alcanzados: suite BCB (4/4 tests), importaciones aduaneras (8/8 tests), EDA multivariable (6/6 tests), 6 figuras estadísticas de alta resolución generadas y documentación sincronizada en docs/03 y docs/06. |
 | **#018** | `bba3427` | Refactor / Ops / Jira | Sprint 2 | 2026-10-27 | Reorganización cronológica de scripts en `src/` (`01_` a `05_`), purga de archivos obsoletos en `data/raw` y `data/processed`, regeneración secuencial de 11 datasets limpios y sincronización total en Jira Cloud (creación de SCRUM-43 para US-28, transición a Finalizado de SCRUM-43, SCRUM-23 y SCRUM-20 con comentarios formales y cierre de Sprint 2 con 25/25 SP). | Criterios 100% verificados: 33/33 tests aprobados (27 ETL + 6 EDA), estructura de código ordenada cronológicamente de forma ascendente en cada carpeta, datos depurados y tablero Jira en 25/25 SP Hecho. |
-| **#019** | `f4ebd7b` | Refactor / Cleanup | Sprint 2 | 2026-10-27 | Eliminación total y definitiva de scripts no numerados duplicados en `src/scraping/`, `src/etl/` y `src/models/`, migración de dependencias internas mediante `importlib.import_module` y actualización de documentación técnica (`README.md` y guías en `docs/`). | Criterios 100% verificados: 33/33 pruebas unitarias aprobadas, árbol de código 100% libre de scripts duplicados, conservando exclusivamente la nomenclatura cronológica `01_` a `05_`. |
+| **#019** | `a788aaa` | Refactor / Cleanup | Sprint 2 | 2026-10-27 | Eliminación total y definitiva de scripts no numerados duplicados en `src/scraping/`, `src/etl/` y `src/models/`, migración de dependencias internas mediante `importlib.import_module` y actualización de documentación técnica (`README.md` y guías en `docs/`). | Criterios 100% verificados: 33/33 pruebas unitarias aprobadas, árbol de código 100% libre de scripts duplicados, conservando exclusivamente la nomenclatura cronológica `01_` a `05_`. |
+| **#020** | `1184944` | `US-29` / Jira Ops | Sprint 3 | 2026-10-30 | Sincronización en Jira Cloud: estandarización de historias en formato ágil ("Como... Quiero... Para...") con criterios de validación explícitos (SCRUM-43, SCRUM-23, SCRUM-20, SCRUM-37, SCRUM-24, SCRUM-9), depuración de SCRUM-18 y SCRUM-8, creación de SCRUM-44 (US-29: MVP Local para Jubilados) y configuración del Sprint 3 en 21 SP. | 100% verificado en Jira Cloud: Backlog cuadrado en 18 historias y 94 SP, descripciones actualizadas con criterios verificables, SCRUM Sprint 3 configurado con 21 SP y 33/33 pruebas unitarias locales aprobadas. |
 
 ---
 
@@ -172,8 +186,8 @@ flowchart TD
   - `SCRUM-7` (`US-03`, 5 SP): Geolocalización de farmacias y mapeo por anillos urbanos 1 al 8. **[Finalizada - Mía]**
   - `SCRUM-42` (`US-27`, 5 SP): Fusión de importaciones-stock y preparación de variables de rezago. **[Finalizada - Mía]**
   - `SCRUM-43` (`US-28`, 3 SP): Ingesta automatizada del tipo de cambio oficial del BCB y serie diaria. **[Finalizada]**
-- **Próximo Sprint a Planificar:** **SCRUM Sprint 3 (Fase 3: Preparación de Datos & Fase 4: Modelado)**:
+- **Próximo Sprint a Desarrollar:** **SCRUM Sprint 3 (Fase 3: Preparación de Datos, Fase 4: Modelado & Fase 6: Despliegue MVP - 21 Story Points)**:
   1. `SCRUM-37` (`US-23`, 5 SP): Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión.
   2. `SCRUM-24` (`US-02`, 3 SP): Ingeniería de características (Feature Engineering) y matriz correlacional ampliada.
-  3. `SCRUM-8` (`US-04`, 5 SP): Análisis espacial de cobertura y densidad por anillos urbanos en Santa Cruz.
-  4. `SCRUM-9` (`US-05`, 8 SP): Entrenamiento de modelos supervisados de clasificación de disponibilidad de stock.
+  3. `SCRUM-9` (`US-05`, 8 SP): Entrenamiento de modelos supervisados de clasificación de disponibilidad de stock.
+  4. `SCRUM-44` (`US-29`, 5 SP): MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados.
