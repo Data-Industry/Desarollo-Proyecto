@@ -34,11 +34,11 @@
 - **`SCRUM-42` (US-27 - 5 SP):** Fusión de fuentes (Scraping + Importaciones) y preparación de variables de rezago temporal de abastecimiento. **[Finalizada - Mía Wayar]**
 - **`SCRUM-43` (US-28 - 3 SP):** Ingesta automatizada del tipo de cambio oficial del BCB (`https://www.bcb.gob.bo/grafico_evolutivo/`) y serie histórica diaria (`Tipo_de_cambio.csv`). **[Finalizada]**
 
-### SCRUM Sprint 3 (Planificado - 21 SP)
-- **`SCRUM-37` (US-23 - 5 SP):** Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión.
-- **`SCRUM-24` (US-02 - 3 SP):** Feature Engineering y matriz correlacional ampliada de variables predictivas.
-- **`SCRUM-9` (US-05 - 8 SP):** Entrenamiento de modelos supervisados de clasificación de disponibilidad y quiebre de stock.
-- **`SCRUM-44` (US-29 - 5 SP):** MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados.
+### SCRUM Sprint 3 (Cerrado al 100% - 21 SP)
+- **`SCRUM-37` (US-23 - 5 SP):** Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión. **[Finalizada - Mía Wayar]**
+- **`SCRUM-24` (US-02 - 3 SP):** Feature Engineering y matriz correlacional ampliada de variables predictivas. **[Finalizada - Mía Wayar]**
+- **`SCRUM-9` (US-05 - 8 SP):** Entrenamiento de modelos supervisados de clasificación de disponibilidad y quiebre de stock. **[Finalizada]**
+- **`SCRUM-44` (US-29 - 5 SP):** MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados. **[Finalizada]**
 
 ### Product Backlog Priorizado (Sprint 4: Evaluación y Despliegue - 26 SP)
 - `SCRUM-38` (US-24 - 5 SP): Evaluación de modelos con optimización estricta de Recall (Sensibilidad).

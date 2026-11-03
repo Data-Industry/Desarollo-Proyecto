@@ -1,0 +1,32 @@
+{
+  "proyecto": "Predictor de Quiebre de Stock de Insulina - CRISP-DM Fase 4",
+  "sprint": "SCRUM Sprint 3",
+  "historia_usuario": "US-05 (SCRUM-9)",
+  "modelo_produccion": "RandomForest",
+  "umbral_clinico_produccion": 0.05,
+  "target": "quiebre_stock_inminente",
+  "total_registros_entrenamiento": 43,
+  "total_positivos_quiebre": 4,
+  "caracteristicas_numericas": [
+    "precio_venta_bs",
+    "precio_lista_bs",
+    "descuento_porcentaje",
+    "precio_por_ml_bs",
+    "precio_por_100ui_bs",
+    "volumen_ml",
+    "concentracion_ui_ml",
+    "unidades_totales_ui"
+  ],
+  "caracteristicas_categoricas": [
+    "farmacia",
+    "principio_activo",
+    "tipo_accion",
+    "origen_biologico",
+    "laboratorio_fabricante",
+    "formato_presentacion"
+  ],
+  "metricas_clave": {
+    "criterio_primario": "Recall (Sensibilidad)",
+    "f2_score_ponderacion": "Beta=2 (Penaliza falsos negativos)"
+  }
+}
