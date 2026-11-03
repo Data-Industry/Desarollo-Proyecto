@@ -9,13 +9,13 @@
 
 | Épica (Fase CRISP-DM) | Clave Épica | Historias Incluidas | Cantidad | Story Points |
 | :--- | :---: | :--- | :---: | :---: |
-| **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3) *(SCRUM-18 depurada)* | 2 | **10 SP** |
+| **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3), `SCRUM-45` (US-30: 3 SP) *(SCRUM-18 depurada)* | 3 | **13 SP** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-30` | `SCRUM-27` (US-20: 7), `SCRUM-23` (US-21: 7), `SCRUM-20` (US-16: 5), `SCRUM-7` (US-03: 5), `SCRUM-43` (US-28: 3) | 5 | **27 SP** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-31` | `SCRUM-36` (US-22: 5), `SCRUM-42` (US-27: 5), `SCRUM-37` (US-23: 5), `SCRUM-24` (US-02: 3) | 4 | **18 SP** |
 | **Fase 4: Modelado** | `SCRUM-33` | `SCRUM-9` (US-05: 8) *(SCRUM-8 sustituida por MVP)* | 1 | **8 SP** |
-| **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-38` (US-24: 5), `SCRUM-39` (US-25: 3) | 2 | **8 SP** |
-| **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-44` (US-29 MVP: 5), `SCRUM-10` (US-06: 5), `SCRUM-41` (US-26: 8), `SCRUM-40` (US-10: 5) | 4 | **23 SP** |
-| **TOTAL PROYECTO** | | **18 Historias de Usuario** | **18** | **94 SP** |
+| **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-47` (US-32: 5 SP), `SCRUM-48` (US-33: 8 SP), `SCRUM-38` (US-24: 5 SP en Backlog) *(SCRUM-39 depurada)* | 3 | **18 SP** |
+| **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-44` (US-29 MVP: 5), `SCRUM-46` (US-31: 5 SP) *(SCRUM-41, SCRUM-40 y SCRUM-10 depuradas)* | 2 | **10 SP** |
+| **TOTAL PROYECTO** | | **18 Historias de Usuario Activas** | **18** | **94 SP** |
 
 ---
 
@@ -40,54 +40,62 @@
 - **`SCRUM-9` (US-05 - 8 SP):** Entrenamiento de modelos supervisados de clasificación de disponibilidad y quiebre de stock. **[Finalizada]**
 - **`SCRUM-44` (US-29 - 5 SP):** MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados. **[Finalizada]**
 
-### Product Backlog Priorizado (Sprint 4: Evaluación y Despliegue - 26 SP)
-- `SCRUM-38` (US-24 - 5 SP): Evaluación de modelos con optimización estricta de Recall (Sensibilidad).
-- `SCRUM-39` (US-25 - 3 SP): Generación automatizada de reportes de desempeño, curvas ROC y Feature Importance.
-- `SCRUM-10` (US-06 - 5 SP): Motor lógico del semáforo predictivo preventivo (`VERDE`, `AMARILLO`, `ROJO`).
-- `SCRUM-41` (US-26 - 8 SP): Chatbot conversacional accesible para adultos mayores y cuidadores.
-- `SCRUM-40` (US-10 - 5 SP): Sistema de alertas preventivas tempranas (5 a 7 días antes de agotar).
+### SCRUM Sprint 4 (Planificado / Listo para Iniciar - 21 SP)
+- **`SCRUM-45` (US-30 - 3 SP):** Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Por hacer / Épica SCRUM-29]**
+- **`SCRUM-46` (US-31 - 5 SP):** Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Por hacer / Épica SCRUM-35]**
+- **`SCRUM-47` (US-32 - 5 SP):** Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Por hacer / Épica SCRUM-34]**
+- **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[Por hacer / Épica SCRUM-34]**
+
+### Product Backlog Priorizado (Sprint 5: Evaluación Formal y Cierre - 5 SP)
+- **`SCRUM-38` (US-24 - 5 SP):** Evaluación formal de modelos supervisados con optimización estricta de Recall (Sensibilidad) y calibración probabilística. **[Backlog]**
 
 ---
 
-## Detalle de Historias del Sprint 3 bajo Formato Ágil Oficial
+## Detalle de Historias del Sprint 4 bajo Formato Ágil Oficial
 
-### 1. `SCRUM-37` (`US-23` - 5 SP): Cruce con Calendario Bancario e Imputación Zonal
-* **Como** Científico de Datos del proyecto,
-* **Quiero** construir un script que impute valores faltantes por zona y cruce las fechas de inventario con el cronograma oficial de pago de rentas del Banco Unión (días 1 al 5 y fin de mes),
-* **Para** incorporar el efecto estacional de cobro de pensiones como predictor del aumento súbito en la demanda y del riesgo de desabastecimiento en farmacias cercanas.
+### 1. `SCRUM-45` (`US-30` - 3 SP): Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia
+* **Como** Equipo de Ciencia de Datos y Emprendimiento Tecnológico,
+* **Quiero** realizar un análisis exhaustivo del marco legal boliviano e internacional sobre web scraping de precios públicos (Ley N° 453 de Protección al Consumidor, Ley N° 164 de Telecomunicaciones, Decisión 486 de la CAN sobre marcas) y las consideraciones regulatorias, de privacidad (Habeas Data) y responsabilidad médica para un eventual lanzamiento público y comercial del chatbot,
+* **Para** garantizar la viabilidad jurídica del proyecto, mitigar riesgos legales de propiedad intelectual y fijar la hoja de ruta de cumplimiento normativo previo al despliegue comercial.
 * **Criterios de Aceptación / Validación:**
-  - Script reproducible en `src/etl/06_calendario_bancario_imputacion.py`.
-  - Matriz de calendario con variables binarias `dia_pago_renta` y ventana de impacto (±3 días).
-  - Reglas reproducibles de imputación para precios y disponibilidad sin distorsionar la varianza original.
-  - Tests unitarios con 100% de aprobación.
+  - [ ] Documento técnico-legal estructurado en `docs/07_marco_legal_y_viabilidad_comercial.md`.
+  - [ ] Análisis de legitimidad del web scraping de datos públicos de farmacias bajo la Ley N° 453 (acceso a información y transparencia de precios) y Ley N° 164 (delitos informáticos y ética de scraping sin vulneración de accesos).
+  - [ ] Evaluación del uso nominativo de marcas comerciales de insulinas bajo la Decisión 486 de la Comisión de la Comunidad Andina (uso de marcas de terceros con fines meramente informativos y comparativos).
+  - [ ] Matriz de consideraciones legales y regulatorias para un eventual lanzamiento público y comercial del chatbot:
+    - Términos de Servicio y políticas de Meta para WhatsApp Business API en el sector salud/farmacia.
+    - Protección de datos personales de salud (Habeas Data, Art. 21 y 130 de la Constitución Política del Estado de Bolivia).
+    - Deslindes de responsabilidad médica (*Medical Disclaimers* y límites entre recomendación clínica vs. reporte de existencias comerciales).
+    - Plan de transición desde web scraping hacia convenios oficiales de interoperabilidad y APIs de farmacias asociadas.
 
-### 2. `SCRUM-24` (`US-02` - 3 SP): Feature Engineering y Matriz Analítica
-* **Como** Científico de Datos del proyecto,
-* **Quiero** transformar y sintetizar variables multivariables (ratios precio/100 UI, rezagos combinados de importaciones `Lag_1m` a `Lag_3m`, variaciones cambiarias y densidad de farmacias por anillo),
-* **Para** generar la matriz analítica final normalizada que servirá de entrenamiento a los algoritmos de Machine Learning.
+### 2. `SCRUM-46` (`US-31` - 5 SP): Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0)
+* **Como** Adulto mayor jubilado o ciudadano sin conocimientos técnicos de Machine Learning,
+* **Quiero** una versión refinada y clara del MVP con lenguaje 100% amigable y accesible, que incluya definiciones comprensibles de términos como "quiebre de stock" y un semáforo predictivo cuya lógica sea completamente coherente con la disponibilidad inmediata en farmacias,
+* **Para** entender con claridad el estado de mi insulina sin confundirme con jerga técnica y confiar en el semáforo para saber cuándo debo comprar anticipadamente o cuándo hay stock suficiente garantizado.
 * **Criterios de Aceptación / Validación:**
-  - Script en `src/models/02_feature_engineering.py`.
-  - Generación de `data/processed/dataset_analitico_modelado.csv` con variables predictivas y target binario `quiebre_stock_inminente`.
-  - Matriz de correlación de Pearson y Spearman exportada para auditoría.
-  - Tests unitarios con 100% de aprobación.
+  - [ ] Eliminación de tecnicismos como "Machine Learning", "Random Forest", "Variables Analíticas" y "Lag de importaciones" en la vista principal del usuario en `src/mvp/generar_mvp_interactivo.py`.
+  - [ ] Incorporación de un glosario visual accesible y tarjetas explicativas con lenguaje ciudadano (ej. *"Quiebre de stock: Situación en la que las farmacias agotan por completo sus existencias y no pueden reponer de inmediato"*).
+  - [ ] Corrección algorítmica estricta del Semáforo de Riesgo: Ninguna insulina marcará ROJO si se encuentra disponible en una o más cadenas farmacéuticas; el ROJO se reserva únicamente si todas las farmacias están agotadas. El AMARILLO refleja riesgo moderado por pocas unidades o proximidad al cobro de pensiones Banco Unión (días 1 al 5). El VERDE refleja abastecimiento estable y suficiente.
+  - [ ] Generación automática del visualizador v3.0 (`docs/mvp_jubilados_comparador.html`) con diseño responsivo, alto contraste y tipografía apta para jubilados.
+  - [ ] Tests unitarios automatizados que verifiquen las reglas semafóricas y la no presencia de rojo en medicamentos con stock activo.
 
-### 3. `SCRUM-9` (`US-05` - 8 SP): Modelos Supervisados de Clasificación de Stock
-* **Como** Científico de Datos del proyecto,
-* **Quiero** entrenar y validar modelos supervisados de clasificación (Random Forest, XGBoost y Regresión Logística regularizada),
-* **Para** predecir con una ventana de 5 a 15 días si una determinada insulina entrará en quiebre de stock en una zona/anillo de Santa Cruz.
+### 3. `SCRUM-47` (`US-32` - 5 SP): Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas)
+* **Como** Diseñador UX e Investigador de Validación de Negocio,
+* **Quiero** diseñar y protocolizar los instrumentos de validación empírica con usuarios (escala de usabilidad SUS adaptada al adulto mayor boliviano, guía de entrevistas semiestructuradas y matriz de prueba de tareas guiadas),
+* **Para** contar con un marco metodológico estandarizado, riguroso y replicable que permita cuantificar la aceptación, facilidad de uso y valor percibido del MVP antes del producto final.
 * **Criterios de Aceptación / Validación:**
-  - Script en `src/models/03_entrenamiento_modelos_stock.py`.
-  - Validación cruzada estratificada (*Stratified K-Fold* temporal) evitando fuga de datos (*data leakage*).
-  - Métrica de evaluación primaria optimizada hacia el **Recall / Sensibilidad** (minimizar falsos negativos).
-  - Exportación de métricas de precisión, curvas ROC y modelos serializados en `models/`.
+  - [ ] Documento metodológico completo en `docs/08_diseno_metodologico_validacion_usuarios.md`.
+  - [ ] Formulario de Escala de Usabilidad del Sistema (SUS - System Usability Scale) de 10 reactivos adaptado a lenguaje neutro y comprensible para adultos mayores de Santa Cruz.
+  - [ ] Protocolo y guía de entrevista cualitativa semiestructurada enfocada en: hábitos de compra, frecuencia de desabastecimiento, comprensión del semáforo y disposición de uso.
+  - [ ] Matriz de pruebas de tareas guiadas (*Task Testing*): Tarea 1 (Buscar su insulina habitual), Tarea 2 (Identificar la farmacia más barata y el ahorro), Tarea 3 (Interpretar el semáforo y disponibilidad en su anillo).
+  - [ ] Consentimiento informado y pautas éticas para interacción con adultos mayores jubilados.
 
-### 4. `SCRUM-44` (`US-29` - 5 SP): MVP Interactivo Local para Jubilados
-* **Como** Adulto mayor jubilado con diabetes (o familiar cuidador) en Santa Cruz de la Sierra,
-* **Quiero** acceder a una aplicación web interactiva local intuitiva, de tipografía accesible y alto contraste,
-* **Para** comparar al instante los precios de mi insulina entre Farmacorp, Chávez y Telchi, verificar en qué anillo urbano hay stock disponible y consultar el semáforo preventivo antes de salir de casa.
+### 4. `SCRUM-48` (`US-33` - 8 SP): Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio
+* **Como** Product Owner y Analista de Negocio,
+* **Quiero** aplicar los instrumentos de validación a una muestra representativa de jubilados diabéticos y familiares cuidadores en Santa Cruz de la Sierra, tabular cuantitativamente los resultados SUS y generar un informe gerencial de conclusiones y aprendizajes de negocio,
+* **Para** validar empíricamente la hipótesis de valor de la solución, cuantificar la usabilidad del prototipo y orientar las decisiones estratégicas de la siguiente iteración con evidencia real.
 * **Criterios de Aceptación / Validación:**
-  - Interfaz web interactiva ejecutable localmente (HTML5 / Tailwind accesible / JS) alimentada directamente por los datos reales de `insulinas_master.csv` y `farmacias_geolocalizadas.csv`.
-  - **Filtro Rápido:** Selección por principio activo (Glargina, NPH, Rápida, Mezcla) y presentación.
-  - **Comparador Económico:** Destaca de forma visible la farmacia con el precio más bajo y el ahorro en Bs.
-  - **Buscador Territorial por Anillos:** Identifica sucursales con stock físico en los anillos 1 al 8.
-  - **Semáforo Preventivo:** Widget visual (`VERDE`, `AMARILLO`, `ROJO`) que indica el estado general del abastecimiento upstream.
+  - [ ] Aplicación y tabulación de la muestra empírica en `data/processed/validacion_usuarios_tabulacion.csv`.
+  - [ ] Cálculo estadístico del puntaje global SUS (escala 0-100) y desglose por dimensiones de usabilidad y aprendizaje.
+  - [ ] Matriz cualitativa de hallazgos, barreras identificadas (*friction points*) y cotizaciones verbales de los entrevistados.
+  - [ ] Informe formal de conclusiones de negocio y recomendaciones en `docs/09_informe_validacion_campo_y_negocio.md`.
+  - [ ] Conclusiones cuantitativas y cualitativas que respondan a la viabilidad del MVP y prioricen las mejoras para el release final.
