@@ -4,6 +4,7 @@ Historia de Usuario: US-21 (SCRUM-23) - Ingesta y Normalización de Importacione
 """
 
 import os
+import sys
 import unittest
 import pandas as pd
 import numpy as np
@@ -11,6 +12,10 @@ import json
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
 PROCESSED_DIR = os.path.join(PROJECT_DIR, "data", "processed")
 RAW_DIR = os.path.join(PROJECT_DIR, "data", "raw")
 

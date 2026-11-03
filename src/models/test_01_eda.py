@@ -1,11 +1,17 @@
 """Suite de Pruebas Automatizadas para US-16 (SCRUM-20): Auditoría de Calidad y EDA Multifuente."""
 
 from pathlib import Path
+import sys
 import unittest
-import pandas as pd
 
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = CURRENT_DIR.parent.parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+import pandas as pd
+
 PROCESSED_DIR = PROJECT_DIR / "data" / "processed"
 FIGURES_DIR = PROJECT_DIR / "docs" / "figures"
 

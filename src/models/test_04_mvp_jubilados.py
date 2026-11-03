@@ -7,9 +7,20 @@ de archivos HTML autocontenidos y los estándares de accesibilidad para adultos 
 
 import importlib
 from pathlib import Path
+import sys
 import unittest
 
-gen_mvp = importlib.import_module("src.ui.generar_mvp_interactivo")
+PROJECT_DIR = Path(__file__).resolve().parents[2]
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+try:
+    gen_mvp = importlib.import_module("src.ui.generar_mvp_interactivo")
+except ImportError:
+    gen_mvp = importlib.import_module("generar_mvp_interactivo")
 
 
 class TestMVPJubilados(unittest.TestCase):

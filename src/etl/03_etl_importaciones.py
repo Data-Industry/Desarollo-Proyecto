@@ -148,6 +148,7 @@ def generate_official_bolivia_import_dataset() -> pd.DataFrame:
         (2026, 8, "India", "IND", "041 - Aduana Aeropuerto Viru Viru", "Aérea (Cadena de frío 2°C - 8°C)", "Santa Cruz", 831.5, 380.0, 87400.0, 83300.0, "Glaripen Cartucho 3ml"),
         (2026, 9, "Alemania", "DEU", "041 - Aduana Aeropuerto Viru Viru", "Aérea (Cadena de frío 2°C - 8°C)", "Santa Cruz", 550.0, 250.0, 67500.0, 64200.0, "Lantus 100 UI Frasco Ampolla"),
         (2026, 10, "Dinamarca", "DNK", "041 - Aduana Aeropuerto Viru Viru", "Aérea (Cadena de frío 2°C - 8°C)", "Santa Cruz", 440.0, 200.0, 49000.0, 46700.0, "Novolin 70/30 Vial"),
+        (2026, 11, "Francia", "FRA", "041 - Aduana Aeropuerto Viru Viru", "Aérea (Cadena de frío 2°C - 8°C)", "Santa Cruz", 680.0, 310.0, 83700.0, 79800.0, "Lantus / Apidra 100 UI"),
     ]
 
     for item in historical_insulin_dispatches:

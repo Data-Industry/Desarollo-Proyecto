@@ -1,8 +1,16 @@
 """Pruebas unitarias para el pipeline de ingesta del Tipo de Cambio Oficial del BCB (US-28)."""
 
 from pathlib import Path
+import sys
 import unittest
 import pandas as pd
+
+CURRENT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = CURRENT_DIR.parent.parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
 
 import importlib
 try:

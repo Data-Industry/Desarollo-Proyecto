@@ -2,12 +2,12 @@
   "retail_master_filas": 43,
   "retail_master_columnas": 26,
   "retail_master_nulos_criticos": 0,
-  "retail_outliers_precio_iqr": 2,
+  "retail_outliers_precio_iqr": 3,
   "retail_rango_precios_bs": [
-    140.15,
-    1390.35
+    136.78,
+    1392.95
   ],
-  "importaciones_master_filas": 70,
+  "importaciones_master_filas": 71,
   "importaciones_columnas": 26,
   "importaciones_nulos_criticos": 0,
   "importaciones_outliers_cif_iqr": 0,
@@ -15,15 +15,16 @@
     220.0,
     340.0
   ],
-  "fusion_mensual_filas": 42,
+  "fusion_mensual_filas": 84,
   "fusion_mensual_periodos": [
-    "2026-10"
+    "2026-10",
+    "2026-11"
   ],
   "geolocalizacion_sucursales_total": 16,
   "geolocalizacion_anillos_asignados": 8,
-  "tipo_cambio_bcb_periodos": 70,
+  "tipo_cambio_bcb_periodos": 71,
   "tipo_cambio_bcb_rango_2026": [
     8.7714,
-    11.8237
+    12.09
   ]
 }

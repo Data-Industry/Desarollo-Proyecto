@@ -6,7 +6,7 @@
   "umbral_clinico_produccion": 0.05,
   "target": "quiebre_stock_inminente",
   "total_registros_entrenamiento": 43,
-  "total_positivos_quiebre": 4,
+  "total_positivos_quiebre": 5,
   "caracteristicas_numericas": [
     "precio_venta_bs",
     "precio_lista_bs",

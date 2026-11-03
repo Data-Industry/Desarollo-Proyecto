@@ -8,6 +8,8 @@ import pandas as pd
 
 CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = CURRENT_DIR.parent.parent
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
 if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
@@ -49,7 +51,7 @@ class TestFusionImportacionesStock(unittest.TestCase):
 
     def test_fecha_periodo_y_disponibilidad_se_normalizan(self):
         history, _ = build_retail_history()
-        self.assertEqual(set(history["fecha_periodo"]), {"2026-10"})
+        self.assertTrue({"2026-10"}.issubset(set(history["fecha_periodo"])))
         self.assertEqual(normalize_stock_status("Agotado"), ("AGOTADO", 0))
         self.assertEqual(normalize_stock_status("Últimas unidades"), ("ULTIMAS_UNIDADES", 1))
         self.assertEqual(normalize_stock_status("Disponible"), ("DISPONIBLE", 1))
@@ -58,7 +60,7 @@ class TestFusionImportacionesStock(unittest.TestCase):
         history, _ = build_retail_history()
         summary = build_monthly_retail_summary(history)
         self.assertTrue(summary["tasa_disponibilidad"].between(0, 1).all())
-        self.assertEqual(set(summary["fecha_periodo"]), {"2026-10"})
+        self.assertTrue({"2026-10"}.issubset(set(summary["fecha_periodo"])))
         self.assertIn("marca_comercial", summary.columns)
         self.assertTrue((summary["productos_disponibles"] <= summary["productos_observados"]).all())
 
@@ -89,9 +91,9 @@ class TestFusionImportacionesStock(unittest.TestCase):
         retail = build_monthly_retail_summary(history)
         prepared = build_prepared_import_lags(build_santa_cruz_import_monthly())
         fusion = build_monthly_import_retail_fusion(retail, prepared)
-        self.assertEqual(len(fusion), len(retail[retail["fecha_periodo"] == "2026-10"]))
-        self.assertEqual(set(fusion["fecha_periodo"]), {"2026-10"})
-        self.assertTrue((fusion["cobertura_retail_meses"] == 1).all())
+        self.assertEqual(len(fusion), len(retail))
+        self.assertTrue({"2026-10"}.issubset(set(fusion["fecha_periodo"])))
+        self.assertTrue((fusion["cobertura_retail_meses"] >= 1).all())
         self.assertFalse(fusion["lag_estimado_estadisticamente"].any())
 
 
