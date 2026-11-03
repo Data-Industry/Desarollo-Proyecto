@@ -175,19 +175,22 @@ flowchart TD
 | **#018** | `bba3427` | Refactor / Ops / Jira | Sprint 2 | 2026-10-27 | Reorganización cronológica de scripts en `src/` (`01_` a `05_`), purga de archivos obsoletos en `data/raw` y `data/processed`, regeneración secuencial de 11 datasets limpios y sincronización total en Jira Cloud (creación de SCRUM-43 para US-28, transición a Finalizado de SCRUM-43, SCRUM-23 y SCRUM-20 con comentarios formales y cierre de Sprint 2 con 25/25 SP). | Criterios 100% verificados: 33/33 tests aprobados (27 ETL + 6 EDA), estructura de código ordenada cronológicamente de forma ascendente en cada carpeta, datos depurados y tablero Jira en 25/25 SP Hecho. |
 | **#019** | `a788aaa` | Refactor / Cleanup | Sprint 2 | 2026-10-27 | Eliminación total y definitiva de scripts no numerados duplicados en `src/scraping/`, `src/etl/` y `src/models/`, migración de dependencias internas mediante `importlib.import_module` y actualización de documentación técnica (`README.md` y guías en `docs/`). | Criterios 100% verificados: 33/33 pruebas unitarias aprobadas, árbol de código 100% libre de scripts duplicados, conservando exclusivamente la nomenclatura cronológica `01_` a `05_`. |
 | **#020** | `c693390` | `US-29` / Jira Ops | Sprint 3 | 2026-10-30 | Sincronización en Jira Cloud: estandarización de historias en formato ágil ("Como... Quiero... Para...") con criterios de validación explícitos (SCRUM-43, SCRUM-23, SCRUM-20, SCRUM-37, SCRUM-24, SCRUM-9), depuración de SCRUM-18 y SCRUM-8, creación de SCRUM-44 (US-29: MVP Local para Jubilados) y configuración del Sprint 3 en 21 SP. | 100% verificado en Jira Cloud: Backlog cuadrado en 18 historias y 94 SP, descripciones actualizadas con criterios verificables, SCRUM Sprint 3 configurado con 21 SP y 33/33 pruebas unitarias locales aprobadas. |
+| **#021** | `9829e09` | `US-23` (`SCRUM-37`) | Sprint 3 | 2026-11-01 | Script de imputación zonal de valores faltantes y cruce con calendario oficial del Banco Unión para identificar días pico de pago de rentas a jubilados. | 100% verificado: pipeline de imputación zonal, variables binarias y de proximidad temporal bancaria generadas e integradas. |
+| **#022** | `317ece8` | `US-02` (`SCRUM-24`) | Sprint 3 | 2026-11-02 | Construcción de matriz analítica de modelado (`dataset_analitico_modelado.csv`, 43 filas x 69 variables) con Feature Engineering y correlaciones Pearson/Spearman. | 100% verificado: 69 características numéricas y categóricas codificadas, análisis de colinealidad y figuras estadísticas generadas en docs/figures/. |
+| **#023** | `43e3bee` | `US-05` / `US-29` | Sprint 3 | 2026-11-03 | Entrenamiento de modelos supervisados de stock (RandomForest, XGBoost, Regresión Logística con StratifiedKFold, PR-AUC, ROC y serialización en models/) y desarrollo de MVP Visualizador Didáctico de Precios para Jubilados v2.0 (24 medicamentos agrupados, comparativa 3 cadenas, zoom A-/A+, filtros y semáforo preventivo). | 100% verificado: 74/74 pruebas unitarias aprobadas (38 ETL + 36 modelos/MVP), ejecutables HTML locales autocontenidos generados, documentación técnica en docs/09 y docs/10, Sprint 3 cerrado al 100% (21/21 SP). |
 
 ---
 
 ## 6. Próximo Paso en el Flujo de Trabajo
 
-- **SCRUM Sprint 2 (25 Story Points):** **100% DESARROLLADO Y AUDITADO**.
-  - `SCRUM-23` (`US-21`, 7 SP): Ingesta y normalización de importaciones aduaneras con TC oficial BCB. **[Finalizada]**
-  - `SCRUM-20` (`US-16`, 5 SP): Auditoría de calidad y EDA multivariable consumiendo la fusión de US-27. **[Finalizada]**
-  - `SCRUM-7` (`US-03`, 5 SP): Geolocalización de farmacias y mapeo por anillos urbanos 1 al 8. **[Finalizada - Mía]**
-  - `SCRUM-42` (`US-27`, 5 SP): Fusión de importaciones-stock y preparación de variables de rezago. **[Finalizada - Mía]**
-  - `SCRUM-43` (`US-28`, 3 SP): Ingesta automatizada del tipo de cambio oficial del BCB y serie diaria. **[Finalizada]**
-- **Próximo Sprint a Desarrollar:** **SCRUM Sprint 3 (Fase 3: Preparación de Datos, Fase 4: Modelado & Fase 6: Despliegue MVP - 21 Story Points)**:
-  1. `SCRUM-37` (`US-23`, 5 SP): Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión.
-  2. `SCRUM-24` (`US-02`, 3 SP): Ingeniería de características (Feature Engineering) y matriz correlacional ampliada.
-  3. `SCRUM-9` (`US-05`, 8 SP): Entrenamiento de modelos supervisados de clasificación de disponibilidad de stock.
-  4. `SCRUM-44` (`US-29`, 5 SP): MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados.
+- **SCRUM Sprint 3 (21 Story Points):** **100% CERRADO Y FINALIZADO (21/21 SP)**:
+  - `SCRUM-37` (`US-23`, 5 SP): Imputación zonal y cruce calendario Banco Unión. **[Finalizada - Mía]**
+  - `SCRUM-24` (`US-02`, 3 SP): Feature Engineering y matriz correlacional analítica. **[Finalizada - Mía]**
+  - `SCRUM-9` (`US-05`, 8 SP): Modelos supervisados de clasificación de stock y quiebres. **[Finalizada]**
+  - `SCRUM-44` (`US-29`, 5 SP): MVP Visualizador Didáctico e Interactivo Local para Jubilados v2.0. **[Finalizada]**
+- **Próximo Sprint a Desarrollar:** **SCRUM Sprint 4 (Fase 5: Evaluación & Fase 6: Despliegue — 26 Story Points)**:
+  1. `SCRUM-38` (`US-24`, 5 SP): Evaluación formal de modelos con optimización estricta de Recall (Sensibilidad) y validación cruzada.
+  2. `SCRUM-39` (`US-25`, 3 SP): Generación automatizada de reportes de desempeño, curvas de calibración y Feature Importance en PDF/Markdown.
+  3. `SCRUM-10` (`US-06`, 5 SP): Motor lógico del semáforo predictivo preventivo conectado a las salidas de los modelos de producción.
+  4. `SCRUM-41` (`US-26`, 8 SP): Chatbot conversacional asistencial para WhatsApp / Web con procesamiento de lenguaje natural y respuestas empáticas para adultos mayores.
+  5. `SCRUM-40` (`US-17`, 5 SP): Dashboard analítico integral de monitoreo territorial y alertas tempranas de desabastecimiento farmacéutico.
