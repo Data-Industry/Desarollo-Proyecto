@@ -1,4 +1,4 @@
 ﻿farmacia,total_skus,precio_min,precio_mediana,precio_promedio,precio_max,descuento_promedio_pct,skus_con_descuento,disponibilidad_stock_pct
-Farmacias Chávez,19,136.78,269.33,422.08,1345.5,10.0,19,100.0
+Farmacias Chávez,19,136.78,269.33,422.27,1345.5,10.0,19,100.0
 Farmacias Telchi,3,249.9,305.39,318.37,399.81,0.0,0,100.0
-Farmacorp,21,140.15,278.91,423.96,1392.95,6.0,18,90.5
+Farmacorp,21,140.15,278.91,421.69,1423.58,1.24,3,90.5

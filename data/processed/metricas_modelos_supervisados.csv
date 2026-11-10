@@ -1,8 +1,8 @@
 ﻿modelo,tipo_umbral,umbral,accuracy,precision,recall_sensibilidad,f1_score,f2_score_clinico,roc_auc,pr_auc
 Baseline,Estandar (0.50),0.5,0.8837,0.0,0.0,0.0,0.0,0.5,0.1163
-RandomForest,Estandar (0.50),0.5,0.7442,0.0,0.0,0.0,0.0,0.3632,0.1045
-RandomForest,Clinico Optimo (0.05),0.05,0.1163,0.1163,1.0,0.2083,0.3968,0.3632,0.1045
-XGBoost,Estandar (0.50),0.5,0.7442,0.0,0.0,0.0,0.0,0.3579,0.1017
-XGBoost,Clinico Optimo (0.05),0.05,0.1163,0.0976,0.8,0.1739,0.3279,0.3579,0.1017
-LogisticRegression,Estandar (0.50),0.5,0.7209,0.0,0.0,0.0,0.0,0.3842,0.1137
-LogisticRegression,Clinico Optimo (0.05),0.05,0.186,0.1053,0.8,0.186,0.3448,0.3842,0.1137
+RandomForest,Estandar (0.50),0.5,0.7209,0.0,0.0,0.0,0.0,0.3632,0.1036
+RandomForest,Clinico Optimo (0.05),0.05,0.1163,0.1163,1.0,0.2083,0.3968,0.3632,0.1036
+XGBoost,Estandar (0.50),0.5,0.6977,0.0,0.0,0.0,0.0,0.3289,0.1022
+XGBoost,Clinico Optimo (0.05),0.05,0.1163,0.0976,0.8,0.1739,0.3279,0.3289,0.1022
+LogisticRegression,Estandar (0.50),0.5,0.7209,0.0,0.0,0.0,0.0,0.3421,0.1087
+LogisticRegression,Clinico Optimo (0.05),0.05,0.1395,0.1,0.8,0.1778,0.3333,0.3421,0.1087
