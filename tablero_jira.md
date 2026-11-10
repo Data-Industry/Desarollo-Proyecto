@@ -40,11 +40,11 @@
 - **`SCRUM-9` (US-05 - 8 SP):** Entrenamiento de modelos supervisados de clasificación de disponibilidad y quiebre de stock. **[Finalizada]**
 - **`SCRUM-44` (US-29 - 5 SP):** MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados. **[Finalizada]**
 
-### SCRUM Sprint 4 (En Ejecución — 13/21 SP Completados)
+### SCRUM Sprint 4 (Cerrado al 100% — 21/21 SP Completados)
 - **`SCRUM-45` (US-30 - 3 SP):** Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Finalizada - Mía Wayar]**
 - **`SCRUM-46` (US-31 - 5 SP):** Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Finalizada - Daniel Molina]**
 - **`SCRUM-47` (US-32 - 5 SP):** Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Finalizada - Mía Wayar]**
-- **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[En Curso - Daniel Molina]**
+- **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[Finalizada - Daniel Molina]**
 
 ### Product Backlog Priorizado (Sprint 5: Evaluación Formal y Cierre - 5 SP)
 - **`SCRUM-38` (US-24 - 5 SP):** Evaluación formal de modelos supervisados con optimización estricta de Recall (Sensibilidad) y calibración probabilística. **[Backlog]**
@@ -94,8 +94,8 @@
 * **Quiero** aplicar los instrumentos de validación a una muestra representativa de jubilados diabéticos y familiares cuidadores en Santa Cruz de la Sierra, tabular cuantitativamente los resultados SUS y generar un informe gerencial de conclusiones y aprendizajes de negocio,
 * **Para** validar empíricamente la hipótesis de valor de la solución, cuantificar la usabilidad del prototipo y orientar las decisiones estratégicas de la siguiente iteración con evidencia real.
 * **Criterios de Aceptación / Validación:**
-  - [ ] Aplicación y tabulación de la muestra empírica en `data/processed/validacion_usuarios_tabulacion.csv`.
-  - [ ] Cálculo estadístico del puntaje global SUS (escala 0-100) y desglose por dimensiones de usabilidad y aprendizaje.
-  - [ ] Matriz cualitativa de hallazgos, barreras identificadas (*friction points*) y cotizaciones verbales de los entrevistados.
-  - [ ] Informe formal de conclusiones de negocio y recomendaciones en `docs/09_informe_validacion_campo_y_negocio.md`.
-  - [ ] Conclusiones cuantitativas y cualitativas que respondan a la viabilidad del MVP y prioricen las mejoras para el release final.
+  - [x] Aplicación y tabulación de la muestra empírica en `data/processed/validacion_usuarios_tabulacion.csv` (14 participantes: 10 Jubilados y 4 Cuidadores).
+  - [x] Cálculo estadístico del puntaje global SUS (Media 78.04, Mediana 76.25) y desglose por dimensiones de usabilidad (80.58%) y aprendizaje (67.86%).
+  - [x] Matriz cualitativa de hallazgos, barreras identificadas (*friction points*) y cotizaciones verbales de los entrevistados en `data/processed/validacion_usuarios_cualitativo.csv`.
+  - [x] Informe formal de conclusiones de negocio y recomendaciones en `docs/14_informe_validacion_campo_y_negocio.md`.
+  - [x] Conclusiones cuantitativas y cualitativas que responden a la viabilidad del MVP y priorizan las mejoras para el release final (demanda unánime de Chatbot en WhatsApp).
