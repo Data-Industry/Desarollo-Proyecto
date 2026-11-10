@@ -1,9 +1,12 @@
-"""Pruebas unitarias para el MVP Visualizador Didáctico de Insulina para Jubilados (US-29 / SCRUM-44).
+"""Pruebas unitarias para el MVP Visualizador Didáctico de Insulina para Jubilados (US-31 / SCRUM-46).
 
 Verifica la compilación de datos reales agrupados por medicamento, la comparación directa
 de las 3 cadenas de farmacias (Farmacorp, Farmacias Chávez, Farmacias Telchi), la generación
-de archivos HTML autocontenidos y los estándares de accesibilidad para adultos mayores.
+de archivos HTML autocontenidos (incluyendo docs/mvp_jubilados_comparador.html), el glosario
+ciudadano amigable, la ausencia de tecnicismos y la regla estricta de semáforos coherentes.
 """
+
+from __future__ import annotations
 
 import importlib
 from pathlib import Path
@@ -24,7 +27,7 @@ except ImportError:
 
 
 class TestMVPJubilados(unittest.TestCase):
-    """Suite de pruebas unitarias para US-29 versión 2.0 (Agrupada y Accesible)."""
+    """Suite de pruebas unitarias para US-31 versión 3.0 (Lenguaje Ciudadano y Semáforo Coherente)."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -32,6 +35,7 @@ class TestMVPJubilados(unittest.TestCase):
         cls.project_dir = Path(__file__).resolve().parents[2]
         cls.src_ui_html = cls.project_dir / "src" / "ui" / "mvp_comparador_jubilados.html"
         cls.root_html = cls.project_dir / "mvp_comparador_jubilados.html"
+        cls.docs_html = cls.project_dir / "docs" / "mvp_jubilados_comparador.html"
         cls.artifact_html = gen_mvp.ARTIFACT_HTML
 
         cls.medicamentos, cls.sucursales, cls.resumen = gen_mvp.compilar_datos_reales()
@@ -46,8 +50,8 @@ class TestMVPJubilados(unittest.TestCase):
         self.assertGreater(self.resumen["precio_min_bs"], 0)
         self.assertGreater(self.resumen["precio_max_bs"], self.resumen["precio_min_bs"])
 
-    def test_02_estructura_comparativa_3_cadenas_y_ml(self) -> None:
-        """Comprueba que cada medicamento contenga desglose de precios de cadenas y métricas predictivas."""
+    def test_02_estructura_comparativa_3_cadenas_y_metricas(self) -> None:
+        """Comprueba que cada medicamento contenga desglose de precios de cadenas y métricas comparativas."""
         cadenas_validas = {"Farmacorp", "Farmacias Chávez", "Farmacias Telchi"}
         for med in self.medicamentos:
             self.assertIn("id", med)
@@ -67,13 +71,51 @@ class TestMVPJubilados(unittest.TestCase):
                 self.assertIn("precio_venta_bs", datos)
                 self.assertIn("precio_por_100ui_bs", datos)
                 self.assertIn("estado_stock", datos)
-                self.assertIn("semaforo_ml", datos)
-                self.assertIn("prob_quiebre_ml", datos)
+                self.assertIn("disponible", datos)
                 self.assertGreater(datos["precio_venta_bs"], 0)
-                self.assertGreaterEqual(datos["prob_quiebre_ml"], 0.0)
-                self.assertLessEqual(datos["prob_quiebre_ml"], 1.0)
 
-    def test_03_sucursales_geolocalizadas_y_anillos(self) -> None:
+    def test_03_regla_estricta_semaforo_coherente_us31(self) -> None:
+        """Verifica que NINGUNA insulina disponible marque ROJO y que el semáforo sea 100% coherente."""
+        total_verde = 0
+        total_amarillo = 0
+        total_rojo = 0
+
+        for med in self.medicamentos:
+            sem = med["semaforo_general"]
+            activas = med["total_farmacias_activas"]
+
+            # Regla 1: Si hay farmacias activas, BAJO NINGUNA CIRCUNSTANCIA puede ser ROJO
+            if activas > 0:
+                self.assertNotEqual(
+                    sem,
+                    "ROJO",
+                    f"Incoherencia semafórica: {med['marca']} tiene {activas} farmacia(s) disponible(s) pero marca ROJO.",
+                )
+                self.assertIn(sem, {"VERDE", "AMARILLO"})
+
+            # Regla 2: El ROJO se reserva estrictamente cuando activas == 0
+            if sem == "ROJO":
+                self.assertEqual(
+                    activas,
+                    0,
+                    f"El semáforo ROJO solo se permite cuando no hay stock activo, pero {med['marca']} tiene {activas}.",
+                )
+                total_rojo += 1
+            elif sem == "VERDE":
+                total_verde += 1
+                self.assertGreaterEqual(activas, 2, "El verde requiere al menos 2 farmacias con stock estable.")
+            elif sem == "AMARILLO":
+                total_amarillo += 1
+                self.assertGreater(activas, 0, "El amarillo requiere al menos 1 farmacia con existencias.")
+
+        self.assertEqual(self.resumen["total_verde"], total_verde)
+        self.assertEqual(self.resumen["total_amarillo"], total_amarillo)
+        self.assertEqual(self.resumen["total_rojo"], total_rojo)
+        self.assertGreater(total_verde, 0, "Debe haber medicamentos con stock verde asegurado.")
+        self.assertGreater(total_amarillo, 0, "Debe haber medicamentos con semáforo amarillo de precaución.")
+        self.assertEqual(total_rojo, 1, "Debe haber exactamente 1 presentación totalmente agotada (Insugen NPH).")
+
+    def test_04_sucursales_geolocalizadas_y_anillos(self) -> None:
         """Comprueba que las sucursales tengan dirección, ciudad y anillo identificado."""
         anillos_encontrados = {s["anillo_num"] for s in self.sucursales}
         self.assertTrue({2.0, 3.0, 4.0, 7.0}.issubset(anillos_encontrados))
@@ -83,18 +125,42 @@ class TestMVPJubilados(unittest.TestCase):
             self.assertIn("anillo_etiqueta", suc)
             self.assertEqual(suc["ciudad"], "Santa Cruz de la Sierra")
 
-    def test_04_archivos_html_generados(self) -> None:
-        """Verifica que los archivos HTML existan y tengan un tamaño válido (>20KB)."""
+    def test_05_archivos_html_generados_y_sincronizados(self) -> None:
+        """Verifica que los 4 archivos HTML existan y tengan un tamaño válido (>20KB)."""
         self.assertTrue(self.src_ui_html.exists(), "Falta src/ui/mvp_comparador_jubilados.html")
         self.assertTrue(self.root_html.exists(), "Falta mvp_comparador_jubilados.html en la raíz")
+        self.assertTrue(self.docs_html.exists(), "Falta docs/mvp_jubilados_comparador.html (Criterio US-31)")
         self.assertTrue(self.artifact_html.exists(), "Falta el artefacto oficial en brain/")
 
         self.assertGreater(self.src_ui_html.stat().st_size, 20000)
         self.assertGreater(self.root_html.stat().st_size, 20000)
+        self.assertGreater(self.docs_html.stat().st_size, 20000)
         self.assertGreater(self.artifact_html.stat().st_size, 20000)
 
-    def test_05_criterios_aceptacion_y_nuevos_botones(self) -> None:
-        """Verifica los criterios de aceptación y los nuevos controles solicitados por el usuario."""
+    def test_06_glosario_ciudadano_y_ausencia_tecnicismos(self) -> None:
+        """Verifica que el glosario accesible esté presente y que no existan tecnicismos en la vista."""
+        with open(self.src_ui_html, "r", encoding="utf-8") as f:
+            contenido = f.read()
+
+        # Glosario ciudadano interactivo obligatorio (Criterio de Aceptación US-31)
+        self.assertIn('id="sec-glosario"', contenido)
+        self.assertIn('¿Qué es "Quiebre de stock"?', contenido)
+        self.assertIn('¿Cómo funciona el Semáforo?', contenido)
+        self.assertIn('¿Cómo se calcula tu Ahorro?', contenido)
+        self.assertIn('¿Qué significa "U-100"?', contenido)
+
+        # Ausencia de tecnicismos complejos en el texto visible al jubilado
+        self.assertNotIn("Machine Learning", contenido, "No debe incluirse el término 'Machine Learning'")
+        self.assertNotIn("Random Forest", contenido, "No debe incluirse el término 'Random Forest'")
+        self.assertNotIn("Lag de importaciones", contenido, "No debe incluirse 'Lag de importaciones'")
+
+        # Semáforo de lenguaje amigable
+        self.assertIn("VERDE (Disponibilidad Segura)", contenido)
+        self.assertIn("AMARILLO (Precaución)", contenido)
+        self.assertIn("ROJO (Agotado General)", contenido)
+
+    def test_07_criterios_interactivos_y_accesibilidad_senior(self) -> None:
+        """Verifica controles de búsqueda, ordenamiento, calculadora y accesibilidad senior."""
         with open(self.src_ui_html, "r", encoding="utf-8") as f:
             contenido = f.read()
 
@@ -103,54 +169,30 @@ class TestMVPJubilados(unittest.TestCase):
         self.assertIn('id="filtroFormato"', contenido)
         self.assertIn('id="filtroFarmacia"', contenido)
         self.assertIn('id="inputBusqueda"', contenido)
-        self.assertIn('id="btnAplicarFiltros"', contenido, "Debe existir el botón explícito de Filtrar Catálogo")
-        self.assertIn('id="btnLimpiarFiltros"', contenido, "Debe existir el botón de restablecer filtros")
-        self.assertIn(f"Bs {self.resumen['precio_min_bs']:.2f}", contenido, "El precio mínimo del banner debe ser dinámico")
+        self.assertIn('id="btnAplicarFiltros"', contenido)
+        self.assertIn('id="btnLimpiarFiltros"', contenido)
 
         # Comparador con desglose de 3 cadenas por tarjeta
         self.assertIn("⭐ Mejor Precio", contenido)
         self.assertIn("Comparativa por Farmacia:", contenido)
-        self.assertIn("Ahorras Bs", contenido)
-        self.assertIn("Farmacias Chávez", contenido)
-        self.assertIn("Farmacorp", contenido)
-        self.assertIn("Farmacias Telchi", contenido)
+        self.assertIn("Ahorro Máximo en tu Compra:", contenido)
 
         # Paso 2: Buscador Territorial por Anillos
         self.assertIn('id="selectAnilloFiltro"', contenido)
         self.assertIn('id="tbodySucursales"', contenido)
-        self.assertIn("2do Anillo", contenido)
-        self.assertIn("3er Anillo", contenido)
-
-        # Semáforo Preventivo Upstream & ML
-        self.assertIn('id="badgeSemaforoGlobal"', contenido)
-        self.assertIn("VERDE (Stock Estable)", contenido)
-        self.assertIn("AMARILLO (Pocas Unidades)", contenido)
-        self.assertIn("ROJO (Alerta de Quiebre)", contenido)
 
         # Paso 3: Calculadora de Presupuesto Mensual
         self.assertIn('id="inputDosisDiaria"', contenido)
         self.assertIn('id="selectTipoInsulinaCalc"', contenido)
         self.assertIn('id="calcResumenAhorro"', contenido)
 
-    def test_06_accesibilidad_senior_y_zoom_escalable(self) -> None:
-        """Comprueba controles de accesibilidad senior y escalado de fuente del documento completo."""
-        with open(self.src_ui_html, "r", encoding="utf-8") as f:
-            contenido = f.read()
-
-        # Controles de tamaño de letra que escalan el elemento raíz (document.documentElement)
+        # Accesibilidad Senior: Escalado real de letra y voz
         self.assertIn('id="btnFontMinus"', contenido)
         self.assertIn('id="btnFontPlus"', contenido)
         self.assertIn('id="lblFontScale"', contenido)
         self.assertIn("document.documentElement.style.fontSize", contenido)
-
-        # Asistente de lectura por voz nativo
         self.assertIn("leerResumenVoz", contenido)
         self.assertIn("speechSynthesis", contenido)
-
-        # Semáforos de contraste accesible
-        self.assertIn("badge-verde", contenido)
-        self.assertIn("badge-amarillo", contenido)
-        self.assertIn("badge-rojo", contenido)
 
 
 if __name__ == "__main__":

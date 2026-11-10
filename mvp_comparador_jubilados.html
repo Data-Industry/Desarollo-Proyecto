@@ -26,7 +26,7 @@
         <span class="text-3xl" aria-hidden="true">🩺</span>
         <div>
           <h1 class="text-xl md:text-2xl font-black tracking-tight">Comparador de Insulina para Jubilados</h1>
-          <p class="text-emerald-100 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Farmacorp, Chávez y Telchi</p>
+          <p class="text-emerald-100 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Precios reales de Farmacorp, Chávez y Telchi</p>
         </div>
       </div>
 
@@ -50,10 +50,10 @@
     <section class="bg-white rounded-2xl p-6 border-2 border-emerald-200 shadow-sm flex flex-col md:flex-row gap-6 items-center justify-between" aria-labelledby="sec-resumen">
       <div class="space-y-2">
         <h2 id="sec-resumen" class="text-xl md:text-2xl font-bold text-emerald-900 flex items-center gap-2">
-          <span>👋</span> ¡Bienvenido! Compara precios de farmacias en un solo lugar
+          <span>👋</span> ¡Bienvenido! Compara precios y ahorra en tu insulina
         </h2>
         <p class="text-slate-600 text-base md:text-lg">
-          Cada tarjeta agrupa un medicamento y te lista los precios de <strong class="text-slate-900">Farmacorp, Farmacias Chávez y Farmacias Telchi</strong>, destacando la opción más barata para que cuides tu pensión.
+          Cada tarjeta agrupa un medicamento y te lista los precios de <strong class="text-slate-900">Farmacorp, Farmacias Chávez y Farmacias Telchi</strong>, destacando la opción más económica para proteger tu pensión.
         </p>
       </div>
       <div class="flex flex-row md:flex-col gap-3 shrink-0">
@@ -62,53 +62,106 @@
           <span class="text-2xl font-black text-emerald-900" id="resumenPrecioMin">Bs 136.78</span>
         </div>
         <div class="bg-blue-50 border border-blue-300 rounded-xl px-4 py-2 text-center">
-          <span class="block text-xs uppercase font-bold text-blue-700">Medicamentos</span>
+          <span class="block text-xs uppercase font-bold text-blue-700">Catálogo disponible</span>
           <span class="text-2xl font-black text-blue-900">24 tipos</span>
         </div>
       </div>
     </section>
 
-    <!-- WIDGET DEL SEMÁFORO PREVENTIVO PREDICTIVO (US-05) -->
+    <!-- WIDGET DEL SEMÁFORO PREVENTIVO EN LENGUAJE CIUDADANO (US-31) -->
     <section class="bg-white rounded-2xl p-6 border-2 border-slate-200 shadow-sm space-y-4" aria-labelledby="sec-semaforo">
       <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <h2 id="sec-semaforo" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <span>🚦</span> Semáforo de Abastecimiento Preventivo (Modelo IA)
+            <span>🚦</span> Semáforo Preventivo de Disponibilidad en Farmacias
           </h2>
           <p class="text-slate-600 text-sm md:text-base">
-            Predicción basada en Machine Learning para anticipar quiebres y compras antes del pago de rentas.
+            Monitoreo diario de existencias en farmacias para avisarte con anticipación si conviene comprar antes del cobro de rentas.
           </p>
         </div>
-        <div id="badgeSemaforoGlobal" class="px-4 py-2 rounded-xl text-base md:text-lg font-extrabold flex items-center gap-2 badge-amarillo">
-          <span>⚠️</span> <span>ESTADO GENERAL: RIESGO MODERADO</span>
+        <div id="badgeSemaforoGlobal" class="px-4 py-2 rounded-xl text-base md:text-lg font-extrabold flex items-center gap-2 badge-verde">
+          <span>🟢</span> <span>ESTADO: 12 CON STOCK ASEGURADO • 11 CON PRECAUCIÓN</span>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
         <div class="p-4 rounded-xl border-2 border-emerald-300 bg-emerald-50/70 space-y-1">
           <div class="flex items-center gap-2 font-bold text-emerald-900 text-base md:text-lg">
-            <span class="text-2xl">🟢</span> VERDE (Stock Estable)
+            <span class="text-2xl">🟢</span> VERDE (Disponibilidad Segura)
           </div>
           <p class="text-emerald-800 text-sm">
-            20 medicamentos con abastecimiento asegurado en la mayoría de cadenas farmacéuticas.
+            12 medicamentos con stock confirmado en farmacias. Puedes ir a comprar con tranquilidad.
           </p>
         </div>
 
         <div class="p-4 rounded-xl border-2 border-amber-300 bg-amber-50/70 space-y-1">
           <div class="flex items-center gap-2 font-bold text-amber-900 text-base md:text-lg">
-            <span class="text-2xl">🟡</span> AMARILLO (Pocas Unidades)
+            <span class="text-2xl">🟡</span> AMARILLO (Precaución)
           </div>
           <p class="text-amber-800 text-sm">
-            Rotación acelerada en presentaciones de Basalog y Apidra. Recomendamos llamar antes de acudir.
+            11 presentaciones con pocas unidades o en una sola cadena. Conviene llamar o comprar antes.
           </p>
         </div>
 
         <div class="p-4 rounded-xl border-2 border-rose-300 bg-rose-50/70 space-y-1">
           <div class="flex items-center gap-2 font-bold text-rose-900 text-base md:text-lg">
-            <span class="text-2xl">🔴</span> ROJO (Alerta de Quiebre)
+            <span class="text-2xl">🔴</span> ROJO (Agotado General)
           </div>
           <p class="text-rose-800 text-sm">
-            4 presentaciones con stock quebrado en alguna cadena (Asparpen y viales). ¡Comprar con 5 días de anticipación!
+            1 presentación agotada en todas las cadenas. Requiere consultar al médico por alternativas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOSARIO CIUDADANO PARA JUBILADOS Y FAMILIARES (US-31) -->
+    <section class="bg-indigo-50/70 rounded-2xl p-6 border-2 border-indigo-200 shadow-sm space-y-4" aria-labelledby="sec-glosario">
+      <div class="flex items-center gap-2 border-b border-indigo-200 pb-3">
+        <span class="text-2xl">📖</span>
+        <div>
+          <h2 id="sec-glosario" class="text-xl md:text-2xl font-bold text-indigo-950">Glosario Amigable: Palabras Clave Explicadas de Forma Sencilla</h2>
+          <p class="text-indigo-800 text-xs md:text-sm">Todo lo que necesitas saber para entender tu insulina y tomar mejores decisiones sin enredos técnicos.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+        <!-- Tarjeta 1: Quiebre de Stock -->
+        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
+            <span class="text-xl">📦</span> ¿Qué es "Quiebre de stock"?
+          </div>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Situación en la que las farmacias <strong>agotan por completo sus existencias</strong> de una insulina y no pueden reponer de inmediato. Avisarte a tiempo te permite comprar días antes sin quedarte sin tu dosis diaria.
+          </p>
+        </div>
+
+        <!-- Tarjeta 2: Semáforo Preventivo -->
+        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
+            <span class="text-xl">🚦</span> ¿Cómo funciona el Semáforo?
+          </div>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Si hay stock en al menos una farmacia, <strong>nunca marcará rojo</strong>. El color <strong>Verde</strong> confirma abasto seguro; <strong>Amarillo</strong> aconseja comprar con anticipación; y <strong>Rojo</strong> avisa que está agotado en todas.
+          </p>
+        </div>
+
+        <!-- Tarjeta 3: Cálculo del Ahorro -->
+        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
+            <span class="text-xl">💰</span> ¿Cómo se calcula tu Ahorro?
+          </div>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Restamos el precio de la farmacia más cara menos el de la más barata para el <strong>mismo medicamento exacto</strong>. La diferencia es el dinero en Bolivianos que te queda en el bolsillo al elegir bien.
+          </p>
+        </div>
+
+        <!-- Tarjeta 4: Concentración U-100 -->
+        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
+            <span class="text-xl">💉</span> ¿Qué significa "U-100"?
+          </div>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Significa que cada mililitro contiene <strong>100 Unidades Internacionales</strong> de insulina. Es la presentación estándar en Bolivia. Asegúrate de usar siempre jeringas graduadas para U-100.
           </p>
         </div>
       </div>
@@ -118,15 +171,15 @@
     <section class="bg-white rounded-2xl p-6 border-2 border-slate-300 shadow-sm space-y-5" aria-labelledby="sec-filtros">
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
         <h2 id="sec-filtros" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
-          <span>🔍</span> Paso 1: Filtra y Busca tu Medicamento
+          <span>🔍</span> Paso 1: Busca tu Medicamento
         </h2>
-        <span class="text-xs md:text-sm font-semibold text-slate-500">Selecciona tus preferencias y presiona "Filtrar"</span>
+        <span class="text-xs md:text-sm font-semibold text-slate-500">Selecciona tus preferencias y presiona "Filtrar Catálogo"</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Filtro Principio Activo -->
         <div class="space-y-1">
-          <label for="filtroPrincipio" class="block font-bold text-slate-800 text-sm md:text-base">Tipo de Insulina / Fármaco:</label>
+          <label for="filtroPrincipio" class="block font-bold text-slate-800 text-sm md:text-base">Tipo de Insulina / Principio Activo:</label>
           <select id="filtroPrincipio" class="w-full p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-medium text-slate-900 text-base focus-ring">
             <option value="TODOS">Todas las insulinas</option>
             <option value="Glargina">Insulina Glargina (Lantus, Basalog, Glaripen, Toujeo)</option>
@@ -195,7 +248,7 @@
         <div class="flex items-center gap-2">
           <span class="text-xs md:text-sm font-bold text-slate-700">Ordenar por:</span>
           <select id="selectOrden" onchange="aplicarFiltros()" class="p-2 border-2 border-slate-300 rounded-lg font-bold text-xs md:text-sm bg-white focus-ring">
-            <option value="precio_asc">Precio más bajo primero (Ahorro)</option>
+            <option value="precio_asc">Precio más bajo primero (Mayor ahorro)</option>
             <option value="precio_desc">Precio más alto primero</option>
             <option value="ahorro_desc">Mayor ahorro entre farmacias</option>
             <option value="nombre_asc">Nombre alfabético (A-Z)</option>
@@ -216,7 +269,7 @@
           <span>🧮</span> Calculadora de Ahorro y Presupuesto Mensual para tu Pensión
         </h2>
         <p class="text-amber-900 text-sm md:text-base">
-          Ingresa la dosis diaria prescrita por tu médico para saber cuántos frascos necesitas y cuánto dinero ahorras al mes.
+          Ingresa la dosis diaria recetada por tu médico para saber cuántos frascos necesitas y cuánto dinero ahorras al mes comprando en la farmacia más económica.
         </p>
       </div>
 
@@ -244,8 +297,8 @@
 
         <div class="bg-white p-5 rounded-xl border-2 border-amber-400 shadow-sm space-y-2 text-center md:text-left">
           <span class="block text-xs uppercase font-black text-amber-800">Resultado Estimado al Mes (30 días)</span>
-          <div class="text-2xl font-black text-emerald-700" id="calcResumenAhorro">Ahorras Bs 22.80 al mes</div>
-          <p class="text-slate-600 text-xs md:text-sm" id="calcDetalleFrascos">Con 30 UI/día necesitas 1 frasco de 1000 UI para 30 días.</p>
+          <div class="text-2xl font-black text-emerald-700" id="calcResumenAhorro">Calculando ahorro...</div>
+          <p class="text-slate-600 text-xs md:text-sm" id="calcDetalleFrascos">Cálculo de frascos y presupuesto en curso.</p>
         </div>
       </div>
     </section>
@@ -258,7 +311,7 @@
             <span>📍</span> Paso 2: Encuentra la Farmacia Más Cercana a tu Anillo
           </h2>
           <p class="text-slate-600 text-sm md:text-base">
-            Sucursales físicas confirmadas por geolocalización en Santa Cruz de la Sierra.
+            Sucursales físicas confirmadas en Santa Cruz de la Sierra ordenadas por anillo urbano.
           </p>
         </div>
 
@@ -267,7 +320,7 @@
           <label for="selectAnilloFiltro" class="font-bold text-slate-800 text-xs md:text-sm">Filtrar por Anillo:</label>
           <select id="selectAnilloFiltro" onchange="filtrarSucursales()" class="p-2.5 bg-slate-50 border-2 border-slate-300 rounded-lg font-bold text-slate-900 text-xs md:text-sm focus-ring">
             <option value="TODOS">Todos los anillos (16 sucursales)</option>
-            <option value="2">2do Anillo (Pirai, Trinidad, Cotoca, Charcas)</option>
+            <option value="2">2do Anillo (Piraí, Trinidad, Cotoca, Charcas)</option>
             <option value="3">3er Anillo (Santos Dumont, Mutualista)</option>
             <option value="4">4to Anillo (Paraguá)</option>
             <option value="7">7mo Anillo (Av. Banzer)</option>
@@ -303,26 +356,26 @@
       <ul class="list-disc list-inside space-y-1.5 text-emerald-900 text-sm md:text-base font-medium">
         <li><strong>Conserva la cadena de frío:</strong> Al retirar tu insulina en la farmacia, llévala siempre en bolsa térmica o con un gel refrigerante sin congelar directamente el frasco.</li>
         <li><strong>Verifica la concentración:</strong> En Bolivia la mayoría de insulinas son U-100 (100 Unidades por mililitro). Usa siempre jeringas graduadas para U-100.</li>
-        <li><strong>Compra con 5 días de anticipación:</strong> Especialmente durante los días de pago de pensiones del Banco Unión (días 1 al 5 y fin de mes), cuando aumenta la demanda y las farmacias pueden quebrar stock transitoriamente.</li>
+        <li><strong>Compra con 3 a 5 días de anticipación:</strong> Especialmente durante las fechas de cobro de pensiones en el Banco Unión (días 1 al 5 y fin de mes), cuando aumenta la afluencia y pueden agotarse existencias temporalmente.</li>
       </ul>
     </section>
 
   </main>
 
-  <!-- PIE DE PÁGINA -->
+  <!-- PIE DE PÁGINA ACCESIBLE -->
   <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs md:text-sm border-t border-slate-800 mt-12">
     <div class="max-w-6xl mx-auto px-4 space-y-1">
-      <p class="font-bold text-slate-300">Sistema Predictivo de Insulina para Jubilados • Metodología CRISP-DM</p>
-      <p>Desarrollado para el Proyecto Integrador (Santa Cruz, Bolivia) • Datos reales auditados de Farmacorp, Chávez y Telchi.</p>
+      <p class="font-bold text-slate-300">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
+      <p>Desarrollado para el Proyecto Integrador • Datos reales auditados de Farmacorp, Chávez y Telchi.</p>
     </div>
   </footer>
 
   <!-- DATOS REALES EMBEBIDOS Y LÓGICA INTERACTIVA -->
   <script>
     // Inyección de datos reales compilados
-    const DATA_MEDICAMENTOS = [{"id": "MED-23", "marca": "Insugen", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 136.78, "precio_lista_bs": 151.98, "precio_por_100ui_bs": 13.68, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3773}, "Farmacorp": {"disponible": true, "precio_venta_bs": 143.13, "precio_lista_bs": 153.9, "precio_por_100ui_bs": 14.31, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4801}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 136.78, "precio_max_bs": 143.13, "ahorro_max_bs": 6.35, "mejor_precio_100ui_bs": 13.68, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-18", "marca": "Insugen", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 140.15, "precio_lista_bs": 150.7, "precio_por_100ui_bs": 14.02, "descuento_porcentaje": 7.0, "estado_stock": "AGOTADO", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3085}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 140.15, "precio_max_bs": 140.15, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 14.02, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-17", "marca": "Humodar NPH", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 141.12, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.11, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4149}, "Farmacorp": {"disponible": true, "precio_venta_bs": 145.82, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.58, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.495}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 141.12, "precio_max_bs": 145.82, "ahorro_max_bs": 4.7, "mejor_precio_100ui_bs": 14.11, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-22", "marca": "Humodar R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 141.12, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.11, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3099}, "Farmacorp": {"disponible": true, "precio_venta_bs": 145.82, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.58, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2369}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 141.12, "precio_max_bs": 145.82, "ahorro_max_bs": 4.7, "mejor_precio_100ui_bs": 14.11, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-01", "marca": "Asparpen", "principio_activo": "Insulina Asparta", "tipo_accion": "Acción Ultrarrápida (Prandial)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 158.76, "precio_lista_bs": 176.4, "precio_por_100ui_bs": 52.92, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.7229}, "Farmacorp": {"disponible": true, "precio_venta_bs": 164.42, "precio_lista_bs": 176.8, "precio_por_100ui_bs": 54.81, "descuento_porcentaje": 7.0, "estado_stock": "AGOTADO", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2093}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 158.76, "precio_max_bs": 164.42, "ahorro_max_bs": 5.66, "mejor_precio_100ui_bs": 52.92, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-16", "marca": "Glinux N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Bagó", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 159.3, "precio_lista_bs": 177.0, "precio_por_100ui_bs": 15.93, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6917}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 159.3, "precio_max_bs": 159.3, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 15.93, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-21", "marca": "Glinux N", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Bagó", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 165.35, "precio_lista_bs": 177.8, "precio_por_100ui_bs": 16.54, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1981}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 165.35, "precio_max_bs": 165.35, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 16.54, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-15", "marca": "Densulin N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Denver Farma", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 218.16, "precio_lista_bs": 242.4, "precio_por_100ui_bs": 21.82, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6373}, "Farmacorp": {"disponible": true, "precio_venta_bs": 225.9, "precio_lista_bs": 242.9, "precio_por_100ui_bs": 22.59, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3051}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 218.16, "precio_max_bs": 225.9, "ahorro_max_bs": 7.74, "mejor_precio_100ui_bs": 21.82, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-19", "marca": "Novolin N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 219.77, "precio_lista_bs": 244.19, "precio_por_100ui_bs": 21.98, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2586}, "Farmacorp": {"disponible": true, "precio_venta_bs": 227.2, "precio_lista_bs": 244.3, "precio_por_100ui_bs": 22.72, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.289}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 249.9, "precio_lista_bs": 249.9, "precio_por_100ui_bs": 24.99, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4028}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 219.77, "precio_max_bs": 249.9, "ahorro_max_bs": 30.13, "mejor_precio_100ui_bs": 21.98, "semaforo_general": "ROJO", "total_farmacias_disp": 3}, {"id": "MED-13", "marca": "Humodar C25", "principio_activo": "Insulina Humana Mixta / Bifásica", "tipo_accion": "Acción Mixta / Bifásica", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 237.6, "precio_lista_bs": 264.0, "precio_por_100ui_bs": 23.76, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1961}, "Farmacorp": {"disponible": true, "precio_venta_bs": 251.75, "precio_lista_bs": 270.7, "precio_por_100ui_bs": 25.18, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2116}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 237.6, "precio_max_bs": 251.75, "ahorro_max_bs": 14.15, "mejor_precio_100ui_bs": 23.76, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-24", "marca": "Novolin R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 251.8, "precio_lista_bs": 279.78, "precio_por_100ui_bs": 25.18, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2118}, "Farmacorp": {"disponible": true, "precio_venta_bs": 260.4, "precio_lista_bs": 280.0, "precio_por_100ui_bs": 26.04, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.0819}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 305.39, "precio_lista_bs": 305.39, "precio_por_100ui_bs": 30.54, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.101}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 251.8, "precio_max_bs": 305.39, "ahorro_max_bs": 53.59, "mejor_precio_100ui_bs": 25.18, "semaforo_general": "ROJO", "total_farmacias_disp": 3}, {"id": "MED-20", "marca": "Densulin R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Denver Farma", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 269.33, "precio_lista_bs": 299.25, "precio_por_100ui_bs": 26.93, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.0782}, "Farmacorp": {"disponible": true, "precio_venta_bs": 278.91, "precio_lista_bs": 278.91, "precio_por_100ui_bs": 27.89, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1001}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 269.33, "precio_max_bs": 278.91, "ahorro_max_bs": 9.58, "mejor_precio_100ui_bs": 26.93, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-14", "marca": "Novolin 70/30", "principio_activo": "Insulina Humana Mixta / Bifásica", "tipo_accion": "Acción Mixta / Bifásica", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 338.4, "precio_lista_bs": 376.0, "precio_por_100ui_bs": 33.84, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3293}, "Farmacorp": {"disponible": true, "precio_venta_bs": 352.84, "precio_lista_bs": 379.4, "precio_por_100ui_bs": 35.28, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2312}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 399.81, "precio_lista_bs": 399.81, "precio_por_100ui_bs": 39.98, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1044}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 338.4, "precio_max_bs": 399.81, "ahorro_max_bs": 61.41, "mejor_precio_100ui_bs": 33.84, "semaforo_general": "ROJO", "total_farmacias_disp": 3}, {"id": "MED-04", "marca": "Glaripen", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 349.25, "precio_lista_bs": 388.05, "precio_por_100ui_bs": 116.42, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.5683}, "Farmacorp": {"disponible": true, "precio_venta_bs": 365.21, "precio_lista_bs": 392.7, "precio_por_100ui_bs": 121.74, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4825}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 349.25, "precio_max_bs": 365.21, "ahorro_max_bs": 15.96, "mejor_precio_100ui_bs": 116.42, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-03", "marca": "Densulent", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Denver Farma", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 434.96, "precio_lista_bs": 434.96, "precio_por_100ui_bs": 144.99, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4189}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 434.96, "precio_max_bs": 434.96, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 144.99, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-10", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 436.5, "precio_lista_bs": 485.0, "precio_por_100ui_bs": 145.5, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4366}, "Farmacorp": {"disponible": true, "precio_venta_bs": 454.4, "precio_lista_bs": 488.6, "precio_por_100ui_bs": 151.47, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3895}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 436.5, "precio_max_bs": 454.4, "ahorro_max_bs": 17.9, "mejor_precio_100ui_bs": 145.5, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-02", "marca": "Basalog", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 526.5, "precio_lista_bs": 585.0, "precio_por_100ui_bs": 52.65, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3041}, "Farmacorp": {"disponible": true, "precio_venta_bs": 547.3, "precio_lista_bs": 588.5, "precio_por_100ui_bs": 54.73, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6742}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 526.5, "precio_max_bs": 547.3, "ahorro_max_bs": 20.8, "mejor_precio_100ui_bs": 52.65, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-11", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 621.0, "precio_lista_bs": 690.0, "precio_por_100ui_bs": 62.1, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.263}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 621.0, "precio_max_bs": 621.0, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 62.1, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-06", "marca": "Lantus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 639.0, "precio_lista_bs": 710.0, "precio_por_100ui_bs": 213.0, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.245}, "Farmacorp": {"disponible": true, "precio_venta_bs": 663.46, "precio_lista_bs": 713.4, "precio_por_100ui_bs": 221.15, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1046}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 639.0, "precio_max_bs": 663.46, "ahorro_max_bs": 24.46, "mejor_precio_100ui_bs": 213.0, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-12", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 645.51, "precio_lista_bs": 694.1, "precio_por_100ui_bs": 64.55, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2656}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 645.51, "precio_max_bs": 645.51, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 64.55, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-05", "marca": "Glaritus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 810.9, "precio_lista_bs": 901.0, "precio_por_100ui_bs": 81.09, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3159}, "Farmacorp": {"disponible": true, "precio_venta_bs": 842.12, "precio_lista_bs": 905.5, "precio_por_100ui_bs": 84.21, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4438}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 810.9, "precio_max_bs": 842.12, "ahorro_max_bs": 31.22, "mejor_precio_100ui_bs": 81.09, "semaforo_general": "ROJO", "total_farmacias_disp": 2}, {"id": "MED-08", "marca": "Toujeo", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 1.5, "concentracion_ui_ml": 100, "unidades_totales": 150, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 1018.8, "precio_lista_bs": 1132.0, "precio_por_100ui_bs": 679.2, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.256}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 1018.8, "precio_max_bs": 1018.8, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 679.2, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-09", "marca": "Toujeo", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 1.5, "concentracion_ui_ml": 300, "unidades_totales": 450, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 1055.46, "precio_lista_bs": 1134.9, "precio_por_100ui_bs": 234.55, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.5384}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 1055.46, "precio_max_bs": 1055.46, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 234.55, "semaforo_general": "ROJO", "total_farmacias_disp": 1}, {"id": "MED-07", "marca": "Lantus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 1345.5, "precio_lista_bs": 1495.0, "precio_por_100ui_bs": 134.55, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4091}, "Farmacorp": {"disponible": true, "precio_venta_bs": 1392.95, "precio_lista_bs": 1392.95, "precio_por_100ui_bs": 139.3, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2889}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 1345.5, "precio_max_bs": 1392.95, "ahorro_max_bs": 47.45, "mejor_precio_100ui_bs": 134.55, "semaforo_general": "ROJO", "total_farmacias_disp": 2}];
+    const DATA_MEDICAMENTOS = [{"id": "MED-23", "marca": "Insugen", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 136.78, "precio_lista_bs": 151.98, "precio_por_100ui_bs": 13.68, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3773}, "Farmacorp": {"disponible": true, "precio_venta_bs": 143.13, "precio_lista_bs": 153.9, "precio_por_100ui_bs": 14.31, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4801}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 136.78, "precio_max_bs": 143.13, "ahorro_max_bs": 6.35, "mejor_precio_100ui_bs": 13.68, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-18", "marca": "Insugen", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacorp": {"disponible": false, "precio_venta_bs": 140.15, "precio_lista_bs": 150.7, "precio_por_100ui_bs": 14.02, "descuento_porcentaje": 7.0, "estado_stock": "AGOTADO", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3085}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 140.15, "precio_max_bs": 140.15, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 14.02, "semaforo_general": "ROJO", "motivo_semaforo": "Agotado en todas las farmacias en este momento", "etiqueta_semaforo": "🔴 Agotado General", "total_farmacias_disp": 1, "total_farmacias_activas": 0}, {"id": "MED-17", "marca": "Humodar NPH", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 141.12, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.11, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4149}, "Farmacorp": {"disponible": true, "precio_venta_bs": 145.82, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.58, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.495}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 141.12, "precio_max_bs": 145.82, "ahorro_max_bs": 4.7, "mejor_precio_100ui_bs": 14.11, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-22", "marca": "Humodar R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 141.12, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.11, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3099}, "Farmacorp": {"disponible": true, "precio_venta_bs": 145.82, "precio_lista_bs": 156.8, "precio_por_100ui_bs": 14.58, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2369}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 141.12, "precio_max_bs": 145.82, "ahorro_max_bs": 4.7, "mejor_precio_100ui_bs": 14.11, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-01", "marca": "Asparpen", "principio_activo": "Insulina Asparta", "tipo_accion": "Acción Ultrarrápida (Prandial)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 158.76, "precio_lista_bs": 176.4, "precio_por_100ui_bs": 52.92, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.7229}, "Farmacorp": {"disponible": false, "precio_venta_bs": 164.42, "precio_lista_bs": 176.8, "precio_por_100ui_bs": 54.81, "descuento_porcentaje": 7.0, "estado_stock": "AGOTADO", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2093}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 158.76, "precio_max_bs": 158.76, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 52.92, "semaforo_general": "AMARILLO", "motivo_semaforo": "Agotado en Farmacorp, pero disponible en otra farmacia", "etiqueta_semaforo": "🟡 Disponibilidad Parcial", "total_farmacias_disp": 2, "total_farmacias_activas": 1}, {"id": "MED-16", "marca": "Glinux N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Bagó", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 159.3, "precio_lista_bs": 177.0, "precio_por_100ui_bs": 15.93, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6917}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 159.3, "precio_max_bs": 159.3, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 15.93, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-21", "marca": "Glinux N", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Bagó", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 165.35, "precio_lista_bs": 177.8, "precio_por_100ui_bs": 16.54, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1981}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 165.35, "precio_max_bs": 165.35, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 16.54, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-15", "marca": "Densulin N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Denver Farma", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 218.16, "precio_lista_bs": 242.4, "precio_por_100ui_bs": 21.82, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6373}, "Farmacorp": {"disponible": true, "precio_venta_bs": 225.9, "precio_lista_bs": 242.9, "precio_por_100ui_bs": 22.59, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3051}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 218.16, "precio_max_bs": 225.9, "ahorro_max_bs": 7.74, "mejor_precio_100ui_bs": 21.82, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-19", "marca": "Novolin N", "principio_activo": "Insulina Humana NPH (N)", "tipo_accion": "Acción Intermedia (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 219.77, "precio_lista_bs": 244.19, "precio_por_100ui_bs": 21.98, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2586}, "Farmacorp": {"disponible": true, "precio_venta_bs": 227.2, "precio_lista_bs": 244.3, "precio_por_100ui_bs": 22.72, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.289}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 249.9, "precio_lista_bs": 249.9, "precio_por_100ui_bs": 24.99, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4028}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 219.77, "precio_max_bs": 249.9, "ahorro_max_bs": 30.13, "mejor_precio_100ui_bs": 21.98, "semaforo_general": "AMARILLO", "motivo_semaforo": "Pocas unidades en estantería (llamar antes de ir)", "etiqueta_semaforo": "🟡 Pocas Unidades", "total_farmacias_disp": 3, "total_farmacias_activas": 3}, {"id": "MED-13", "marca": "Humodar C25", "principio_activo": "Insulina Humana Mixta / Bifásica", "tipo_accion": "Acción Mixta / Bifásica", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Laboratorios Beta", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 237.6, "precio_lista_bs": 264.0, "precio_por_100ui_bs": 23.76, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1961}, "Farmacorp": {"disponible": true, "precio_venta_bs": 251.75, "precio_lista_bs": 270.7, "precio_por_100ui_bs": 25.18, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2116}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 237.6, "precio_max_bs": 251.75, "ahorro_max_bs": 14.15, "mejor_precio_100ui_bs": 23.76, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-24", "marca": "Novolin R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 251.8, "precio_lista_bs": 279.78, "precio_por_100ui_bs": 25.18, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2118}, "Farmacorp": {"disponible": true, "precio_venta_bs": 260.4, "precio_lista_bs": 280.0, "precio_por_100ui_bs": 26.04, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.0819}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 305.39, "precio_lista_bs": 305.39, "precio_por_100ui_bs": 30.54, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.101}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 251.8, "precio_max_bs": 305.39, "ahorro_max_bs": 53.59, "mejor_precio_100ui_bs": 25.18, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 3, "total_farmacias_activas": 3}, {"id": "MED-20", "marca": "Densulin R", "principio_activo": "Insulina Humana Regular (R)", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Denver Farma", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 269.33, "precio_lista_bs": 299.25, "precio_por_100ui_bs": 26.93, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.0782}, "Farmacorp": {"disponible": true, "precio_venta_bs": 278.91, "precio_lista_bs": 278.91, "precio_por_100ui_bs": 27.89, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1001}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 269.33, "precio_max_bs": 278.91, "ahorro_max_bs": 9.58, "mejor_precio_100ui_bs": 26.93, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-14", "marca": "Novolin 70/30", "principio_activo": "Insulina Humana Mixta / Bifásica", "tipo_accion": "Acción Mixta / Bifásica", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Novo Nordisk", "origen_biologico": "Insulina Humana ADN Recombinante", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 338.4, "precio_lista_bs": 376.0, "precio_por_100ui_bs": 33.84, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3293}, "Farmacorp": {"disponible": true, "precio_venta_bs": 352.84, "precio_lista_bs": 379.4, "precio_por_100ui_bs": 35.28, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2312}, "Farmacias Telchi": {"disponible": true, "precio_venta_bs": 399.81, "precio_lista_bs": 399.81, "precio_por_100ui_bs": 39.98, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1044}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 338.4, "precio_max_bs": 399.81, "ahorro_max_bs": 61.41, "mejor_precio_100ui_bs": 33.84, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 3, "total_farmacias_activas": 3}, {"id": "MED-04", "marca": "Glaripen", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 349.25, "precio_lista_bs": 388.05, "precio_por_100ui_bs": 116.42, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.5683}, "Farmacorp": {"disponible": true, "precio_venta_bs": 365.21, "precio_lista_bs": 392.7, "precio_por_100ui_bs": 121.74, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4825}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 349.25, "precio_max_bs": 365.21, "ahorro_max_bs": 15.96, "mejor_precio_100ui_bs": 116.42, "semaforo_general": "AMARILLO", "motivo_semaforo": "Alta demanda proyectada antes de fin de mes", "etiqueta_semaforo": "🟡 Demanda Acelerada", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-03", "marca": "Densulent", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Denver Farma", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 434.96, "precio_lista_bs": 434.96, "precio_por_100ui_bs": 144.99, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4189}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 434.96, "precio_max_bs": 434.96, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 144.99, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-10", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 436.5, "precio_lista_bs": 485.0, "precio_por_100ui_bs": 145.5, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4366}, "Farmacorp": {"disponible": true, "precio_venta_bs": 454.4, "precio_lista_bs": 488.6, "precio_por_100ui_bs": 151.47, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3895}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 436.5, "precio_max_bs": 454.4, "ahorro_max_bs": 17.9, "mejor_precio_100ui_bs": 145.5, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-02", "marca": "Basalog", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Biocon Biologics", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 526.5, "precio_lista_bs": 585.0, "precio_por_100ui_bs": 52.65, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3041}, "Farmacorp": {"disponible": true, "precio_venta_bs": 547.3, "precio_lista_bs": 588.5, "precio_por_100ui_bs": 54.73, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.6742}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 526.5, "precio_max_bs": 547.3, "ahorro_max_bs": 20.8, "mejor_precio_100ui_bs": 52.65, "semaforo_general": "AMARILLO", "motivo_semaforo": "Pocas unidades en estantería (llamar antes de ir)", "etiqueta_semaforo": "🟡 Pocas Unidades", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-11", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 621.0, "precio_lista_bs": 690.0, "precio_por_100ui_bs": 62.1, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.263}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 621.0, "precio_max_bs": 621.0, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 62.1, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-06", "marca": "Lantus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Lapicero Prellenado (Pluma)", "volumen_ml": 3.0, "concentracion_ui_ml": 100, "unidades_totales": 300, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 639.0, "precio_lista_bs": 710.0, "precio_por_100ui_bs": 213.0, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.245}, "Farmacorp": {"disponible": true, "precio_venta_bs": 663.46, "precio_lista_bs": 713.4, "precio_por_100ui_bs": 221.15, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.1046}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 639.0, "precio_max_bs": 663.46, "ahorro_max_bs": 24.46, "mejor_precio_100ui_bs": 213.0, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-12", "marca": "Apidra", "principio_activo": "Insulina Glulisina", "tipo_accion": "Acción Rápida (Prandial)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 645.51, "precio_lista_bs": 694.1, "precio_por_100ui_bs": 64.55, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2656}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 645.51, "precio_max_bs": 645.51, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 64.55, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-05", "marca": "Glaritus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Wockhardt", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 810.9, "precio_lista_bs": 901.0, "precio_por_100ui_bs": 81.09, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.3159}, "Farmacorp": {"disponible": true, "precio_venta_bs": 842.12, "precio_lista_bs": 905.5, "precio_por_100ui_bs": 84.21, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4438}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 810.9, "precio_max_bs": 842.12, "ahorro_max_bs": 31.22, "mejor_precio_100ui_bs": 81.09, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}, {"id": "MED-08", "marca": "Toujeo", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 1.5, "concentracion_ui_ml": 100, "unidades_totales": 150, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 1018.8, "precio_lista_bs": 1132.0, "precio_por_100ui_bs": 679.2, "descuento_porcentaje": 10.0, "estado_stock": "ULTIMAS_UNIDADES", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.256}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 1018.8, "precio_max_bs": 1018.8, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 679.2, "semaforo_general": "AMARILLO", "motivo_semaforo": "Pocas unidades en estantería (llamar antes de ir)", "etiqueta_semaforo": "🟡 Pocas Unidades", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-09", "marca": "Toujeo", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Cartucho para Pluma Reutilizable", "volumen_ml": 1.5, "concentracion_ui_ml": 300, "unidades_totales": 450, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacorp": {"disponible": true, "precio_venta_bs": 1055.46, "precio_lista_bs": 1134.9, "precio_por_100ui_bs": 234.55, "descuento_porcentaje": 7.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.5384}}, "mejor_cadena": "Farmacorp", "mejor_precio_bs": 1055.46, "precio_max_bs": 1055.46, "ahorro_max_bs": 0.0, "mejor_precio_100ui_bs": 234.55, "semaforo_general": "AMARILLO", "motivo_semaforo": "Disponible en una sola cadena farmacéutica (sin opción de comparar)", "etiqueta_semaforo": "🟡 Oferta Única", "total_farmacias_disp": 1, "total_farmacias_activas": 1}, {"id": "MED-07", "marca": "Lantus", "principio_activo": "Insulina Glargina", "tipo_accion": "Acción Prolongada (Basal)", "formato": "Vial / Frasco Ampolla", "volumen_ml": 10.0, "concentracion_ui_ml": 100, "unidades_totales": 1000, "laboratorio": "Sanofi-Aventis", "origen_biologico": "Análogo de Insulina", "precios": {"Farmacias Chávez": {"disponible": true, "precio_venta_bs": 1345.5, "precio_lista_bs": 1495.0, "precio_por_100ui_bs": 134.55, "descuento_porcentaje": 10.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.4091}, "Farmacorp": {"disponible": true, "precio_venta_bs": 1392.95, "precio_lista_bs": 1392.95, "precio_por_100ui_bs": 139.3, "descuento_porcentaje": 0.0, "estado_stock": "DISPONIBLE", "semaforo_ml": "ROJO_ALTO_RIESGO", "prob_quiebre_ml": 0.2889}}, "mejor_cadena": "Farmacias Chávez", "mejor_precio_bs": 1345.5, "precio_max_bs": 1392.95, "ahorro_max_bs": 47.45, "mejor_precio_100ui_bs": 134.55, "semaforo_general": "VERDE", "motivo_semaforo": "Stock asegurado en múltiples farmacias", "etiqueta_semaforo": "🟢 Abastecimiento Seguro", "total_farmacias_disp": 2, "total_farmacias_activas": 2}];
     const DATA_SUCURSALES = [{"id": "SC-01", "farmacia": "Farmacorp", "nombre": "21 MAYO FSM", "direccion": "Calle Junín esq. 21 de Mayo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "SIN_EVIDENCIA"}, {"id": "SC-02", "farmacia": "Farmacorp", "nombre": "PIRAI FSM", "direccion": "Av. Piraí esq. 2do Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 2.0, "anillo_etiqueta": "2to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-05", "farmacia": "Farmacorp", "nombre": "CAÑOTO FSM", "direccion": "Av. Cañoto esq. México", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "SIN_EVIDENCIA"}, {"id": "SC-07", "farmacia": "Farmacorp", "nombre": "IRALA FG", "direccion": "Av. Irala #564", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "SIN_EVIDENCIA"}, {"id": "SC-10", "farmacia": "Farmacorp", "nombre": "TRINIDAD", "direccion": "Av. Trinidad #710 esq. 2do Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 2.0, "anillo_etiqueta": "2to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-18", "farmacia": "Farmacorp", "nombre": "TORRES GEMELAS", "direccion": "Av. Cristo Redentor entre 2do y 3er Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "AMBIGUO_EN_BORDE"}, {"id": "SC-20", "farmacia": "Farmacorp", "nombre": "VIRGEN DE COTOCA SM", "direccion": "Av. Virgen de Cotoca casi esq. 2do Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 2.0, "anillo_etiqueta": "2to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-22", "farmacia": "Farmacorp", "nombre": "AV. BANZER", "direccion": "7mo Anillo Av. Banzer", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 7.0, "anillo_etiqueta": "7to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-24", "farmacia": "Farmacorp", "nombre": "CHARCAS", "direccion": "Av. Charcas esq. 2do Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 2.0, "anillo_etiqueta": "2to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-25", "farmacia": "Farmacorp", "nombre": "SAN MARTIN SCZ", "direccion": "Av. San Martín esq. Calle 9 Oeste, Equipetrol", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "SIN_EVIDENCIA"}, {"id": "SC-26", "farmacia": "Farmacorp", "nombre": "SANTOS DUMONT", "direccion": "Av. Santos Dumont 3er Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 3.0, "anillo_etiqueta": "3to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "SC-31", "farmacia": "Farmacorp", "nombre": "PARAGUA", "direccion": "Av. Paraguá esquina 4to Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 4.0, "anillo_etiqueta": "4to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "CH-01", "farmacia": "Farmacias Chávez", "nombre": "Sucursal Mutualista", "direccion": "3er Anillo Externo, entre C/ Estremadoiro M. Tovar y C/ Combate Riosino", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 3.0, "anillo_etiqueta": "3to Anillo", "estado_anillo": "ASIGNADO"}, {"id": "CH-02", "farmacia": "Farmacias Chávez", "nombre": "Sucursal Alemana Prosalud", "direccion": "Av. Alemana, entre 2do y 3er Anillo, cerca C/ Los Guayabos", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "AMBIGUO_EN_BORDE"}, {"id": "CH-03", "farmacia": "Farmacias Chávez", "nombre": "Sucursal Beni", "direccion": "Av. Beni #475 C/ Oeste, entre 3er y 4to Anillo", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "AMBIGUO_EN_BORDE"}, {"id": "TE-01", "farmacia": "Farmacias Telchi", "nombre": "Sucursal Villa 1ro de Mayo", "direccion": "Zona Casco Viejo, Plaza de la Villa Primero de Mayo, Calle 1ro de Mayo Este", "ciudad": "Santa Cruz de la Sierra", "anillo_num": 1.0, "anillo_etiqueta": "Casco Urbano Central", "estado_anillo": "SIN_EVIDENCIA"}];
-    const DATA_RESUMEN = {"total_medicamentos": 24, "total_registros_crudos": 43, "total_sucursales": 16, "precio_min_bs": 136.78, "precio_max_bs": 1392.95};
+    const DATA_RESUMEN = {"total_medicamentos": 24, "total_registros_crudos": 43, "total_sucursales": 16, "precio_min_bs": 136.78, "precio_max_bs": 1392.95, "total_verde": 12, "total_amarillo": 11, "total_rojo": 1};
 
     let escalaFuenteActual = 1.0;
 
@@ -364,12 +417,14 @@
         const card = document.createElement('article');
         card.className = "bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-emerald-400 transition-all";
 
-        // Badges del semáforo general
-        let semaforoBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-verde">🟢 Stock Normal</span>';
-        if (med.semaforo_general === 'ROJO') {
-          semaforoBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo">🔴 Alerta de Quiebre</span>';
+        // Badges del semáforo general con lenguaje ciudadano
+        let semaforoBadge = '';
+        if (med.semaforo_general === 'VERDE') {
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-verde" title="${med.motivo_semaforo}">🟢 Stock Seguro</span>`;
         } else if (med.semaforo_general === 'AMARILLO') {
-          semaforoBadge = '<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-amarillo">🟡 Pocas Unidades</span>';
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-amarillo" title="${med.motivo_semaforo}">🟡 Precaución</span>`;
+        } else {
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo" title="${med.motivo_semaforo}">🔴 Agotado en Farmacias</span>`;
         }
 
         // Construir filas de la lista de farmacias
@@ -377,7 +432,19 @@
         cadenas.forEach(cadena => {
           const info = med.precios[cadena];
           if (info) {
-            const esElMejor = (cadena === med.mejor_cadena && med.total_farmacias_disp > 1);
+            const tieneStock = info.disponible && info.estado_stock !== 'AGOTADO';
+            const esElMejor = (cadena === med.mejor_cadena && med.total_farmacias_activas > 1 && tieneStock);
+            
+            let estadoTexto = 'Disponible';
+            let estadoClase = 'text-emerald-700 font-bold';
+            if (info.estado_stock === 'AGOTADO' || !info.disponible) {
+              estadoTexto = 'Agotado temporalmente';
+              estadoClase = 'text-rose-600 font-bold';
+            } else if (info.estado_stock === 'ULTIMAS_UNIDADES') {
+              estadoTexto = 'Últimas unidades disponibles';
+              estadoClase = 'text-amber-600 font-bold';
+            }
+
             filasFarmaciasHTML += `
               <div class="p-3 rounded-xl border ${esElMejor ? 'bg-emerald-50 border-emerald-300 ring-1 ring-emerald-200' : 'bg-slate-50 border-slate-200'} flex items-center justify-between gap-2">
                 <div class="space-y-0.5">
@@ -386,10 +453,8 @@
                     ${esElMejor ? '<span class="px-2 py-0.5 rounded-full text-xs font-black bg-emerald-600 text-white uppercase tracking-wider">⭐ Mejor Precio</span>' : ''}
                   </div>
                   <span class="text-xs text-slate-500 block">
-                    100 UI: <strong>Bs ${info.precio_por_100ui_bs.toFixed(2)}</strong> • 
-                    <span class="${info.estado_stock === 'AGOTADO' ? 'text-rose-600 font-bold' : (info.estado_stock === 'ULTIMAS_UNIDADES' ? 'text-amber-600 font-bold' : 'text-emerald-700')}">
-                      ${info.estado_stock}
-                    </span>
+                    Por 100 UI: <strong>Bs ${info.precio_por_100ui_bs.toFixed(2)}</strong> • 
+                    <span class="${estadoClase}">${estadoTexto}</span>
                   </span>
                 </div>
                 <div class="text-right">
@@ -417,16 +482,19 @@
                 <p class="text-sm md:text-base font-bold text-emerald-800">${med.principio_activo}</p>
                 <p class="text-xs md:text-sm text-slate-500">${med.formato} • ${med.volumen_ml} ml (${med.unidades_totales} UI) • Lab. ${med.laboratorio}</p>
               </div>
-              <div class="shrink-0">${semaforoBadge}</div>
+              <div class="shrink-0 flex flex-col items-end gap-1">
+                ${semaforoBadge}
+                <span class="text-[10px] text-slate-500 text-right max-w-[130px] leading-tight">${med.motivo_semaforo}</span>
+              </div>
             </div>
 
             <!-- Resumen de Ahorro Destacado -->
-            ${med.ahorro_max_bs > 0 ? `
+            ${med.ahorro_max_bs > 0 && med.total_farmacias_activas > 1 ? `
               <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-400 p-3 rounded-xl flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
                   <span class="text-xl">💵</span>
                   <div>
-                    <span class="text-xs uppercase font-extrabold text-emerald-800 block">Ahorro Máximo:</span>
+                    <span class="text-xs uppercase font-extrabold text-emerald-800 block">Ahorro Máximo en tu Compra:</span>
                     <span class="text-base font-black text-emerald-950">Ahorras Bs ${med.ahorro_max_bs.toFixed(2)} comprando en ${med.mejor_cadena}</span>
                   </div>
                 </div>
@@ -434,11 +502,19 @@
                   Mejor opción
                 </span>
               </div>
+            ` : (med.total_farmacias_activas === 1 ? `
+              <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs text-slate-600 font-medium">
+                Disponible a Bs ${med.mejor_precio_bs.toFixed(2)} en ${med.mejor_cadena} (única farmacia con existencias).
+              </div>
+            ` : (med.total_farmacias_activas === 0 ? `
+              <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl text-xs text-rose-800 font-medium">
+                Agotado en todas las farmacias en este momento. Consulta con tu médico por alternativas.
+              </div>
             ` : `
               <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs text-slate-600 font-medium">
                 Disponible a Bs ${med.mejor_precio_bs.toFixed(2)} en ${med.mejor_cadena}.
               </div>
-            `}
+            `))}
 
             <!-- Lista comparativa de las 3 farmacias -->
             <div class="space-y-2 pt-1">
@@ -460,20 +536,20 @@
       const orden = document.getElementById('selectOrden').value;
 
       let filtrados = DATA_MEDICAMENTOS.filter(med => {
-        // Filtro principio activo (coincidencia parcial flexible)
+        // Filtro principio activo
         let matchPrincipio = true;
         if (principioSel !== 'TODOS') {
           matchPrincipio = med.principio_activo.toLowerCase().includes(principioSel.toLowerCase()) ||
                            med.marca.toLowerCase().includes(principioSel.toLowerCase());
         }
 
-        // Filtro formato (coincidencia parcial)
+        // Filtro formato
         let matchFormato = true;
         if (formatoSel !== 'TODOS') {
           matchFormato = med.formato.toLowerCase().includes(formatoSel.toLowerCase());
         }
 
-        // Filtro farmacia (debe estar disponible en esa cadena)
+        // Filtro farmacia
         let matchFarmacia = true;
         if (farmaciaSel !== 'TODAS') {
           matchFarmacia = Object.keys(med.precios).some(cad => cad.toLowerCase().includes(farmaciaSel.toLowerCase()));
@@ -540,7 +616,7 @@
           <td class="p-3 text-slate-700 text-xs md:text-sm">${s.direccion}</td>
           <td class="p-3">
             <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">
-              ✓ Activa
+              ✓ Sucursal Activa
             </span>
           </td>
         `;
@@ -548,7 +624,7 @@
       });
     }
 
-    // 6. CALCULADORA DE PRESUPUESTO
+    // 6. CALCULADORA DE PRESUPUESTO Y AHORRO
     function calcularPresupuesto() {
       const dosis = parseFloat(document.getElementById('inputDosisDiaria').value) || 30;
       const marca = document.getElementById('selectTipoInsulinaCalc').value;
@@ -570,12 +646,12 @@
       const lblDetalle = document.getElementById('calcDetalleFrascos');
 
       if (minPrecio === maxPrecio || precios.length <= 1) {
-        lblAhorro.textContent = `Gasto mensual: Bs ${(minPrecio * frascosNecesarios).toFixed(2)}`;
+        lblAhorro.textContent = `Gasto estimado al mes: Bs ${(minPrecio * frascosNecesarios).toFixed(2)}`;
       } else {
         lblAhorro.textContent = `Ahorras Bs ${ahorroTotal} al mes`;
       }
 
-      lblDetalle.textContent = `Con ${dosis} UI/día necesitas ${frascosNecesarios} frasco(s) de ${volumenPorFrasco} UI para 30 días (${dosisMensual} UI). Mejor opción: Bs ${minPrecio.toFixed(2)} en ${med.mejor_cadena}.`;
+      lblDetalle.textContent = `Con tu dosis de ${dosis} UI/día necesitas ${frascosNecesarios} frasco(s) de ${volumenPorFrasco} UI para 30 días (${dosisMensual} UI). Mejor opción disponible: Bs ${minPrecio.toFixed(2)} en ${med.mejor_cadena}.`;
     }
 
     // 7. LECTURA POR VOZ DIDÁCTICA
@@ -584,7 +660,7 @@
         alert('Tu navegador no soporta lectura por voz.');
         return;
       }
-      const texto = `Hola abuelito o familiar cuidador. En este momento el sistema compara veinticuatro presentaciones de insulina en Santa Cruz de la Sierra. Cada tarjeta te muestra los precios de Farmacorp, Farmacias Chávez y Farmacias Telchi para que elijas la más barata. Te recomendamos adquirir tu dosis con cinco días de anticipación antes de las fechas de pago del Banco Unión.`;
+      const texto = `Hola abuelito o familiar cuidador. En este momento el sistema compara veinticuatro tipos de insulina en Santa Cruz de la Sierra. Cada tarjeta te muestra los precios de Farmacorp, Farmacias Chávez y Farmacias Telchi para que elijas la opción más económica. El semáforo verde te indica que hay stock asegurado en las farmacias. Si ves semáforo amarillo, te recomendamos comprar con tres a cinco días de anticipación antes de las fechas de cobro de pensiones en el Banco Unión.`;
       const utterance = new SpeechSynthesisUtterance(texto);
       utterance.lang = 'es-BO';
       utterance.rate = 0.95;
@@ -593,7 +669,6 @@
 
     // 8. EVENT LISTENERS AUTOMÁTICOS Y EN TIEMPO REAL
     window.addEventListener('DOMContentLoaded', () => {
-      // Event listeners para filtros en vivo
       document.getElementById('filtroPrincipio').addEventListener('change', aplicarFiltros);
       document.getElementById('filtroFormato').addEventListener('change', aplicarFiltros);
       document.getElementById('filtroFarmacia').addEventListener('change', aplicarFiltros);

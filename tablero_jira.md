@@ -40,11 +40,11 @@
 - **`SCRUM-9` (US-05 - 8 SP):** Entrenamiento de modelos supervisados de clasificación de disponibilidad y quiebre de stock. **[Finalizada]**
 - **`SCRUM-44` (US-29 - 5 SP):** MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados. **[Finalizada]**
 
-### SCRUM Sprint 4 (Planificado / Listo para Iniciar - 21 SP)
-- **`SCRUM-45` (US-30 - 3 SP):** Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Por hacer / Épica SCRUM-29]**
-- **`SCRUM-46` (US-31 - 5 SP):** Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Por hacer / Épica SCRUM-35]**
-- **`SCRUM-47` (US-32 - 5 SP):** Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Por hacer / Épica SCRUM-34]**
-- **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[Por hacer / Épica SCRUM-34]**
+### SCRUM Sprint 4 (En Ejecución — 13/21 SP Completados)
+- **`SCRUM-45` (US-30 - 3 SP):** Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Finalizada - Mía Wayar]**
+- **`SCRUM-46` (US-31 - 5 SP):** Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Finalizada - Daniel Molina]**
+- **`SCRUM-47` (US-32 - 5 SP):** Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Finalizada - Mía Wayar]**
+- **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[En Curso - Daniel Molina]**
 
 ### Product Backlog Priorizado (Sprint 5: Evaluación Formal y Cierre - 5 SP)
 - **`SCRUM-38` (US-24 - 5 SP):** Evaluación formal de modelos supervisados con optimización estricta de Recall (Sensibilidad) y calibración probabilística. **[Backlog]**

@@ -49,7 +49,7 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | :--- | :---: | :---: | :--- | :---: | :--- |
 | **Fase 1: Comprensión del Negocio** | `SCRUM-28` | `US-19` | Integración y automatización de repositorio GitHub con directorio local | 7 | **Completada (Sprint 1)** |
 | **Fase 1: Comprensión del Negocio** | `SCRUM-15` | `US-11` | Definición del problema de negocio, perfil de actores y pregunta de investigación | 3 | **Completada (Sprint 1)** |
-| **Fase 1: Comprensión del Negocio** | `SCRUM-45` | `US-30` | Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia | 3 | **Por hacer (Sprint 4)** |
+| **Fase 1: Comprensión del Negocio** | `SCRUM-45` | `US-30` | Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia | 3 | **Completada (Sprint 4 - Mía)** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-27` | `US-20` | Extracción automatizada (Web Scraping) de stock y precios en portales de farmacias | 7 | **Completada (Sprint 1)** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-23` | `US-21` | Ingesta y normalización de importaciones aduaneras de insulina (Partida 3004.31.00.00) | 7 | **Completada (Sprint 2)** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-20` | `US-16` | Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) | 5 | **Completada (Sprint 2)** |
@@ -60,11 +60,11 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 3: Preparación de los Datos** | `SCRUM-37` | `US-23` | Script de imputación zonal de valores faltantes y cruce con calendario bancario | 5 | **Completada (Sprint 3 - Mía)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-24` | `US-02` | Ingeniería de características (Feature Engineering) y matriz correlacional de variables | 3 | **Completada (Sprint 3 - Mía)** |
 | **Fase 4: Modelado** | `SCRUM-9` | `US-05` | Entrenamiento de modelo supervisado de clasificación de disponibilidad de stock | 8 | **Completada (Sprint 3)** |
-| **Fase 5: Evaluación** | `SCRUM-47` | `US-32` | Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas) | 5 | **Por hacer (Sprint 4)** |
-| **Fase 5: Evaluación** | `SCRUM-48` | `US-33` | Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio | 8 | **Por hacer (Sprint 4)** |
+| **Fase 5: Evaluación** | `SCRUM-47` | `US-32` | Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas) | 5 | **Completada (Sprint 4 - Mía)** |
+| **Fase 5: Evaluación** | `SCRUM-48` | `US-33` | Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio | 8 | **En curso (Sprint 4)** |
 | **Fase 5: Evaluación** | `SCRUM-38` | `US-24` | Evaluación formal de modelos supervisados con optimización de Recall y calibración | 5 | Backlog (Sprint 5) |
 | **Fase 6: Despliegue** | `SCRUM-44` | `US-29` | MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados | 5 | **Completada (Sprint 3 - MVP)** |
-| **Fase 6: Despliegue** | `SCRUM-46` | `US-31` | Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0) | 5 | **Por hacer (Sprint 4)** |
+| **Fase 6: Despliegue** | `SCRUM-46` | `US-31` | Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0) | 5 | **Completada (Sprint 4 - Daniel)** |
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
@@ -180,6 +180,7 @@ flowchart TD
 | **#022** | `317ece8` | `US-02` (`SCRUM-24`) | Sprint 3 | 2026-11-02 | Construcción de matriz analítica de modelado (`dataset_analitico_modelado.csv`, 43 filas x 69 variables) con Feature Engineering y correlaciones Pearson/Spearman. | 100% verificado: 69 características numéricas y categóricas codificadas, análisis de colinealidad y figuras estadísticas generadas en docs/figures/. |
 | **#023** | `43e3bee` | `US-05` / `US-29` | Sprint 3 | 2026-11-03 | Entrenamiento de modelos supervisados de stock (RandomForest, XGBoost, Regresión Logística con StratifiedKFold, PR-AUC, ROC y serialización en models/) y desarrollo de MVP Visualizador Didáctico de Precios para Jubilados v2.0 (24 medicamentos agrupados, comparativa 3 cadenas, zoom A-/A+, filtros y semáforo preventivo). | 100% verificado: 74/74 pruebas unitarias aprobadas (38 ETL + 36 modelos/MVP), ejecutables HTML locales autocontenidos generados, documentación técnica en docs/09 y docs/10, Sprint 3 cerrado al 100% (21/21 SP). |
 | **#024** | `445e127` | Ops / Data Refresh | Sprint 3 | 2026-11-03 | Ingesta de nuevo scraping diario (`20261103`), adición de despacho aduanero Noviembre 2026, reejecución completa del pipeline end-to-end (ETL 01-06, EDA, Feature Engineering, Modelos y MVP) y resolución universal de `sys.path` en todas las suites de prueba para ejecución directa con `python <test.py>`. | 100% verificado: 10/10 archivos de prueba y 74/74 pruebas unitarias aprobadas tanto vía `unittest discover` como ejecución directa por script; actualización de precio mínimo a Bs 136.78 y recalibración de modelos con 5 quiebres (11.6%). |
+| **#025** | `de35470` | `US-31` (`SCRUM-46`) | Sprint 4 | 2026-11-10 | Pulido didáctico v3.0 del MVP con lenguaje ciudadano (eliminación total de tecnicismos como Machine Learning, Random Forest y Lags analíticos), módulo interactivo de glosario visual accesible y corrección algorítmica estricta del semáforo de riesgo (ninguna insulina con stock disponible marca rojo; 12 verdes, 11 amarillos, 1 rojo únicamente para presentación 100% agotada). | 100% verificado: 75/75 tests unitarios aprobados (38 ETL + 37 modelos/MVP), 4 ejecutables HTML sincronizados (raíz, src/ui/, docs/ y artefacto oficial de sesión) y documentación técnica formal en docs/13_pulido_didactico_lenguaje_ciudadano_mvp_v3.md. |
 
 ---
 
@@ -190,10 +191,10 @@ flowchart TD
   - `SCRUM-24` (`US-02`, 3 SP): Feature Engineering y matriz correlacional analítica. **[Finalizada - Mía]**
   - `SCRUM-9` (`US-05`, 8 SP): Modelos supervisados de clasificación de stock y quiebres. **[Finalizada]**
   - `SCRUM-44` (`US-29`, 5 SP): MVP Visualizador Didáctico e Interactivo Local para Jubilados v2.0. **[Finalizada]**
-- **Próximo Sprint a Desarrollar:** **SCRUM Sprint 4 (Fase 1: Negocio, Fase 5: Evaluación & Fase 6: Despliegue — 21 Story Points)**:
-  1. `SCRUM-45` (`US-30`, 3 SP): Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia.
-  2. `SCRUM-46` (`US-31`, 5 SP): Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0).
-  3. `SCRUM-47` (`US-32`, 5 SP): Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas).
-  4. `SCRUM-48` (`US-33`, 8 SP): Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio.
+- **SCRUM Sprint 4 (21 Story Points) — EN EJECUCIÓN ACTIVA (13/21 SP Completados)**:
+  1. `SCRUM-45` (`US-30`, 3 SP): Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Finalizada - Mía Wayar]**
+  2. `SCRUM-46` (`US-31`, 5 SP): Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Finalizada - Daniel Molina]**
+  3. `SCRUM-47` (`US-32`, 5 SP): Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Finalizada - Mía Wayar]**
+  4. `SCRUM-48` (`US-33`, 8 SP): Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[En Curso - Daniel Molina]**
 - **Sprint 5 (Backlog Priorizado — 5 Story Points):**
   1. `SCRUM-38` (`US-24`, 5 SP): Evaluación formal de modelos supervisados con optimización estricta de Recall y calibración.
