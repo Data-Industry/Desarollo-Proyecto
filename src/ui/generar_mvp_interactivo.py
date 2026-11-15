@@ -30,8 +30,10 @@ SRC_UI_DIR = PROJECT_DIR / "src" / "ui"
 DOCS_DIR = PROJECT_DIR / "docs"
 
 ROOT_HTML = PROJECT_DIR / "mvp_comparador_jubilados.html"
+ROOT_INDEX_HTML = PROJECT_DIR / "index.html"
 UI_HTML = SRC_UI_DIR / "mvp_comparador_jubilados.html"
 DOCS_HTML = DOCS_DIR / "mvp_jubilados_comparador.html"
+DOCS_INDEX_HTML = DOCS_DIR / "index.html"
 ARTIFACT_HTML = Path(
     r"C:\Users\USUARIO\.gemini\antigravity\brain\ccf30eb7-9b28-48ca-8301-f6996c594ed6\mvp_jubilados_comparador.html"
 )
@@ -247,6 +249,12 @@ def construir_html_mvp(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asistente de Insulina para Jubilados - Santa Cruz de la Sierra</title>
+  <meta name="description" content="Comparador interactivo de precios, disponibilidad inmediata y semáforo preventivo de insulina en Santa Cruz de la Sierra (Farmacorp, Chávez, Telchi).">
+  <meta property="og:title" content="Asistente de Insulina para Jubilados - Santa Cruz de la Sierra">
+  <meta property="og:description" content="Compara precios entre farmacias, calcula tu presupuesto mensual y consulta el semáforo preventivo de abastecimiento.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://data-industry.github.io/Desarollo-Proyecto/">
+  <link rel="canonical" href="https://data-industry.github.io/Desarollo-Proyecto/">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -1046,7 +1054,7 @@ def construir_html_mvp(
 
 
 def exportar_mvp() -> None:
-    """Genera y guarda el HTML interactivo v3.0 sincronizado en las 4 ubicaciones clave."""
+    """Genera y guarda el HTML interactivo sincronizado en las 6 ubicaciones clave (incluyendo GitHub Pages)."""
     SRC_UI_DIR.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     ARTIFACT_HTML.parent.mkdir(parents=True, exist_ok=True)
@@ -1057,22 +1065,26 @@ def exportar_mvp() -> None:
     # 1. Guardar en src/ui/
     with open(UI_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    logger.info(f"MVP interactivo v3.0 actualizado en: {UI_HTML}")
+    logger.info(f"MVP interactivo actualizado en: {UI_HTML}")
 
-    # 2. Guardar en raíz del proyecto
+    # 2. Guardar en raíz del proyecto (nombre histórico y index.html para GitHub Pages raíz)
     with open(ROOT_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    logger.info(f"Copia accesible v3.0 actualizada en raíz: {ROOT_HTML}")
+    with open(ROOT_INDEX_HTML, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    logger.info(f"Copia accesible actualizada en raíz (mvp y index.html): {ROOT_HTML}")
 
-    # 3. Guardar en docs/ (Criterio de Aceptación US-31)
+    # 3. Guardar en docs/ (Criterio de Aceptación US-31 y US-35 para GitHub Pages /docs)
     with open(DOCS_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    logger.info(f"Copia documental v3.0 actualizada en docs: {DOCS_HTML}")
+    with open(DOCS_INDEX_HTML, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    logger.info(f"Copias de producción actualizadas en docs/ (mvp y index.html): {DOCS_INDEX_HTML}")
 
     # 4. Guardar como Artefacto de Antigravity
     with open(ARTIFACT_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    logger.info(f"Artefacto oficial v3.0 actualizado en: {ARTIFACT_HTML}")
+    logger.info(f"Artefacto oficial actualizado en: {ARTIFACT_HTML}")
 
 
 if __name__ == "__main__":

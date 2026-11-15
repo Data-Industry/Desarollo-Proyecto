@@ -49,7 +49,7 @@
 ### SCRUM Sprint 5 (ACTIVO / EN CURSO — 21 SP)
 *Período: 15 nov – 29 nov 2026 • Meta: Pulido visual pastel, Despliegue en Producción a Costo $0 e Informe Metodológico Parte 1.*
 - **`SCRUM-49` (US-34 - 5 SP):** Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX. **[Finalizada - Daniel Molina]**
-- **`SCRUM-50` (US-35 - 5 SP):** Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Por hacer - Daniel Molina]**
+- **`SCRUM-50` (US-35 - 5 SP):** Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Finalizada - Daniel Molina]**
 - **`SCRUM-51` (US-36 - 8 SP):** Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Por hacer - Mía Wayar]**
 - **`SCRUM-52` (US-37 - 3 SP):** Automatización del Pipeline de Datos Frescos para la Web Pública. **[Por hacer - Mía Wayar]**
 

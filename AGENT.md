@@ -69,7 +69,7 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 6: Despliegue** | `SCRUM-44` | `US-29` | MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados | 5 | **Completada (Sprint 3 - MVP)** |
 | **Fase 6: Despliegue** | `SCRUM-46` | `US-31` | Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0) | 5 | **Completada (Sprint 4 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-49` | `US-34` | Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX | 5 | **Completada (Sprint 5 - Daniel)** |
-| **Fase 6: Despliegue** | `SCRUM-50` | `US-35` | Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción | 5 | **En curso (Sprint 5 - Daniel)** |
+| **Fase 6: Despliegue** | `SCRUM-50` | `US-35` | Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción | 5 | **Completada (Sprint 5 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-53` | `US-38` | Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural | 8 | Planificada (Sprint 6 - Daniel) |
 | **Fase 6: Despliegue** | `SCRUM-54` | `US-39` | Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería) | 5 | Planificada (Sprint 6 - Daniel) |
 
@@ -193,15 +193,16 @@ flowchart TD
 | **#027** | `df09e3e` | Ops / Pipeline Refresh | Sprint 4 | 2026-11-10 | Ejecución integral end-to-end de todo el proyecto (Scraping en vivo, ETL 01 a 06, EDA, Feature Engineering, Modelado, Validación Empírica y MVP v3.0) con datos frescos para la defensa de hoy. | 100% verificado: 52 productos extraídos en vivo de Farmacorp, Chávez y Telchi, serie BCB actualizada a 2,140 cotizaciones, 82/82 pruebas unitarias aprobadas (38 ETL + 44 modelos), modelos re-entrenados y visualizador interactivo v3.0 sincronizado para la defensa. |
 | **#028** | `b2b0e63` | Ops / Jira Sync | Sprint 5 | 2026-11-15 | Cierre formal de SCRUM Sprint 4 (21 SP), creación y activación de SCRUM Sprint 5 (21 SP: SCRUM-49 a SCRUM-52) y planificación en Backlog de SCRUM Sprint 6 (21 SP: SCRUM-53 a SCRUM-55 y SCRUM-38 actualizada a 3 SP) en Jira Cloud y documentación local. | 100% verificado: Tablero Jira Cloud auditado y cuadrado en 25 historias (131 SP), Sprint 5 iniciado y activo en el tablero, y tablero_jira.md sincronizado. |
 | **#029** | `726e19f` | `US-34` (`SCRUM-49`) | Sprint 5 | 2026-11-15 | Refinamiento ergonómico del MVP v3.1: controles accesibles con texto explícito ("Achicar letra" / "Agrandar letra"), glosario ciudadano interactivo compacto desplegable con definiciones clave, reubicación de la calculadora de dosis y presupuesto mensual antes del catálogo, filtrado reactivo con botón explícito "Filtrar Catálogo" y estado visual pendiente, y paleta pastel farmacéutica natural (Anti-IA) en verde salvia (#1b4332, #2d6a4f), menta suave (#ebf7ee) y blanco clínico. | 100% verificado: 83/83 pruebas unitarias aprobadas (45 en models con test_08 específico + 38 en etl), 4 archivos HTML sincronizados (raíz, src/ui/, docs/ y artefacto oficial en brain/) y documentación técnica en docs/15_refinamiento_ergonomico_paleta_pastel_mvp_v3_1.md. |
+| **#030** | `5ffa4a9` | `US-35` (`SCRUM-50`) | Sprint 5 | 2026-11-15 | Despliegue continuo (CI/CD) y hosting web gratuito a costo $0 en GitHub Pages: sincronización automática de index.html (raíz y docs/), creación de pipeline automatizado en .github/workflows/deploy_pages.yml con barrera de calidad de pruebas unitarias, enlaces HTTPS seguros sin referencias a localhost, metadatos OpenGraph y dominio público oficial https://data-industry.github.io/Desarollo-Proyecto/. | 100% verificado: 87/87 pruebas unitarias aprobadas (49 models con suite test_05_despliegue_web_pages.py + 38 etl), index.html sincronizado (76.2 KB) y documentación técnica formal en docs/16_despliegue_continuo_hosting_web_gratuito_us35.md. |
 
 ---
 
 ## 6. Próximo Paso en el Flujo de Trabajo
 
 - **SCRUM Sprint 4 (21 Story Points):** **100% CERRADO Y FINALIZADO (21/21 SP)**.
-- **SCRUM Sprint 5 (21 Story Points):** **EN CURSO (5/21 SP COMPLETADOS)**:
+- **SCRUM Sprint 5 (21 Story Points):** **EN CURSO (10/21 SP COMPLETADOS)**:
   1. `SCRUM-49` (`US-34`, 5 SP): Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX. **[Finalizada - Daniel Molina]**
-  2. `SCRUM-50` (`US-35`, 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Por hacer - Daniel Molina]**
+  2. `SCRUM-50` (`US-35`, 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Finalizada - Daniel Molina]**
   3. `SCRUM-51` (`US-36`, 8 SP): Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Por hacer - Mía Wayar]**
   4. `SCRUM-52` (`US-37`, 3 SP): Automatización del Pipeline de Datos Frescos para la Web Pública. **[Por hacer - Mía Wayar]**
 - **SCRUM Sprint 6 (21 Story Points):** **PLANIFICADO EN BACKLOG**:
