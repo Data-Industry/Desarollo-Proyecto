@@ -1,21 +1,21 @@
 # Reestructuración del Backlog en Jira (Proyecto Insulina CRISP-DM)
 
 **Tablero Oficial Jira Cloud:** [https://danielmerengue0.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog](https://danielmerengue0.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog)  
-**Estado:** 100% Auditado y Sincronizado bajo Formato Ágil Oficial (18 Historias de Usuario, 94 Story Points en total).
+**Estado:** 100% Auditado y Sincronizado bajo Formato Ágil Oficial (25 Historias de Usuario, 131 Story Points en total en 6 Sprints).
 
 ---
 
-## Resumen de Cuadratura del Backlog (18 Historias / 94 SP)
+## Resumen de Cuadratura del Backlog (25 Historias / 131 SP)
 
 | Épica (Fase CRISP-DM) | Clave Épica | Historias Incluidas | Cantidad | Story Points |
 | :--- | :---: | :--- | :---: | :---: |
-| **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3), `SCRUM-45` (US-30: 3 SP) *(SCRUM-18 depurada)* | 3 | **13 SP** |
+| **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3), `SCRUM-45` (US-30: 3 SP) | 3 | **13 SP** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-30` | `SCRUM-27` (US-20: 7), `SCRUM-23` (US-21: 7), `SCRUM-20` (US-16: 5), `SCRUM-7` (US-03: 5), `SCRUM-43` (US-28: 3) | 5 | **27 SP** |
-| **Fase 3: Preparación de los Datos** | `SCRUM-31` | `SCRUM-36` (US-22: 5), `SCRUM-42` (US-27: 5), `SCRUM-37` (US-23: 5), `SCRUM-24` (US-02: 3) | 4 | **18 SP** |
-| **Fase 4: Modelado** | `SCRUM-33` | `SCRUM-9` (US-05: 8) *(SCRUM-8 sustituida por MVP)* | 1 | **8 SP** |
-| **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-47` (US-32: 5 SP), `SCRUM-48` (US-33: 8 SP), `SCRUM-38` (US-24: 5 SP en Backlog) *(SCRUM-39 depurada)* | 3 | **18 SP** |
-| **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-44` (US-29 MVP: 5), `SCRUM-46` (US-31: 5 SP) *(SCRUM-41, SCRUM-40 y SCRUM-10 depuradas)* | 2 | **10 SP** |
-| **TOTAL PROYECTO** | | **18 Historias de Usuario Activas** | **18** | **94 SP** |
+| **Fase 3: Preparación de los Datos** | `SCRUM-31` | `SCRUM-36` (US-22: 5), `SCRUM-42` (US-27: 5), `SCRUM-37` (US-23: 5), `SCRUM-24` (US-02: 3), `SCRUM-52` (US-37: 3) | 5 | **21 SP** |
+| **Fase 4: Modelado** | `SCRUM-33` | `SCRUM-9` (US-05: 8) | 1 | **8 SP** |
+| **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-47` (US-32: 5), `SCRUM-48` (US-33: 8), `SCRUM-51` (US-36: 8), `SCRUM-55` (US-40: 5), `SCRUM-38` (US-41: 3) | 5 | **29 SP** |
+| **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-44` (US-29: 5), `SCRUM-46` (US-31: 5), `SCRUM-49` (US-34: 5), `SCRUM-50` (US-35: 5), `SCRUM-53` (US-38: 8), `SCRUM-54` (US-39: 5) | 6 | **33 SP** |
+| **TOTAL PROYECTO** | | **25 Historias de Usuario Activas** | **25** | **131 SP** |
 
 ---
 
@@ -32,7 +32,7 @@
 - **`SCRUM-20` (US-16 - 5 SP):** Auditoría automatizada de calidad de datos y análisis exploratorio (EDA) multivariable integrando la fusión de US-27 y geolocalización de US-03. **[Finalizada]**
 - **`SCRUM-7` (US-03 - 5 SP):** Script de geolocalización de sucursales farmacéuticas y mapeo por anillos urbanos (1 al 8) en Santa Cruz. **[Finalizada - Mía Wayar]**
 - **`SCRUM-42` (US-27 - 5 SP):** Fusión de fuentes (Scraping + Importaciones) y preparación de variables de rezago temporal de abastecimiento. **[Finalizada - Mía Wayar]**
-- **`SCRUM-43` (US-28 - 3 SP):** Ingesta automatizada del tipo de cambio oficial del BCB (`https://www.bcb.gob.bo/grafico_evolutivo/`) y serie histórica diaria (`Tipo_de_cambio.csv`). **[Finalizada]**
+- **`SCRUM-43` (US-28 - 3 SP):** Ingesta automatizada del tipo de cambio oficial del BCB (`Tipo_de_cambio.csv`). **[Finalizada]**
 
 ### SCRUM Sprint 3 (Cerrado al 100% - 21 SP)
 - **`SCRUM-37` (US-23 - 5 SP):** Script de imputación zonal de valores faltantes y cruce con calendario bancario Banco Unión. **[Finalizada - Mía Wayar]**
@@ -46,56 +46,102 @@
 - **`SCRUM-47` (US-32 - 5 SP):** Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Finalizada - Mía Wayar]**
 - **`SCRUM-48` (US-33 - 8 SP):** Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[Finalizada - Daniel Molina]**
 
-### Product Backlog Priorizado (Sprint 5: Evaluación Formal y Cierre - 5 SP)
-- **`SCRUM-38` (US-24 - 5 SP):** Evaluación formal de modelos supervisados con optimización estricta de Recall (Sensibilidad) y calibración probabilística. **[Backlog]**
+### SCRUM Sprint 5 (ACTIVO / EN CURSO — 21 SP)
+*Período: 15 nov – 29 nov 2026 • Meta: Pulido visual pastel, Despliegue en Producción a Costo $0 e Informe Metodológico Parte 1.*
+- **`SCRUM-49` (US-34 - 5 SP):** Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX. **[Por hacer - Daniel Molina]**
+- **`SCRUM-50` (US-35 - 5 SP):** Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Por hacer - Daniel Molina]**
+- **`SCRUM-51` (US-36 - 8 SP):** Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Por hacer - Mía Wayar]**
+- **`SCRUM-52` (US-37 - 3 SP):** Automatización del Pipeline de Datos Frescos para la Web Pública. **[Por hacer - Mía Wayar]**
+
+### SCRUM Sprint 6 (PLANIFICADO EN BACKLOG — 21 SP)
+*Meta: Chatbot Funcional, Integración a Producción, Documento Metodológico Parte 2 y Evaluación Formal de Recall.*
+- **`SCRUM-53` (US-38 - 8 SP):** Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Planificada - Daniel Molina]**
+- **`SCRUM-54` (US-39 - 5 SP):** Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Planificada - Daniel Molina]**
+- **`SCRUM-55` (US-40 - 5 SP):** Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
+- **`SCRUM-38` (US-41 - 3 SP):** Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
 
 ---
 
-## Detalle de Historias del Sprint 4 bajo Formato Ágil Oficial
+## Detalle de Historias de los Sprints 5 y 6 bajo Formato Ágil Oficial
 
-### 1. `SCRUM-45` (`US-30` - 3 SP): Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia
-* **Como** Equipo de Ciencia de Datos y Emprendimiento Tecnológico,
-* **Quiero** realizar un análisis exhaustivo del marco legal boliviano e internacional sobre web scraping de precios públicos (Ley N° 453 de Protección al Consumidor, Ley N° 164 de Telecomunicaciones, Decisión 486 de la CAN sobre marcas) y las consideraciones regulatorias, de privacidad (Habeas Data) y responsabilidad médica para un eventual lanzamiento público y comercial del chatbot,
-* **Para** garantizar la viabilidad jurídica del proyecto, mitigar riesgos legales de propiedad intelectual y fijar la hoja de ruta de cumplimiento normativo previo al despliegue comercial.
-* **Criterios de Aceptación / Validación:**
-  - [ ] Documento técnico-legal estructurado en `docs/07_marco_legal_y_viabilidad_comercial.md`.
-  - [ ] Análisis de legitimidad del web scraping de datos públicos de farmacias bajo la Ley N° 453 (acceso a información y transparencia de precios) y Ley N° 164 (delitos informáticos y ética de scraping sin vulneración de accesos).
-  - [ ] Evaluación del uso nominativo de marcas comerciales de insulinas bajo la Decisión 486 de la Comisión de la Comunidad Andina (uso de marcas de terceros con fines meramente informativos y comparativos).
-  - [ ] Matriz de consideraciones legales y regulatorias para un eventual lanzamiento público y comercial del chatbot:
-    - Términos de Servicio y políticas de Meta para WhatsApp Business API en el sector salud/farmacia.
-    - Protección de datos personales de salud (Habeas Data, Art. 21 y 130 de la Constitución Política del Estado de Bolivia).
-    - Deslindes de responsabilidad médica (*Medical Disclaimers* y límites entre recomendación clínica vs. reporte de existencias comerciales).
-    - Plan de transición desde web scraping hacia convenios oficiales de interoperabilidad y APIs de farmacias asociadas.
+### SPRINT 5 (En Curso)
 
-### 2. `SCRUM-46` (`US-31` - 5 SP): Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0)
-* **Como** Adulto mayor jubilado o ciudadano sin conocimientos técnicos de Machine Learning,
-* **Quiero** una versión refinada y clara del MVP con lenguaje 100% amigable y accesible, que incluya definiciones comprensibles de términos como "quiebre de stock" y un semáforo predictivo cuya lógica sea completamente coherente con la disponibilidad inmediata en farmacias,
-* **Para** entender con claridad el estado de mi insulina sin confundirme con jerga técnica y confiar en el semáforo para saber cuándo debo comprar anticipadamente o cuándo hay stock suficiente garantizado.
+#### 1. `SCRUM-49` (`US-34` - 5 SP): Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX
+* **Como** Adulto mayor jubilado o familiar cuidador en Santa Cruz de la Sierra,
+* **Quiero** una interfaz visualmente limpia con botones explícitos de "Agrandar letra" y "Achicar letra", un glosario flotante compacto que no ocupe espacio innecesario, la calculadora de ahorro en la parte superior y una paleta farmacéutica pastel amigable y natural,
+* **Para** encontrar y comparar mi insulina con total comodidad visual y rapidez sin perderme en la página ni sentir que uso una herramienta artificial.
 * **Criterios de Aceptación / Validación:**
-  - [ ] Eliminación de tecnicismos como "Machine Learning", "Random Forest", "Variables Analíticas" y "Lag de importaciones" en la vista principal del usuario en `src/mvp/generar_mvp_interactivo.py`.
-  - [ ] Incorporación de un glosario visual accesible y tarjetas explicativas con lenguaje ciudadano (ej. *"Quiebre de stock: Situación en la que las farmacias agotan por completo sus existencias y no pueden reponer de inmediato"*).
-  - [ ] Corrección algorítmica estricta del Semáforo de Riesgo: Ninguna insulina marcará ROJO si se encuentra disponible en una o más cadenas farmacéuticas; el ROJO se reserva únicamente si todas las farmacias están agotadas. El AMARILLO refleja riesgo moderado por pocas unidades o proximidad al cobro de pensiones Banco Unión (días 1 al 5). El VERDE refleja abastecimiento estable y suficiente.
-  - [ ] Generación automática del visualizador v3.0 (`docs/mvp_jubilados_comparador.html`) con diseño responsivo, alto contraste y tipografía apta para jubilados.
-  - [ ] Tests unitarios automatizados que verifiquen las reglas semafóricas y la no presencia de rojo en medicamentos con stock activo.
+  - [ ] Reemplazo de botones A-/A+ por botones visibles de texto "Agrandar letra" y "Achicar letra".
+  - [ ] Glosario ciudadano compacto tipo botón flotante/modal accesible que no ocupe espacio vertical excesivo.
+  - [ ] Calculadora de dosis y ahorro mensual reubicada en la parte superior junto a los filtros principales.
+  - [ ] Corrección de redundancia entre búsqueda interactiva y botón de filtrado de catálogo.
+  - [ ] Rediseño visual con paleta farmacéutica pastel limpia (menta suave, salvia, tonos claros, sin sombras ni estilos artificiales de IA).
 
-### 3. `SCRUM-47` (`US-32` - 5 SP): Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas)
-* **Como** Diseñador UX e Investigador de Validación de Negocio,
-* **Quiero** diseñar y protocolizar los instrumentos de validación empírica con usuarios (escala de usabilidad SUS adaptada al adulto mayor boliviano, guía de entrevistas semiestructuradas y matriz de prueba de tareas guiadas),
-* **Para** contar con un marco metodológico estandarizado, riguroso y replicable que permita cuantificar la aceptación, facilidad de uso y valor percibido del MVP antes del producto final.
+#### 2. `SCRUM-50` (`US-35` - 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción
+* **Como** Usuario y evaluador del proyecto,
+* **Quiero** acceder al comparador interactivo mediante una URL pública segura en internet a costo cero,
+* **Para** utilizar la herramienta desde cualquier celular o computadora sin depender de un entorno local de ejecución.
 * **Criterios de Aceptación / Validación:**
-  - [ ] Documento metodológico completo en `docs/08_diseno_metodologico_validacion_usuarios.md`.
-  - [ ] Formulario de Escala de Usabilidad del Sistema (SUS - System Usability Scale) de 10 reactivos adaptado a lenguaje neutro y comprensible para adultos mayores de Santa Cruz.
-  - [ ] Protocolo y guía de entrevista cualitativa semiestructurada enfocada en: hábitos de compra, frecuencia de desabastecimiento, comprensión del semáforo y disposición de uso.
-  - [ ] Matriz de pruebas de tareas guiadas (*Task Testing*): Tarea 1 (Buscar su insulina habitual), Tarea 2 (Identificar la farmacia más barata y el ahorro), Tarea 3 (Interpretar el semáforo y disponibilidad en su anillo).
-  - [ ] Consentimiento informado y pautas éticas para interacción con adultos mayores jubilados.
+  - [ ] Publicación del sitio web en GitHub Pages con URL pública y soporte HTTPS activo.
+  - [ ] Configuración de GitHub Actions para despliegue continuo automático ante cambios en main.
+  - [ ] Verificación de funcionamiento multiplataforma (móvil y escritorio) a costo $0 permanente.
 
-### 4. `SCRUM-48` (`US-33` - 8 SP): Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio
-* **Como** Product Owner y Analista de Negocio,
-* **Quiero** aplicar los instrumentos de validación a una muestra representativa de jubilados diabéticos y familiares cuidadores en Santa Cruz de la Sierra, tabular cuantitativamente los resultados SUS y generar un informe gerencial de conclusiones y aprendizajes de negocio,
-* **Para** validar empíricamente la hipótesis de valor de la solución, cuantificar la usabilidad del prototipo y orientar las decisiones estratégicas de la siguiente iteración con evidencia real.
+#### 3. `SCRUM-51` (`US-36` - 8 SP): Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4)
+* **Como** Equipo emprendedor y postulante académico,
+* **Queremos** consolidar el informe integral de la materia Programa Emprendedor cubriendo desde el punto 1.1 hasta el 3.4 con la evidencia recolectada en campo,
+* **Para** formalizar la fundamentación metodológica, contextual, competitiva y empírica del modelo de solución.
 * **Criterios de Aceptación / Validación:**
-  - [x] Aplicación y tabulación de la muestra empírica en `data/processed/validacion_usuarios_tabulacion.csv` (14 participantes: 10 Jubilados y 4 Cuidadores).
-  - [x] Cálculo estadístico del puntaje global SUS (Media 78.04, Mediana 76.25) y desglose por dimensiones de usabilidad (80.58%) y aprendizaje (67.86%).
-  - [x] Matriz cualitativa de hallazgos, barreras identificadas (*friction points*) y cotizaciones verbales de los entrevistados en `data/processed/validacion_usuarios_cualitativo.csv`.
-  - [x] Informe formal de conclusiones de negocio y recomendaciones en `docs/14_informe_validacion_campo_y_negocio.md`.
-  - [x] Conclusiones cuantitativas y cualitativas que responden a la viabilidad del MVP y priorizan las mejoras para el release final (demanda unánime de Chatbot en WhatsApp).
+  - [ ] Carátula y autoría oficial con los 4 integrantes: Daniel Molina, Mía Wayar, Carlos Hugo Suárez y Kessia Cuellar.
+  - [ ] Capítulo 1 (1.1-1.10) completo, con 1.3 identificando al Dueño del Problema con nombre, cargo institucional y cita textual literal de la entrevista de campo.
+  - [ ] Capítulo 2 (2.1-2.4) completo, con 2.4 detallando el Benchmarking de 3 casos internacionales parecidos a la solución.
+  - [ ] Capítulo 3 (3.1-3.4) completo, con 3.4 registrando la bitácora de campo con fechas, lugares y personas entrevistadas en Santa Cruz.
+
+#### 4. `SCRUM-52` (`US-37` - 3 SP): Automatización del Pipeline de Datos Frescos para la Web Pública
+* **Como** Mantenedor del sistema,
+* **Quiero** un script de un solo paso que compile y refresque los datos de precios, farmacias y semáforo preventivo en el archivo de producción web,
+* **Para** asegurar que la web pública siempre muestre información actualizada sin intervención manual propensa a fallos.
+* **Criterios de Aceptación / Validación:**
+  - [ ] Script automatizado de consolidación de datos frescos para producción web.
+  - [ ] Validación de consistencia de stock, precios y cotización cambiaria BCB.
+  - [ ] Tests de integridad de datos en el bundle web.
+
+---
+
+### SPRINT 6 (Planificado)
+
+#### 5. `SCRUM-53` (`US-38` - 8 SP): Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural
+* **Como** Adulto mayor con diabetes o familiar cuidador,
+* **Quiero** consultar por mensaje de texto o voz simple la disponibilidad, el mejor precio y la farmacia más cercana para mi tipo de insulina,
+* **Para** recibir una respuesta inmediata, comprensible y sin tener que explorar tablas ni menús complejos.
+* **Criterios de Aceptación / Validación:**
+  - [ ] Motor conversacional en src/chatbot/ que reconozca marcas comerciales, formatos y ubicación por anillos en Santa Cruz.
+  - [ ] Respuestas empáticas con lenguaje ciudadano, sin tecnicismos y con semáforo preventivo.
+  - [ ] Integración con la base analítica de stock y precios de farmacias.
+
+#### 6. `SCRUM-54` (`US-39` - 5 SP): Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería)
+* **Como** Jubilado que navega la página web o utiliza mensajería,
+* **Quiero** interactuar directamente con el asistente a través de un botón de chat flotante y un canal directo de mensajería (WhatsApp / Telegram),
+* **Para** resolver mis dudas desde cualquier dispositivo sin pagar nada.
+* **Criterios de Aceptación / Validación:**
+  - [ ] Widget flotante interactivo de chat incrustado en la página web pública.
+  - [ ] Conector a canal de mensajería gratuito (WhatsApp Cloud API / Bot de Telegram a costo $0).
+  - [ ] Backend serverless desplegado a costo $0 permanente.
+
+#### 7. `SCRUM-55` (`US-40` - 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado)
+* **Como** Equipo emprendedor,
+* **Queremos** completar la segunda parte del documento maestro de Programa Emprendedor desde el punto 3.5 hasta el 5.4 sobre el mismo archivo unificado,
+* **Para** definir con rigor el perfil del cliente, el diseño de la solución y el modelo de negocio.
+* **Criterios de Aceptación / Validación:**
+  - [ ] Capítulo 3 (3.5-3.9): Procesamiento, resultados, perfil del cliente, segmentación y análisis de competidores.
+  - [ ] Capítulo 4 (4.1-4.6): Proceso de ideación, criterios de selección, descripción de la solución, funcionamiento, propuesta de valor y prototipo.
+  - [ ] Capítulo 5 (5.1-5.4): Business Model Canvas, plan operativo, modelo de ingresos/precios y estructura de costos.
+  - [ ] Integración continua en el mismo documento maestro sin archivos separados.
+
+#### 8. `SCRUM-38` (`US-41` - 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%)
+* **Como** Científico de datos del proyecto,
+* **Quiero** evaluar formalmente los modelos supervisados optimizando el Recall (>= 90%) con validación cruzada y calibración de probabilidades,
+* **Para** garantizar que el sistema minimice los falsos negativos y nunca reporte stock seguro cuando existe un riesgo real de quiebre.
+* **Criterios de Aceptación / Validación:**
+  - [ ] Evaluación Stratified K-Fold de PR-AUC, ROC-AUC y matriz de costos con penalización a falsos negativos.
+  - [ ] Calibración de probabilidades (Isotonic / Sigmoid).
+  - [ ] Documentación técnica de evaluación formal en docs/.

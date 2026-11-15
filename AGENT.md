@@ -41,7 +41,7 @@ Los pacientes jubilados con diabetes insulinodependientes en Santa Cruz de la Si
 
 ## 2. Metodología de Trabajo y Tablero de Control
 
-El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **Jira Cloud** (Clave `SCRUM`, 18 Historias de Usuario, 94 Story Points en total).
+El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **Jira Cloud** (Clave `SCRUM`, 25 Historias de Usuario, 131 Story Points en total en 6 Sprints).
 
 ### 2.1. Matriz Oficial del Product Backlog (Sincronizada con Jira Cloud)
 
@@ -59,20 +59,28 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 3: Preparación de los Datos** | `SCRUM-42` | `US-27` | Fusión de fuentes (Scraping + Importaciones) y modelado de desfase temporal (Lag) de abastecimiento | 5 | **Completada (Sprint 2 - Mía)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-37` | `US-23` | Script de imputación zonal de valores faltantes y cruce con calendario bancario | 5 | **Completada (Sprint 3 - Mía)** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-24` | `US-02` | Ingeniería de características (Feature Engineering) y matriz correlacional de variables | 3 | **Completada (Sprint 3 - Mía)** |
+| **Fase 3: Preparación de los Datos** | `SCRUM-52` | `US-37` | Automatización del Pipeline de Datos Frescos para la Web Pública | 3 | **En curso (Sprint 5 - Mía)** |
 | **Fase 4: Modelado** | `SCRUM-9` | `US-05` | Entrenamiento de modelo supervisado de clasificación de disponibilidad de stock | 8 | **Completada (Sprint 3)** |
 | **Fase 5: Evaluación** | `SCRUM-47` | `US-32` | Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas) | 5 | **Completada (Sprint 4 - Mía)** |
 | **Fase 5: Evaluación** | `SCRUM-48` | `US-33` | Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio | 8 | **Completada (Sprint 4 - Daniel)** |
-| **Fase 5: Evaluación** | `SCRUM-38` | `US-24` | Evaluación formal de modelos supervisados con optimización de Recall y calibración | 5 | Backlog (Sprint 5) |
+| **Fase 5: Evaluación** | `SCRUM-51` | `US-36` | Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4) | 8 | **En curso (Sprint 5 - Mía)** |
+| **Fase 5: Evaluación** | `SCRUM-55` | `US-40` | Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado) | 5 | Planificada (Sprint 6 - Mía) |
+| **Fase 5: Evaluación** | `SCRUM-38` | `US-41` | Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%) | 3 | Planificada (Sprint 6 - Mía) |
 | **Fase 6: Despliegue** | `SCRUM-44` | `US-29` | MVP Visualizador Didáctico e Interactivo Local de Precios, Stock y Farmacias por Anillo para Jubilados | 5 | **Completada (Sprint 3 - MVP)** |
 | **Fase 6: Despliegue** | `SCRUM-46` | `US-31` | Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0) | 5 | **Completada (Sprint 4 - Daniel)** |
+| **Fase 6: Despliegue** | `SCRUM-49` | `US-34` | Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX | 5 | **En curso (Sprint 5 - Daniel)** |
+| **Fase 6: Despliegue** | `SCRUM-50` | `US-35` | Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción | 5 | **En curso (Sprint 5 - Daniel)** |
+| **Fase 6: Despliegue** | `SCRUM-53` | `US-38` | Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural | 8 | Planificada (Sprint 6 - Daniel) |
+| **Fase 6: Despliegue** | `SCRUM-54` | `US-39` | Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería) | 5 | Planificada (Sprint 6 - Daniel) |
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
 - **SCRUM Sprint 2 (Cerrado al 100% - 25 SP):** `SCRUM-23` (7 SP) + `SCRUM-20` (5 SP) + `SCRUM-7` (5 SP) + `SCRUM-42` (5 SP) + `SCRUM-43` (3 SP) = **25 Story Points**.
 - **SCRUM Sprint 3 (Cerrado al 100% - 21 SP):** `SCRUM-37` (5 SP) + `SCRUM-24` (3 SP) + `SCRUM-9` (8 SP) + `SCRUM-44` (5 SP) = **21 Story Points**.
 - **SCRUM Sprint 4 (Cerrado al 100% - 21 SP):** `US-30` (3 SP) + `US-31` (5 SP) + `US-32` (5 SP) + `US-33` (8 SP) = **21 Story Points**.
-- **SCRUM Sprint 5 (Backlog Priorizado: Evaluación Formal y Cierre - 5 SP):** `SCRUM-38` (US-24, 5 SP) = **5 Story Points**.
-- **Total Proyecto:** 18 Historias Activas | **94 Story Points**.
+- **SCRUM Sprint 5 (Activo / En curso - 21 SP):** `SCRUM-49` (5 SP) + `SCRUM-50` (5 SP) + `SCRUM-51` (8 SP) + `SCRUM-52` (3 SP) = **21 Story Points**.
+- **SCRUM Sprint 6 (Planificado en Backlog - 21 SP):** `SCRUM-53` (8 SP) + `SCRUM-54` (5 SP) + `SCRUM-55` (5 SP) + `SCRUM-38` (3 SP) = **21 Story Points**.
+- **Total Proyecto:** 25 Historias Activas | **131 Story Points** (89 SP completados, 21 SP en curso, 21 SP planificados).
 
 ---
 
@@ -183,16 +191,20 @@ flowchart TD
 | **#025** | `de35470` | `US-31` (`SCRUM-46`) | Sprint 4 | 2026-11-10 | Pulido didáctico v3.0 del MVP con lenguaje ciudadano (eliminación total de tecnicismos como Machine Learning, Random Forest y Lags analíticos), módulo interactivo de glosario visual accesible y corrección algorítmica estricta del semáforo de riesgo (ninguna insulina con stock disponible marca rojo; 12 verdes, 11 amarillos, 1 rojo únicamente para presentación 100% agotada). | 100% verificado: 75/75 tests unitarios aprobados (38 ETL + 37 modelos/MVP), 4 ejecutables HTML sincronizados (raíz, src/ui/, docs/ y artefacto oficial de sesión) y documentación técnica formal en docs/13_pulido_didactico_lenguaje_ciudadano_mvp_v3.md. |
 | **#026** | `a0248fa` | `US-33` (`SCRUM-48`) | Sprint 4 | 2026-11-10 | Trabajo de validación de campo con usuarios (N=14: 10 adultos mayores jubilados y 4 cuidadores familiares en Santa Cruz de la Sierra), tabulación psicométrica de la escala SUS (Brooke 1996 / Bangor 2008: Media 78.04, Mediana 76.25, Grado B+ 'Good', Percentil 82), análisis de pruebas de tareas guiadas (100% éxito en T1, T2, T3A; 92.9% en T3B), evaluación de fricciones cognitivas y reporte formal de negocio en docs/14_informe_validacion_campo_y_negocio.md. | 100% verificado: 82/82 pruebas unitarias aprobadas (38 ETL + 44 modelos/validación), datasets estructurados en data/processed/, 4 figuras estadísticas de alta resolución en docs/figures/, validación de hipótesis de negocio y Sprint 4 cerrado al 100% (21/21 SP). |
 | **#027** | `df09e3e` | Ops / Pipeline Refresh | Sprint 4 | 2026-11-10 | Ejecución integral end-to-end de todo el proyecto (Scraping en vivo, ETL 01 a 06, EDA, Feature Engineering, Modelado, Validación Empírica y MVP v3.0) con datos frescos para la defensa de hoy. | 100% verificado: 52 productos extraídos en vivo de Farmacorp, Chávez y Telchi, serie BCB actualizada a 2,140 cotizaciones, 82/82 pruebas unitarias aprobadas (38 ETL + 44 modelos), modelos re-entrenados y visualizador interactivo v3.0 sincronizado para la defensa. |
+| **#028** | `b2b0e63` | Ops / Jira Sync | Sprint 5 | 2026-11-15 | Cierre formal de SCRUM Sprint 4 (21 SP), creación y activación de SCRUM Sprint 5 (21 SP: SCRUM-49 a SCRUM-52) y planificación en Backlog de SCRUM Sprint 6 (21 SP: SCRUM-53 a SCRUM-55 y SCRUM-38 actualizada a 3 SP) en Jira Cloud y documentación local. | 100% verificado: Tablero Jira Cloud auditado y cuadrado en 25 historias (131 SP), Sprint 5 iniciado y activo en el tablero, y tablero_jira.md sincronizado. |
 
 ---
 
 ## 6. Próximo Paso en el Flujo de Trabajo
 
-- **SCRUM Sprint 4 (21 Story Points):** **100% CERRADO Y FINALIZADO (21/21 SP)**:
-  - `SCRUM-45` (`US-30`, 3 SP): Marco Legal, Regulatorio y Viabilidad Comercial de Scraping y Chatbot en Bolivia. **[Finalizada - Mía Wayar]**
-  - `SCRUM-46` (`US-31`, 5 SP): Pulido Didáctico, Lenguaje Ciudadano y Semáforo Coherente del MVP (v3.0). **[Finalizada - Daniel Molina]**
-  - `SCRUM-47` (`US-32`, 5 SP): Diseño Metodológico de Instrumentos de Validación Empírica con Usuarios (SUS y Entrevistas). **[Finalizada - Mía Wayar]**
-  - `SCRUM-48` (`US-33`, 8 SP): Trabajo de Validación de Campo, Tabulación de Datos e Informe de Conclusiones de Negocio. **[Finalizada - Daniel Molina]**
-- **Próximo Sprint a Desarrollar:** **SCRUM Sprint 5 (Fase 4: Modelado / Evaluación Formal & Fase 6: Despliegue de Chatbot en WhatsApp — 5+ SP)**:
-  1. `SCRUM-38` (`US-24`, 5 SP): Evaluación formal de modelos supervisados con optimización estricta de Recall y calibración.
-  2. Implementación y despliegue del Chatbot en WhatsApp (canal unánimemente exigido por los usuarios jubilados y cuidadores en la validación empírica).
+- **SCRUM Sprint 4 (21 Story Points):** **100% CERRADO Y FINALIZADO (21/21 SP)**.
+- **SCRUM Sprint 5 (21 Story Points):** **INICIADO Y ACTIVO EN TABLERO JIRA**:
+  1. `SCRUM-49` (`US-34`, 5 SP): Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX. **[Por hacer - Daniel Molina]**
+  2. `SCRUM-50` (`US-35`, 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Por hacer - Daniel Molina]**
+  3. `SCRUM-51` (`US-36`, 8 SP): Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Por hacer - Mía Wayar]**
+  4. `SCRUM-52` (`US-37`, 3 SP): Automatización del Pipeline de Datos Frescos para la Web Pública. **[Por hacer - Mía Wayar]**
+- **SCRUM Sprint 6 (21 Story Points):** **PLANIFICADO EN BACKLOG**:
+  1. `SCRUM-53` (`US-38`, 8 SP): Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Planificada - Daniel Molina]**
+  2. `SCRUM-54` (`US-39`, 5 SP): Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Planificada - Daniel Molina]**
+  3. `SCRUM-55` (`US-40`, 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
+  4. `SCRUM-38` (`US-41`, 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
