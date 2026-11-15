@@ -6,181 +6,290 @@
   <title>Asistente de Insulina para Jubilados - Santa Cruz de la Sierra</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #f7faf8;
+      color: #1e293b;
+    }
+
     .focus-ring:focus {
-      outline: 4px solid #2563eb !important;
+      outline: 3px solid #2d6a4f !important;
       outline-offset: 2px !important;
     }
-    .badge-verde { background-color: #dcfce7; color: #166534; border: 2px solid #86efac; }
-    .badge-amarillo { background-color: #fef9c3; color: #854d0e; border: 2px solid #fde047; }
-    .badge-rojo { background-color: #fee2e2; color: #991b1b; border: 2px solid #fca5a5; }
-    .transition-scale { transition: transform 0.15s ease-in-out; }
-    .transition-scale:active { transform: scale(0.96); }
+
+    /* Paleta Pastel Farmacéutica Natural y Limpia (Anti-IA) */
+    .badge-verde {
+      background-color: #ebf7ee;
+      color: #1b5e20;
+      border: 1px solid #c3e6cb;
+    }
+    .badge-amarillo {
+      background-color: #fef9e8;
+      color: #855b0a;
+      border: 1px solid #fbe59d;
+    }
+    .badge-rojo {
+      background-color: #fdf2f2;
+      color: #991b1b;
+      border: 1px solid #f8c8c8;
+    }
+
+    .card-pastel {
+      background-color: #ffffff;
+      border: 1px solid #e3eae5;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease-in-out;
+    }
+    .card-pastel:hover {
+      border-color: #a3cfbb;
+      box-shadow: 0 4px 12px rgba(45, 106, 79, 0.07);
+    }
+
+    .transition-scale {
+      transition: transform 0.15s ease-in-out, background-color 0.15s ease;
+    }
+    .transition-scale:active {
+      transform: scale(0.97);
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeInSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased font-sans min-h-screen">
+<body class="bg-[#f7faf8] text-slate-800 antialiased font-sans min-h-screen">
 
-  <!-- ENCABEZADO ACCESIBLE CON BOTONES DE ZOOM REAL -->
-  <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+  <!-- ENCABEZADO ACCESIBLE CON BOTONES EXPLÍCITOS DE TAMAÑO DE LETRA (US-34) -->
+  <header class="bg-[#1b4332] text-white shadow-sm sticky top-0 z-50 border-b border-[#2d6a4f]">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <span class="text-3xl" aria-hidden="true">🩺</span>
         <div>
-          <h1 class="text-xl md:text-2xl font-black tracking-tight">Comparador de Insulina para Jubilados</h1>
-          <p class="text-emerald-100 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Precios reales de Farmacorp, Chávez y Telchi</p>
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">Comparador de Insulina para Jubilados</h1>
+          <p class="text-emerald-100/90 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Precios reales de Farmacorp, Chávez y Telchi</p>
         </div>
       </div>
 
-      <!-- CONTROLES DE ACCESIBILIDAD SENIOR (AFECTA A TODA LA PÁGINA) -->
-      <div class="flex items-center gap-2 bg-emerald-800/90 p-2 rounded-xl border border-emerald-600 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-emerald-200">Letra:</span>
-        <button id="btnFontMinus" onclick="ajustarFuente(-0.1)" class="w-9 h-9 rounded-lg bg-white text-emerald-950 font-black text-lg flex items-center justify-center hover:bg-emerald-100 focus-ring transition-scale" title="Reducir letra" aria-label="Reducir tamaño de letra">A-</button>
-        <span id="lblFontScale" class="text-xs font-extrabold text-white px-1">100%</span>
-        <button id="btnFontPlus" onclick="ajustarFuente(0.1)" class="w-9 h-9 rounded-lg bg-white text-emerald-950 font-black text-xl flex items-center justify-center hover:bg-emerald-100 focus-ring transition-scale" title="Aumentar letra" aria-label="Aumentar tamaño de letra">A+</button>
-        <button onclick="leerResumenVoz()" class="ml-2 px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-extrabold text-xs md:text-sm flex items-center gap-1.5 hover:bg-amber-300 focus-ring transition-scale" title="Escuchar resumen en audio">
-          <span>🔊</span> <span class="hidden sm:inline">Léeme en voz alta</span>
+      <!-- CONTROLES DE ACCESIBILIDAD SENIOR: ACHICAR / AGRANDAR LETRA CON TEXTO EXPLÍCITO -->
+      <div class="flex items-center gap-1.5 sm:gap-2 bg-[#2d6a4f]/70 p-1.5 rounded-xl border border-emerald-500/40">
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-100 hidden lg:inline">Tamaño de letra:</span>
+        <button id="btnFontMinus" onclick="ajustarFuente(-0.1)" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-950 font-bold text-xs md:text-sm hover:bg-white focus-ring transition-scale flex items-center gap-1" title="Achicar tamaño de letra" aria-label="Achicar tamaño de letra">
+          <span>🔍➖</span> Achicar letra
+        </button>
+        <span id="lblFontScale" class="text-xs font-extrabold text-white px-1.5 min-w-[42px] text-center">100%</span>
+        <button id="btnFontPlus" onclick="ajustarFuente(0.1)" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-950 font-bold text-xs md:text-sm hover:bg-white focus-ring transition-scale flex items-center gap-1" title="Agrandar tamaño de letra" aria-label="Agrandar tamaño de letra">
+          <span>🔍➕</span> Agrandar letra
+        </button>
+        <button onclick="leerResumenVoz()" class="ml-1 sm:ml-2 px-3 py-1.5 rounded-lg bg-[#fef3c7] text-[#78350f] border border-[#fde68a] font-extrabold text-xs md:text-sm flex items-center gap-1.5 hover:bg-[#fde68a] focus-ring transition-scale" title="Escuchar resumen en audio">
+          <span>🔊</span> <span class="hidden md:inline">Léeme en voz alta</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- CONTENEDOR PRINCIPAL -->
-  <main class="max-w-6xl mx-auto px-4 py-6 space-y-8">
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
 
-    <!-- BANNER DE BIENVENIDA -->
-    <section class="bg-white rounded-2xl p-6 border-2 border-emerald-200 shadow-sm flex flex-col md:flex-row gap-6 items-center justify-between" aria-labelledby="sec-resumen">
-      <div class="space-y-2">
-        <h2 id="sec-resumen" class="text-xl md:text-2xl font-bold text-emerald-900 flex items-center gap-2">
+    <!-- BANNER DE BIENVENIDA LIMPIO Y EMPÁTICO -->
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-emerald-200/90 bg-[#f4f9f5] flex flex-col md:flex-row gap-5 items-center justify-between" aria-labelledby="sec-resumen">
+      <div class="space-y-1.5">
+        <h2 id="sec-resumen" class="text-lg md:text-2xl font-black text-[#1b4332] flex items-center gap-2">
           <span>👋</span> ¡Bienvenido! Compara precios y ahorra en tu insulina
         </h2>
-        <p class="text-slate-600 text-base md:text-lg">
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
           Cada tarjeta agrupa un medicamento y te lista los precios de <strong class="text-slate-900">Farmacorp, Farmacias Chávez y Farmacias Telchi</strong>, destacando la opción más económica para proteger tu pensión.
         </p>
       </div>
-      <div class="flex flex-row md:flex-col gap-3 shrink-0">
-        <div class="bg-emerald-50 border border-emerald-300 rounded-xl px-4 py-2 text-center">
-          <span class="block text-xs uppercase font-bold text-emerald-700">Precios desde</span>
-          <span class="text-2xl font-black text-emerald-900" id="resumenPrecioMin">Bs 136.78</span>
+      <div class="flex flex-row md:flex-col gap-2.5 shrink-0">
+        <div class="bg-white border border-emerald-200 rounded-xl px-4 py-2 text-center shadow-xs">
+          <span class="block text-[11px] uppercase font-bold text-emerald-800">Precios desde</span>
+          <span class="text-xl md:text-2xl font-black text-emerald-900" id="resumenPrecioMin">Bs 136.78</span>
         </div>
-        <div class="bg-blue-50 border border-blue-300 rounded-xl px-4 py-2 text-center">
-          <span class="block text-xs uppercase font-bold text-blue-700">Catálogo disponible</span>
-          <span class="text-2xl font-black text-blue-900">24 tipos</span>
+        <div class="bg-white border border-emerald-200 rounded-xl px-4 py-2 text-center shadow-xs">
+          <span class="block text-[11px] uppercase font-bold text-emerald-800">Catálogo disponible</span>
+          <span class="text-xl md:text-2xl font-black text-[#1b4332]">24 tipos</span>
         </div>
       </div>
     </section>
 
-    <!-- WIDGET DEL SEMÁFORO PREVENTIVO EN LENGUAJE CIUDADANO (US-31) -->
-    <section class="bg-white rounded-2xl p-6 border-2 border-slate-200 shadow-sm space-y-4" aria-labelledby="sec-semaforo">
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+    <!-- WIDGET DEL SEMÁFORO PREVENTIVO EN LENGUAJE CIUDADANO (US-31/US-34) -->
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-[#e3eae5] space-y-4" aria-labelledby="sec-semaforo">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#e9f0eb] pb-3">
         <div>
-          <h2 id="sec-semaforo" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
+          <h2 id="sec-semaforo" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
             <span>🚦</span> Semáforo Preventivo de Disponibilidad en Farmacias
           </h2>
-          <p class="text-slate-600 text-sm md:text-base">
+          <p class="text-slate-600 text-xs md:text-sm mt-0.5">
             Monitoreo diario de existencias en farmacias para avisarte con anticipación si conviene comprar antes del cobro de rentas.
           </p>
         </div>
-        <div id="badgeSemaforoGlobal" class="px-4 py-2 rounded-xl text-base md:text-lg font-extrabold flex items-center gap-2 badge-verde">
+        <div id="badgeSemaforoGlobal" class="px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-extrabold flex items-center gap-1.5 badge-verde shadow-xs">
           <span>🟢</span> <span>ESTADO: 12 CON STOCK ASEGURADO • 11 CON PRECAUCIÓN</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-        <div class="p-4 rounded-xl border-2 border-emerald-300 bg-emerald-50/70 space-y-1">
-          <div class="flex items-center gap-2 font-bold text-emerald-900 text-base md:text-lg">
-            <span class="text-2xl">🟢</span> VERDE (Disponibilidad Segura)
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+        <div class="p-4 rounded-xl border border-[#c3e6cb] bg-[#ebf7ee] space-y-1">
+          <div class="flex items-center gap-2 font-bold text-[#1b5e20] text-sm md:text-base">
+            <span class="text-xl">🟢</span> VERDE (Disponibilidad Segura)
           </div>
-          <p class="text-emerald-800 text-sm">
+          <p class="text-[#2e6f40] text-xs md:text-sm leading-relaxed">
             12 medicamentos con stock confirmado en farmacias. Puedes ir a comprar con tranquilidad.
           </p>
         </div>
 
-        <div class="p-4 rounded-xl border-2 border-amber-300 bg-amber-50/70 space-y-1">
-          <div class="flex items-center gap-2 font-bold text-amber-900 text-base md:text-lg">
-            <span class="text-2xl">🟡</span> AMARILLO (Precaución)
+        <div class="p-4 rounded-xl border border-[#fbe59d] bg-[#fef9e8] space-y-1">
+          <div class="flex items-center gap-2 font-bold text-[#855b0a] text-sm md:text-base">
+            <span class="text-xl">🟡</span> AMARILLO (Precaución)
           </div>
-          <p class="text-amber-800 text-sm">
+          <p class="text-[#8c6b1b] text-xs md:text-sm leading-relaxed">
             11 presentaciones con pocas unidades o en una sola cadena. Conviene llamar o comprar antes.
           </p>
         </div>
 
-        <div class="p-4 rounded-xl border-2 border-rose-300 bg-rose-50/70 space-y-1">
-          <div class="flex items-center gap-2 font-bold text-rose-900 text-base md:text-lg">
-            <span class="text-2xl">🔴</span> ROJO (Agotado General)
+        <div class="p-4 rounded-xl border border-[#f8c8c8] bg-[#fdf2f2] space-y-1">
+          <div class="flex items-center gap-2 font-bold text-[#991b1b] text-sm md:text-base">
+            <span class="text-xl">🔴</span> ROJO (Agotado General)
           </div>
-          <p class="text-rose-800 text-sm">
+          <p class="text-[#a83232] text-xs md:text-sm leading-relaxed">
             1 presentación agotada en todas las cadenas. Requiere consultar al médico por alternativas.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- GLOSARIO CIUDADANO PARA JUBILADOS Y FAMILIARES (US-31) -->
-    <section class="bg-indigo-50/70 rounded-2xl p-6 border-2 border-indigo-200 shadow-sm space-y-4" aria-labelledby="sec-glosario">
-      <div class="flex items-center gap-2 border-b border-indigo-200 pb-3">
-        <span class="text-2xl">📖</span>
-        <div>
-          <h2 id="sec-glosario" class="text-xl md:text-2xl font-bold text-indigo-950">Glosario Amigable: Palabras Clave Explicadas de Forma Sencilla</h2>
-          <p class="text-indigo-800 text-xs md:text-sm">Todo lo que necesitas saber para entender tu insulina y tomar mejores decisiones sin enredos técnicos.</p>
+    <!-- GLOSARIO CIUDADANO COMPACTO Y NO INVASIVO (US-34) -->
+    <section id="sec-glosario" class="card-pastel rounded-xl p-3 border border-emerald-200/80 bg-emerald-50/40" aria-label="Glosario Ciudadano">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">📖</span>
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-emerald-950 inline">Glosario de Términos Amigables:</h2>
+            <span class="text-xs text-slate-500 ml-1 hidden sm:inline">Pasa el mouse o presiona el botón para consultar definiciones sencillas</span>
+          </div>
         </div>
+        <button id="btnToggleGlosario" onclick="toggleGlosario()" onmouseenter="mostrarGlosario(true)" class="px-3 py-1.5 bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-300 rounded-lg text-xs md:text-sm font-bold flex items-center gap-1.5 shadow-xs focus-ring transition-scale" aria-expanded="false" aria-controls="glosarioContenido">
+          <span>📖 Glosario de Términos</span>
+          <span id="iconoGlosario" class="text-xs">▼</span>
+        </button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
-        <!-- Tarjeta 1: Quiebre de Stock -->
-        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
-          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
-            <span class="text-xl">📦</span> ¿Qué es "Quiebre de stock"?
+      <!-- Contenedor desplegable (no ocupa espacio en pantalla cuando está recogido) -->
+      <div id="glosarioContenido" class="hidden mt-3 pt-3 border-t border-emerald-200/70 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 animate-fadeIn">
+        <!-- Tarjeta 1: Quiebre de stock -->
+        <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
+          <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
+            <span>📦</span> ¿Qué es "Quiebre de stock"?
           </div>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          <p class="text-slate-600 text-xs leading-relaxed">
             Situación en la que las farmacias <strong>agotan por completo sus existencias</strong> de una insulina y no pueden reponer de inmediato. Avisarte a tiempo te permite comprar días antes sin quedarte sin tu dosis diaria.
           </p>
         </div>
 
         <!-- Tarjeta 2: Semáforo Preventivo -->
-        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
-          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
-            <span class="text-xl">🚦</span> ¿Cómo funciona el Semáforo?
+        <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
+          <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
+            <span>🚦</span> ¿Cómo funciona el Semáforo?
           </div>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          <p class="text-slate-600 text-xs leading-relaxed">
             Si hay stock en al menos una farmacia, <strong>nunca marcará rojo</strong>. El color <strong>Verde</strong> confirma abasto seguro; <strong>Amarillo</strong> aconseja comprar con anticipación; y <strong>Rojo</strong> avisa que está agotado en todas.
           </p>
         </div>
 
         <!-- Tarjeta 3: Cálculo del Ahorro -->
-        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
-          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
-            <span class="text-xl">💰</span> ¿Cómo se calcula tu Ahorro?
+        <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
+          <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
+            <span>💰</span> ¿Cómo se calcula tu Ahorro?
           </div>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          <p class="text-slate-600 text-xs leading-relaxed">
             Restamos el precio de la farmacia más cara menos el de la más barata para el <strong>mismo medicamento exacto</strong>. La diferencia es el dinero en Bolivianos que te queda en el bolsillo al elegir bien.
           </p>
         </div>
 
         <!-- Tarjeta 4: Concentración U-100 -->
-        <div class="bg-white p-4 rounded-xl border-2 border-indigo-100 shadow-xs space-y-2">
-          <div class="flex items-center gap-2 text-indigo-900 font-extrabold text-base">
-            <span class="text-xl">💉</span> ¿Qué significa "U-100"?
+        <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
+          <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
+            <span>💉</span> ¿Qué significa "U-100"?
           </div>
-          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+          <p class="text-slate-600 text-xs leading-relaxed">
             Significa que cada mililitro contiene <strong>100 Unidades Internacionales</strong> de insulina. Es la presentación estándar en Bolivia. Asegúrate de usar siempre jeringas graduadas para U-100.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- PASO 1: PANEL DE FILTROS RÁPIDOS CON BOTÓN FILTRAR EXPLÍCITO -->
-    <section class="bg-white rounded-2xl p-6 border-2 border-slate-300 shadow-sm space-y-5" aria-labelledby="sec-filtros">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
-        <h2 id="sec-filtros" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
-          <span>🔍</span> Paso 1: Busca tu Medicamento
-        </h2>
-        <span class="text-xs md:text-sm font-semibold text-slate-500">Selecciona tus preferencias y presiona "Filtrar Catálogo"</span>
+    <!-- CALCULADORA DE DOSIS Y PRESUPUESTO MENSUAL DEL JUBILADO (REUBICADA ANTES DEL CATÁLOGO - US-34) -->
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-amber-200/90 bg-[#fffdf7] space-y-5" aria-labelledby="sec-calculadora">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/70 pb-3">
+        <div>
+          <h2 id="sec-calculadora" class="text-lg md:text-xl font-extrabold text-amber-950 flex items-center gap-2">
+            <span>🧮</span> Calculadora de Ahorro y Presupuesto Mensual para tu Pensión
+          </h2>
+          <p class="text-amber-900/80 text-xs md:text-sm mt-0.5">
+            Ingresa la dosis diaria recetada por tu médico para saber cuántos frascos necesitas y cuánto dinero ahorras al mes comprando en la farmacia más económica.
+          </p>
+        </div>
+        <span class="text-xs font-bold text-amber-800 bg-amber-100/80 px-2.5 py-1 rounded-full border border-amber-200">
+          Herramienta de Ahorro
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-center">
+        <div class="space-y-1.5">
+          <label for="inputDosisDiaria" class="block font-bold text-slate-800 text-sm">¿Cuántas Unidades (UI) usas al día?</label>
+          <div class="flex items-center gap-2.5">
+            <input type="number" id="inputDosisDiaria" min="5" max="150" value="30" onchange="calcularPresupuesto()" class="w-28 p-2.5 bg-white border border-amber-300 rounded-xl font-black text-xl text-center text-slate-900 focus-ring">
+            <span class="font-bold text-slate-600 text-sm">UI / día</span>
+          </div>
+          <span class="text-xs text-slate-500 block">Dosis habitual frecuente: 20 a 40 UI al día.</span>
+        </div>
+
+        <div class="space-y-1.5">
+          <label for="selectTipoInsulinaCalc" class="block font-bold text-slate-800 text-sm">Insulina que utilizas:</label>
+          <select id="selectTipoInsulinaCalc" onchange="calcularPresupuesto()" class="w-full p-2.5 bg-white border border-amber-300 rounded-xl font-bold text-slate-800 text-sm focus-ring">
+            <option value="Novolin N">Novolin N (NPH 10 ml Vial)</option>
+            <option value="Novolin R">Novolin R (Regular 10 ml Vial)</option>
+            <option value="Novolin 70/30">Novolin 70/30 (Mixta 10 ml Vial)</option>
+            <option value="Lantus">Lantus (Glargina 10 ml Vial)</option>
+            <option value="Basalog">Basalog (Glargina 10 ml Vial)</option>
+            <option value="Apidra">Apidra (Glulisina 3 ml Pluma)</option>
+          </select>
+          <span class="text-xs text-slate-500 block">Calcula automáticamente frascos y ahorro al mes.</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-amber-300/80 shadow-xs space-y-1.5 text-center md:text-left">
+          <span class="block text-xs uppercase font-extrabold text-amber-800 tracking-wider">Resultado Estimado al Mes (30 días)</span>
+          <div class="text-xl md:text-2xl font-black text-emerald-800" id="calcResumenAhorro">Calculando ahorro...</div>
+          <p class="text-slate-600 text-xs leading-relaxed" id="calcDetalleFrascos">Cálculo de frascos y presupuesto en curso.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASO 1: PANEL DE FILTROS RÁPIDOS CON BOTÓN FILTRAR FUNCIONAL Y COHERENTE (US-34) -->
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-[#e3eae5] space-y-4" aria-labelledby="sec-filtros">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#e9f0eb] pb-3">
+        <div>
+          <h2 id="sec-filtros" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
+            <span>🔍</span> Paso 1: Busca tu Medicamento
+          </h2>
+          <span class="text-xs md:text-sm text-slate-500">Ajusta los filtros deseados y presiona "Filtrar Catálogo" para actualizar</span>
+        </div>
+        <div id="lblFiltroEstado" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+          ✓ Catálogo al día
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Filtro Principio Activo -->
-        <div class="space-y-1">
-          <label for="filtroPrincipio" class="block font-bold text-slate-800 text-sm md:text-base">Tipo de Insulina / Principio Activo:</label>
-          <select id="filtroPrincipio" class="w-full p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-medium text-slate-900 text-base focus-ring">
+        <div class="space-y-1.5">
+          <label for="filtroPrincipio" class="block font-bold text-slate-800 text-sm">Tipo de Insulina / Principio Activo:</label>
+          <select id="filtroPrincipio" onchange="marcarFiltrosPendientes()" class="w-full p-2.5 bg-white border border-[#cbd5e1] rounded-xl font-medium text-slate-800 text-sm focus-ring">
             <option value="TODOS">Todas las insulinas</option>
             <option value="Glargina">Insulina Glargina (Lantus, Basalog, Glaripen, Toujeo)</option>
             <option value="Regular">Insulina Regular / Rápida (Novolin R, Densulin R)</option>
@@ -192,9 +301,9 @@
         </div>
 
         <!-- Filtro Formato -->
-        <div class="space-y-1">
-          <label for="filtroFormato" class="block font-bold text-slate-800 text-sm md:text-base">Presentación / Envase:</label>
-          <select id="filtroFormato" class="w-full p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-medium text-slate-900 text-base focus-ring">
+        <div class="space-y-1.5">
+          <label for="filtroFormato" class="block font-bold text-slate-800 text-sm">Presentación / Envase:</label>
+          <select id="filtroFormato" onchange="marcarFiltrosPendientes()" class="w-full p-2.5 bg-white border border-[#cbd5e1] rounded-xl font-medium text-slate-800 text-sm focus-ring">
             <option value="TODOS">Todos los envases</option>
             <option value="Vial">Frasco Ampolla / Vial (10 ml)</option>
             <option value="Cartucho">Cartucho para Pluma (3 ml)</option>
@@ -203,9 +312,9 @@
         </div>
 
         <!-- Filtro Cadena de Farmacia -->
-        <div class="space-y-1">
-          <label for="filtroFarmacia" class="block font-bold text-slate-800 text-sm md:text-base">Cadena de Farmacias:</label>
-          <select id="filtroFarmacia" class="w-full p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-medium text-slate-900 text-base focus-ring">
+        <div class="space-y-1.5">
+          <label for="filtroFarmacia" class="block font-bold text-slate-800 text-sm">Cadena de Farmacias:</label>
+          <select id="filtroFarmacia" onchange="marcarFiltrosPendientes()" class="w-full p-2.5 bg-white border border-[#cbd5e1] rounded-xl font-medium text-slate-800 text-sm focus-ring">
             <option value="TODAS">Todas las cadenas (Comparar las 3)</option>
             <option value="Farmacorp">Disponible en Farmacorp</option>
             <option value="Chávez">Disponible en Farmacias Chávez</option>
@@ -214,40 +323,40 @@
         </div>
       </div>
 
-      <!-- Buscador por texto rápido -->
-      <div class="space-y-1">
-        <label for="inputBusqueda" class="block font-bold text-slate-800 text-sm md:text-base">O escribe el nombre comercial:</label>
+      <!-- Buscador por texto -->
+      <div class="space-y-1.5">
+        <label for="inputBusqueda" class="block font-bold text-slate-800 text-sm">O escribe el nombre comercial (presiona Enter o el botón para buscar):</label>
         <div class="relative">
-          <input type="text" id="inputBusqueda" placeholder="Ejemplo: Lantus, Novolin, Basalog, Apidra..." class="w-full p-3 pl-10 bg-slate-50 border-2 border-slate-300 rounded-xl font-medium text-slate-900 text-base focus-ring">
-          <span class="absolute left-3 top-3 text-lg text-slate-400" aria-hidden="true">🔎</span>
+          <input type="text" id="inputBusqueda" oninput="marcarFiltrosPendientes()" onkeydown="if(event.key==='Enter') aplicarFiltros()" placeholder="Ejemplo: Lantus, Novolin, Basalog, Apidra..." class="w-full p-2.5 pl-10 bg-white border border-[#cbd5e1] rounded-xl font-medium text-slate-800 text-sm focus-ring">
+          <span class="absolute left-3 top-2.5 text-base text-slate-400" aria-hidden="true">🔎</span>
         </div>
       </div>
 
-      <!-- BOTONES DE ACCIÓN VISIBLES: FILTRAR Y LIMPIAR -->
-      <div class="flex flex-wrap items-center gap-3 pt-2">
-        <button id="btnAplicarFiltros" onclick="aplicarFiltros()" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base md:text-lg rounded-xl flex items-center justify-center gap-2 shadow-md transition-scale focus-ring">
+      <!-- BOTONES DE ACCIÓN: FILTRAR EXPLÍCITO Y LIMPIAR (US-34) -->
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <button id="btnAplicarFiltros" onclick="aplicarFiltros()" class="px-5 py-2.5 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-black text-sm md:text-base rounded-xl flex items-center justify-center gap-2 shadow-xs transition-scale focus-ring">
           <span>🔍</span> Filtrar Catálogo
         </button>
-        <button id="btnLimpiarFiltros" onclick="limpiarFiltros()" class="px-5 py-3.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-sm md:text-base rounded-xl flex items-center justify-center gap-1 transition-scale focus-ring">
+        <button id="btnLimpiarFiltros" onclick="limpiarFiltros()" class="px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs md:text-sm rounded-xl flex items-center justify-center gap-1.5 transition-scale focus-ring">
           <span>↺</span> Ver Todos los Medicamentos
         </button>
       </div>
     </section>
 
-    <!-- CATÁLOGO AGRUPADO: CADA MEDICAMENTO CON LISTA DE LAS 3 CADENAS -->
+    <!-- CATÁLOGO AGRUPADO: CADA MEDICAMENTO CON COMPARATIVA PASTEL DE LAS 3 CADENAS -->
     <section class="space-y-4" aria-labelledby="sec-catalogo">
-      <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 id="sec-catalogo" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
+          <h2 id="sec-catalogo" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
             <span>🏷️</span> Comparativa de Precios entre las 3 Cadenas
           </h2>
-          <p class="text-slate-600 text-sm md:text-base" id="lblResultadosConteo">
+          <p class="text-slate-600 text-xs md:text-sm" id="lblResultadosConteo">
             Mostrando 24 medicamentos. Cada tarjeta lista los precios de Farmacorp, Chávez y Telchi.
           </p>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-xs md:text-sm font-bold text-slate-700">Ordenar por:</span>
-          <select id="selectOrden" onchange="aplicarFiltros()" class="p-2 border-2 border-slate-300 rounded-lg font-bold text-xs md:text-sm bg-white focus-ring">
+          <span class="text-xs font-bold text-slate-600">Ordenar por:</span>
+          <select id="selectOrden" onchange="aplicarFiltros()" class="p-2 border border-slate-300 rounded-lg font-bold text-xs bg-white text-slate-800 focus-ring">
             <option value="precio_asc">Precio más bajo primero (Mayor ahorro)</option>
             <option value="precio_desc">Precio más alto primero</option>
             <option value="ahorro_desc">Mayor ahorro entre farmacias</option>
@@ -257,68 +366,27 @@
       </div>
 
       <!-- Contenedor dinámico de tarjetas agrupadas -->
-      <div id="contenedorMedicamentos" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div id="contenedorMedicamentos" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <!-- Renderizado dinámico vía JavaScript -->
       </div>
     </section>
 
-    <!-- CALCULADORA DE DOSIS Y PRESUPUESTO MENSUAL DEL JUBILADO -->
-    <section class="bg-amber-50 rounded-2xl p-6 border-2 border-amber-300 shadow-sm space-y-6" aria-labelledby="sec-calculadora">
-      <div class="border-b border-amber-200 pb-3">
-        <h2 id="sec-calculadora" class="text-xl md:text-2xl font-extrabold text-amber-950 flex items-center gap-2">
-          <span>🧮</span> Calculadora de Ahorro y Presupuesto Mensual para tu Pensión
-        </h2>
-        <p class="text-amber-900 text-sm md:text-base">
-          Ingresa la dosis diaria recetada por tu médico para saber cuántos frascos necesitas y cuánto dinero ahorras al mes comprando en la farmacia más económica.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        <div class="space-y-2">
-          <label for="inputDosisDiaria" class="block font-bold text-slate-900 text-sm md:text-base">¿Cuántas Unidades (UI) usas al día?</label>
-          <div class="flex items-center gap-3">
-            <input type="number" id="inputDosisDiaria" min="5" max="150" value="30" onchange="calcularPresupuesto()" class="w-32 p-3 bg-white border-2 border-amber-400 rounded-xl font-black text-2xl text-center text-slate-900 focus-ring">
-            <span class="font-bold text-slate-700 text-base md:text-lg">UI / día</span>
-          </div>
-          <span class="text-xs text-slate-500 block">Dosis habitual frecuente: 20 a 40 UI al día.</span>
-        </div>
-
-        <div class="space-y-2">
-          <label for="selectTipoInsulinaCalc" class="block font-bold text-slate-900 text-sm md:text-base">Insulina que utilizas:</label>
-          <select id="selectTipoInsulinaCalc" onchange="calcularPresupuesto()" class="w-full p-3 bg-white border-2 border-amber-400 rounded-xl font-bold text-slate-900 text-sm md:text-base focus-ring">
-            <option value="Novolin N">Novolin N (NPH 10 ml Vial)</option>
-            <option value="Novolin R">Novolin R (Regular 10 ml Vial)</option>
-            <option value="Novolin 70/30">Novolin 70/30 (Mixta 10 ml Vial)</option>
-            <option value="Lantus">Lantus (Glargina 10 ml Vial)</option>
-            <option value="Basalog">Basalog (Glargina 10 ml Vial)</option>
-            <option value="Apidra">Apidra (Glulisina 3 ml Pluma)</option>
-          </select>
-        </div>
-
-        <div class="bg-white p-5 rounded-xl border-2 border-amber-400 shadow-sm space-y-2 text-center md:text-left">
-          <span class="block text-xs uppercase font-black text-amber-800">Resultado Estimado al Mes (30 días)</span>
-          <div class="text-2xl font-black text-emerald-700" id="calcResumenAhorro">Calculando ahorro...</div>
-          <p class="text-slate-600 text-xs md:text-sm" id="calcDetalleFrascos">Cálculo de frascos y presupuesto en curso.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- BUSCADOR TERRITORIAL POR ANILLOS (1 AL 8 EN SANTA CRUZ) -->
-    <section class="bg-white rounded-2xl p-6 border-2 border-slate-200 shadow-sm space-y-4" aria-labelledby="sec-anillos">
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-3">
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-[#e3eae5] space-y-4" aria-labelledby="sec-anillos">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#e9f0eb] pb-3">
         <div>
-          <h2 id="sec-anillos" class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
+          <h2 id="sec-anillos" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
             <span>📍</span> Paso 2: Encuentra la Farmacia Más Cercana a tu Anillo
           </h2>
-          <p class="text-slate-600 text-sm md:text-base">
+          <p class="text-slate-600 text-xs md:text-sm mt-0.5">
             Sucursales físicas confirmadas en Santa Cruz de la Sierra ordenadas por anillo urbano.
           </p>
         </div>
 
         <!-- Selector de Anillo -->
         <div class="flex items-center gap-2">
-          <label for="selectAnilloFiltro" class="font-bold text-slate-800 text-xs md:text-sm">Filtrar por Anillo:</label>
-          <select id="selectAnilloFiltro" onchange="filtrarSucursales()" class="p-2.5 bg-slate-50 border-2 border-slate-300 rounded-lg font-bold text-slate-900 text-xs md:text-sm focus-ring">
+          <label for="selectAnilloFiltro" class="font-bold text-slate-700 text-xs">Filtrar por Anillo:</label>
+          <select id="selectAnilloFiltro" onchange="filtrarSucursales()" class="p-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-800 text-xs focus-ring">
             <option value="TODOS">Todos los anillos (16 sucursales)</option>
             <option value="2">2do Anillo (Piraí, Trinidad, Cotoca, Charcas)</option>
             <option value="3">3er Anillo (Santos Dumont, Mutualista)</option>
@@ -329,11 +397,11 @@
         </div>
       </div>
 
-      <!-- Tabla de sucursales -->
+      <!-- Tabla de sucursales con paleta pastel limpia -->
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse" id="tablaSucursales">
           <thead>
-            <tr class="bg-slate-100 text-slate-800 font-extrabold text-xs md:text-sm border-b-2 border-slate-300">
+            <tr class="bg-[#f4f8f5] text-slate-700 font-extrabold text-xs border-b border-[#dce6df]">
               <th class="p-3">Cadena</th>
               <th class="p-3">Nombre de Sucursal</th>
               <th class="p-3">Anillo Urbano</th>
@@ -341,19 +409,19 @@
               <th class="p-3">Estado de Sucursal</th>
             </tr>
           </thead>
-          <tbody id="tbodySucursales" class="divide-y divide-slate-200 text-sm md:text-base">
+          <tbody id="tbodySucursales" class="divide-y divide-[#edf2ee] text-xs md:text-sm">
             <!-- Renderizado dinámico vía JavaScript -->
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- CONSEJOS PRÁCTICOS PARA EL ADULTO MAYOR -->
-    <section class="bg-emerald-50 rounded-2xl p-6 border border-emerald-200 space-y-3">
-      <h3 class="text-lg font-extrabold text-emerald-950 flex items-center gap-2">
+    <!-- CONSEJOS PRÁCTICOS PARA EL ADULTO MAYOR EN PALETA PASTEL DE FARMACIA -->
+    <section class="card-pastel rounded-2xl p-5 md:p-6 border border-emerald-200/90 bg-[#f4f9f5] space-y-2.5">
+      <h3 class="text-base md:text-lg font-extrabold text-[#1b4332] flex items-center gap-2">
         <span>💡</span> Consejos Importantes para el Jubilado y su Familia
       </h3>
-      <ul class="list-disc list-inside space-y-1.5 text-emerald-900 text-sm md:text-base font-medium">
+      <ul class="list-disc list-inside space-y-1.5 text-slate-700 text-xs md:text-sm font-medium leading-relaxed">
         <li><strong>Conserva la cadena de frío:</strong> Al retirar tu insulina en la farmacia, llévala siempre en bolsa térmica o con un gel refrigerante sin congelar directamente el frasco.</li>
         <li><strong>Verifica la concentración:</strong> En Bolivia la mayoría de insulinas son U-100 (100 Unidades por mililitro). Usa siempre jeringas graduadas para U-100.</li>
         <li><strong>Compra con 3 a 5 días de anticipación:</strong> Especialmente durante las fechas de cobro de pensiones en el Banco Unión (días 1 al 5 y fin de mes), cuando aumenta la afluencia y pueden agotarse existencias temporalmente.</li>
@@ -363,9 +431,9 @@
   </main>
 
   <!-- PIE DE PÁGINA ACCESIBLE -->
-  <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs md:text-sm border-t border-slate-800 mt-12">
+  <footer class="bg-[#1b4332] text-emerald-100/80 py-6 text-center text-xs border-t border-[#2d6a4f] mt-10">
     <div class="max-w-6xl mx-auto px-4 space-y-1">
-      <p class="font-bold text-slate-300">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
+      <p class="font-bold text-white">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
       <p>Desarrollado para el Proyecto Integrador • Datos reales auditados de Farmacorp, Chávez y Telchi.</p>
     </div>
   </footer>
@@ -389,7 +457,50 @@
       }
     }
 
-    // 2. RENDERIZADO DE TARJETAS AGRUPADAS CON LISTA DE LAS 3 CADENAS
+    // 2. TOGGLE Y VISIBILIDAD DEL GLOSARIO COMPACTO (US-34)
+    function toggleGlosario() {
+      const panel = document.getElementById('glosarioContenido');
+      const icono = document.getElementById('iconoGlosario');
+      const btn = document.getElementById('btnToggleGlosario');
+      if (!panel) return;
+      const estaOculto = panel.classList.contains('hidden');
+      if (estaOculto) {
+        panel.classList.remove('hidden');
+        if (icono) icono.textContent = '▲';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      } else {
+        panel.classList.add('hidden');
+        if (icono) icono.textContent = '▼';
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function mostrarGlosario(abrir) {
+      const panel = document.getElementById('glosarioContenido');
+      const icono = document.getElementById('iconoGlosario');
+      const btn = document.getElementById('btnToggleGlosario');
+      if (!panel) return;
+      if (abrir) {
+        panel.classList.remove('hidden');
+        if (icono) icono.textContent = '▲';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // 3. ESTADOS PENDIENTES DEL FILTRADO (US-34)
+    function marcarFiltrosPendientes() {
+      const lbl = document.getElementById('lblFiltroEstado');
+      const btn = document.getElementById('btnAplicarFiltros');
+      if (lbl) {
+        lbl.className = 'text-xs font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 animate-pulse';
+        lbl.textContent = '● Presiona "Filtrar Catálogo" para ver cambios';
+      }
+      if (btn) {
+        btn.classList.add('ring-2', 'ring-emerald-400');
+      }
+    }
+
+    // 4. RENDERIZADO DE TARJETAS AGRUPADAS CON COMPARATIVA PASTEL DE LAS 3 CADENAS
     function renderizarMedicamentos(medicamentos) {
       const contenedor = document.getElementById('contenedorMedicamentos');
       const lblConteo = document.getElementById('lblResultadosConteo');
@@ -399,11 +510,11 @@
 
       if (medicamentos.length === 0) {
         contenedor.innerHTML = `
-          <div class="col-span-full bg-white p-8 rounded-2xl border-2 border-dashed border-slate-300 text-center space-y-3">
+          <div class="col-span-full bg-white p-8 rounded-2xl border border-dashed border-slate-300 text-center space-y-3">
             <span class="text-4xl block">🔍</span>
-            <p class="text-xl font-bold text-slate-800">No encontramos medicamentos con los filtros seleccionados.</p>
-            <p class="text-slate-500">Prueba cambiando el tipo de insulina o presiona "Ver Todos los Medicamentos".</p>
-            <button onclick="limpiarFiltros()" class="mt-2 px-5 py-2.5 bg-emerald-600 text-white font-bold rounded-xl shadow-sm">
+            <p class="text-lg font-bold text-slate-800">No encontramos medicamentos con los filtros seleccionados.</p>
+            <p class="text-slate-500 text-sm">Prueba cambiando el tipo de insulina o presiona "Ver Todos los Medicamentos".</p>
+            <button onclick="limpiarFiltros()" class="mt-2 px-5 py-2.5 bg-[#2d6a4f] text-white font-bold rounded-xl shadow-xs hover:bg-[#1b4332] transition-scale">
               Mostrar Todo el Catálogo
             </button>
           </div>
@@ -415,7 +526,7 @@
 
       medicamentos.forEach(med => {
         const card = document.createElement('article');
-        card.className = "bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-emerald-400 transition-all";
+        card.className = "card-pastel rounded-2xl p-5 border border-[#e3eae5] flex flex-col justify-between space-y-4 hover:border-emerald-300 transition-all";
 
         // Badges del semáforo general con lenguaje ciudadano
         let semaforoBadge = '';
@@ -427,30 +538,30 @@
           semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo" title="${med.motivo_semaforo}">🔴 Agotado en Farmacias</span>`;
         }
 
-        // Construir filas de la lista de farmacias
+        // Construir filas de la comparativa de farmacias con estética pastel
         let filasFarmaciasHTML = '';
         cadenas.forEach(cadena => {
           const info = med.precios[cadena];
           if (info) {
             const tieneStock = info.disponible && info.estado_stock !== 'AGOTADO';
             const esElMejor = (cadena === med.mejor_cadena && med.total_farmacias_activas > 1 && tieneStock);
-            
+
             let estadoTexto = 'Disponible';
             let estadoClase = 'text-emerald-700 font-bold';
             if (info.estado_stock === 'AGOTADO' || !info.disponible) {
               estadoTexto = 'Agotado temporalmente';
-              estadoClase = 'text-rose-600 font-bold';
+              estadoClase = 'text-rose-700 font-bold';
             } else if (info.estado_stock === 'ULTIMAS_UNIDADES') {
               estadoTexto = 'Últimas unidades disponibles';
-              estadoClase = 'text-amber-600 font-bold';
+              estadoClase = 'text-amber-700 font-bold';
             }
 
             filasFarmaciasHTML += `
-              <div class="p-3 rounded-xl border ${esElMejor ? 'bg-emerald-50 border-emerald-300 ring-1 ring-emerald-200' : 'bg-slate-50 border-slate-200'} flex items-center justify-between gap-2">
+              <div class="p-3 rounded-xl border ${esElMejor ? 'bg-[#f0f9f3] border-[#bfe5cd] ring-1 ring-[#cdeade]' : 'bg-[#fafcfb] border-[#eaf0eb]'} flex items-center justify-between gap-2">
                 <div class="space-y-0.5">
                   <div class="flex items-center gap-2">
-                    <span class="font-bold text-slate-900 text-sm md:text-base">${cadena}</span>
-                    ${esElMejor ? '<span class="px-2 py-0.5 rounded-full text-xs font-black bg-emerald-600 text-white uppercase tracking-wider">⭐ Mejor Precio</span>' : ''}
+                    <span class="font-bold text-slate-800 text-sm md:text-base">${cadena}</span>
+                    ${esElMejor ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-black bg-[#2d6a4f] text-white uppercase tracking-wider">⭐ Mejor Precio</span>' : ''}
                   </div>
                   <span class="text-xs text-slate-500 block">
                     Por 100 UI: <strong>Bs ${info.precio_por_100ui_bs.toFixed(2)}</strong> • 
@@ -458,15 +569,15 @@
                   </span>
                 </div>
                 <div class="text-right">
-                  <span class="text-xl md:text-2xl font-black text-slate-900 block">Bs ${info.precio_venta_bs.toFixed(2)}</span>
+                  <span class="text-xl font-black text-slate-900 block">Bs ${info.precio_venta_bs.toFixed(2)}</span>
                 </div>
               </div>
             `;
           } else {
             // No disponible en esta cadena
             filasFarmaciasHTML += `
-              <div class="p-2.5 rounded-xl border border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-between opacity-60">
-                <span class="font-medium text-slate-500 text-xs md:text-sm">${cadena}</span>
+              <div class="p-2.5 rounded-xl border border-dashed border-[#e2e8f0] bg-[#fafbfc] flex items-center justify-between opacity-60">
+                <span class="font-medium text-slate-500 text-xs">${cadena}</span>
                 <span class="text-xs text-slate-400 italic">No disponible en catálogo</span>
               </div>
             `;
@@ -478,9 +589,9 @@
             <!-- Encabezado de la tarjeta -->
             <div class="flex items-start justify-between gap-2">
               <div>
-                <h3 class="text-xl md:text-2xl font-black text-slate-900 leading-snug">${med.marca}</h3>
-                <p class="text-sm md:text-base font-bold text-emerald-800">${med.principio_activo}</p>
-                <p class="text-xs md:text-sm text-slate-500">${med.formato} • ${med.volumen_ml} ml (${med.unidades_totales} UI) • Lab. ${med.laboratorio}</p>
+                <h3 class="text-lg md:text-xl font-black text-slate-900 leading-snug">${med.marca}</h3>
+                <p class="text-sm font-bold text-emerald-800">${med.principio_activo}</p>
+                <p class="text-xs text-slate-500">${med.formato} • ${med.volumen_ml} ml (${med.unidades_totales} UI) • Lab. ${med.laboratorio}</p>
               </div>
               <div class="shrink-0 flex flex-col items-end gap-1">
                 ${semaforoBadge}
@@ -488,30 +599,30 @@
               </div>
             </div>
 
-            <!-- Resumen de Ahorro Destacado -->
+            <!-- Resumen de Ahorro Destacado en Paleta Pastel -->
             ${med.ahorro_max_bs > 0 && med.total_farmacias_activas > 1 ? `
-              <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-400 p-3 rounded-xl flex items-center justify-between gap-2">
+              <div class="bg-[#ebf7ee] border border-[#bfe5cd] p-3 rounded-xl flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
                   <span class="text-xl">💵</span>
                   <div>
-                    <span class="text-xs uppercase font-extrabold text-emerald-800 block">Ahorro Máximo en tu Compra:</span>
-                    <span class="text-base font-black text-emerald-950">Ahorras Bs ${med.ahorro_max_bs.toFixed(2)} comprando en ${med.mejor_cadena}</span>
+                    <span class="text-xs uppercase font-extrabold text-[#1b5e20] block">Ahorro Máximo en tu Compra:</span>
+                    <span class="text-sm md:text-base font-black text-[#1b4332]">Ahorras Bs ${med.ahorro_max_bs.toFixed(2)} comprando en ${med.mejor_cadena}</span>
                   </div>
                 </div>
-                <span class="text-xs font-bold bg-white text-emerald-800 px-2 py-1 rounded-lg border border-emerald-300 shrink-0">
+                <span class="text-xs font-bold bg-white text-[#1b5e20] px-2.5 py-1 rounded-lg border border-[#c3e6cb] shrink-0">
                   Mejor opción
                 </span>
               </div>
             ` : (med.total_farmacias_activas === 1 ? `
-              <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs text-slate-600 font-medium">
+              <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
                 Disponible a Bs ${med.mejor_precio_bs.toFixed(2)} en ${med.mejor_cadena} (única farmacia con existencias).
               </div>
             ` : (med.total_farmacias_activas === 0 ? `
-              <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl text-xs text-rose-800 font-medium">
+              <div class="bg-[#fdf2f2] border border-[#f8c8c8] p-2.5 rounded-xl text-xs text-[#991b1b] font-medium">
                 Agotado en todas las farmacias en este momento. Consulta con tu médico por alternativas.
               </div>
             ` : `
-              <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs text-slate-600 font-medium">
+              <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
                 Disponible a Bs ${med.mejor_precio_bs.toFixed(2)} en ${med.mejor_cadena}.
               </div>
             `))}
@@ -527,7 +638,7 @@
       });
     }
 
-    // 3. LÓGICA DE FILTRADO ROBUSTA
+    // 5. LÓGICA DE FILTRADO ROBUSTA CON BOTÓN EXPLÍCITO (US-34)
     function aplicarFiltros() {
       const principioSel = document.getElementById('filtroPrincipio').value;
       const formatoSel = document.getElementById('filtroFormato').value;
@@ -578,9 +689,20 @@
       }
 
       renderizarMedicamentos(filtrados);
+
+      // Feedback visual del estado de filtrado
+      const lbl = document.getElementById('lblFiltroEstado');
+      const btn = document.getElementById('btnAplicarFiltros');
+      if (lbl) {
+        lbl.className = 'text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200';
+        lbl.textContent = `✓ Catálogo filtrado (${filtrados.length} encontrados)`;
+      }
+      if (btn) {
+        btn.classList.remove('ring-2', 'ring-emerald-400');
+      }
     }
 
-    // 4. LIMPIAR FILTROS
+    // 6. LIMPIAR FILTROS
     function limpiarFiltros() {
       document.getElementById('filtroPrincipio').value = 'TODOS';
       document.getElementById('filtroFormato').value = 'TODOS';
@@ -590,7 +712,7 @@
       aplicarFiltros();
     }
 
-    // 5. FILTRAR SUCURSALES POR ANILLO
+    // 7. FILTRAR SUCURSALES POR ANILLO
     function filtrarSucursales() {
       const anilloSel = document.getElementById('selectAnilloFiltro').value;
       const tbody = document.getElementById('tbodySucursales');
@@ -604,18 +726,18 @@
 
       filtradas.forEach(s => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-50 transition-colors';
+        tr.className = 'hover:bg-[#f9fbf9] transition-colors';
         tr.innerHTML = `
-          <td class="p-3 font-bold text-slate-900">${s.farmacia}</td>
-          <td class="p-3 font-semibold text-emerald-900">${s.nombre}</td>
+          <td class="p-3 font-bold text-slate-800">${s.farmacia}</td>
+          <td class="p-3 font-semibold text-emerald-950">${s.nombre}</td>
           <td class="p-3">
-            <span class="px-2.5 py-1 rounded-md text-xs font-extrabold ${s.anillo_num <= 2 ? 'bg-blue-100 text-blue-800' : 'bg-slate-200 text-slate-800'}">
+            <span class="px-2.5 py-1 rounded-md text-xs font-extrabold ${s.anillo_num <= 2 ? 'bg-[#ebf3f7] text-[#1e4a62]' : 'bg-[#edf2ee] text-slate-700'}">
               ${s.anillo_etiqueta}
             </span>
           </td>
-          <td class="p-3 text-slate-700 text-xs md:text-sm">${s.direccion}</td>
+          <td class="p-3 text-slate-600 text-xs md:text-sm">${s.direccion}</td>
           <td class="p-3">
-            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">
+            <span class="text-xs font-bold text-emerald-800 bg-[#ebf7ee] px-2.5 py-0.5 rounded-lg border border-[#c3e6cb]">
               ✓ Sucursal Activa
             </span>
           </td>
@@ -624,7 +746,7 @@
       });
     }
 
-    // 6. CALCULADORA DE PRESUPUESTO Y AHORRO
+    // 8. CALCULADORA DE PRESUPUESTO Y AHORRO
     function calcularPresupuesto() {
       const dosis = parseFloat(document.getElementById('inputDosisDiaria').value) || 30;
       const marca = document.getElementById('selectTipoInsulinaCalc').value;
@@ -654,7 +776,7 @@
       lblDetalle.textContent = `Con tu dosis de ${dosis} UI/día necesitas ${frascosNecesarios} frasco(s) de ${volumenPorFrasco} UI para 30 días (${dosisMensual} UI). Mejor opción disponible: Bs ${minPrecio.toFixed(2)} en ${med.mejor_cadena}.`;
     }
 
-    // 7. LECTURA POR VOZ DIDÁCTICA
+    // 9. LECTURA POR VOZ DIDÁCTICA
     function leerResumenVoz() {
       if (!('speechSynthesis' in window)) {
         alert('Tu navegador no soporta lectura por voz.');
@@ -667,14 +789,9 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // 8. EVENT LISTENERS AUTOMÁTICOS Y EN TIEMPO REAL
+    // 10. INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('filtroPrincipio').addEventListener('change', aplicarFiltros);
-      document.getElementById('filtroFormato').addEventListener('change', aplicarFiltros);
-      document.getElementById('filtroFarmacia').addEventListener('change', aplicarFiltros);
-      document.getElementById('inputBusqueda').addEventListener('keyup', aplicarFiltros);
-
-      // Carga inicial
+      // Carga inicial directa
       aplicarFiltros();
       filtrarSucursales();
       calcularPresupuesto();

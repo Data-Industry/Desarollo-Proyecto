@@ -194,6 +194,40 @@ class TestMVPJubilados(unittest.TestCase):
         self.assertIn("leerResumenVoz", contenido)
         self.assertIn("speechSynthesis", contenido)
 
+    def test_08_refinamiento_ergonomico_paleta_pastel_us34(self) -> None:
+        """Verifica los criterios específicos de US-34: texto explícito de letra, glosario compacto, calculadora previa y pastel UI."""
+        with open(self.src_ui_html, "r", encoding="utf-8") as f:
+            contenido = f.read()
+
+        # 1. Controles de fuente con texto explícito (reemplaza A- y A+)
+        self.assertIn("Achicar letra", contenido, "Debe incluir el texto explícito 'Achicar letra'")
+        self.assertIn("Agrandar letra", contenido, "Debe incluir el texto explícito 'Agrandar letra'")
+
+        # 2. Glosario compacto desplegable no invasivo
+        self.assertIn('id="btnToggleGlosario"', contenido)
+        self.assertIn('id="glosarioContenido"', contenido)
+        self.assertIn("toggleGlosario", contenido)
+        self.assertIn("Glosario de Términos", contenido)
+
+        # 3. Calculadora reubicada antes del catálogo de medicamentos
+        pos_calculadora = contenido.find('id="sec-calculadora"')
+        pos_catalogo = contenido.find('id="sec-catalogo"')
+        self.assertGreater(pos_calculadora, 0, "Debe existir id='sec-calculadora'")
+        self.assertGreater(pos_catalogo, 0, "Debe existir id='sec-catalogo'")
+        self.assertLess(
+            pos_calculadora,
+            pos_catalogo,
+            "La calculadora debe posicionarse ANTES del catálogo para mayor relevancia ergonómica (Criterio US-34).",
+        )
+
+        # 4. Coherencia en el botón de filtrado y estados pendientes
+        self.assertIn('id="lblFiltroEstado"', contenido)
+        self.assertIn("marcarFiltrosPendientes", contenido)
+
+        # 5. Estética Pastel Farmacéutica Limpia
+        self.assertIn("card-pastel", contenido)
+        self.assertIn("#1b4332", contenido)  # Verde botánico de farmacia
+
 
 if __name__ == "__main__":
     unittest.main()
