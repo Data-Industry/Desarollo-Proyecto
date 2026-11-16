@@ -6,7 +6,7 @@ Versión 3.1 (Refinamiento Ergonómico y Estética Farmacéutica Pastel):
 - Reubicación de la Calculadora de Dosis y Presupuesto Mensual a la parte superior antes del catálogo.
 - Filtrado por catálogo y búsqueda con acción explícita mediante botón 'Filtrar Catálogo' o tecla Enter.
 - Estética pastel farmacéutica limpia, humana y natural (Anti-IA): verdes salvia, menta suave y blanco clínico.
-- Semáforo de riesgo estrictamente coherente con la disponibilidad inmediata en farmacias (Verde, Amarillo, Rojo).
+- Semáforo general de disponibilidad observada, separado del riesgo predictivo por farmacia.
 - Comparador económico transparente entre Farmacorp, Farmacias Chávez y Farmacias Telchi.
 - Exportación automática sincronizada a la raíz, src/ui/, docs/ y directorio de artefactos.
 """
@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
@@ -39,38 +39,65 @@ ARTIFACT_HTML = Path(
 )
 
 
-def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
-    """Carga, consolida y agrupa por medicamento las insulinas, sucursales y estados de stock."""
+def compilar_datos_reales(
+    *,
+    df_master: Optional[pd.DataFrame] = None,
+    df_preds: Optional[pd.DataFrame] = None,
+    df_geo: Optional[pd.DataFrame] = None,
+    metadata: Optional[Dict[str, Any]] = None,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
+    """Compila el MVP desde archivos existentes o DataFrames preparados en staging.
+
+    Las predicciones son obligatorias: nunca se sustituyen valores faltantes por
+    un supuesto verde. El stock observado y el riesgo predictivo se conservan
+    en campos separados.
+    """
     master_path = DATA_PROCESSED_DIR / "insulinas_master.csv"
     preds_path = DATA_PROCESSED_DIR / "predicciones_probabilidad_stock.csv"
     geo_path = DATA_PROCESSED_DIR / "farmacias_geolocalizadas.csv"
 
-    if not master_path.exists():
+    if df_master is None and not master_path.exists():
         raise FileNotFoundError(f"Falta el dataset maestro en: {master_path}")
-    if not preds_path.exists():
+    if df_preds is None and not preds_path.exists():
         raise FileNotFoundError(f"Falta el dataset de predicciones en: {preds_path}")
-    if not geo_path.exists():
+    if df_geo is None and not geo_path.exists():
         raise FileNotFoundError(f"Falta el dataset geolocalizado en: {geo_path}")
 
-    df_master = pd.read_csv(master_path)
-    df_preds = pd.read_csv(preds_path)
-    df_geo = pd.read_csv(geo_path)
+    df_master = pd.read_csv(master_path) if df_master is None else df_master.copy()
+    df_preds = pd.read_csv(preds_path) if df_preds is None else df_preds.copy()
+    df_geo = pd.read_csv(geo_path) if df_geo is None else df_geo.copy()
 
-    # Merge de insulinas con predicciones
-    df_merged = df_master.merge(
-        df_preds[[
-            "id_insulina_master",
-            "probabilidad_randomforest",
-            "alerta_randomforest",
-            "semaforo_predictivo_ml",
-        ]],
+    if {"probabilidad_riesgo", "riesgo_predictivo"}.issubset(df_preds.columns):
+        prediction_columns = ["id_insulina_master", "probabilidad_riesgo", "riesgo_predictivo"]
+    elif {"probabilidad_randomforest", "semaforo_predictivo_ml"}.issubset(df_preds.columns):
+        df_preds = df_preds.rename(columns={
+            "probabilidad_randomforest": "probabilidad_riesgo",
+            "semaforo_predictivo_ml": "riesgo_predictivo",
+        })
+        prediction_columns = ["id_insulina_master", "probabilidad_riesgo", "riesgo_predictivo"]
+    else:
+        raise ValueError("Faltan las columnas obligatorias de predicción del bundle.")
+
+    if df_preds["id_insulina_master"].duplicated().any():
+        raise ValueError("Existe más de una predicción para el mismo producto.")
+
+    # Merge de insulinas con predicciones ML
+    master_base = df_master.drop(
+        columns=["probabilidad_riesgo", "riesgo_predictivo", "probabilidad_randomforest", "semaforo_predictivo_ml"],
+        errors="ignore",
+    )
+    df_merged = master_base.merge(
+        df_preds[prediction_columns],
         on="id_insulina_master",
         how="left",
+        validate="one_to_one",
     )
-
-    df_merged["probabilidad_randomforest"] = df_merged["probabilidad_randomforest"].fillna(0.10)
-    df_merged["alerta_randomforest"] = df_merged["alerta_randomforest"].fillna("STOCK_ESTABLE")
-    df_merged["semaforo_predictivo_ml"] = df_merged["semaforo_predictivo_ml"].fillna("VERDE_ESTABLE")
+    if df_merged[["probabilidad_riesgo", "riesgo_predictivo"]].isna().any().any():
+        missing_ids = df_merged.loc[
+            df_merged[["probabilidad_riesgo", "riesgo_predictivo"]].isna().any(axis=1),
+            "id_insulina_master",
+        ].tolist()
+        raise ValueError(f"Predicción faltante para: {missing_ids}")
 
     # AGRUPACIÓN POR MEDICAMENTO / FORMULACIÓN
     medicamentos_dict: Dict[Tuple[str, str, str, float], Dict[str, Any]] = {}
@@ -103,17 +130,33 @@ def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]],
         precio_lista = float(row["precio_lista_bs"])
         precio_100ui = float(row["precio_por_100ui_bs"])
         descuento = float(row["descuento_porcentaje"])
-        estado_stock = str(row["estado_stock"])
-        semaforo_ml = str(row["semaforo_predictivo_ml"])
-        prob_quiebre = float(row["probabilidad_randomforest"])
-        disponible_bool = bool(row["stock_disponible_binario"] == 1)
+        estado_stock = str(row.get("stock_actual", row.get("estado_stock", "NO_VERIFICADO")))
+        stock_evidence = str(row.get("stock_evidence", "SOURCE_REPORTED"))
+        if farmacia == "Farmacias Telchi" and stock_evidence == "SOURCE_REPORTED":
+            estado_stock = "NO_VERIFICADO"
+            stock_evidence = "CATALOG_ONLY"
+        semaforo_ml = str(row["riesgo_predictivo"])
+        prob_quiebre = float(row["probabilidad_riesgo"])
+        stock_warning = (
+            "Producto encontrado en catálogo; stock no confirmado"
+            if estado_stock == "NO_VERIFICADO"
+            else ""
+        )
 
         medicamentos_dict[key]["precios"][farmacia] = {
-            "disponible": disponible_bool,
+            "disponible": estado_stock in {"DISPONIBLE", "ULTIMAS_UNIDADES"},
             "precio_venta_bs": precio_venta,
             "precio_lista_bs": precio_lista,
             "precio_por_100ui_bs": precio_100ui,
             "descuento_porcentaje": descuento,
+            "stock_actual": estado_stock,
+            "stock_evidence": stock_evidence,
+            "stock_advertencia": stock_warning,
+            "riesgo_predictivo": semaforo_ml,
+            "probabilidad_riesgo": prob_quiebre,
+            "fuente": str(row.get("url_producto", "")),
+            "fecha_datos": str(row.get("timestamp_extraccion", "")),
+            # Alias conservados para compatibilidad con consumidores existentes.
             "estado_stock": estado_stock,
             "semaforo_ml": semaforo_ml,
             "prob_quiebre_ml": prob_quiebre,
@@ -130,14 +173,14 @@ def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]],
         ]
         cadenas_agotadas = [
             c for c, d in med["precios"].items()
-            if d["estado_stock"] == "AGOTADO" or not d["disponible"]
+            if d["estado_stock"] == "AGOTADO"
+        ]
+        cadenas_no_verificadas = [
+            c for c, d in med["precios"].items()
+            if d["estado_stock"] == "NO_VERIFICADO"
         ]
         hay_ultimas_unidades = any(
             d["estado_stock"] == "ULTIMAS_UNIDADES" for d in med["precios"].values()
-        )
-        prob_quiebre_prom = (
-            sum(d["prob_quiebre_ml"] for d in med["precios"].values()) / len(med["precios"])
-            if med["precios"] else 0.0
         )
 
         # Cálculo de mejores precios y ahorro
@@ -155,36 +198,36 @@ def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]],
             mejor_cadena, mejor_precio, mejor_100ui = todos_precios[0]
             peor_cadena, peor_precio, ahorro_max = todos_precios[-1][0], todos_precios[-1][1], 0.0
 
-        # REGLA SEMAFÓRICA ESTRICTA Y COHERENTE (US-31):
-        # 1. ROJO: Únicamente si el medicamento está agotado en TODAS las cadenas oferentes.
-        #    Si está disponible en 1 o más cadenas, NUNCA marcará ROJO.
-        if len(cadenas_activas) == 0:
+        # El semáforo general resume únicamente disponibilidad observada. El
+        # riesgo del modelo permanece separado en cada registro de farmacia.
+        if not cadenas_activas and cadenas_agotadas and not cadenas_no_verificadas:
             semaforo_general = "ROJO"
-            motivo_semaforo = "Agotado en todas las farmacias en este momento"
-            etiqueta_semaforo = "🔴 Agotado General"
-        # 2. AMARILLO: Si hay stock disponible, pero existe alerta de pocas unidades,
-        #    cadena única, disponibilidad parcial o alta demanda mensual.
+            motivo_semaforo = "No se observó disponibilidad en las farmacias consultadas"
+            etiqueta_semaforo = "🔴 Sin disponibilidad observada"
+        elif not cadenas_activas:
+            semaforo_general = "AMARILLO"
+            motivo_semaforo = "No hay disponibilidad confirmada; existen registros sin verificar"
+            etiqueta_semaforo = "🟡 Disponibilidad no confirmada"
         elif hay_ultimas_unidades:
             semaforo_general = "AMARILLO"
-            motivo_semaforo = "Pocas unidades en estantería (llamar antes de ir)"
+            motivo_semaforo = "Se observaron últimas unidades; confirma antes de acudir"
             etiqueta_semaforo = "🟡 Pocas Unidades"
-        elif len(cadenas_agotadas) > 0:
+        elif cadenas_agotadas:
             semaforo_general = "AMARILLO"
-            motivo_semaforo = f"Agotado en {', '.join(cadenas_agotadas)}, pero disponible en otra farmacia"
+            motivo_semaforo = f"Sin disponibilidad observada en {', '.join(cadenas_agotadas)}, con disponibilidad en otra farmacia"
             etiqueta_semaforo = "🟡 Disponibilidad Parcial"
+        elif cadenas_no_verificadas:
+            semaforo_general = "AMARILLO"
+            motivo_semaforo = "Hay disponibilidad observada y también registros de stock no verificado"
+            etiqueta_semaforo = "🟡 Verificación Parcial"
         elif len(med["precios"]) == 1:
             semaforo_general = "AMARILLO"
-            motivo_semaforo = "Disponible en una sola cadena farmacéutica (sin opción de comparar)"
+            motivo_semaforo = "Disponibilidad observada en una sola cadena farmacéutica"
             etiqueta_semaforo = "🟡 Oferta Única"
-        elif prob_quiebre_prom >= 0.50:
-            semaforo_general = "AMARILLO"
-            motivo_semaforo = "Alta demanda proyectada antes de fin de mes"
-            etiqueta_semaforo = "🟡 Demanda Acelerada"
-        # 3. VERDE: Disponible en múltiples cadenas con stock normal garantizado.
         else:
             semaforo_general = "VERDE"
-            motivo_semaforo = "Stock asegurado en múltiples farmacias"
-            etiqueta_semaforo = "🟢 Abastecimiento Seguro"
+            motivo_semaforo = "Disponible según datos observados en múltiples farmacias"
+            etiqueta_semaforo = "🟢 Disponibilidad observada"
 
         med["mejor_cadena"] = mejor_cadena
         med["mejor_precio_bs"] = mejor_precio
@@ -205,17 +248,27 @@ def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]],
     # Consolidar sucursales geolocalizadas
     sucursales_lista = []
     for _, row in df_geo.iterrows():
+        estado_anillo = str(row["estado_anillo"])
         anillo = row["anillo_asignado"]
-        anillo_str = f"{int(anillo)}to Anillo" if pd.notnull(anillo) else "Casco Urbano Central"
+        if estado_anillo == "ASIGNADO" and pd.notnull(anillo):
+            anillo_num: Optional[float] = float(anillo)
+            anillo_str = f"Anillo {int(anillo)}"
+        else:
+            anillo_num = None
+            anillo_str = "Sin anillo confirmado"
         sucursales_lista.append({
             "id": str(row["id_sucursal"]),
             "farmacia": str(row["farmacia"]),
             "nombre": str(row["nombre_sucursal"]),
             "direccion": str(row["direccion"]),
             "ciudad": str(row["ciudad"]),
-            "anillo_num": float(anillo) if pd.notnull(anillo) else 1.0,
+            "anillo_num": anillo_num,
             "anillo_etiqueta": anillo_str,
-            "estado_anillo": str(row["estado_anillo"]),
+            "estado_anillo": estado_anillo,
+            "estado_actividad": "NO_VERIFICADO",
+            "fuente": str(row.get("fuente", "")),
+            "fecha_verificacion": str(row.get("fecha_verificacion", "")),
+            "advertencias": str(row.get("advertencias", "")) if pd.notna(row.get("advertencias", "")) else "",
         })
 
     # Resumen macro accesible
@@ -228,6 +281,7 @@ def compilar_datos_reales() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]],
         "total_verde": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "VERDE"),
         "total_amarillo": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "AMARILLO"),
         "total_rojo": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "ROJO"),
+        "metadata": metadata or {},
     }
 
     return medicamentos_lista, sucursales_lista, resumen_macro
@@ -237,11 +291,17 @@ def construir_html_mvp(
     medicamentos: List[Dict[str, Any]],
     sucursales: List[Dict[str, Any]],
     resumen: Dict[str, Any],
+    metadata: Optional[Dict[str, Any]] = None,
 ) -> str:
-    """Genera el código HTML5 reactivo, accesible y con estética pastel farmacéutica (US-34 / SCRUM-49)."""
-    meds_json = json.dumps(medicamentos, ensure_ascii=False)
-    sucursales_json = json.dumps(sucursales, ensure_ascii=False)
-    resumen_json = json.dumps(resumen, ensure_ascii=False)
+    """Genera HTML5 accesible con estética pastel, trazabilidad y datos separados."""
+    metadata = metadata or resumen.get("metadata", {})
+    meds_json = json.dumps(medicamentos, ensure_ascii=False, sort_keys=True)
+    sucursales_json = json.dumps(sucursales, ensure_ascii=False, sort_keys=True)
+    resumen_json = json.dumps(resumen, ensure_ascii=False, sort_keys=True)
+    metadata_json = json.dumps(metadata, ensure_ascii=False, sort_keys=True)
+    generated_at = str(metadata.get("generated_at", "No disponible"))
+    data_as_of = str(metadata.get("data_as_of", "No disponible"))
+    source_name = str(metadata.get("source_snapshot", {}).get("filename", "No disponible"))
 
     return f"""<!DOCTYPE html>
 <html lang="es" class="scroll-smooth" style="font-size: 16px;">
@@ -249,9 +309,9 @@ def construir_html_mvp(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asistente de Insulina para Jubilados - Santa Cruz de la Sierra</title>
-  <meta name="description" content="Comparador interactivo de precios, disponibilidad inmediata y semáforo preventivo de insulina en Santa Cruz de la Sierra (Farmacorp, Chávez, Telchi).">
+  <meta name="description" content="Comparador interactivo de precios, disponibilidad observada y riesgo predictivo de insulina en Santa Cruz de la Sierra (Farmacorp, Chávez, Telchi).">
   <meta property="og:title" content="Asistente de Insulina para Jubilados - Santa Cruz de la Sierra">
-  <meta property="og:description" content="Compara precios entre farmacias, calcula tu presupuesto mensual y consulta el semáforo preventivo de abastecimiento.">
+  <meta property="og:description" content="Compara precios entre farmacias, calcula tu presupuesto mensual y consulta por separado disponibilidad observada y riesgo predictivo.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://data-industry.github.io/Desarollo-Proyecto/">
   <link rel="canonical" href="https://data-industry.github.io/Desarollo-Proyecto/">
@@ -323,7 +383,7 @@ def construir_html_mvp(
         <span class="text-3xl" aria-hidden="true">🩺</span>
         <div>
           <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">Comparador de Insulina para Jubilados</h1>
-          <p class="text-emerald-100/90 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Precios reales de Farmacorp, Chávez y Telchi</p>
+          <p class="text-emerald-100/90 text-xs md:text-sm font-medium">Santa Cruz de la Sierra • Precios publicados por Farmacorp, Chávez y Telchi</p>
         </div>
       </div>
 
@@ -363,35 +423,40 @@ def construir_html_mvp(
           <span class="text-xl md:text-2xl font-black text-emerald-900" id="resumenPrecioMin">Bs {resumen['precio_min_bs']:.2f}</span>
         </div>
         <div class="bg-white border border-emerald-200 rounded-xl px-4 py-2 text-center shadow-xs">
-          <span class="block text-[11px] uppercase font-bold text-emerald-800">Catálogo disponible</span>
+          <span class="block text-[11px] uppercase font-bold text-emerald-800">Presentaciones comparadas</span>
           <span class="text-xl md:text-2xl font-black text-[#1b4332]">{resumen['total_medicamentos']} tipos</span>
         </div>
       </div>
     </section>
 
-    <!-- WIDGET DEL SEMÁFORO PREVENTIVO EN LENGUAJE CIUDADANO (US-31/US-34) -->
+    <section class="card-pastel rounded-xl p-4 border border-blue-200 bg-blue-50 text-sm text-blue-950" aria-label="Trazabilidad de los datos">
+      <p><strong>Fecha efectiva de los datos:</strong> {data_as_of} • <strong>Fecha de generación del bundle:</strong> {generated_at}</p>
+      <p><strong>Snapshot fuente:</strong> {source_name}. Los precios y estados pueden cambiar; confirma precio y disponibilidad directamente con la farmacia antes de acudir.</p>
+    </section>
+
+    <!-- SEMÁFORO GENERAL DE DISPONIBILIDAD OBSERVADA (US-31/US-34) -->
     <section class="card-pastel rounded-2xl p-5 md:p-6 border border-[#e3eae5] space-y-4" aria-labelledby="sec-semaforo">
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#e9f0eb] pb-3">
         <div>
           <h2 id="sec-semaforo" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
-            <span>🚦</span> Semáforo Preventivo de Disponibilidad en Farmacias
+            <span>🚦</span> Disponibilidad Observada en Farmacias
           </h2>
           <p class="text-slate-600 text-xs md:text-sm mt-0.5">
-            Monitoreo diario de existencias en farmacias para avisarte con anticipación si conviene comprar antes del cobro de rentas.
+            Resumen de los estados observados en las fuentes consultadas. El riesgo predictivo se muestra por separado en cada farmacia.
           </p>
         </div>
         <div id="badgeSemaforoGlobal" class="px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-extrabold flex items-center gap-1.5 badge-verde shadow-xs">
-          <span>🟢</span> <span>ESTADO: {resumen['total_verde']} CON STOCK ASEGURADO • {resumen['total_amarillo']} CON PRECAUCIÓN</span>
+          <span>ℹ️</span> <span>DISPONIBILIDAD OBSERVADA: {resumen['total_verde']} VERDE • {resumen['total_amarillo']} AMARILLO • {resumen['total_rojo']} ROJO</span>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
         <div class="p-4 rounded-xl border border-[#c3e6cb] bg-[#ebf7ee] space-y-1">
           <div class="flex items-center gap-2 font-bold text-[#1b5e20] text-sm md:text-base">
-            <span class="text-xl">🟢</span> VERDE (Disponibilidad Segura)
+            <span class="text-xl">🟢</span> VERDE (Disponible según datos observados)
           </div>
           <p class="text-[#2e6f40] text-xs md:text-sm leading-relaxed">
-            {resumen['total_verde']} medicamentos con stock confirmado en farmacias. Puedes ir a comprar con tranquilidad.
+            {resumen['total_verde']} presentaciones con disponibilidad observada en múltiples farmacias. Confirma antes de acudir.
           </p>
         </div>
 
@@ -400,16 +465,16 @@ def construir_html_mvp(
             <span class="text-xl">🟡</span> AMARILLO (Precaución)
           </div>
           <p class="text-[#8c6b1b] text-xs md:text-sm leading-relaxed">
-            {resumen['total_amarillo']} presentaciones con pocas unidades o en una sola cadena. Conviene llamar o comprar antes.
+            {resumen['total_amarillo']} presentaciones con disponibilidad parcial, últimas unidades o datos sin verificar. Confirma con la farmacia.
           </p>
         </div>
 
         <div class="p-4 rounded-xl border border-[#f8c8c8] bg-[#fdf2f2] space-y-1">
           <div class="flex items-center gap-2 font-bold text-[#991b1b] text-sm md:text-base">
-            <span class="text-xl">🔴</span> ROJO (Agotado General)
+            <span class="text-xl">🔴</span> ROJO (Sin disponibilidad observada)
           </div>
           <p class="text-[#a83232] text-xs md:text-sm leading-relaxed">
-            {resumen['total_rojo']} presentación agotada en todas las cadenas. Requiere consultar al médico por alternativas.
+            {resumen['total_rojo']} presentaciones sin disponibilidad observada en las fuentes consultadas. Confirma con la farmacia.
           </p>
         </div>
       </div>
@@ -439,17 +504,17 @@ def construir_html_mvp(
             <span>📦</span> ¿Qué es "Quiebre de stock"?
           </div>
           <p class="text-slate-600 text-xs leading-relaxed">
-            Situación en la que las farmacias <strong>agotan por completo sus existencias</strong> de una insulina y no pueden reponer de inmediato. Avisarte a tiempo te permite comprar días antes sin quedarte sin tu dosis diaria.
+            Situación en la que una farmacia reporta que agotó sus existencias de una insulina y no puede reponerla de inmediato. El reporte debe confirmarse directamente con la farmacia.
           </p>
         </div>
 
-        <!-- Tarjeta 2: Semáforo Preventivo -->
+        <!-- Tarjeta 2: Disponibilidad observada y riesgo predictivo -->
         <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
           <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
-            <span>🚦</span> ¿Cómo funciona el Semáforo?
+            <span>🚦</span> ¿Qué indican los estados?
           </div>
           <p class="text-slate-600 text-xs leading-relaxed">
-            Si hay stock en al menos una farmacia, <strong>nunca marcará rojo</strong>. El color <strong>Verde</strong> confirma abasto seguro; <strong>Amarillo</strong> aconseja comprar con anticipación; y <strong>Rojo</strong> avisa que está agotado en todas.
+            La <strong>disponibilidad observada</strong> describe el stock reportado por la fuente. El <strong>riesgo predictivo</strong> es una estimación del modelo y se muestra por separado; no confirma inventario ni convierte un producto disponible en agotado. Confirma con la farmacia antes de acudir.
           </p>
         </div>
 
@@ -495,10 +560,10 @@ def construir_html_mvp(
         <div class="space-y-1.5">
           <label for="inputDosisDiaria" class="block font-bold text-slate-800 text-sm">¿Cuántas Unidades (UI) usas al día?</label>
           <div class="flex items-center gap-2.5">
-            <input type="number" id="inputDosisDiaria" min="5" max="150" value="30" onchange="calcularPresupuesto()" class="w-28 p-2.5 bg-white border border-amber-300 rounded-xl font-black text-xl text-center text-slate-900 focus-ring">
+            <input type="number" id="inputDosisDiaria" min="1" max="150" placeholder="Tu dosis" onchange="calcularPresupuesto()" class="w-28 p-2.5 bg-white border border-amber-300 rounded-xl font-black text-xl text-center text-slate-900 focus-ring">
             <span class="font-bold text-slate-600 text-sm">UI / día</span>
           </div>
-          <span class="text-xs text-slate-500 block">Dosis habitual frecuente: 20 a 40 UI al día.</span>
+          <span class="text-xs text-slate-500 block">Ingresa únicamente la dosis indicada por tu profesional de salud.</span>
         </div>
 
         <div class="space-y-1.5">
@@ -532,7 +597,7 @@ def construir_html_mvp(
           <span class="text-xs md:text-sm text-slate-500">Ajusta los filtros deseados y presiona "Filtrar Catálogo" para actualizar</span>
         </div>
         <div id="lblFiltroEstado" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-          ✓ Catálogo al día
+          ✓ Catálogo cargado
         </div>
       </div>
 
@@ -627,10 +692,10 @@ def construir_html_mvp(
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#e9f0eb] pb-3">
         <div>
           <h2 id="sec-anillos" class="text-lg md:text-xl font-black text-slate-900 flex items-center gap-2">
-            <span>📍</span> Paso 2: Encuentra la Farmacia Más Cercana a tu Anillo
+            <span>📍</span> Paso 2: Consulta Sucursales por Anillo
           </h2>
           <p class="text-slate-600 text-xs md:text-sm mt-0.5">
-            Sucursales físicas confirmadas en Santa Cruz de la Sierra ordenadas por anillo urbano.
+            Listado de sucursales y evidencia territorial disponible. No se calcula distancia ni cercanía.
           </p>
         </div>
 
@@ -638,12 +703,12 @@ def construir_html_mvp(
         <div class="flex items-center gap-2">
           <label for="selectAnilloFiltro" class="font-bold text-slate-700 text-xs">Filtrar por Anillo:</label>
           <select id="selectAnilloFiltro" onchange="filtrarSucursales()" class="p-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-800 text-xs focus-ring">
-            <option value="TODOS">Todos los anillos (16 sucursales)</option>
+            <option value="TODOS">Todas las sucursales</option>
             <option value="2">2do Anillo (Piraí, Trinidad, Cotoca, Charcas)</option>
             <option value="3">3er Anillo (Santos Dumont, Mutualista)</option>
             <option value="4">4to Anillo (Paraguá)</option>
             <option value="7">7mo Anillo (Av. Banzer)</option>
-            <option value="CENTRO">Casco Viejo / Anillo Central</option>
+            <option value="SIN_EVIDENCIA">Sin anillo verificado</option>
           </select>
         </div>
       </div>
@@ -675,7 +740,7 @@ def construir_html_mvp(
       <ul class="list-disc list-inside space-y-1.5 text-slate-700 text-xs md:text-sm font-medium leading-relaxed">
         <li><strong>Conserva la cadena de frío:</strong> Al retirar tu insulina en la farmacia, llévala siempre en bolsa térmica o con un gel refrigerante sin congelar directamente el frasco.</li>
         <li><strong>Verifica la concentración:</strong> En Bolivia la mayoría de insulinas son U-100 (100 Unidades por mililitro). Usa siempre jeringas graduadas para U-100.</li>
-        <li><strong>Compra con 3 a 5 días de anticipación:</strong> Especialmente durante las fechas de cobro de pensiones en el Banco Unión (días 1 al 5 y fin de mes), cuando aumenta la afluencia y pueden agotarse existencias temporalmente.</li>
+        <li><strong>Confirma antes de acudir:</strong> Verifica directamente con la farmacia el precio y la disponibilidad actuales.</li>
       </ul>
     </section>
 
@@ -685,7 +750,7 @@ def construir_html_mvp(
   <footer class="bg-[#1b4332] text-emerald-100/80 py-6 text-center text-xs border-t border-[#2d6a4f] mt-10">
     <div class="max-w-6xl mx-auto px-4 space-y-1">
       <p class="font-bold text-white">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
-      <p>Desarrollado para el Proyecto Integrador • Datos reales auditados de Farmacorp, Chávez y Telchi.</p>
+      <p>Desarrollado para el Proyecto Integrador • Datos provenientes de fuentes de Farmacorp, Chávez y Telchi.</p>
     </div>
   </footer>
 
@@ -695,6 +760,7 @@ def construir_html_mvp(
     const DATA_MEDICAMENTOS = {meds_json};
     const DATA_SUCURSALES = {sucursales_json};
     const DATA_RESUMEN = {resumen_json};
+    const DATA_METADATA = {metadata_json};
 
     let escalaFuenteActual = 1.0;
 
@@ -779,14 +845,14 @@ def construir_html_mvp(
         const card = document.createElement('article');
         card.className = "card-pastel rounded-2xl p-5 border border-[#e3eae5] flex flex-col justify-between space-y-4 hover:border-emerald-300 transition-all";
 
-        // Badges del semáforo general con lenguaje ciudadano
+        // Badge del semáforo general: disponibilidad observada, no predicción.
         let semaforoBadge = '';
         if (med.semaforo_general === 'VERDE') {{
-          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-verde" title="${{med.motivo_semaforo}}">🟢 Stock Seguro</span>`;
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-verde" title="${{med.motivo_semaforo}}">🟢 Disponibilidad observada</span>`;
         }} else if (med.semaforo_general === 'AMARILLO') {{
-          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-amarillo" title="${{med.motivo_semaforo}}">🟡 Precaución</span>`;
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-amarillo" title="${{med.motivo_semaforo}}">🟡 Disponibilidad parcial</span>`;
         }} else {{
-          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo" title="${{med.motivo_semaforo}}">🔴 Agotado en Farmacias</span>`;
+          semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo" title="${{med.motivo_semaforo}}">🔴 Sin disponibilidad observada</span>`;
         }}
 
         // Construir filas de la comparativa de farmacias con estética pastel
@@ -797,16 +863,6 @@ def construir_html_mvp(
             const tieneStock = info.disponible && info.estado_stock !== 'AGOTADO';
             const esElMejor = (cadena === med.mejor_cadena && med.total_farmacias_activas > 1 && tieneStock);
 
-            let estadoTexto = 'Disponible';
-            let estadoClase = 'text-emerald-700 font-bold';
-            if (info.estado_stock === 'AGOTADO' || !info.disponible) {{
-              estadoTexto = 'Agotado temporalmente';
-              estadoClase = 'text-rose-700 font-bold';
-            }} else if (info.estado_stock === 'ULTIMAS_UNIDADES') {{
-              estadoTexto = 'Últimas unidades disponibles';
-              estadoClase = 'text-amber-700 font-bold';
-            }}
-
             filasFarmaciasHTML += `
               <div class="p-3 rounded-xl border ${{esElMejor ? 'bg-[#f0f9f3] border-[#bfe5cd] ring-1 ring-[#cdeade]' : 'bg-[#fafcfb] border-[#eaf0eb]'}} flex items-center justify-between gap-2">
                 <div class="space-y-0.5">
@@ -816,8 +872,13 @@ def construir_html_mvp(
                   </div>
                   <span class="text-xs text-slate-500 block">
                     Por 100 UI: <strong>Bs ${{info.precio_por_100ui_bs.toFixed(2)}}</strong> • 
-                    <span class="${{estadoClase}}">${{estadoTexto}}</span>
+                    <span class="${{info.stock_actual === 'AGOTADO' ? 'text-rose-600 font-bold' : (info.stock_actual === 'ULTIMAS_UNIDADES' ? 'text-amber-600 font-bold' : (info.stock_actual === 'NO_VERIFICADO' ? 'text-slate-600 font-bold' : 'text-emerald-700'))}}">
+                      Stock actual: ${{info.stock_actual}}
+                    </span>
                   </span>
+                  <span class="text-xs text-slate-500 block">Riesgo predictivo: <strong>${{info.riesgo_predictivo}}</strong> (${{(info.probabilidad_riesgo * 100).toFixed(1)}}%)</span>
+                  ${{info.stock_advertencia ? `<span class="text-xs text-amber-700 font-bold block">${{info.stock_advertencia}}</span>` : ''}}
+                  <span class="text-xs text-slate-500 block">Datos: ${{info.fecha_datos}} • <a class="underline" href="${{info.fuente}}" target="_blank" rel="noopener noreferrer">Ver fuente</a></span>
                 </div>
                 <div class="text-right">
                   <span class="text-xl font-black text-slate-900 block">Bs ${{info.precio_venta_bs.toFixed(2)}}</span>
@@ -866,17 +927,21 @@ def construir_html_mvp(
               </div>
             ` : (med.total_farmacias_activas === 1 ? `
               <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
-                Disponible a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}} (única farmacia con existencias).
+                Disponibilidad observada a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}} (única farmacia con existencias observadas).
+              </div>
+            ` : (med.total_farmacias_activas === 0 && med.semaforo_general === 'ROJO' ? `
+              <div class="bg-[#fdf2f2] border border-[#f8c8c8] p-2.5 rounded-xl text-xs text-[#991b1b] font-medium">
+                Sin disponibilidad observada en las fuentes consultadas. Confirma con la farmacia.
               </div>
             ` : (med.total_farmacias_activas === 0 ? `
-              <div class="bg-[#fdf2f2] border border-[#f8c8c8] p-2.5 rounded-xl text-xs text-[#991b1b] font-medium">
-                Agotado en todas las farmacias en este momento. Consulta con tu médico por alternativas.
+              <div class="bg-[#fef9e8] border border-[#fbe59d] p-2.5 rounded-xl text-xs text-[#855b0a] font-medium">
+                No hay disponibilidad confirmada; existen registros sin verificar. Confirma con la farmacia.
               </div>
             ` : `
               <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
-                Disponible a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}}.
+                Disponibilidad observada a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}}.
               </div>
-            `))}}
+            `)))}}
 
             <!-- Lista comparativa de las 3 farmacias -->
             <div class="space-y-2 pt-1">
@@ -971,7 +1036,7 @@ def construir_html_mvp(
 
       let filtradas = DATA_SUCURSALES.filter(s => {{
         if (anilloSel === 'TODOS') return true;
-        if (anilloSel === 'CENTRO') return (s.anillo_num === 1.0 || s.estado_anillo === 'SIN_EVIDENCIA');
+        if (anilloSel === 'SIN_EVIDENCIA') return s.anillo_num === null;
         return (s.anillo_num === parseFloat(anilloSel));
       }});
 
@@ -982,14 +1047,14 @@ def construir_html_mvp(
           <td class="p-3 font-bold text-slate-800">${{s.farmacia}}</td>
           <td class="p-3 font-semibold text-emerald-950">${{s.nombre}}</td>
           <td class="p-3">
-            <span class="px-2.5 py-1 rounded-md text-xs font-extrabold ${{s.anillo_num <= 2 ? 'bg-[#ebf3f7] text-[#1e4a62]' : 'bg-[#edf2ee] text-slate-700'}}">
+            <span class="px-2.5 py-1 rounded-md text-xs font-extrabold ${{s.anillo_num !== null && s.anillo_num <= 2 ? 'bg-[#ebf3f7] text-[#1e4a62]' : 'bg-[#edf2ee] text-slate-700'}}">
               ${{s.anillo_etiqueta}}
             </span>
           </td>
           <td class="p-3 text-slate-600 text-xs md:text-sm">${{s.direccion}}</td>
           <td class="p-3">
-            <span class="text-xs font-bold text-emerald-800 bg-[#ebf7ee] px-2.5 py-0.5 rounded-lg border border-[#c3e6cb]">
-              ✓ Sucursal Activa
+            <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-lg border border-slate-200">
+              Estado no verificado
             </span>
           </td>
         `;
@@ -999,8 +1064,15 @@ def construir_html_mvp(
 
     // 8. CALCULADORA DE PRESUPUESTO Y AHORRO
     function calcularPresupuesto() {{
-      const dosis = parseFloat(document.getElementById('inputDosisDiaria').value) || 30;
+      const dosis = parseFloat(document.getElementById('inputDosisDiaria').value);
       const marca = document.getElementById('selectTipoInsulinaCalc').value;
+      const lblAhorro = document.getElementById('calcResumenAhorro');
+      const lblDetalle = document.getElementById('calcDetalleFrascos');
+      if (!Number.isFinite(dosis) || dosis <= 0) {{
+        lblAhorro.textContent = 'Ingresa tu dosis indicada';
+        lblDetalle.textContent = 'Usa únicamente la dosis indicada por tu profesional de salud.';
+        return;
+      }}
       const dosisMensual = dosis * 30;
 
       // Buscar en medicamentos
@@ -1010,13 +1082,17 @@ def construir_html_mvp(
       const volumenPorFrasco = med.unidades_totales || 1000;
       const frascosNecesarios = Math.ceil(dosisMensual / volumenPorFrasco);
 
-      const precios = Object.values(med.precios).map(p => p.precio_venta_bs);
+      const precios = Object.values(med.precios)
+        .filter(p => p.disponible)
+        .map(p => p.precio_venta_bs);
+      if (precios.length === 0) {{
+        lblAhorro.textContent = 'Sin disponibilidad confirmada';
+        lblDetalle.textContent = 'Confirma precio y disponibilidad directamente con la farmacia.';
+        return;
+      }}
       const minPrecio = Math.min(...precios);
       const maxPrecio = Math.max(...precios);
       const ahorroTotal = ((maxPrecio - minPrecio) * frascosNecesarios).toFixed(2);
-
-      const lblAhorro = document.getElementById('calcResumenAhorro');
-      const lblDetalle = document.getElementById('calcDetalleFrascos');
 
       if (minPrecio === maxPrecio || precios.length <= 1) {{
         lblAhorro.textContent = `Gasto estimado al mes: Bs ${{(minPrecio * frascosNecesarios).toFixed(2)}}`;
@@ -1024,7 +1100,7 @@ def construir_html_mvp(
         lblAhorro.textContent = `Ahorras Bs ${{ahorroTotal}} al mes`;
       }}
 
-      lblDetalle.textContent = `Con tu dosis de ${{dosis}} UI/día necesitas ${{frascosNecesarios}} frasco(s) de ${{volumenPorFrasco}} UI para 30 días (${{dosisMensual}} UI). Mejor opción disponible: Bs ${{minPrecio.toFixed(2)}} en ${{med.mejor_cadena}}.`;
+      lblDetalle.textContent = `Con la dosis ingresada de ${{dosis}} UI/día, el cálculo estima ${{frascosNecesarios}} frasco(s) de ${{volumenPorFrasco}} UI para 30 días (${{dosisMensual}} UI). Menor precio con disponibilidad observada: Bs ${{minPrecio.toFixed(2)}} en ${{med.mejor_cadena}}.`;
     }}
 
     // 9. LECTURA POR VOZ DIDÁCTICA
@@ -1033,7 +1109,7 @@ def construir_html_mvp(
         alert('Tu navegador no soporta lectura por voz.');
         return;
       }}
-      const texto = `Hola abuelito o familiar cuidador. En este momento el sistema compara veinticuatro tipos de insulina en Santa Cruz de la Sierra. Cada tarjeta te muestra los precios de Farmacorp, Farmacias Chávez y Farmacias Telchi para que elijas la opción más económica. El semáforo verde te indica que hay stock asegurado en las farmacias. Si ves semáforo amarillo, te recomendamos comprar con tres a cinco días de anticipación antes de las fechas de cobro de pensiones en el Banco Unión.`;
+      const texto = `Hola. En este momento el sistema compara ${{DATA_RESUMEN.total_medicamentos}} presentaciones de insulina en Santa Cruz de la Sierra. Cada tarjeta separa el stock observado del riesgo predictivo. Confirma precio y disponibilidad directamente con la farmacia antes de acudir.`;
       const utterance = new SpeechSynthesisUtterance(texto);
       utterance.lang = 'es-BO';
       utterance.rate = 0.95;
