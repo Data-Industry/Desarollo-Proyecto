@@ -113,9 +113,9 @@ La muestra es pequeña y estas cifras no permiten afirmar que precio, volumen o 
 |---|---:|
 | filas del dataset final | 43 |
 | columnas totales | 69 |
-| target 0 | 38 |
-| target 1 | 5 |
-| porcentaje positivo | 11.6% |
+| target 0 | 35 |
+| target 1 | 8 |
+| porcentaje positivo | 18.6% |
 | variables con variación para correlación (sin target) | 8 |
 | variables numéricas constantes | 25 |
 | valores faltantes finales | 43 |

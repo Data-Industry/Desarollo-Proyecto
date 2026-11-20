@@ -1,11 +1,11 @@
 ﻿principio_activo,tipo_accion,formato_presentacion,total_skus,precio_min,precio_promedio,precio_max,precio_por_100ui_promedio
-Insulina Asparta,Acción Ultrarrápida (Prandial),Cartucho para Pluma Reutilizable,2,158.76,161.59,164.42,53.86
-Insulina Glargina,Acción Prolongada (Basal),Cartucho para Pluma Reutilizable,3,349.25,584.37,1038.66,156.32
-Insulina Glargina,Acción Prolongada (Basal),Lapicero Prellenado (Pluma),3,434.96,571.45,640.38,190.48
-Insulina Glargina,Acción Prolongada (Basal),Vial / Frasco Ampolla,7,526.5,930.67,1423.58,175.54
+Insulina Asparta,Acción Ultrarrápida (Prandial),Cartucho para Pluma Reutilizable,2,164.42,170.41,176.4,56.8
+Insulina Glargina,Acción Prolongada (Basal),Cartucho para Pluma Reutilizable,3,365.21,597.31,1038.66,160.63
+Insulina Glargina,Acción Prolongada (Basal),Lapicero Prellenado (Pluma),3,434.96,578.55,660.3,192.85
+Insulina Glargina,Acción Prolongada (Basal),Vial / Frasco Ampolla,7,547.3,954.15,1423.58,180.64
 Insulina Glulisina,Acción Rápida (Prandial),Cartucho para Pluma Reutilizable,1,623.04,623.04,623.04,62.3
-Insulina Glulisina,Acción Rápida (Prandial),Lapicero Prellenado (Pluma),2,436.5,437.54,438.59,145.85
-Insulina Glulisina,Acción Rápida (Prandial),Vial / Frasco Ampolla,1,621.0,621.0,621.0,62.1
-Insulina Humana Mixta / Bifásica,Acción Mixta / Bifásica,Vial / Frasco Ampolla,5,241.2,316.8,399.81,31.68
-Insulina Humana NPH (N),Acción Intermedia (Basal),Vial / Frasco Ampolla,9,140.15,191.92,249.9,19.19
-Insulina Humana Regular (R),Acción Rápida (Prandial),Vial / Frasco Ampolla,10,136.78,209.8,305.39,20.98
+Insulina Glulisina,Acción Rápida (Prandial),Lapicero Prellenado (Pluma),2,438.59,444.82,451.05,148.27
+Insulina Glulisina,Acción Rápida (Prandial),Vial / Frasco Ampolla,1,641.7,641.7,641.7,64.17
+Insulina Humana Mixta / Bifásica,Acción Mixta / Bifásica,Vial / Frasco Ampolla,5,249.24,325.2,399.81,32.52
+Insulina Humana NPH (N),Acción Intermedia (Basal),Vial / Frasco Ampolla,9,140.15,197.23,249.9,19.72
+Insulina Humana Regular (R),Acción Rápida (Prandial),Vial / Frasco Ampolla,10,141.34,215.27,305.39,21.53

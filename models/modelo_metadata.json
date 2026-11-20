@@ -3,10 +3,10 @@
   "sprint": "SCRUM Sprint 3",
   "historia_usuario": "US-05 (SCRUM-9)",
   "modelo_produccion": "RandomForest",
-  "umbral_clinico_produccion": 0.05,
+  "umbral_clinico_produccion": 0.16999999999999998,
   "target": "quiebre_stock_inminente",
   "total_registros_entrenamiento": 43,
-  "total_positivos_quiebre": 5,
+  "total_positivos_quiebre": 8,
   "caracteristicas_numericas": [
     "precio_venta_bs",
     "precio_lista_bs",

@@ -4,7 +4,7 @@
   "retail_master_nulos_criticos": 0,
   "retail_outliers_precio_iqr": 2,
   "retail_rango_precios_bs": [
-    136.78,
+    140.15,
     1423.58
   ],
   "importaciones_master_filas": 71,
@@ -25,6 +25,6 @@
   "tipo_cambio_bcb_periodos": 71,
   "tipo_cambio_bcb_rango_2026": [
     8.7714,
-    11.94
+    11.8574
   ]
 }

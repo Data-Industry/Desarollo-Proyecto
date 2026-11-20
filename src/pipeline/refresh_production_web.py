@@ -29,6 +29,8 @@ import pandas as pd
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[2]
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
 RAW_DIR = PROJECT_DIR / "data" / "raw"
 PROCESSED_DIR = PROJECT_DIR / "data" / "processed"
 MODEL_PATH = PROJECT_DIR / "models" / "modelo_produccion_stock.joblib"

@@ -1,0 +1,28 @@
+{
+  "branch_count": 16,
+  "bundle_schema_version": 1,
+  "currency": "BOB",
+  "currency_date": "2026-11-20",
+  "currency_direction": "BOB_PER_USD",
+  "currency_source": "Banco Central de Bolivia (BCB - Grafico Evolutivo)",
+  "data_as_of": "2026-11-20T12:27:52.461185+00:00",
+  "generated_at": "2026-11-20T12:32:19.515767+00:00",
+  "input_fingerprint": "f57ad7abe02e72c7ea5c5d6d15c080a8cc66b38daa5d6f4add000169d31d50ad",
+  "model": {
+    "name": "RandomForest",
+    "sha256": "34dd3e9538adf4ec58d9e8377de837b68245e6248a03c6be32db13606ea4a90b",
+    "target_type": "CURRENT_STOCK_PROXY",
+    "threshold": 0.16999999999999998
+  },
+  "pharmacy_chain_count": 3,
+  "pipeline_version": "af84995",
+  "product_count": 43,
+  "source_snapshot": {
+    "filename": "insulina_precios_stock_20261120_082712.csv",
+    "sha256": "c686cdd89835b056eaa5c583525d047a13d5a8eb26552b3dab7b4b6ea65a5858"
+  },
+  "warnings": [
+    "RISK_STOCK_DISAGREEMENT: 30 registros con stock disponible y riesgo rojo",
+    "STOCK_UNVERIFIED: Farmacias Telchi aparece en catálogo sin confirmación de inventario"
+  ]
+}

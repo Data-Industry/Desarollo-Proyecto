@@ -1,103 +1,103 @@
 ﻿modelo,caracteristica,importancia_absoluta,tipo_importancia
-RandomForest,precio_venta_bs,0.073168,MDI_Gini
-RandomForest,precio_lista_bs,0.102244,MDI_Gini
-RandomForest,descuento_porcentaje,0.046461,MDI_Gini
-RandomForest,precio_por_ml_bs,0.082554,MDI_Gini
-RandomForest,precio_por_100ui_bs,0.048569,MDI_Gini
-RandomForest,volumen_ml,0.008191,MDI_Gini
+RandomForest,precio_venta_bs,0.082442,MDI_Gini
+RandomForest,precio_lista_bs,0.115493,MDI_Gini
+RandomForest,descuento_porcentaje,0.058204,MDI_Gini
+RandomForest,precio_por_ml_bs,0.047848,MDI_Gini
+RandomForest,precio_por_100ui_bs,0.088647,MDI_Gini
+RandomForest,volumen_ml,0.022861,MDI_Gini
 RandomForest,concentracion_ui_ml,0.0,MDI_Gini
-RandomForest,unidades_totales_ui,0.030596,MDI_Gini
-RandomForest,farmacia_Farmacias Chávez,0.024071,MDI_Gini
-RandomForest,farmacia_Farmacias Telchi,0.009727,MDI_Gini
-RandomForest,farmacia_Farmacorp,0.016198,MDI_Gini
-RandomForest,principio_activo_Insulina Asparta,0.006775,MDI_Gini
-RandomForest,principio_activo_Insulina Glargina,0.021673,MDI_Gini
-RandomForest,principio_activo_Insulina Glulisina,0.023696,MDI_Gini
-RandomForest,principio_activo_Insulina Humana Mixta / Bifásica,0.015537,MDI_Gini
-RandomForest,principio_activo_Insulina Humana NPH (N),0.032362,MDI_Gini
-RandomForest,principio_activo_Insulina Humana Regular (R),0.06901,MDI_Gini
-RandomForest,tipo_accion_Acción Intermedia (Basal),0.038921,MDI_Gini
-RandomForest,tipo_accion_Acción Mixta / Bifásica,0.012486,MDI_Gini
-RandomForest,tipo_accion_Acción Prolongada (Basal),0.01923,MDI_Gini
-RandomForest,tipo_accion_Acción Rápida (Prandial),0.107096,MDI_Gini
-RandomForest,tipo_accion_Acción Ultrarrápida (Prandial),0.002851,MDI_Gini
-RandomForest,origen_biologico_Análogo de Insulina,0.032905,MDI_Gini
-RandomForest,origen_biologico_Insulina Humana ADN Recombinante,0.01471,MDI_Gini
-RandomForest,laboratorio_fabricante_Biocon Biologics,0.068933,MDI_Gini
-RandomForest,laboratorio_fabricante_Denver Farma,0.016353,MDI_Gini
-RandomForest,laboratorio_fabricante_Laboratorios Bagó,0.004482,MDI_Gini
-RandomForest,laboratorio_fabricante_Laboratorios Beta,0.018168,MDI_Gini
-RandomForest,laboratorio_fabricante_Novo Nordisk,0.0016,MDI_Gini
-RandomForest,laboratorio_fabricante_Sanofi-Aventis,0.000545,MDI_Gini
-RandomForest,laboratorio_fabricante_Wockhardt,0.007057,MDI_Gini
-RandomForest,formato_presentacion_Cartucho para Pluma Reutilizable,0.00807,MDI_Gini
-RandomForest,formato_presentacion_Lapicero Prellenado (Pluma),0.019391,MDI_Gini
-RandomForest,formato_presentacion_Vial / Frasco Ampolla,0.016369,MDI_Gini
-XGBoost,precio_venta_bs,0.145937,Gain_Weight
-XGBoost,precio_lista_bs,0.036633,Gain_Weight
-XGBoost,descuento_porcentaje,0.0,Gain_Weight
-XGBoost,precio_por_ml_bs,0.090658,Gain_Weight
-XGBoost,precio_por_100ui_bs,0.104496,Gain_Weight
+RandomForest,unidades_totales_ui,0.021736,MDI_Gini
+RandomForest,farmacia_Farmacias Chávez,0.059702,MDI_Gini
+RandomForest,farmacia_Farmacias Telchi,0.003136,MDI_Gini
+RandomForest,farmacia_Farmacorp,0.021986,MDI_Gini
+RandomForest,principio_activo_Insulina Asparta,0.000577,MDI_Gini
+RandomForest,principio_activo_Insulina Glargina,0.020842,MDI_Gini
+RandomForest,principio_activo_Insulina Glulisina,0.022173,MDI_Gini
+RandomForest,principio_activo_Insulina Humana Mixta / Bifásica,0.003604,MDI_Gini
+RandomForest,principio_activo_Insulina Humana NPH (N),0.03437,MDI_Gini
+RandomForest,principio_activo_Insulina Humana Regular (R),0.002654,MDI_Gini
+RandomForest,tipo_accion_Acción Intermedia (Basal),0.019178,MDI_Gini
+RandomForest,tipo_accion_Acción Mixta / Bifásica,0.004879,MDI_Gini
+RandomForest,tipo_accion_Acción Prolongada (Basal),0.014206,MDI_Gini
+RandomForest,tipo_accion_Acción Rápida (Prandial),0.040748,MDI_Gini
+RandomForest,tipo_accion_Acción Ultrarrápida (Prandial),0.003608,MDI_Gini
+RandomForest,origen_biologico_Análogo de Insulina,0.007271,MDI_Gini
+RandomForest,origen_biologico_Insulina Humana ADN Recombinante,0.027297,MDI_Gini
+RandomForest,laboratorio_fabricante_Biocon Biologics,0.015123,MDI_Gini
+RandomForest,laboratorio_fabricante_Denver Farma,0.009467,MDI_Gini
+RandomForest,laboratorio_fabricante_Laboratorios Bagó,0.00486,MDI_Gini
+RandomForest,laboratorio_fabricante_Laboratorios Beta,0.036244,MDI_Gini
+RandomForest,laboratorio_fabricante_Novo Nordisk,0.07022,MDI_Gini
+RandomForest,laboratorio_fabricante_Sanofi-Aventis,0.02481,MDI_Gini
+RandomForest,laboratorio_fabricante_Wockhardt,0.051897,MDI_Gini
+RandomForest,formato_presentacion_Cartucho para Pluma Reutilizable,0.033628,MDI_Gini
+RandomForest,formato_presentacion_Lapicero Prellenado (Pluma),0.026629,MDI_Gini
+RandomForest,formato_presentacion_Vial / Frasco Ampolla,0.003659,MDI_Gini
+XGBoost,precio_venta_bs,0.037705,Gain_Weight
+XGBoost,precio_lista_bs,0.0,Gain_Weight
+XGBoost,descuento_porcentaje,0.055283,Gain_Weight
+XGBoost,precio_por_ml_bs,0.041491,Gain_Weight
+XGBoost,precio_por_100ui_bs,0.0,Gain_Weight
 XGBoost,volumen_ml,0.0,Gain_Weight
 XGBoost,concentracion_ui_ml,0.0,Gain_Weight
-XGBoost,unidades_totales_ui,0.121167,Gain_Weight
-XGBoost,farmacia_Farmacias Chávez,0.0,Gain_Weight
+XGBoost,unidades_totales_ui,0.052638,Gain_Weight
+XGBoost,farmacia_Farmacias Chávez,0.060422,Gain_Weight
 XGBoost,farmacia_Farmacias Telchi,0.0,Gain_Weight
 XGBoost,farmacia_Farmacorp,0.0,Gain_Weight
 XGBoost,principio_activo_Insulina Asparta,0.0,Gain_Weight
 XGBoost,principio_activo_Insulina Glargina,0.0,Gain_Weight
 XGBoost,principio_activo_Insulina Glulisina,0.0,Gain_Weight
-XGBoost,principio_activo_Insulina Humana Mixta / Bifásica,0.135678,Gain_Weight
+XGBoost,principio_activo_Insulina Humana Mixta / Bifásica,0.0,Gain_Weight
 XGBoost,principio_activo_Insulina Humana NPH (N),0.0,Gain_Weight
 XGBoost,principio_activo_Insulina Humana Regular (R),0.0,Gain_Weight
 XGBoost,tipo_accion_Acción Intermedia (Basal),0.0,Gain_Weight
 XGBoost,tipo_accion_Acción Mixta / Bifásica,0.0,Gain_Weight
 XGBoost,tipo_accion_Acción Prolongada (Basal),0.0,Gain_Weight
-XGBoost,tipo_accion_Acción Rápida (Prandial),0.186637,Gain_Weight
+XGBoost,tipo_accion_Acción Rápida (Prandial),0.091162,Gain_Weight
 XGBoost,tipo_accion_Acción Ultrarrápida (Prandial),0.0,Gain_Weight
 XGBoost,origen_biologico_Análogo de Insulina,0.0,Gain_Weight
 XGBoost,origen_biologico_Insulina Humana ADN Recombinante,0.0,Gain_Weight
-XGBoost,laboratorio_fabricante_Biocon Biologics,0.108759,Gain_Weight
-XGBoost,laboratorio_fabricante_Denver Farma,0.0,Gain_Weight
+XGBoost,laboratorio_fabricante_Biocon Biologics,0.11488,Gain_Weight
+XGBoost,laboratorio_fabricante_Denver Farma,0.137788,Gain_Weight
 XGBoost,laboratorio_fabricante_Laboratorios Bagó,0.0,Gain_Weight
-XGBoost,laboratorio_fabricante_Laboratorios Beta,0.070036,Gain_Weight
-XGBoost,laboratorio_fabricante_Novo Nordisk,0.0,Gain_Weight
+XGBoost,laboratorio_fabricante_Laboratorios Beta,0.061414,Gain_Weight
+XGBoost,laboratorio_fabricante_Novo Nordisk,0.169815,Gain_Weight
 XGBoost,laboratorio_fabricante_Sanofi-Aventis,0.0,Gain_Weight
-XGBoost,laboratorio_fabricante_Wockhardt,0.0,Gain_Weight
+XGBoost,laboratorio_fabricante_Wockhardt,0.068545,Gain_Weight
 XGBoost,formato_presentacion_Cartucho para Pluma Reutilizable,0.0,Gain_Weight
-XGBoost,formato_presentacion_Lapicero Prellenado (Pluma),0.0,Gain_Weight
+XGBoost,formato_presentacion_Lapicero Prellenado (Pluma),0.108855,Gain_Weight
 XGBoost,formato_presentacion_Vial / Frasco Ampolla,0.0,Gain_Weight
-LogisticRegression,precio_venta_bs,0.33876,Coeficiente_L2_Absoluto
-LogisticRegression,precio_lista_bs,0.261423,Coeficiente_L2_Absoluto
-LogisticRegression,descuento_porcentaje,0.101066,Coeficiente_L2_Absoluto
-LogisticRegression,precio_por_ml_bs,0.241873,Coeficiente_L2_Absoluto
-LogisticRegression,precio_por_100ui_bs,0.466321,Coeficiente_L2_Absoluto
-LogisticRegression,volumen_ml,0.009099,Coeficiente_L2_Absoluto
-LogisticRegression,concentracion_ui_ml,0.244275,Coeficiente_L2_Absoluto
-LogisticRegression,unidades_totales_ui,0.045402,Coeficiente_L2_Absoluto
-LogisticRegression,farmacia_Farmacias Chávez,0.238273,Coeficiente_L2_Absoluto
-LogisticRegression,farmacia_Farmacias Telchi,0.206316,Coeficiente_L2_Absoluto
-LogisticRegression,farmacia_Farmacorp,0.031979,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Asparta,0.465214,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Glargina,0.009088,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Glulisina,0.180083,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Humana Mixta / Bifásica,0.260027,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Humana NPH (N),0.434597,Coeficiente_L2_Absoluto
-LogisticRegression,principio_activo_Insulina Humana Regular (R),0.450635,Coeficiente_L2_Absoluto
-LogisticRegression,tipo_accion_Acción Intermedia (Basal),0.434597,Coeficiente_L2_Absoluto
-LogisticRegression,tipo_accion_Acción Mixta / Bifásica,0.260027,Coeficiente_L2_Absoluto
-LogisticRegression,tipo_accion_Acción Prolongada (Basal),0.009088,Coeficiente_L2_Absoluto
-LogisticRegression,tipo_accion_Acción Rápida (Prandial),0.630719,Coeficiente_L2_Absoluto
-LogisticRegression,tipo_accion_Acción Ultrarrápida (Prandial),0.465214,Coeficiente_L2_Absoluto
-LogisticRegression,origen_biologico_Análogo de Insulina,0.276042,Coeficiente_L2_Absoluto
-LogisticRegression,origen_biologico_Insulina Humana ADN Recombinante,0.276065,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Biocon Biologics,1.009931,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Denver Farma,0.37314,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Laboratorios Bagó,0.185874,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Laboratorios Beta,0.402484,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Novo Nordisk,0.212148,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Sanofi-Aventis,0.27588,Coeficiente_L2_Absoluto
-LogisticRegression,laboratorio_fabricante_Wockhardt,0.015277,Coeficiente_L2_Absoluto
-LogisticRegression,formato_presentacion_Cartucho para Pluma Reutilizable,0.108512,Coeficiente_L2_Absoluto
-LogisticRegression,formato_presentacion_Lapicero Prellenado (Pluma),0.379727,Coeficiente_L2_Absoluto
-LogisticRegression,formato_presentacion_Vial / Frasco Ampolla,0.271192,Coeficiente_L2_Absoluto
+LogisticRegression,precio_venta_bs,0.313981,Coeficiente_L2_Absoluto
+LogisticRegression,precio_lista_bs,0.269421,Coeficiente_L2_Absoluto
+LogisticRegression,descuento_porcentaje,0.567055,Coeficiente_L2_Absoluto
+LogisticRegression,precio_por_ml_bs,0.129919,Coeficiente_L2_Absoluto
+LogisticRegression,precio_por_100ui_bs,0.30881,Coeficiente_L2_Absoluto
+LogisticRegression,volumen_ml,0.005449,Coeficiente_L2_Absoluto
+LogisticRegression,concentracion_ui_ml,0.233291,Coeficiente_L2_Absoluto
+LogisticRegression,unidades_totales_ui,0.02869,Coeficiente_L2_Absoluto
+LogisticRegression,farmacia_Farmacias Chávez,0.074673,Coeficiente_L2_Absoluto
+LogisticRegression,farmacia_Farmacias Telchi,0.13015,Coeficiente_L2_Absoluto
+LogisticRegression,farmacia_Farmacorp,0.055442,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Asparta,0.182087,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Glargina,0.284792,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Glulisina,0.252737,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Humana Mixta / Bifásica,0.059471,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Humana NPH (N),0.105363,Coeficiente_L2_Absoluto
+LogisticRegression,principio_activo_Insulina Humana Regular (R),0.168286,Coeficiente_L2_Absoluto
+LogisticRegression,tipo_accion_Acción Intermedia (Basal),0.105363,Coeficiente_L2_Absoluto
+LogisticRegression,tipo_accion_Acción Mixta / Bifásica,0.059471,Coeficiente_L2_Absoluto
+LogisticRegression,tipo_accion_Acción Prolongada (Basal),0.284792,Coeficiente_L2_Absoluto
+LogisticRegression,tipo_accion_Acción Rápida (Prandial),0.421023,Coeficiente_L2_Absoluto
+LogisticRegression,tipo_accion_Acción Ultrarrápida (Prandial),0.182087,Coeficiente_L2_Absoluto
+LogisticRegression,origen_biologico_Análogo de Insulina,0.214142,Coeficiente_L2_Absoluto
+LogisticRegression,origen_biologico_Insulina Humana ADN Recombinante,0.214177,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Biocon Biologics,0.719873,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Denver Farma,0.323965,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Laboratorios Bagó,0.225304,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Laboratorios Beta,0.353805,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Novo Nordisk,0.512937,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Sanofi-Aventis,0.525887,Coeficiente_L2_Absoluto
+LogisticRegression,laboratorio_fabricante_Wockhardt,0.51438,Coeficiente_L2_Absoluto
+LogisticRegression,formato_presentacion_Cartucho para Pluma Reutilizable,0.264637,Coeficiente_L2_Absoluto
+LogisticRegression,formato_presentacion_Lapicero Prellenado (Pluma),0.486475,Coeficiente_L2_Absoluto
+LogisticRegression,formato_presentacion_Vial / Frasco Ampolla,0.221803,Coeficiente_L2_Absoluto

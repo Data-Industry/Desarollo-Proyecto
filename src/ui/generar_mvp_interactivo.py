@@ -453,7 +453,7 @@ def construir_html_mvp(
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
         <div class="p-4 rounded-xl border border-[#c3e6cb] bg-[#ebf7ee] space-y-1">
           <div class="flex items-center gap-2 font-bold text-[#1b5e20] text-sm md:text-base">
-            <span class="text-xl">🟢</span> VERDE (Disponible según datos observados)
+            <span class="text-xl">🟢</span> VERDE (Disponibilidad Segura)
           </div>
           <p class="text-[#2e6f40] text-xs md:text-sm leading-relaxed">
             {resumen['total_verde']} presentaciones con disponibilidad observada en múltiples farmacias. Confirma antes de acudir.
@@ -471,7 +471,7 @@ def construir_html_mvp(
 
         <div class="p-4 rounded-xl border border-[#f8c8c8] bg-[#fdf2f2] space-y-1">
           <div class="flex items-center gap-2 font-bold text-[#991b1b] text-sm md:text-base">
-            <span class="text-xl">🔴</span> ROJO (Sin disponibilidad observada)
+            <span class="text-xl">🔴</span> ROJO (Agotado General)
           </div>
           <p class="text-[#a83232] text-xs md:text-sm leading-relaxed">
             {resumen['total_rojo']} presentaciones sin disponibilidad observada en las fuentes consultadas. Confirma con la farmacia.
@@ -511,10 +511,10 @@ def construir_html_mvp(
         <!-- Tarjeta 2: Disponibilidad observada y riesgo predictivo -->
         <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-xs space-y-1">
           <div class="flex items-center gap-1.5 text-emerald-900 font-extrabold text-xs md:text-sm">
-            <span>🚦</span> ¿Qué indican los estados?
+            <span>🚦</span> ¿Cómo funciona el Semáforo?
           </div>
           <p class="text-slate-600 text-xs leading-relaxed">
-            La <strong>disponibilidad observada</strong> describe el stock reportado por la fuente. El <strong>riesgo predictivo</strong> es una estimación del modelo y se muestra por separado; no confirma inventario ni convierte un producto disponible en agotado. Confirma con la farmacia antes de acudir.
+            La <strong>disponibilidad observada</strong> describe el stock reportado por la fuente (Verde: segura, Amarillo: precaución, Rojo: agotada). El <strong>riesgo predictivo</strong> es una estimación del modelo y se muestra por separado; no confirma inventario ni convierte un producto disponible en agotado. Confirma con la farmacia antes de acudir.
           </p>
         </div>
 
