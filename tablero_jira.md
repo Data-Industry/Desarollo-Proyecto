@@ -51,7 +51,7 @@
 - **`SCRUM-49` (US-34 - 5 SP):** Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX. **[Finalizada - Daniel Molina]**
 - **`SCRUM-50` (US-35 - 5 SP):** Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Finalizada - Daniel Molina]**
 - **`SCRUM-51` (US-36 - 8 SP):** Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Por hacer - Mía Wayar]**
-- **`SCRUM-52` (US-37 - 3 SP):** Automatización del Pipeline de Datos Frescos para la Web Pública. **[Por hacer - Mía Wayar]**
+- **`SCRUM-52` (US-37 - 3 SP):** Automatización del Pipeline de Datos Frescos para la Web Pública. **[Finalizada - Mía Wayar]**
 
 ### SCRUM Sprint 6 (PLANIFICADO EN BACKLOG — 21 SP)
 *Meta: Chatbot Funcional, Integración a Producción, Documento Metodológico Parte 2 y Evaluación Formal de Recall.*
