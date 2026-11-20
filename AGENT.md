@@ -71,7 +71,7 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 6: Despliegue** | `SCRUM-49` | `US-34` | Refinamiento Ergonómico, Estética Farmacéutica Pastel y Pulido UI/UX | 5 | **Completada (Sprint 5 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-50` | `US-35` | Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción | 5 | **Completada (Sprint 5 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-53` | `US-38` | Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural | 8 | **Completada (Sprint 6 - Daniel)** |
-| **Fase 6: Despliegue** | `SCRUM-54` | `US-39` | Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería) | 5 | Planificada (Sprint 6 - Daniel) |
+| **Fase 6: Despliegue** | `SCRUM-54` | `US-39` | Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería) | 5 | **Completada (Sprint 6 - Daniel)** |
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
@@ -79,8 +79,8 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 - **SCRUM Sprint 3 (Cerrado al 100% - 21 SP):** `SCRUM-37` (5 SP) + `SCRUM-24` (3 SP) + `SCRUM-9` (8 SP) + `SCRUM-44` (5 SP) = **21 Story Points**.
 - **SCRUM Sprint 4 (Cerrado al 100% - 21 SP):** `US-30` (3 SP) + `US-31` (5 SP) + `US-32` (5 SP) + `US-33` (8 SP) = **21 Story Points**.
 - **SCRUM Sprint 5 (Cerrado al 100% - 21 SP):** `SCRUM-49` (5 SP) + `SCRUM-50` (5 SP) + `SCRUM-51` (8 SP) + `SCRUM-52` (3 SP) = **21 Story Points**.
-- **SCRUM Sprint 6 (Activo / En curso - 21 SP):** `SCRUM-53` (8 SP completados) + `SCRUM-54` (5 SP) + `SCRUM-55` (5 SP) + `SCRUM-38` (3 SP) = **21 Story Points** (8 SP completados, 13 SP planificados).
-- **Total Proyecto:** 25 Historias Activas | **131 Story Points** (118 SP completados, 13 SP planificados).
+- **SCRUM Sprint 6 (Activo / En curso - 21 SP):** `SCRUM-53` (8 SP) + `SCRUM-54` (5 SP) + `SCRUM-55` (5 SP) + `SCRUM-38` (3 SP) = **21 Story Points** (13 SP completados, 8 SP planificados).
+- **Total Proyecto:** 25 Historias Activas | **131 Story Points** (123 SP completados, 8 SP planificados).
 
 ---
 
@@ -196,7 +196,8 @@ flowchart TD
 | **#030** | `5ffa4a9` | `US-35` (`SCRUM-50`) | Sprint 5 | 2026-11-15 | Despliegue continuo (CI/CD) y hosting web gratuito a costo $0 en GitHub Pages: sincronización automática de index.html (raíz y docs/), creación de pipeline automatizado en .github/workflows/deploy_pages.yml con barrera de calidad de pruebas unitarias, enlaces HTTPS seguros sin referencias a localhost, metadatos OpenGraph y dominio público oficial https://data-industry.github.io/Desarollo-Proyecto/. | 100% verificado: 87/87 pruebas unitarias aprobadas (49 models con suite test_05_despliegue_web_pages.py + 38 etl), index.html sincronizado (76.2 KB) y documentación técnica formal en docs/16_despliegue_continuo_hosting_web_gratuito_us35.md. |
 | **#031** | `4a8acf8` | `US-37` (`SCRUM-52`) | Sprint 5 | 2026-11-15 | Automatización transaccional del pipeline de datos frescos para la web pública (`src/pipeline/refresh_production_web.py`): selección determinista de snapshots por timestamp real, validaciones de integridad de precios/URLs/farmacias, barreras de caducidad (Freshness Gates: warning >24h, error >72h), inferencia in-memory con `modelo_produccion_stock.joblib` y metadata, generación atómica con staging temporal, manifest `web_bundle_manifest.json` y prevención de cambios redundantes por fingerprinting. | 100% verificado: 25/25 pruebas unitarias en `src.pipeline.test_refresh_production_web` aprobadas (112 pruebas totales del proyecto), documentación técnica en `docs/13_automatizacion_pipeline_datos_web.md`. |
 | **#032** | `af84995` | Ops / Sync | Sprint 5 | 2026-11-20 | Registro de entrega de US-37 (`SCRUM-52`) en bitácora y sincronización del tablero de control para cierre del Sprint 5. | Trazabilidad de US-37 documentada y sincronizada en bitácora. |
-| **#033** | `c0a6472` | `US-38` (`SCRUM-53`) | Sprint 6 | 2026-11-20 | Motor conversacional (Chatbot) en lenguaje natural para adultos mayores y cuidadores (`src/chatbot/asistente_insulina.py`): extracción tolerante de 18 marcas y 6 principios activos, clasificación de intenciones (precios, stock, anillos 1-8, presupuesto), comparador económico con cálculo de ahorro en Bs, semáforo preventivo, desvío ético médico, resolución de CI/CD Pages con `requirements.txt` y ejecución end-to-end con datos del 2026-11-20. | 100% verificado: 120/120 pruebas unitarias aprobadas (38 ETL, 49 models, 25 pipeline, 8 chatbot), 0 fallos, 0 errores, y documentación técnica en `docs/17_desarrollo_asistente_conversacional_lenguaje_natural_us38.md`. |
+| **#033** | `67438c0` | `US-38` (`SCRUM-53`) | Sprint 6 | 2026-11-20 | Motor conversacional (Chatbot) en lenguaje natural para adultos mayores y cuidadores (`src/chatbot/asistente_insulina.py`): extracción tolerante de 18 marcas y 6 principios activos, clasificación de intenciones (precios, stock, anillos 1-8, presupuesto), comparador económico con cálculo de ahorro en Bs, semáforo preventivo, desvío ético médico, resolución de CI/CD Pages con `requirements.txt` y ejecución end-to-end con datos del 2026-11-20. | 100% verificado: 120/120 pruebas unitarias aprobadas (38 ETL, 49 models, 25 pipeline, 8 chatbot), 0 fallos, 0 errores, y documentación técnica en `docs/17_desarrollo_asistente_conversacional_lenguaje_natural_us38.md`. |
+| **#034** | `24a4e22` | `US-39` (`SCRUM-54`) | Sprint 6 | 2026-11-20 | Despliegue e integración del Widget Conversacional Senior y puente WhatsApp a costo $0: botón flotante accesible, modal con estética WhatsApp Salud, píldoras de consulta rápida, enlaces dinámicos wa.me para cuidadores, lectura por voz individual, 7/7 pruebas unitarias aprobadas (127 pruebas totales del proyecto) y documentación técnica en `docs/18_despliegue_integracion_chatbot_widget_web_us39.md`. | 100% verificado: 127/127 pruebas unitarias aprobadas (38 ETL, 56 models/UI, 25 pipeline, 8 chatbot), sincronización universal de artefactos web y hosting en GitHub Pages a costo $0. |
 
 ---
 
@@ -207,8 +208,8 @@ flowchart TD
   2. `SCRUM-50` (`US-35`, 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Finalizada - Daniel Molina]**
   3. `SCRUM-52` (`US-37`, 3 SP): Automatización del Pipeline de Datos Frescos para la Web Pública. **[Finalizada - Mía Wayar]**
   4. `SCRUM-51` (`US-36`, 8 SP): Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Finalizada - Equipo Emprendedor]**
-- **SCRUM Sprint 6 (21 Story Points):** **ACTIVO / EN CURSO (8/21 SP COMPLETADOS)**:
+- **SCRUM Sprint 6 (21 Story Points):** **ACTIVO / EN CURSO (13/21 SP COMPLETADOS)**:
   1. `SCRUM-53` (`US-38`, 8 SP): Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Finalizada - Daniel Molina]**
-  2. `SCRUM-54` (`US-39`, 5 SP): Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Planificada - Daniel Molina]**
-  3. `SCRUM-55` (`US-40`, 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
-  4. `SCRUM-38` (`US-41`, 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
+  2. `SCRUM-54` (`US-39`, 5 SP): Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Finalizada - Daniel Molina]**
+  3. `SCRUM-55` (`US-40`, 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Por hacer - Mía Wayar]**
+  4. `SCRUM-38` (`US-41`, 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Por hacer - Mía Wayar]**

@@ -67,6 +67,15 @@
     .animate-fadeIn {
       animation: fadeInSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
+    /* Estilos del Widget Conversacional Senior y WhatsApp (US-39) */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="bg-[#f7faf8] text-slate-800 antialiased font-sans min-h-screen">
@@ -449,6 +458,79 @@
     </div>
   </footer>
 
+  <!-- ========================================================================= -->
+  <!-- WIDGET FLOTANTE DEL CHATBOT CIUDADANO Y PUENTE WHATSAPP (US-39 / SCRUM-54) -->
+  <!-- ========================================================================= -->
+  <div id="contenedorChatbotFlotante" class="fixed bottom-4 right-4 z-50 flex flex-col items-end print:hidden">
+    <!-- Ventana Modal del Chatbot (oculta por defecto) -->
+    <div id="modalChatbot" class="hidden mb-3 w-[92vw] sm:w-[410px] max-h-[82vh] bg-white rounded-2xl shadow-2xl border border-emerald-300 flex flex-col overflow-hidden animate-fadeIn" role="dialog" aria-modal="true" aria-labelledby="chatHeaderTitle">
+      
+      <!-- Encabezado con Estética Amigable Senior y WhatsApp -->
+      <div class="bg-[#1b4332] text-white p-3.5 flex items-center justify-between border-b border-[#2d6a4f]">
+        <div class="flex items-center gap-2.5">
+          <div class="relative">
+            <div class="w-10 h-10 rounded-full bg-emerald-100 text-[#1b4332] flex items-center justify-center font-extrabold text-xl shadow-xs" aria-hidden="true">
+              🩺
+            </div>
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-[#1b4332] rounded-full" title="En línea"></span>
+          </div>
+          <div>
+            <h2 id="chatHeaderTitle" class="font-extrabold text-sm md:text-base leading-tight">Asistente de Insulina</h2>
+            <p class="text-emerald-100/90 text-xs font-medium">Santa Cruz • Farmacorp, Chávez y Telchi</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button id="btnAudioChatHeader" onclick="leerUltimoMensajeBot()" class="p-1.5 text-emerald-100 hover:text-white hover:bg-[#2d6a4f] rounded-lg transition-colors focus-ring" title="Escuchar último mensaje en voz alta" aria-label="Escuchar respuesta en voz alta">
+            🔊
+          </button>
+          <button id="btnCerrarChatbot" onclick="toggleChatbot(false)" class="p-1.5 text-emerald-100 hover:text-white hover:bg-[#2d6a4f] rounded-lg transition-colors focus-ring" title="Cerrar ventana del asistente" aria-label="Cerrar chat">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Píldoras de Consulta Rápida (Senior-Friendly: sin necesidad de escribir) -->
+      <div class="bg-[#f0f7f2] border-b border-emerald-100 px-3 py-2">
+        <p class="text-[11px] font-bold text-emerald-950 uppercase tracking-wider mb-1">Preguntas Frecuentes:</p>
+        <div class="flex gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+          <button type="button" onclick="enviarPreguntaRapida('¿Dónde está más barata la Lantus?')" class="whitespace-nowrap px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full font-semibold transition-scale shadow-2xs">
+            💰 ¿Lantus más barata?
+          </button>
+          <button type="button" onclick="enviarPreguntaRapida('¿Hay stock seguro de Novolin N?')" class="whitespace-nowrap px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full font-semibold transition-scale shadow-2xs">
+            🚦 ¿Stock de Novolin N?
+          </button>
+          <button type="button" onclick="enviarPreguntaRapida('Farmacias en el 2do anillo')" class="whitespace-nowrap px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full font-semibold transition-scale shadow-2xs">
+            📍 2do Anillo
+          </button>
+          <button type="button" onclick="enviarPreguntaRapida('Uso 30 UI al día, ¿cuánto gasto al mes?')" class="whitespace-nowrap px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full font-semibold transition-scale shadow-2xs">
+            🧮 Gasto 30 UI/día
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de Conversación (Historial de Mensajes) -->
+      <div id="chatMessages" class="flex-1 p-3.5 space-y-3 overflow-y-auto max-h-[380px] bg-[#f7faf8] text-xs md:text-sm">
+        <!-- Renderizado dinámico de mensajes -->
+      </div>
+
+      <!-- Barra de Entrada de Texto y Envío -->
+      <form id="formChatbot" onsubmit="enviarMensajeUsuario(event)" class="p-2.5 bg-white border-t border-slate-200 flex items-center gap-2">
+        <input id="inputMensajeChat" type="text" placeholder="Escribe tu consulta aquí..." autocomplete="off" class="flex-1 px-3 py-2 text-xs md:text-sm border border-slate-300 rounded-xl focus:border-[#2d6a4f] focus-ring text-slate-800" aria-label="Escribe tu consulta sobre insulina" />
+        <button type="submit" id="btnEnviarMensaje" class="px-3.5 py-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-bold rounded-xl transition-scale shadow-xs flex items-center gap-1 focus-ring" title="Enviar consulta">
+          <span>Enviar</span>
+          <span aria-hidden="true">➤</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Botón Principal Flotante para Abrir / Cerrar el Chatbot -->
+    <button id="btnToggleChatbot" onclick="toggleChatbot()" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-white px-4 py-3 rounded-full shadow-xl border-2 border-emerald-300 flex items-center gap-2.5 transition-all transform hover:scale-105 focus-ring" aria-label="Abrir asistente de consulta" aria-expanded="false">
+      <span class="text-2xl" aria-hidden="true">💬</span>
+      <span class="font-extrabold text-xs md:text-sm tracking-tight text-white">¿Preguntas sobre Insulina?</span>
+      <span id="badgeChatbotNotif" class="bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full shadow-2xs">En vivo</span>
+    </button>
+  </div>
+
   <!-- DATOS REALES EMBEBIDOS Y LÓGICA INTERACTIVA -->
   <script>
     // Inyección de datos reales compilados
@@ -811,7 +893,266 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // 10. INICIALIZACIÓN
+    // =========================================================================
+    // 10. MOTOR CONVERSACIONAL (CHATBOT) Y PUENTE WHATSAPP (US-39 / SCRUM-54)
+    // =========================================================================
+    let chatbotIniciado = false;
+    let ultimoMensajeBotTexto = '';
+
+    function normalizarTextoChat(str) {
+      if (!str) return '';
+      return str.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+    }
+
+    function toggleChatbot(forzar) {
+      const modal = document.getElementById('modalChatbot');
+      const btn = document.getElementById('btnToggleChatbot');
+      const badge = document.getElementById('badgeChatbotNotif');
+      const abrir = (forzar !== undefined) ? forzar : modal.classList.contains('hidden');
+
+      if (abrir) {
+        modal.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        if (badge) badge.classList.add('hidden');
+        if (!chatbotIniciado) {
+          iniciarChatbot();
+          chatbotIniciado = true;
+        }
+        const input = document.getElementById('inputMensajeChat');
+        if (input) input.focus();
+      } else {
+        modal.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function iniciarChatbot() {
+      const saludo = `¡Hola! Con mucho gusto le ayudo. 🩺
+
+Soy su **Asistente de Insulina para Santa Cruz de la Sierra**. Le puedo orientar de forma sencilla en:
+• 💰 **Comparación de precios:** Cuál farmacia la tiene más económica (Farmacorp, Chávez o Telchi).
+• 🚦 **Disponibilidad:** Si hay stock seguro o si conviene comprar con anticipación.
+• 📍 **Sucursales por anillo:** Direcciones cercanas del 1er al 8vo anillo o centro.
+• 🧮 **Presupuesto mensual:** Frascos y ahorro estimado según su dosis diaria.
+
+Puede pulsar una pregunta rápida arriba o escribir su consulta directamente.`;
+      agregarMensajeChat('bot', saludo);
+    }
+
+    function leerTextoVoz(textoEncoded) {
+      if (!('speechSynthesis' in window)) {
+        alert('Tu navegador no soporta lectura por voz.');
+        return;
+      }
+      const texto = decodeURIComponent(textoEncoded);
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = 'es-BO';
+      utterance.rate = 0.95;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function leerUltimoMensajeBot() {
+      if (ultimoMensajeBotTexto) {
+        leerTextoVoz(encodeURIComponent(ultimoMensajeBotTexto));
+      } else {
+        leerResumenVoz();
+      }
+    }
+
+    function agregarMensajeChat(remitente, texto) {
+      const contenedor = document.getElementById('chatMessages');
+      if (!contenedor) return;
+      const div = document.createElement('div');
+      const esBot = (remitente === 'bot');
+
+      div.className = esBot ? 'flex flex-col items-start space-y-1' : 'flex flex-col items-end space-y-1';
+
+      const textoFormateado = texto
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+
+      const bubble = document.createElement('div');
+      bubble.className = esBot
+        ? 'bg-white text-slate-800 p-3 rounded-2xl rounded-tl-xs border border-emerald-100 shadow-xs max-w-[90%] leading-relaxed'
+        : 'bg-[#2d6a4f] text-white p-3 rounded-2xl rounded-tr-xs shadow-xs max-w-[85%] leading-relaxed font-medium';
+      bubble.innerHTML = textoFormateado;
+      div.appendChild(bubble);
+
+      if (esBot) {
+        ultimoMensajeBotTexto = texto.replace(/[*#]/g, '');
+        const acciones = document.createElement('div');
+        acciones.className = 'flex flex-wrap items-center gap-1.5 pt-1 pl-1 text-[11px]';
+
+        const waText = encodeURIComponent(`Hola, te comparto esta información de insulina en Santa Cruz de la Sierra:
+
+${texto.replace(/[*#]/g, '')}
+
+Consulta en: https://data-industry.github.io/Desarollo-Proyecto/`);
+        acciones.innerHTML = `
+          <a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[#1b4332] bg-[#ebf7ee] hover:bg-[#d8f0de] px-2 py-0.5 rounded-md font-bold border border-[#c3e6cb] transition-colors" title="Compartir este reporte con un familiar por WhatsApp">
+            <span>📱 Enviar a WhatsApp</span>
+          </a>
+          <button type="button" onclick="leerTextoVoz('${encodeURIComponent(texto.replace(/[*#]/g, ''))}')" class="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded-md font-medium border border-slate-200 transition-colors" title="Escuchar este mensaje">
+            <span>🔊 Escuchar</span>
+          </button>
+        `;
+        div.appendChild(acciones);
+      }
+
+      contenedor.appendChild(div);
+      contenedor.scrollTop = contenedor.scrollHeight;
+    }
+
+    function enviarPreguntaRapida(pregunta) {
+      const input = document.getElementById('inputMensajeChat');
+      if (input) {
+        input.value = pregunta;
+        enviarMensajeUsuario();
+      }
+    }
+
+    function procesarConsultaChatbot(mensaje) {
+      const norm = normalizarTextoChat(mensaje);
+      if (!norm) return { texto: 'Por favor escribe tu consulta sobre insulina.' };
+
+      // 1. Desvío ético prioritario de consultas médicas o prescripción
+      if (/(cuanta dosis|que dosis|dosis me pongo|dosis me debo poner|dosis tomar|dosis usar|cuanto me inyecto|como inyectarme|recetame|recetar|prescribir|cambiar de insulina|cambiar mi|puedo cambiar|puedo sustituir|sustituir|glucosa alta|azucar alta|hiperglucemia|hipoglucemia|sintomas|efectos secundarios|curar)/.test(norm)) {
+        return {
+          texto: `⚠️ **Aviso de Salud Importante:**
+
+Como asistente de precios y farmacias, **no puedo indicar dosis, recetar medicamentos ni sugerir cambios de insulina**.
+
+Su dosis y tipo de insulina deben ser indicados únicamente por su médico de cabecera o especialista endocrinólogo. Por favor consulte con su centro de salud antes de modificar su tratamiento. 🩺
+
+Si ya conoce la marca prescrita (por ejemplo: Lantus, Novolin N o Basalog), con gusto le informo dónde encontrarla al mejor precio.`
+        };
+      }
+
+      // 2. Cálculo de presupuesto y dosis mensual
+      const matchDosis = norm.match(/(\d(1, 3))\s*(?:ui|unidades|unidad|u)\b/);
+      if (matchDosis || /(presupuesto|cuanto gasto|al mes|calculadora|cuantos frascos|gasto mensual)/.test(norm)) {
+        const dosis = matchDosis ? parseFloat(matchDosis[1]) : 30;
+        let med = DATA_MEDICAMENTOS.find(m => norm.includes(normalizarTextoChat(m.marca))) || DATA_MEDICAMENTOS[0];
+        const volumenFrasco = med.unidades_totales || 1000;
+        const dosisMes = dosis * 30;
+        const frascos = Math.ceil(dosisMes / volumenFrasco);
+        const precios = Object.values(med.precios).filter(p => p.disponible).map(p => p.precio_venta_bs);
+        const pMin = precios.length ? Math.min(...precios) : med.mejor_precio_bs;
+        const pMax = precios.length ? Math.max(...precios) : med.precio_max_bs;
+        const gastoMin = (pMin * frascos).toFixed(2);
+        const ahorro = ((pMax - pMin) * frascos).toFixed(2);
+
+        let r = `🧮 **Presupuesto Mensual Estimado (${med.marca}):**
+
+• **Dosis diaria:** ${dosis} UI/día (${dosisMes} UI en 30 días).
+• **Presentación:** Necesita **${frascos} unidad(es)** de ${volumenFrasco} UI.
+• 💰 **Gasto mensual:** Bs ${gastoMin} en ${med.mejor_cadena} (la farmacia más económica).`;
+        if (parseFloat(ahorro) > 0) {
+          r += `
+• 🎉 **¡Ahorro potencial de Bs ${ahorro} al mes** frente a la farmacia más cara!`;
+        }
+        r += `
+
+⚠️ *Este es un cálculo económico orientativo. Use únicamente la dosis prescrita por su médico.*`;
+        return { texto: r };
+      }
+
+      // 3. Consulta de sucursales por anillo urbano
+      let anillo = null;
+      if (/(centro|casco viejo)/.test(norm)) anillo = 1;
+      const matchAnillo = norm.match(/([1-8])(?:er|do|ro|to|vo|mo)?\s+anillo/) || norm.match(/anillo\s+([1-8])/);
+      if (matchAnillo) anillo = parseInt(matchAnillo[1]);
+      if (anillo || /(sucursal|sucursales|donde queda|direccion|cerca|donde hay farmacia)/.test(norm)) {
+        let sucs = DATA_SUCURSALES;
+        if (anillo) {
+          sucs = DATA_SUCURSALES.filter(s => s.anillo_num === anillo);
+          if (!sucs.length) sucs = DATA_SUCURSALES.filter(s => Math.abs(s.anillo_num - anillo) <= 1);
+        }
+        if (!sucs.length) sucs = DATA_SUCURSALES.slice(0, 4);
+        const lugar = anillo ? `en el ${anillo}do anillo o cercanías` : `principales en Santa Cruz`;
+        let r = `📍 **Sucursales de Farmacias ${lugar}:**
+`;
+        sucs.slice(0, 4).forEach(s => {
+          r += `
+• **${s.farmacia} - ${s.nombre}** (${s.anillo_etiqueta}):
+  Dirección: ${s.direccion}`;
+        });
+        r += `
+
+💡 *Consejo:* Le sugerimos llamar a la sucursal para confirmar disponibilidad antes de trasladarse.`;
+        return { texto: r };
+      }
+
+      // 4. Búsqueda de Medicamento por Marca o Principio Activo
+      let med = DATA_MEDICAMENTOS.find(m => {
+        const mNorm = normalizarTextoChat(m.marca);
+        return norm.includes(mNorm) || (mNorm.includes('novolin n') && norm.includes('nph')) || (mNorm.includes('lantus') && norm.includes('glargina'));
+      });
+      if (!med && (norm.includes('nph') || norm.includes('glargina') || norm.includes('cristalina') || norm.includes('regular') || norm.includes('lenta') || norm.includes('rapida'))) {
+        med = DATA_MEDICAMENTOS.find(m => norm.includes(normalizarTextoChat(m.principio_activo)) || norm.includes(normalizarTextoChat(m.tipo_accion)));
+      }
+
+      if (med) {
+        let r = `🩺 **${med.marca}** (${med.formato_presentacion} • ${med.principio_activo}):
+
+`;
+        r += `🚦 **Disponibilidad Observada:** ${med.etiqueta_semaforo}.
+`;
+        r += `
+💵 **Precios Comparativos en Santa Cruz:**
+`;
+
+        ["Farmacias Chávez", "Farmacorp", "Farmacias Telchi"].forEach(c => {
+          const p = med.precios[c];
+          if (p) {
+            const disp = p.disponible ? 'Disponible' : 'Sin stock confirmado';
+            r += `• **${c}:** Bs ${p.precio_venta_bs.toFixed(2)} (${disp})
+`;
+          }
+        });
+
+        if (med.ahorro_max_bs > 0) {
+          r += `
+💡 **Opción más económica:** **${med.mejor_cadena}** a **Bs ${med.mejor_precio_bs.toFixed(2)}** (¡Ahorras Bs ${med.ahorro_max_bs.toFixed(2)} frente a la más cara!).
+`;
+        } else {
+          r += `
+💡 **Precio de referencia:** **Bs ${med.mejor_precio_bs.toFixed(2)}** en **${med.mejor_cadena}**.
+`;
+        }
+
+        r += `
+🗓️ *Consejo para jubilados:* Si cobra su renta a fin de mes en el Banco Unión, compre con 3 a 5 días de anticipación para evitar filas y asegurar su medicamento.`;
+        return { texto: r };
+      }
+
+      // 5. Saludo o Ayuda General
+      return {
+        texto: `No identifiqué una marca específica en su mensaje.
+
+Le sugiero escribir el nombre de su insulina (por ejemplo: **Lantus**, **Novolin N**, **Novolin R**, **Basalog** o **Apidra**), consultar por farmacias en un anillo (ej. *'farmacias en el 2do anillo'*), o calcular su presupuesto (ej. *'gasto con 30 UI al día'*). 🩺`
+      };
+    }
+
+    function enviarMensajeUsuario(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('inputMensajeChat');
+      if (!input) return;
+      const txt = input.value.trim();
+      if (!txt) return;
+
+      agregarMensajeChat('usuario', txt);
+      input.value = '';
+
+      setTimeout(() => {
+        const resp = procesarConsultaChatbot(txt);
+        agregarMensajeChat('bot', resp.texto);
+      }, 160);
+    }
+
+    // 11. INICIALIZACIÓN
     window.addEventListener('DOMContentLoaded', () => {
       // Carga inicial directa
       aplicarFiltros();

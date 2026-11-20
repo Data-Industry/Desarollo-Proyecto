@@ -56,7 +56,7 @@
 ### SCRUM Sprint 6 (ACTIVO / EN CURSO — 21 SP)
 *Meta: Chatbot Funcional, Integración a Producción, Documento Metodológico Parte 2 y Evaluación Formal de Recall.*
 - **`SCRUM-53` (US-38 - 8 SP):** Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Finalizada - Daniel Molina]**
-- **`SCRUM-54` (US-39 - 5 SP):** Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Planificada - Daniel Molina]**
+- **`SCRUM-54` (US-39 - 5 SP):** Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Finalizada - Daniel Molina]**
 - **`SCRUM-55` (US-40 - 5 SP):** Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
 - **`SCRUM-38` (US-41 - 3 SP):** Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
 
