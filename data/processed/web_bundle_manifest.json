@@ -6,8 +6,8 @@
   "currency_direction": "BOB_PER_USD",
   "currency_source": "Banco Central de Bolivia (BCB - Grafico Evolutivo)",
   "data_as_of": "2026-11-24T15:32:29.391433+00:00",
-  "generated_at": "2026-11-24T15:48:35.531300+00:00",
-  "input_fingerprint": "d37444602f50f389eb2bb85db8fd8a2dde3997d7a5856dc9dc8d7270ae9073a1",
+  "generated_at": "2026-11-24T16:06:03.929630+00:00",
+  "input_fingerprint": "a55cd003bcefaa8d2c42005da247e8ebd71176790bb3948d99681f699d27978d",
   "model": {
     "name": "RandomForest",
     "sha256": "9d35aab07c924f58c423edfa1d7b4966779324ed40d24636e27a94cb62240ebd",
@@ -15,7 +15,7 @@
     "threshold": 0.05
   },
   "pharmacy_chain_count": 3,
-  "pipeline_version": "3b2fc17",
+  "pipeline_version": "574c440",
   "product_count": 43,
   "source_snapshot": {
     "filename": "insulina_precios_stock_20261124_113150.csv",

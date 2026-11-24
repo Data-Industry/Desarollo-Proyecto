@@ -1028,7 +1028,7 @@ def construir_html_mvp(
           semaforoBadge = `<span class="px-2.5 py-1 rounded-lg text-xs font-black badge-rojo" title="${{med.motivo_semaforo}}">🔴 Sin disponibilidad observada</span>`;
         }}
 
-        // Construir filas de la comparativa de farmacias con estética pastel
+        // Construir filas de la comparativa de farmacias con estética pastel limpia y sin tecnicismos
         let filasFarmaciasHTML = '';
         cadenas.forEach(cadena => {{
           const info = med.precios[cadena];
@@ -1036,25 +1036,40 @@ def construir_html_mvp(
             const tieneStock = info.disponible && info.estado_stock !== 'AGOTADO';
             const esElMejor = (cadena === med.mejor_cadena && med.total_farmacias_activas > 1 && tieneStock);
 
+            // Estado amigable y claro para el adulto mayor
+            let estadoTexto = '';
+            let estadoClase = '';
+            if (info.stock_actual === 'AGOTADO') {{
+              estadoTexto = '🔴 Agotado en esta farmacia';
+              estadoClase = 'text-rose-700 font-bold';
+            }} else if (info.stock_actual === 'ULTIMAS_UNIDADES') {{
+              estadoTexto = '🟡 Pocas unidades';
+              estadoClase = 'text-amber-700 font-bold';
+            }} else if (info.stock_actual === 'NO_VERIFICADO') {{
+              estadoTexto = '⚪ Consultar disponibilidad';
+              estadoClase = 'text-slate-600 font-medium';
+            }} else {{
+              estadoTexto = '🟢 Disponible';
+              estadoClase = 'text-emerald-800 font-bold';
+            }}
+
             filasFarmaciasHTML += `
-              <div class="p-3 rounded-xl border ${{esElMejor ? 'bg-[#f0f9f3] border-[#bfe5cd] ring-1 ring-[#cdeade]' : 'bg-[#fafcfb] border-[#eaf0eb]'}} flex items-center justify-between gap-2">
-                <div class="space-y-0.5">
-                  <div class="flex items-center gap-2">
-                    <span class="font-bold text-slate-800 text-sm md:text-base">${{cadena}}</span>
+              <div class="p-3 rounded-xl border ${{esElMejor ? 'bg-[#f0f9f3] border-[#bfe5cd] ring-1 ring-[#cdeade]' : 'bg-[#fafcfb] border-[#eaf0eb]'}} flex items-center justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-extrabold text-slate-800 text-sm md:text-base">${{cadena}}</span>
                     ${{esElMejor ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-black bg-[#2d6a4f] text-white uppercase tracking-wider">⭐ Mejor Precio</span>' : ''}}
                   </div>
-                  <span class="text-xs text-slate-500 block">
-                    Por 100 UI: <strong>Bs ${{info.precio_por_100ui_bs.toFixed(2)}}</strong> • 
-                    <span class="${{info.stock_actual === 'AGOTADO' ? 'text-rose-600 font-bold' : (info.stock_actual === 'ULTIMAS_UNIDADES' ? 'text-amber-600 font-bold' : (info.stock_actual === 'NO_VERIFICADO' ? 'text-slate-600 font-bold' : 'text-emerald-700'))}}">
-                      Stock actual: ${{info.stock_actual}}
-                    </span>
-                  </span>
-                  <span class="text-xs text-slate-500 block">Riesgo predictivo: <strong>${{info.riesgo_predictivo}}</strong> (${{(info.probabilidad_riesgo * 100).toFixed(1)}}%)</span>
-                  ${{info.stock_advertencia ? `<span class="text-xs text-amber-700 font-bold block">${{info.stock_advertencia}}</span>` : ''}}
-                  <span class="text-xs text-slate-500 block">Datos: ${{info.fecha_datos}} • <a class="underline" href="${{info.fuente}}" target="_blank" rel="noopener noreferrer">Ver fuente</a></span>
+                  <div class="flex items-center gap-2 text-xs">
+                    <span class="${{estadoClase}}">${{estadoTexto}}</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="text-slate-500">Bs ${{info.precio_por_100ui_bs.toFixed(2)}} por 100 UI</span>
+                  </div>
+                  ${{info.stock_advertencia ? `<span class="text-[11px] text-amber-800 font-semibold block">${{info.stock_advertencia}}</span>` : ''}}
                 </div>
-                <div class="text-right">
-                  <span class="text-xl font-black text-slate-900 block">Bs ${{info.precio_venta_bs.toFixed(2)}}</span>
+                <div class="text-right shrink-0">
+                  <span class="text-xl md:text-2xl font-black text-[#1b4332] block">Bs ${{info.precio_venta_bs.toFixed(2)}}</span>
+                  ${{info.fuente ? `<a href="${{info.fuente}}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-emerald-700 hover:text-emerald-900 underline font-medium block mt-0.5">Ver en farmacia ↗</a>` : ''}}
                 </div>
               </div>
             `;
@@ -1078,9 +1093,8 @@ def construir_html_mvp(
                 <p class="text-sm font-bold text-emerald-800">${{med.principio_activo}}</p>
                 <p class="text-xs text-slate-500">${{med.formato}} • ${{med.volumen_ml}} ml (${{med.unidades_totales}} UI) • Lab. ${{med.laboratorio}}</p>
               </div>
-              <div class="shrink-0 flex flex-col items-end gap-1">
+              <div class="shrink-0">
                 ${{semaforoBadge}}
-                <span class="text-[10px] text-slate-500 text-right max-w-[130px] leading-tight">${{med.motivo_semaforo}}</span>
               </div>
             </div>
 
@@ -1098,23 +1112,11 @@ def construir_html_mvp(
                   Mejor opción
                 </span>
               </div>
-            ` : (med.total_farmacias_activas === 1 ? `
-              <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
-                Disponibilidad observada a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}} (única farmacia con existencias observadas).
-              </div>
             ` : (med.total_farmacias_activas === 0 && med.semaforo_general === 'ROJO' ? `
               <div class="bg-[#fdf2f2] border border-[#f8c8c8] p-2.5 rounded-xl text-xs text-[#991b1b] font-medium">
-                Sin disponibilidad observada en las fuentes consultadas. Confirma con la farmacia.
+                Sin disponibilidad observada en las farmacias consultadas.
               </div>
-            ` : (med.total_farmacias_activas === 0 ? `
-              <div class="bg-[#fef9e8] border border-[#fbe59d] p-2.5 rounded-xl text-xs text-[#855b0a] font-medium">
-                No hay disponibilidad confirmada; existen registros sin verificar. Confirma con la farmacia.
-              </div>
-            ` : `
-              <div class="bg-[#f8faf9] border border-[#e2e8f0] p-2.5 rounded-xl text-xs text-slate-600 font-medium">
-                Disponibilidad observada a Bs ${{med.mejor_precio_bs.toFixed(2)}} en ${{med.mejor_cadena}}.
-              </div>
-            `)))}}
+            ` : '')}}
 
             <!-- Lista comparativa de las 3 farmacias -->
             <div class="space-y-2 pt-1">
