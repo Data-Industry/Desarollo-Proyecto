@@ -970,8 +970,11 @@ def create_figures(results: EvaluationResults, figures_dir: Path = FIGURES_DIR) 
     evaluated["grupo"] = evaluated["modelo"] + "\n" + evaluated["calibracion"].map(labels)
     group_names = list(dict.fromkeys(evaluated["grupo"]))
     values = [evaluated.loc[evaluated["grupo"] == name, "recall"].to_numpy() for name in group_names]
-    # ``labels`` mantiene compatibilidad con la versión de Matplotlib del proyecto.
-    ax.boxplot(values, labels=group_names, showmeans=True)
+    # Compatibilidad universal de versiones de Matplotlib (tick_labels en 3.9+ vs labels legacy)
+    try:
+        ax.boxplot(values, tick_labels=group_names, showmeans=True)
+    except TypeError:
+        ax.boxplot(values, labels=group_names, showmeans=True)
     ax.axhline(DEFAULT_RECALL_TARGET, ls="--", color="red", label="Objetivo 0.90")
     ax.set(title="SCRUM-38 · Estabilidad de recall entre outer folds", ylabel="Recall")
     ax.tick_params(axis="x", rotation=35, labelsize=8)

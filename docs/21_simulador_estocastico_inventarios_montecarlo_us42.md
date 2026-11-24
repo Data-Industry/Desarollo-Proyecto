@@ -14,7 +14,7 @@
 **Módulos Desarrollados:**  
 1. `src/optimization/simulador_montecarlo_paciente.py` (Motor estocástico en Python, 1.000 réplicas, IC 95%).  
 2. `src/optimization/test_simulador_montecarlo.py` (8/8 pruebas unitarias).  
-3. `src/models/test_07_audio_y_simulacion_web.py` (6/6 pruebas unitarias de integración web).  
+3. `src/models/test_08_audio_y_simulacion_web.py` (6/6 pruebas unitarias de integración web).  
 4. `src/ui/generar_mvp_interactivo.py` y HTMLs (`index.html`, `docs/index.html`, `mvp_comparador_jubilados.html`).  
 **Cobertura Global del Proyecto:** 141/141 pruebas unitarias aprobadas (100% de éxito).
 
@@ -132,7 +132,7 @@ Para resolver las observaciones de usabilidad donde un clic involuntario forzaba
 ```
 ----------------------------------------------------------------------
 Ran 8 tests in 0.099s (src/optimization/test_simulador_montecarlo.py) -> OK
-Ran 6 tests in 0.006s (src/models/test_07_audio_y_simulacion_web.py)  -> OK
+Ran 6 tests in 0.006s (src/models/test_08_audio_y_simulacion_web.py)  -> OK
 Ran 141 tests in 9.422s (Suite Integral del Proyecto)                -> OK (100%)
 ----------------------------------------------------------------------
 ```
