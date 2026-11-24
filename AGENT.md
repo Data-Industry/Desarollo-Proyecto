@@ -211,6 +211,9 @@ flowchart TD
 | **#043** | `3b2fc17` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash f68ecf3 en bitacora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 | **#044** | `5268fbc` | `US-34` / `US-37` | Sprint 6 | 2026-11-24 | Corrección de sintaxis JS en renderizado de catálogo y calculadora, unificación del botón de bienvenida en cabecera (🔊 Bienvenida) al lado de Detener, eliminación de botones redundantes en banner, refresco automatizado de datos frescos del día (scraping 24-11-2026: Farmacorp 26, Chávez 20, Telchi 6) y reentrenamiento y calibración de modelos. | 100% verificado: 156/156 pruebas unitarias aprobadas, catálogo de 24 presentaciones y 16 sucursales 100% operativo, cero errores de consola. |
 | **#045** | `931c1fd` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 5268fbc en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#046** | `574c440` | Docs / Sync | Sprint 6 | 2026-11-24 | Consolidación de hash 931c1fd en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#047** | `91912e5` | `US-34` (UI/UX) | Sprint 6 | 2026-11-24 | Simplificación y condensación ergonómica de las tarjetas del catálogo para adultos mayores: eliminación de sobrecarga numérica y tecnicismos (se retiró el porcentaje de riesgo predictivo y timestamps crudos de la vista principal), adopción de estados en lenguaje humano (🟢 Disponible, 🔴 Agotado en esta farmacia, 🟡 Pocas unidades), limpieza del encabezado y enlaces directos a farmacias. | 100% verificado: 156/156 pruebas unitarias aprobadas, estética limpia, legible y sin fricción cognitiva. |
+| **#048** | *(pendiente)* | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 91912e5 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 
 ---
 
