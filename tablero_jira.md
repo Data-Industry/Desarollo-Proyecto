@@ -12,10 +12,10 @@
 | **Fase 1: Comprensión del Negocio** | `SCRUM-29` | `SCRUM-28` (US-19: 7), `SCRUM-15` (US-11: 3), `SCRUM-45` (US-30: 3 SP) | 3 | **13 SP** |
 | **Fase 2: Comprensión de los Datos** | `SCRUM-30` | `SCRUM-27` (US-20: 7), `SCRUM-23` (US-21: 7), `SCRUM-20` (US-16: 5), `SCRUM-7` (US-03: 5), `SCRUM-43` (US-28: 3) | 5 | **27 SP** |
 | **Fase 3: Preparación de los Datos** | `SCRUM-31` | `SCRUM-36` (US-22: 5), `SCRUM-42` (US-27: 5), `SCRUM-37` (US-23: 5), `SCRUM-24` (US-02: 3), `SCRUM-52` (US-37: 3) | 5 | **21 SP** |
-| **Fase 4: Modelado** | `SCRUM-33` | `SCRUM-9` (US-05: 8) | 1 | **8 SP** |
+| **Fase 4: Modelado & Optimización** | `SCRUM-33` | `SCRUM-9` (US-05: 8), `SCRUM-56` (US-42: 5 SP) | 2 | **13 SP** |
 | **Fase 5: Evaluación** | `SCRUM-34` | `SCRUM-47` (US-32: 5), `SCRUM-48` (US-33: 8), `SCRUM-51` (US-36: 8), `SCRUM-55` (US-40: 5), `SCRUM-38` (US-41: 3) | 5 | **29 SP** |
 | **Fase 6: Despliegue** | `SCRUM-35` | `SCRUM-44` (US-29: 5), `SCRUM-46` (US-31: 5), `SCRUM-49` (US-34: 5), `SCRUM-50` (US-35: 5), `SCRUM-53` (US-38: 8), `SCRUM-54` (US-39: 5) | 6 | **33 SP** |
-| **TOTAL PROYECTO** | | **25 Historias de Usuario Activas** | **25** | **131 SP** |
+| **TOTAL PROYECTO** | | **26 Historias de Usuario Activas** | **26** | **136 SP** |
 
 ---
 
@@ -53,10 +53,11 @@
 - **`SCRUM-51` (US-36 - 8 SP):** Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Finalizada - Equipo Emprendedor]**
 - **`SCRUM-52` (US-37 - 3 SP):** Automatización del Pipeline de Datos Frescos para la Web Pública. **[Finalizada - Mía Wayar]**
 
-### SCRUM Sprint 6 (ACTIVO / EN CURSO — 21 SP)
-*Meta: Chatbot Funcional, Integración a Producción, Documento Metodológico Parte 2 y Evaluación Formal de Recall.*
+### SCRUM Sprint 6 (ACTIVO / EN CURSO — 26 SP)
+*Meta: Chatbot Funcional, Integración a Producción, Documento Metodológico Parte 2, Evaluación Formal de Recall y Simulación Estocástica de Inventarios.*
 - **`SCRUM-53` (US-38 - 8 SP):** Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Finalizada - Daniel Molina]**
 - **`SCRUM-54` (US-39 - 5 SP):** Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Finalizada - Daniel Molina]**
+- **`SCRUM-56` (US-42 - 5 SP):** Simulación Estocástica de Inventarios de Cobertura (Monte Carlo García Dunna et al., 2013) y Control Ergonómico de Audio (Detener y Velocidades x1.5/x2). **[Finalizada - Daniel Molina]**
 - **`SCRUM-55` (US-40 - 5 SP):** Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
 - **`SCRUM-38` (US-41 - 3 SP):** Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
 
@@ -145,3 +146,15 @@
   - [ ] Evaluación Stratified K-Fold de PR-AUC, ROC-AUC y matriz de costos con penalización a falsos negativos.
   - [ ] Calibración de probabilidades (Isotonic / Sigmoid).
   - [ ] Documentación técnica de evaluación formal en docs/.
+
+#### 9. `SCRUM-56` (`US-42` - 5 SP): Simulación Estocástica de Inventarios de Cobertura (Monte Carlo García Dunna et al., 2013) y Control Ergonómico de Audio (Detener y Velocidades x1.5/x2)
+* **Como** Adulto mayor con diabetes, familiar cuidador o evaluador del área de Optimización de Sistemas,
+* **Quiero** simular estocásticamente el agotamiento de mi suministro de insulina con 1,000 réplicas Monte Carlo y controlar la lectura de voz con botón de parada inmediata y velocidades x1.5/x2,
+* **Para** conocer con rigor matemático el día óptimo de compra evitando el quiebre de stock, planificar el presupuesto de la pensión y escuchar las recomendaciones al ritmo que me resulte más cómodo sin bloqueos auditivos.
+* **Criterios de Aceptación / Validación:**
+  - [x] Módulo en `src/optimization/simulador_montecarlo_paciente.py` que ejecute 1,000 réplicas Monte Carlo del consumo diario estocástico ($\mu \pm \sigma$) según la metodología de García Dunna et al. (Cap. 4.3.3) con cálculo de intervalos de confianza al 95%.
+  - [x] Determinación matemática del punto de reorden seguro ($s$) y el día óptimo de compra cruzando con el ciclo de pagos de Renta Dignidad (Banco Unión) y el semáforo predictivo de farmacias.
+  - [x] Botón de "Detener audio" junto a cada botón parlante en la interfaz web pública (`index.html`, `docs/index.html` y `src/ui/mvp_comparador_jubilados.html`).
+  - [x] Selector visual de velocidad de reproducción de voz (`1x`, `1.5x`, `2x`) activo en Web Speech API.
+  - [x] Motor en JavaScript dentro del navegador que replique la simulación de 1,000 réplicas en $< 20\text{ ms}$ en cualquier dispositivo.
+  - [x] Suite de pruebas unitarias automatizadas (`test_simulador_montecarlo.py` y suite web) con 100% de éxito.

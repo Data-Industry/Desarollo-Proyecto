@@ -72,6 +72,7 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 | **Fase 6: Despliegue** | `SCRUM-50` | `US-35` | Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción | 5 | **Completada (Sprint 5 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-53` | `US-38` | Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural | 8 | **Completada (Sprint 6 - Daniel)** |
 | **Fase 6: Despliegue** | `SCRUM-54` | `US-39` | Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería) | 5 | **Completada (Sprint 6 - Daniel)** |
+| **Fase 4: Modelado & Optimización** | `SCRUM-56` | `US-42` | Simulación Estocástica de Inventarios de Cobertura (Monte Carlo García Dunna et al., 2013) y Controles de Audio | 5 | **Completada (Sprint 6 - Daniel)** |
 
 ### 2.2. Distribución y Capacidad por Sprints
 - **SCRUM Sprint 1 (Cerrado - 22 SP):** `SCRUM-28` (7 SP) + `SCRUM-15` (3 SP) + `SCRUM-27` (7 SP) + `SCRUM-36` (5 SP) = **22 Story Points**.
@@ -79,8 +80,8 @@ El proyecto sigue el estándar **CRISP-DM** en 6 fases, sincronizado 1:1 con **J
 - **SCRUM Sprint 3 (Cerrado al 100% - 21 SP):** `SCRUM-37` (5 SP) + `SCRUM-24` (3 SP) + `SCRUM-9` (8 SP) + `SCRUM-44` (5 SP) = **21 Story Points**.
 - **SCRUM Sprint 4 (Cerrado al 100% - 21 SP):** `US-30` (3 SP) + `US-31` (5 SP) + `US-32` (5 SP) + `US-33` (8 SP) = **21 Story Points**.
 - **SCRUM Sprint 5 (Cerrado al 100% - 21 SP):** `SCRUM-49` (5 SP) + `SCRUM-50` (5 SP) + `SCRUM-51` (8 SP) + `SCRUM-52` (3 SP) = **21 Story Points**.
-- **SCRUM Sprint 6 (Activo / En curso - 21 SP):** `SCRUM-53` (8 SP) + `SCRUM-54` (5 SP) + `SCRUM-55` (5 SP) + `SCRUM-38` (3 SP) = **21 Story Points** (13 SP completados, 8 SP planificados).
-- **Total Proyecto:** 25 Historias Activas | **131 Story Points** (123 SP completados, 8 SP planificados).
+- **SCRUM Sprint 6 (Activo / En curso - 26 SP):** `SCRUM-53` (8 SP) + `SCRUM-54` (5 SP) + `SCRUM-56` (5 SP) + `SCRUM-55` (5 SP) + `SCRUM-38` (3 SP) = **26 Story Points** (18 SP completados, 8 SP planificados).
+- **Total Proyecto:** 26 Historias Activas | **136 Story Points** (128 SP completados, 8 SP planificados).
 
 ---
 
@@ -97,6 +98,7 @@ Proyecto Integrador/
 │   ├── scraping/             # Scrapers de farmacias (Farmacorp, Chávez, Telchi)
 │   ├── etl/                  # Pipelines ETL de insulinas e importaciones aduaneras
 │   ├── models/               # Scripts de entrenamiento, inferencia y evaluación ML
+│   ├── optimization/         # Simulación estocástica de inventarios Monte Carlo (García Dunna et al., 2013)
 │   └── chatbot/              # Backend conversacional y conectores de chat
 ├── AGENT.md                  # Este documento (Contexto, lineamientos y bitácora obligatoria)
 ├── tablero_jira.md           # Resumen detallado del backlog de Jira
@@ -201,6 +203,8 @@ flowchart TD
 | **#035** | `54fe992` | Docs / Master | Sprint 6 | 2026-11-20 | Documentación maestra integral del proyecto (`docs/DOCUMENTACION_MAESTRA_SISTEMA_INSULINA.md`) y artefacto de sesión: arquitectura end-to-end, fuentes de datos, catálogo de 13 funcionalidades web/chatbot, métricas de ML, validación psicométrica SUS 78.04 y guion de defensa en clase de 5 minutos. | Documentación técnica y estratégica consolidada para presentación académica y traspaso. |
 | **#036** | `af9c354` | Docs / Sync | Sprint 6 | 2026-11-20 | Registro de entrega de documentación maestra en bitácora AGENT.md. | Trazabilidad de documentación maestra sincronizada en bitácora. |
 | **#037** | `50f6022` | Docs / PDF & ML | Sprint 6 | 2026-11-20 | Generación de Documentación Maestra en PDF (`docs/DOCUMENTACION_MAESTRA_SISTEMA_INSULINA.pdf`, 590 KB) y Dossier Técnico de Inteligencia Artificial y Machine Learning en PDF (`docs/DOSSIER_TECNICO_MACHINE_LEARNING_DEFENSA.pdf`, 1.78 MB) con 8 gráficos reales incrustados, formulación matemática, matriz 43x69, validación estratificada, optimización de umbrales clínicos ($F_2$-Score, Recall 100%), explicabilidad XAI y 10 preguntas de defensa para el tribunal de IA. | 100% verificado: 2 PDFs de alta resolución generados con Playwright y Chromium headless, aptos para lectura móvil y defensa presencial, y sincronizados en brain/. |
+| **#038** | `648f111` | Docs / Sync | Sprint 6 | 2026-11-20 | Registro de hashes git de entregables PDF en bitácora AGENT.md y consolidación de trazabilidad. | Trazabilidad alineada con GitHub origin/main. |
+| **#039** | *(pendiente)* | `US-42` (`SCRUM-56`) | Sprint 6 | 2026-11-24 | Simulación estocástica de cobertura de inventarios de insulina (1.000 réplicas Monte Carlo, normal truncada Box-Muller, IC 95% y política de reorden anti-aglomeraciones de Banco Unión según García Dunna et al., 2013) e integración de controles ergonómicos de audio (detención inmediata en cabecera, tarjetas y chat, y velocidades 1x/1.5x/2x). | 100% verificado: 141/141 pruebas unitarias aprobadas (8/8 en test_simulador_montecarlo.py + 6/6 en test_07_audio_y_simulacion_web.py), ejecución client-side <15ms, sincronización en HTMLs y docs/20_simulador_estocastico_inventarios_montecarlo_us42.md. |
 
 ---
 
@@ -211,8 +215,9 @@ flowchart TD
   2. `SCRUM-50` (`US-35`, 5 SP): Despliegue Continuo (CI/CD) y Hosting Web Gratuito en Producción (GitHub Pages). **[Finalizada - Daniel Molina]**
   3. `SCRUM-52` (`US-37`, 3 SP): Automatización del Pipeline de Datos Frescos para la Web Pública. **[Finalizada - Mía Wayar]**
   4. `SCRUM-51` (`US-36`, 8 SP): Documento Metodológico y Validación del Emprendimiento (Capítulos 1.1 al 3.4). **[Finalizada - Equipo Emprendedor]**
-- **SCRUM Sprint 6 (21 Story Points):** **ACTIVO / EN CURSO (13/21 SP COMPLETADOS)**:
+- **SCRUM Sprint 6 (26 Story Points):** **ACTIVO / EN CURSO (18/26 SP COMPLETADOS)**:
   1. `SCRUM-53` (`US-38`, 8 SP): Desarrollo del Asistente Conversacional (Chatbot) en Lenguaje Natural. **[Finalizada - Daniel Molina]**
   2. `SCRUM-54` (`US-39`, 5 SP): Despliegue e Integración del Chatbot a Costo $0 (Widget Web + Canal Mensajería). **[Finalizada - Daniel Molina]**
-  3. `SCRUM-55` (`US-40`, 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Por hacer - Mía Wayar]**
-  4. `SCRUM-38` (`US-41`, 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Por hacer - Mía Wayar]**
+  3. `SCRUM-56` (`US-42`, 5 SP): Simulación Estocástica de Inventarios de Cobertura (Monte Carlo García Dunna et al., 2013) y Control Ergonómico de Audio. **[Finalizada - Daniel Molina]**
+  4. `SCRUM-55` (`US-40`, 5 SP): Documento Metodológico y Modelo de Negocio (Capítulos 3.5 al 5.4 - Integrado). **[Planificada - Mía Wayar]**
+  5. `SCRUM-38` (`US-41`, 3 SP): Evaluación Formal de Modelos Predictivos y Calibración de Recall (>= 90%). **[Planificada - Mía Wayar]**
