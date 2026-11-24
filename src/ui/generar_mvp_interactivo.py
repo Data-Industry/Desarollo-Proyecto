@@ -1065,6 +1065,10 @@ def construir_html_mvp(
                     <span class="text-slate-300">•</span>
                     <span class="text-slate-500">Bs ${{info.precio_por_100ui_bs.toFixed(2)}} por 100 UI</span>
                   </div>
+                  <div class="text-[11px] text-slate-500 flex items-center gap-1">
+                    <span>Riesgo predecido:</span>
+                    <strong class="text-slate-700">${{(info.probabilidad_riesgo * 100).toFixed(1)}}%</strong>
+                  </div>
                   ${{info.stock_advertencia ? `<span class="text-[11px] text-amber-800 font-semibold block">${{info.stock_advertencia}}</span>` : ''}}
                 </div>
                 <div class="text-right shrink-0">
