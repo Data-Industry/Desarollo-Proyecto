@@ -215,7 +215,7 @@ flowchart TD
 | **#047** | `91912e5` | `US-34` (UI/UX) | Sprint 6 | 2026-11-24 | Simplificación y condensación ergonómica de las tarjetas del catálogo para adultos mayores: eliminación de sobrecarga numérica y tecnicismos (se retiró el porcentaje de riesgo predictivo y timestamps crudos de la vista principal), adopción de estados en lenguaje humano (🟢 Disponible, 🔴 Agotado en esta farmacia, 🟡 Pocas unidades), limpieza del encabezado y enlaces directos a farmacias. | 100% verificado: 156/156 pruebas unitarias aprobadas, estética limpia, legible y sin fricción cognitiva. |
 | **#048** | `76b36db` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 91912e5 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 | **#049** | `4970e66` | `US-34` / `US-05` | Sprint 6 | 2026-11-24 | Reintegración de mención limpia y minimalista del resultado de Machine Learning en las tarjetas del catálogo (`Riesgo predecido: XX.X%`): equilibra la ergonomía visual para el adulto mayor con la visibilidad del componente de Inteligencia Artificial para la defensa académica. | 100% verificado: 156/156 pruebas unitarias aprobadas, diseño armonioso y sin etiquetas técnicas complejas. |
-| **#050** | *(pendiente)* | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 4970e66 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#050** | `4e8e954` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 4970e66 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 
 ---
 
