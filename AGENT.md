@@ -208,7 +208,9 @@ flowchart TD
 | **#040** | `fea350f` | Ops / Compat | Sprint 6 | 2026-11-24 | Rebase con rama remota tras entrega de SCRUM-38 por Mía, compatibilidad universal Matplotlib en evaluación formal y renumeración a docs/21 y test_08 para US-42. | 154/154 pruebas unitarias aprobadas (100% éxito en todo el proyecto). |
 | **#041** | `7a87d9a` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hashes 98feba8 y fea350f en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 | **#042** | `f68ecf3` | `US-34` / `US-42` | Sprint 6 | 2026-11-24 | Retiro de panel técnico vacío en cabecera (reubicación en footer con snapshot real), restauración y corrección de audio de bienvenida accesible (1x, 1.5x, 2x y botón dedicado), y simplificación radical a lenguaje humano senior-friendly en simulación de inventarios (cero tecnicismos). | 100% verificado: 156/156 pruebas unitarias aprobadas (8/8 en test_08_audio_y_simulacion_web.py) y sincronización universal de páginas HTML. |
-| **#043** | *(pendiente)* | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash f68ecf3 en bitacora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#043** | `3b2fc17` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash f68ecf3 en bitacora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#044** | `5268fbc` | `US-34` / `US-37` | Sprint 6 | 2026-11-24 | Corrección de sintaxis JS en renderizado de catálogo y calculadora, unificación del botón de bienvenida en cabecera (🔊 Bienvenida) al lado de Detener, eliminación de botones redundantes en banner, refresco automatizado de datos frescos del día (scraping 24-11-2026: Farmacorp 26, Chávez 20, Telchi 6) y reentrenamiento y calibración de modelos. | 100% verificado: 156/156 pruebas unitarias aprobadas, catálogo de 24 presentaciones y 16 sucursales 100% operativo, cero errores de consola. |
+| **#045** | *(pendiente)* | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 5268fbc en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 
 ---
 
