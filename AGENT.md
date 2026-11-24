@@ -213,7 +213,7 @@ flowchart TD
 | **#045** | `931c1fd` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 5268fbc en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 | **#046** | `574c440` | Docs / Sync | Sprint 6 | 2026-11-24 | Consolidación de hash 931c1fd en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 | **#047** | `91912e5` | `US-34` (UI/UX) | Sprint 6 | 2026-11-24 | Simplificación y condensación ergonómica de las tarjetas del catálogo para adultos mayores: eliminación de sobrecarga numérica y tecnicismos (se retiró el porcentaje de riesgo predictivo y timestamps crudos de la vista principal), adopción de estados en lenguaje humano (🟢 Disponible, 🔴 Agotado en esta farmacia, 🟡 Pocas unidades), limpieza del encabezado y enlaces directos a farmacias. | 100% verificado: 156/156 pruebas unitarias aprobadas, estética limpia, legible y sin fricción cognitiva. |
-| **#048** | *(pendiente)* | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 91912e5 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
+| **#048** | `76b36db` | Docs / Sync | Sprint 6 | 2026-11-24 | Registro de hash 91912e5 en bitácora AGENT.md. | Trazabilidad alineada con GitHub origin/main. |
 
 ---
 
