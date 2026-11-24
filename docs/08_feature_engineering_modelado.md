@@ -113,15 +113,15 @@ La muestra es pequeña y estas cifras no permiten afirmar que precio, volumen o 
 |---|---:|
 | filas del dataset final | 43 |
 | columnas totales | 69 |
-| target 0 | 35 |
-| target 1 | 8 |
-| porcentaje positivo | 18.6% |
+| target 0 | 37 |
+| target 1 | 6 |
+| porcentaje positivo | 14.0% |
 | variables con variación para correlación (sin target) | 8 |
 | variables numéricas constantes | 25 |
-| valores faltantes finales | 43 |
+| valores faltantes finales | 215 |
 | cobertura de lags | 100.0% |
 | cobertura de tipo de cambio | 100.0% |
-| cobertura de calendario | 100.0% |
+| cobertura de calendario | 0.0% |
 | cobertura geográfica a nivel producto | 0.0% |
 
 Variables constantes actuales: kilos_netos_lag_0m, kilos_netos_lag_1m, kilos_netos_lag_2m, kilos_netos_lag_3m, valor_cif_usd_lag_0m, valor_cif_usd_lag_1m, valor_cif_usd_lag_2m, valor_cif_usd_lag_3m, viales_estimados_lag_0m, viales_estimados_lag_1m, viales_estimados_lag_2m, viales_estimados_lag_3m, ui_estimadas_lag_0m, ui_estimadas_lag_1m, ui_estimadas_lag_2m, ui_estimadas_lag_3m, tipo_cambio_promedio_bob_usd, tipo_cambio_cierre_bob_usd, tipo_cambio_minimo_bob_usd, tipo_cambio_maximo_bob_usd, variacion_intermensual_pct, dia_pago_renta, ventana_pago_renta_3d, distancia_dias_pago_renta, dia_pago_pension_oficial.

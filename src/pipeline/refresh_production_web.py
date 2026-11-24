@@ -664,6 +664,15 @@ def publish_bundle(html: str, manifest_text: str, paths: RefreshPaths) -> None:
         _atomic_write(paths.manifest_path, manifest_text.encode("utf-8"))
         # Artefacto público canónico: siempre se reemplaza al final.
         _atomic_write(paths.root_html, html.encode("utf-8"))
+        # Mantener sincronizadas las réplicas públicas de producción (index.html, docs/)
+        root_dir = paths.root_html.parent
+        index_root = root_dir / "index.html"
+        if index_root.exists() or root_dir == PROJECT_DIR:
+            _atomic_write(index_root, html.encode("utf-8"))
+        docs_dir = root_dir / "docs"
+        if docs_dir.exists():
+            _atomic_write(docs_dir / "index.html", html.encode("utf-8"))
+            _atomic_write(docs_dir / "mvp_jubilados_comparador.html", html.encode("utf-8"))
     except Exception as exc:
         try:
             _restore(paths.ui_html, previous_ui)

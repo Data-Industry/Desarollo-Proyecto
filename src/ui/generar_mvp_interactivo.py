@@ -66,9 +66,9 @@ def compilar_datos_reales(
 
     if not metadata:
         metadata = {
-            "data_as_of": "2026-11-20T12:27:52+00:00",
-            "generated_at": "2026-11-20T12:32:19+00:00",
-            "source_snapshot": {"filename": "insulina_precios_stock_20261120_082712.csv"},
+            "data_as_of": "2026-11-24T15:32:29+00:00",
+            "generated_at": "2026-11-24T15:33:21+00:00",
+            "source_snapshot": {"filename": "insulina_precios_stock_20261124_113150.csv"},
         }
 
     if df_master is None and not master_path.exists():
@@ -319,15 +319,25 @@ def construir_html_mvp(
     sucursales_json = json.dumps(sucursales, ensure_ascii=False, sort_keys=True)
     resumen_json = json.dumps(resumen, ensure_ascii=False, sort_keys=True)
     metadata_json = json.dumps(metadata, ensure_ascii=False, sort_keys=True)
-    generated_at = str(metadata.get("generated_at", "")) or "2026-11-20T12:32:19+00:00"
-    data_as_of = str(metadata.get("data_as_of", "")) or "2026-11-20T12:27:52+00:00"
-    source_name = str(metadata.get("source_snapshot", {}).get("filename", "")) or "insulina_precios_stock_20261120_082712.csv"
+    generated_at = str(metadata.get("generated_at", "")) or "2026-11-24T15:33:21+00:00"
+    data_as_of = str(metadata.get("data_as_of", "")) or "2026-11-24T15:32:29+00:00"
+    source_name = str(metadata.get("source_snapshot", {}).get("filename", "")) or "insulina_precios_stock_20261124_113150.csv"
     if generated_at == "No disponible":
-        generated_at = "2026-11-20T12:32:19+00:00"
+        generated_at = "2026-11-24T15:33:21+00:00"
     if data_as_of == "No disponible":
-        data_as_of = "2026-11-20T12:27:52+00:00"
+        data_as_of = "2026-11-24T15:32:29+00:00"
     if source_name == "No disponible":
-        source_name = "insulina_precios_stock_20261120_082712.csv"
+        source_name = "insulina_precios_stock_20261124_113150.csv"
+
+    meses_es = [
+        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    ]
+    try:
+        dt_corte = datetime.fromisoformat(data_as_of.replace("Z", "+00:00"))
+        texto_fecha_corte = f"{dt_corte.day} de {meses_es[dt_corte.month - 1]} de {dt_corte.year}"
+    except Exception:
+        texto_fecha_corte = "24 de noviembre de 2026"
 
     return f"""<!DOCTYPE html>
 <html lang="es" class="scroll-smooth" style="font-size: 16px;">
@@ -433,11 +443,11 @@ def construir_html_mvp(
           <span>🔍➕</span> Agrandar letra
         </button>
         <div class="flex items-center gap-1 border-l border-emerald-500/40 pl-1.5 sm:pl-2">
-          <button id="btnAudioResumen" onclick="leerResumenVoz()" class="px-2.5 py-1.5 rounded-lg bg-[#fef3c7] text-[#78350f] border border-[#fde68a] font-extrabold text-xs md:text-sm flex items-center gap-1 hover:bg-[#fde68a] focus-ring transition-scale" title="Escuchar resumen en audio">
-            <span>🔊</span> <span class="hidden md:inline">Léeme</span>
+          <button id="btnAudioBienvenida" onclick="leerResumenVoz()" class="px-2.5 py-1.5 rounded-lg bg-[#fef3c7] text-[#78350f] border border-[#fde68a] font-extrabold text-xs md:text-sm flex items-center gap-1 hover:bg-[#fde68a] focus-ring transition-scale" title="Escuchar mensaje de bienvenida en voz alta" aria-label="Escuchar mensaje de bienvenida">
+            <span>🔊</span> <span>Bienvenida</span>
           </button>
-          <button id="btnDetenerAudioHeader" onclick="detenerAudio()" class="px-2 py-1.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300 font-extrabold text-xs md:text-sm flex items-center gap-1 hover:bg-rose-200 focus-ring transition-scale" title="Detener audio en cualquier momento">
-            <span>⏹️</span> <span class="hidden md:inline">Detener</span>
+          <button id="btnDetenerAudioHeader" onclick="detenerAudio()" class="px-2 py-1.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300 font-extrabold text-xs md:text-sm flex items-center gap-1 hover:bg-rose-200 focus-ring transition-scale" title="Detener audio en cualquier momento" aria-label="Detener audio">
+            <span>⏹️</span> <span>Detener</span>
           </button>
           <!-- Selector de velocidad de voz x1, x1.5, x2 (US-42) -->
           <div class="flex items-center gap-0.5 ml-1 bg-[#1b4332] p-0.5 rounded-lg border border-emerald-500/40" title="Velocidad de reproducción de voz">
@@ -457,23 +467,16 @@ def construir_html_mvp(
     <!-- BANNER DE BIENVENIDA LIMPIO Y EMPÁTICO -->
     <section class="card-pastel rounded-2xl p-5 md:p-6 border border-emerald-200/90 bg-[#f4f9f5] flex flex-col md:flex-row gap-5 items-center justify-between" aria-labelledby="sec-resumen">
       <div class="space-y-2">
-        <div class="flex flex-wrap items-center gap-2">
+        <div>
           <h2 id="sec-resumen" class="text-lg md:text-2xl font-black text-[#1b4332] flex items-center gap-2">
             <span>👋</span> ¡Bienvenido! Compara precios y ahorra en tu insulina
           </h2>
-          <!-- Botones de voz accesibles en el encabezado del banner -->
-          <button type="button" id="btnAudioBienvenida" onclick="leerResumenVoz()" class="px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 text-xs md:text-sm font-extrabold border border-amber-300 flex items-center gap-1.5 shadow-2xs transition-scale" title="Escuchar mensaje de bienvenida en voz alta">
-            <span>🔊</span> <span>Escuchar bienvenida</span>
-          </button>
-          <button type="button" onclick="detenerAudio()" class="px-2.5 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs md:text-sm font-extrabold border border-rose-300 flex items-center gap-1 shadow-2xs transition-scale" title="Detener voz en cualquier momento">
-            <span>⏹️</span> <span>Detener</span>
-          </button>
         </div>
         <p class="text-slate-600 text-sm md:text-base leading-relaxed">
           Cada tarjeta agrupa un medicamento y te lista los precios de <strong class="text-slate-900">Farmacorp, Farmacias Chávez y Farmacias Telchi</strong>, destacando la opción más económica para proteger tu pensión.
         </p>
         <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-100/70 px-3 py-1 rounded-full border border-emerald-300">
-          <span>✓</span> Precios verificados en Santa Cruz de la Sierra • Corte al 20 de noviembre de 2026
+          <span>✓</span> Precios verificados en Santa Cruz de la Sierra • Corte al {texto_fecha_corte}
         </div>
       </div>
       <div class="flex flex-row md:flex-col gap-2.5 shrink-0">
@@ -1451,8 +1454,6 @@ def construir_html_mvp(
         <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs text-slate-700 leading-relaxed">
           💡 <strong>Consejo para tu tranquilidad:</strong> Con tu dosis de ${{dosis}} unidades al día, tu frasco de <strong>${{med.marca}}</strong> (${{capacidadUI}} UI) te brindará cobertura tranquila para más de un mes. Te aconsejamos comprar tu siguiente frasco alrededor del <strong>día ${{diaOptimo}} del mes</strong> en <strong>${{med.mejor_cadena}}</strong> para pagar el precio más económico (<strong>Bs ${{med.mejor_precio_bs.toFixed(2)}}</strong>, ahorrando hasta Bs ${{med.ahorro_max_bs.toFixed(2)}}) y evitar el cansancio y las colas de los primeros días de cobro de jubilaciones.
         </div>
-      `;
-    }}
       `;
     }}
 

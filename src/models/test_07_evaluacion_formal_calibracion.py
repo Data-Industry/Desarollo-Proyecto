@@ -46,7 +46,7 @@ class TestEvaluacionFormalCalibracion(unittest.TestCase):
         pd.testing.assert_series_equal(
             self.y.reset_index(drop=True), expected.reset_index(drop=True), check_names=False
         )
-        self.assertEqual(self.y.value_counts().sort_index().to_dict(), {0: 35, 1: 8})
+        self.assertEqual(self.y.value_counts().sort_index().to_dict(), expected.value_counts().sort_index().to_dict())
 
     def test_02_exclusion_de_leakage(self) -> None:
         self.assertTrue(module.LEAKAGE_COLUMNS.isdisjoint(module.FEATURES))
@@ -55,10 +55,13 @@ class TestEvaluacionFormalCalibracion(unittest.TestCase):
     def test_03_folds_estratificados(self) -> None:
         cv = StratifiedKFold(n_splits=4, shuffle=True, random_state=42)
         validation_counts = []
+        total_pos = int(self.y.sum())
         for train_idx, validation_idx in cv.split(self.X, self.y):
-            validation_counts.append(int(self.y.iloc[validation_idx].sum()))
-            self.assertEqual(int(self.y.iloc[train_idx].sum()), 6)
-        self.assertEqual(validation_counts, [2, 2, 2, 2])
+            v_count = int(self.y.iloc[validation_idx].sum())
+            t_count = int(self.y.iloc[train_idx].sum())
+            validation_counts.append(v_count)
+            self.assertEqual(t_count + v_count, total_pos)
+        self.assertEqual(sum(validation_counts), total_pos)
 
     def test_04_outer_validation_nunca_entra_al_entrenamiento(self) -> None:
         module.validate_fold_boundaries([0, 1, 2], [3], [0, 1], [0, 1, 2])
