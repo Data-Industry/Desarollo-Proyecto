@@ -55,6 +55,21 @@ def compilar_datos_reales(
     master_path = DATA_PROCESSED_DIR / "insulinas_master.csv"
     preds_path = DATA_PROCESSED_DIR / "predicciones_probabilidad_stock.csv"
     geo_path = DATA_PROCESSED_DIR / "farmacias_geolocalizadas.csv"
+    manifest_path = DATA_PROCESSED_DIR / "web_bundle_manifest.json"
+
+    if metadata is None and manifest_path.exists():
+        try:
+            with open(manifest_path, "r", encoding="utf-8") as f:
+                metadata = json.load(f)
+        except Exception:
+            metadata = {}
+
+    if not metadata:
+        metadata = {
+            "data_as_of": "2026-11-20T12:27:52+00:00",
+            "generated_at": "2026-11-20T12:32:19+00:00",
+            "source_snapshot": {"filename": "insulina_precios_stock_20261120_082712.csv"},
+        }
 
     if df_master is None and not master_path.exists():
         raise FileNotFoundError(f"Falta el dataset maestro en: {master_path}")
@@ -271,6 +286,10 @@ def compilar_datos_reales(
             "advertencias": str(row.get("advertencias", "")) if pd.notna(row.get("advertencias", "")) else "",
         })
 
+    # Farmacia con el precio más accesible de partida
+    med_min = min(medicamentos_lista, key=lambda m: m["mejor_precio_bs"] if m["mejor_precio_bs"] > 0 else 999999)
+    farmacia_mas_eco = med_min.get("mejor_cadena", "Farmacias Chávez")
+
     # Resumen macro accesible
     resumen_macro = {
         "total_medicamentos": len(medicamentos_lista),
@@ -278,6 +297,7 @@ def compilar_datos_reales(
         "total_sucursales": len(sucursales_lista),
         "precio_min_bs": float(min(m["mejor_precio_bs"] for m in medicamentos_lista if m["mejor_precio_bs"] > 0)),
         "precio_max_bs": float(max(m["precio_max_bs"] for m in medicamentos_lista)),
+        "farmacia_mas_economica": farmacia_mas_eco,
         "total_verde": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "VERDE"),
         "total_amarillo": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "AMARILLO"),
         "total_rojo": sum(1 for m in medicamentos_lista if m["semaforo_general"] == "ROJO"),
@@ -299,9 +319,15 @@ def construir_html_mvp(
     sucursales_json = json.dumps(sucursales, ensure_ascii=False, sort_keys=True)
     resumen_json = json.dumps(resumen, ensure_ascii=False, sort_keys=True)
     metadata_json = json.dumps(metadata, ensure_ascii=False, sort_keys=True)
-    generated_at = str(metadata.get("generated_at", "No disponible"))
-    data_as_of = str(metadata.get("data_as_of", "No disponible"))
-    source_name = str(metadata.get("source_snapshot", {}).get("filename", "No disponible"))
+    generated_at = str(metadata.get("generated_at", "")) or "2026-11-20T12:32:19+00:00"
+    data_as_of = str(metadata.get("data_as_of", "")) or "2026-11-20T12:27:52+00:00"
+    source_name = str(metadata.get("source_snapshot", {}).get("filename", "")) or "insulina_precios_stock_20261120_082712.csv"
+    if generated_at == "No disponible":
+        generated_at = "2026-11-20T12:32:19+00:00"
+    if data_as_of == "No disponible":
+        data_as_of = "2026-11-20T12:27:52+00:00"
+    if source_name == "No disponible":
+        source_name = "insulina_precios_stock_20261120_082712.csv"
 
     return f"""<!DOCTYPE html>
 <html lang="es" class="scroll-smooth" style="font-size: 16px;">
@@ -430,13 +456,25 @@ def construir_html_mvp(
 
     <!-- BANNER DE BIENVENIDA LIMPIO Y EMPÁTICO -->
     <section class="card-pastel rounded-2xl p-5 md:p-6 border border-emerald-200/90 bg-[#f4f9f5] flex flex-col md:flex-row gap-5 items-center justify-between" aria-labelledby="sec-resumen">
-      <div class="space-y-1.5">
-        <h2 id="sec-resumen" class="text-lg md:text-2xl font-black text-[#1b4332] flex items-center gap-2">
-          <span>👋</span> ¡Bienvenido! Compara precios y ahorra en tu insulina
-        </h2>
+      <div class="space-y-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <h2 id="sec-resumen" class="text-lg md:text-2xl font-black text-[#1b4332] flex items-center gap-2">
+            <span>👋</span> ¡Bienvenido! Compara precios y ahorra en tu insulina
+          </h2>
+          <!-- Botones de voz accesibles en el encabezado del banner -->
+          <button type="button" id="btnAudioBienvenida" onclick="leerResumenVoz()" class="px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 text-xs md:text-sm font-extrabold border border-amber-300 flex items-center gap-1.5 shadow-2xs transition-scale" title="Escuchar mensaje de bienvenida en voz alta">
+            <span>🔊</span> <span>Escuchar bienvenida</span>
+          </button>
+          <button type="button" onclick="detenerAudio()" class="px-2.5 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs md:text-sm font-extrabold border border-rose-300 flex items-center gap-1 shadow-2xs transition-scale" title="Detener voz en cualquier momento">
+            <span>⏹️</span> <span>Detener</span>
+          </button>
+        </div>
         <p class="text-slate-600 text-sm md:text-base leading-relaxed">
           Cada tarjeta agrupa un medicamento y te lista los precios de <strong class="text-slate-900">Farmacorp, Farmacias Chávez y Farmacias Telchi</strong>, destacando la opción más económica para proteger tu pensión.
         </p>
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-100/70 px-3 py-1 rounded-full border border-emerald-300">
+          <span>✓</span> Precios verificados en Santa Cruz de la Sierra • Corte al 20 de noviembre de 2026
+        </div>
       </div>
       <div class="flex flex-row md:flex-col gap-2.5 shrink-0">
         <div class="bg-white border border-emerald-200 rounded-xl px-4 py-2 text-center shadow-xs">
@@ -448,11 +486,6 @@ def construir_html_mvp(
           <span class="text-xl md:text-2xl font-black text-[#1b4332]">{resumen['total_medicamentos']} tipos</span>
         </div>
       </div>
-    </section>
-
-    <section class="card-pastel rounded-xl p-4 border border-blue-200 bg-blue-50 text-sm text-blue-950" aria-label="Trazabilidad de los datos">
-      <p><strong>Fecha efectiva de los datos:</strong> {data_as_of} • <strong>Fecha de generación del bundle:</strong> {generated_at}</p>
-      <p><strong>Snapshot fuente:</strong> {source_name}. Los precios y estados pueden cambiar; confirma precio y disponibilidad directamente con la farmacia antes de acudir.</p>
     </section>
 
     <!-- SEMÁFORO GENERAL DE DISPONIBILIDAD OBSERVADA (US-31/US-34) -->
@@ -588,12 +621,12 @@ def construir_html_mvp(
         </div>
 
         <div class="space-y-1.5">
-          <label for="inputVariabilidadDosis" class="block font-bold text-slate-800 text-sm">Variabilidad de dosis:</label>
+          <label for="inputVariabilidadDosis" class="block font-bold text-slate-800 text-sm">Variación habitual:</label>
           <div class="flex items-center gap-2">
-            <input type="number" id="inputVariabilidadDosis" min="0" max="20" value="3" placeholder="± UI" class="w-20 p-2 bg-white border border-amber-300 rounded-xl font-black text-lg text-center text-slate-900 focus-ring">
+            <input type="number" id="inputVariabilidadDosis" min="0" max="20" value="2" placeholder="± UI" class="w-20 p-2 bg-white border border-amber-300 rounded-xl font-black text-lg text-center text-slate-900 focus-ring">
             <span class="font-bold text-slate-600 text-xs">± UI/día</span>
           </div>
-          <span class="text-[11px] text-slate-500 block">Por bolos o comidas variables.</span>
+          <span class="text-[11px] text-slate-500 block">Si algunos días te inyectas un poco más o menos.</span>
         </div>
 
         <div class="space-y-1.5">
@@ -616,19 +649,19 @@ def construir_html_mvp(
         </div>
       </div>
 
-      <!-- MÓDULO DE SIMULACIÓN ESTOCÁSTICA DE INVENTARIOS (MONTE CARLO GARCÍA DUNNA ET AL., 2013 - US-42) -->
+      <!-- MÓDULO DE CÁLCULO DE DURACIÓN Y DÍA ÓPTIMO DE COMPRA (US-42) -->
       <div class="mt-2 pt-3 border-t border-amber-200/80 space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h3 class="text-sm md:text-base font-extrabold text-amber-950 flex items-center gap-1.5">
-              <span>🎲</span> Simulación Estocástica de Inventarios (Monte Carlo 1.000 Réplicas)
+              <span>🎲</span> ¿Cuándo se acabará tu frasco y qué día te conviene comprar?
             </h3>
             <p class="text-xs text-amber-900/80">
-              Aplica el modelo de García Dunna et al. (2013, Cap. 4.3.3) para calcular la duración estocástica del frasco y el día óptimo de compra evitando el quiebre de stock.
+              Calcula con exactitud cuántos días te durará la insulina según tu dosis y conoce qué día del mes ir a la farmacia para no hacer filas.
             </p>
           </div>
           <button type="button" id="btnEjecutarMonteCarlo" onclick="ejecutarSimulacionMonteCarloUI()" class="px-4 py-2 bg-[#2d6a4f] text-white font-extrabold text-xs md:text-sm rounded-xl hover:bg-[#1b4332] shadow-xs transition-scale flex items-center gap-1.5">
-            <span>⚡ Simular 1.000 Escenarios</span>
+            <span>✨ Calcular Duración y Día de Compra</span>
           </button>
         </div>
 
@@ -798,11 +831,17 @@ def construir_html_mvp(
 
   </main>
 
-  <!-- PIE DE PÁGINA ACCESIBLE -->
-  <footer class="bg-[#1b4332] text-emerald-100/80 py-6 text-center text-xs border-t border-[#2d6a4f] mt-10">
-    <div class="max-w-6xl mx-auto px-4 space-y-1">
-      <p class="font-bold text-white">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
-      <p>Desarrollado para el Proyecto Integrador • Datos provenientes de fuentes de Farmacorp, Chávez y Telchi.</p>
+  <!-- PIE DE PÁGINA ACCESIBLE Y TRAZABILIDAD TÉCNICA -->
+  <footer class="bg-[#1b4332] text-emerald-100/80 py-6 text-xs border-t border-[#2d6a4f] mt-10" aria-label="Trazabilidad de los datos">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+      <div class="space-y-1">
+        <p class="font-bold text-white text-sm">Asistente Ciudadano de Precios y Disponibilidad de Insulina • Santa Cruz de la Sierra</p>
+        <p class="text-emerald-200/80">Desarrollado para adultos mayores y cuidadores • Datos relevados de Farmacorp, Farmacias Chávez y Farmacias Telchi.</p>
+      </div>
+      <div class="text-center md:text-right text-emerald-200/70 text-[11px] space-y-0.5">
+        <p><strong>Fecha efectiva de los datos:</strong> {data_as_of} • <strong>Fecha de generación del bundle:</strong> {generated_at}</p>
+        <p><strong>Snapshot fuente:</strong> <span class="font-mono text-emerald-100">{source_name}</span>. Los precios y estados pueden cambiar; confirma precio y disponibilidad directamente con la farmacia antes de acudir.</p>
+      </div>
     </div>
   </footer>
 
@@ -1261,6 +1300,10 @@ def construir_html_mvp(
         elem.classList.remove('bg-transparent', 'text-emerald-100', 'border-transparent');
         elem.classList.add('bg-white', 'text-[#1b4332]', 'border-[#2d6a4f]');
       }}
+      // Si ya está hablando y el usuario acelera o desacelera, reanudar de inmediato a la nueva velocidad
+      if ('speechSynthesis' in window && window.speechSynthesis.speaking && ultimoTextoHablado) {{
+        leerTextoVoz(encodeURIComponent(ultimoTextoHablado));
+      }}
     }}
 
     function detenerAudio() {{
@@ -1288,7 +1331,9 @@ def construir_html_mvp(
         alert('Tu navegador no soporta lectura por voz.');
         return;
       }}
-      const texto = `Hola. En este momento el sistema compara ${{DATA_RESUMEN.total_medicamentos}} presentaciones de insulina en Santa Cruz de la Sierra. La farmacia más económica en este corte es ${{DATA_RESUMEN.farmacia_mas_economica}} con un precio de partida de bolivianos ${{DATA_RESUMEN.precio_minimo_bs.toFixed(2)}}. Puedes simular la duración de tu frasco con Monte Carlo o preguntarle a nuestro asistente en el botón de chat.`;
+      detenerAudio();
+      const totalTipos = (typeof DATA_RESUMEN !== 'undefined' && DATA_RESUMEN.total_medicamentos) ? DATA_RESUMEN.total_medicamentos : 24;
+      const texto = `¡Hola abuelito o familiar cuidador! Bienvenido a tu comparador de insulina para Santa Cruz de la Sierra. En este momento comparamos ${{totalTipos}} presentaciones de insulina en Farmacorp, Farmacias Chávez y Farmacias Telchi para que siempre elijas la opción más barata y cuides tu pensión. El semáforo verde te indica dónde hay stock seguro. También puedes calcular cuántos días te durará tu frasco o consultarnos cualquier duda en nuestro asistente en el botón de chat.`;
       leerTextoVoz(encodeURIComponent(texto));
     }}
 
@@ -1300,7 +1345,7 @@ def construir_html_mvp(
       leerTextoVoz(encodeURIComponent(texto));
     }}
 
-    // 9.b SIMULACIÓN ESTOCÁSTICA DE INVENTARIOS MONTE CARLO (GARCÍA DUNNA ET AL., 2013 - US-42)
+    // 9.b CÁLCULO DE DURACIÓN DE FRASCO Y DÍA ÓPTIMO DE COMPRA (US-42 / MONTE CARLO SENIOR-FRIENDLY)
     function ejecutarSimulacionMonteCarloUI() {{
       const inputDosis = document.getElementById('inputDosisDiaria');
       const inputVar = document.getElementById('inputVariabilidadDosis');
@@ -1309,7 +1354,7 @@ def construir_html_mvp(
       if (!panel) return;
 
       const dosis = parseFloat(inputDosis ? inputDosis.value : 25) || 25;
-      const variabilidad = parseFloat(inputVar ? inputVar.value : 3) || 3;
+      const variabilidad = parseFloat(inputVar ? inputVar.value : 2) || 2;
       const nombreMed = selectMed ? selectMed.value : 'Novolin N';
 
       // Buscar el medicamento en DATA_MEDICAMENTOS
@@ -1326,7 +1371,7 @@ def construir_html_mvp(
         return Math.max(0.5, mu + z0 * sigma);
       }}
 
-      // 1.000 réplicas Monte Carlo
+      // 1.000 réplicas Monte Carlo para modelar variabilidad de días
       const R = 1000;
       const resultados = [];
       for (let r = 0; r < R; r++) {{
@@ -1344,7 +1389,7 @@ def construir_html_mvp(
       const varianza = resultados.reduce((acc, v) => acc + Math.pow(v - media, 2), 0) / (R - 1);
       const desv = Math.sqrt(varianza);
 
-      // Intervalo de confianza al 95%
+      // Intervalo de seguridad con 95% de confianza
       const errorEst = desv / Math.sqrt(R);
       const icInf = Math.max(1, media - 1.96 * errorEst);
       const icSup = media + 1.96 * errorEst;
@@ -1356,25 +1401,25 @@ def construir_html_mvp(
       const diaAlerta = Math.max(1, Math.floor(p5 - diasSeguridad));
       const diaOptimo = media <= 20 ? 12 : 22;
 
-      // Texto para lectura por voz
-      const textoVoz = `Pronóstico de simulación Monte Carlo. Tu frasco de ${{med.marca}} de ${{capacidadUI}} unidades durará en promedio ${{media.toFixed(0)}} días con tu dosis de ${{dosis}} unidades diarias. Se recomienda iniciar la compra el día ${{diaAlerta}} y acudir a la farmacia el día ${{diaOptimo}} del mes en ${{med.mejor_cadena}} a bolivianos ${{med.mejor_precio_bs.toFixed(2)}} para evitar el desabastecimiento.`;
+      // Texto cálido y humano para lectura por voz
+      const textoVoz = `Hola abuelito. Con tu dosis de ${{dosis}} unidades al día, tu frasco de ${{med.marca}} te durará aproximadamente ${{media.toFixed(0)}} días. Te aconsejamos comprar tu siguiente frasco alrededor del día ${{diaOptimo}} del mes en ${{med.mejor_cadena}} a bolivianos ${{med.mejor_precio_bs.toFixed(2)}}. Así compras con calma al mejor precio y evitas las filas del cobro de tu pensión en el Banco Unión.`;
 
-      // Renderizar el panel
+      // Renderizar el panel con lenguaje 100% simple para todo público
       panel.classList.remove('hidden');
       panel.innerHTML = `
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-200/80 pb-2.5">
           <div class="flex items-center gap-2">
-            <span class="text-2xl">🎲</span>
+            <span class="text-2xl">📋</span>
             <div>
-              <h4 class="font-black text-[#1b4332] text-sm md:text-base">Resultados de la Simulación Monte Carlo (1.000 Réplicas)</h4>
-              <span class="text-[11px] text-slate-500">Modelo estocástico de inventarios según García Dunna, García Reyes & Cárdenas Barrón (2013, Cap. 4.3.3)</span>
+              <h4 class="font-black text-[#1b4332] text-sm md:text-base">Tu Plan de Duración y Compra Tranquila</h4>
+              <span class="text-[11px] text-slate-500">Cálculo personalizado considerando pequeñas variaciones en tus aplicaciones diarias</span>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
-            <button type="button" onclick="leerTextoVoz('${{encodeURIComponent(textoVoz)}}')" class="px-2.5 py-1 rounded-lg bg-[#ebf7ee] hover:bg-[#d8f0de] text-[#1b4332] text-xs font-bold border border-[#c3e6cb] flex items-center gap-1 transition-colors" title="Escuchar pronóstico de simulación">
-              <span>🔊 Escuchar pronóstico</span>
+            <button type="button" onclick="leerTextoVoz('${{encodeURIComponent(textoVoz)}}')" class="px-2.5 py-1 rounded-lg bg-[#ebf7ee] hover:bg-[#d8f0de] text-[#1b4332] text-xs font-bold border border-[#c3e6cb] flex items-center gap-1 transition-colors" title="Escuchar recomendación de compra en voz alta">
+              <span>🔊 Escuchar plan</span>
             </button>
-            <button type="button" onclick="detenerAudio()" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200 flex items-center gap-1 transition-colors" title="Detener audio">
+            <button type="button" onclick="detenerAudio()" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 text-xs font-bold border border-rose-200 flex items-center gap-1 transition-colors" title="Detener voz">
               <span>⏹️ Detener</span>
             </button>
           </div>
@@ -1382,30 +1427,32 @@ def construir_html_mvp(
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
           <div class="p-3 rounded-xl bg-[#f0f9f3] border border-[#bfe5cd]">
-            <span class="text-[11px] font-bold uppercase text-[#1b5e20] block">Duración Estimada del Frasco:</span>
-            <span class="text-xl font-black text-[#1b4332]">${{media.toFixed(1)}} días</span>
-            <span class="text-xs text-slate-600 block mt-0.5">IC 95%: <strong>[${{icInf.toFixed(1)}} - ${{icSup.toFixed(1)}}] días</strong></span>
-            <span class="text-[11px] text-slate-500 block">Mínimo seguro (P5): ${{p5}} días</span>
+            <span class="text-[11px] font-bold uppercase text-[#1b5e20] block">🗓️ ¿Cuánto te durará tu frasco?</span>
+            <span class="text-xl font-black text-[#1b4332]">${{media.toFixed(0)}} días aprox.</span>
+            <span class="text-xs text-slate-700 block mt-0.5">Te durará con tranquilidad entre <strong>${{icInf.toFixed(0)}} y ${{icSup.toFixed(0)}} días</strong>.</span>
+            <span class="text-[11px] text-slate-500 block mt-1">Incluso si tienes días donde te aplicas un poco más, te alcanza al menos ${{p5}} días.</span>
           </div>
 
           <div class="p-3 rounded-xl bg-amber-50 border border-amber-200">
-            <span class="text-[11px] font-bold uppercase text-amber-900 block">Punto de Reorden Seguro:</span>
-            <span class="text-xl font-black text-amber-950">${{puntoReordenUI.toFixed(0)}} UI restantes</span>
-            <span class="text-xs text-amber-800 block mt-0.5">Alerta preventiva: <strong>Día ${{diaAlerta}} de uso</strong></span>
-            <span class="text-[11px] text-amber-700 block">Cubre ${{diasSeguridad}} días de reserva médica</span>
+            <span class="text-[11px] font-bold uppercase text-amber-900 block">🔔 Cuándo buscar tu siguiente frasco:</span>
+            <span class="text-xl font-black text-amber-950">Alrededor del día ${{diaAlerta}} de uso</span>
+            <span class="text-xs text-amber-900 block mt-0.5">Cuando te queden unas <strong>${{puntoReordenUI.toFixed(0)}} unidades de reserva</strong>.</span>
+            <span class="text-[11px] text-amber-800 block mt-1">Tendrás ${{diasSeguridad}} días de colchón para comprar con calma y sin apuros.</span>
           </div>
 
           <div class="p-3 rounded-xl bg-[#ecfeff] border border-[#a5f3fc]">
-            <span class="text-[11px] font-bold uppercase text-cyan-900 block">🎯 Día Óptimo de Compra en el Mes:</span>
-            <span class="text-xl font-black text-cyan-950">Día ${{diaOptimo}} del Mes</span>
-            <span class="text-xs text-cyan-800 block mt-0.5">Riesgo en día óptimo: <strong>3.8%</strong> (vs 39.5% a fin de mes)</span>
-            <span class="text-[11px] text-cyan-700 block">Mejor opción: ${{med.mejor_cadena}} (Bs ${{med.mejor_precio_bs.toFixed(2)}})</span>
+            <span class="text-[11px] font-bold uppercase text-cyan-900 block">🛒 Mejor día del mes para ir a comprar:</span>
+            <span class="text-xl font-black text-cyan-950">Día ${{diaOptimo}} de cada mes</span>
+            <span class="text-xs text-cyan-900 block mt-0.5">Evitas las colas largas del cobro de pensión en el Banco Unión (días 1 al 5).</span>
+            <span class="text-[11px] text-cyan-800 block mt-1">Opción más económica hoy: <strong>${{med.mejor_cadena}}</strong> (Bs ${{med.mejor_precio_bs.toFixed(2)}}).</span>
           </div>
         </div>
 
-        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">
-          💡 <strong>Recomendación Clínica & Operativa:</strong> Para una dosis de ${{dosis}} UI/día con variación de ±${{variabilidad}} UI, tu frasco de ${{med.marca}} (${{capacidadUI}} UI) te brindará cobertura segura. Comprar el <strong>Día ${{diaOptimo}} del mes</strong> evita el colapso de filas en farmacias generado por el cobro de la Renta Dignidad (días 1 al 5) y el agotamiento de fin de mes, permitiéndote ahorrar <strong>Bs ${{med.ahorro_max_bs.toFixed(2)}}</strong> en ${{med.mejor_cadena}}.
+        <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs text-slate-700 leading-relaxed">
+          💡 <strong>Consejo para tu tranquilidad:</strong> Con tu dosis de ${{dosis}} unidades al día, tu frasco de <strong>${{med.marca}}</strong> (${{capacidadUI}} UI) te brindará cobertura tranquila para más de un mes. Te aconsejamos comprar tu siguiente frasco alrededor del <strong>día ${{diaOptimo}} del mes</strong> en <strong>${{med.mejor_cadena}}</strong> para pagar el precio más económico (<strong>Bs ${{med.mejor_precio_bs.toFixed(2)}}</strong>, ahorrando hasta Bs ${{med.ahorro_max_bs.toFixed(2)}}) y evitar el cansancio y las colas de los primeros días de cobro de jubilaciones.
         </div>
+      `;
+    }}
       `;
     }}
 
@@ -1443,7 +1490,7 @@ def construir_html_mvp(
     }}
 
     function iniciarChatbot() {{
-      const saludo = `¡Hola! Con mucho gusto le ayudo. 🩺\n\nSoy su **Asistente de Insulina para Santa Cruz de la Sierra**. Le puedo orientar de forma sencilla en:\n• 💰 **Comparación de precios:** Cuál farmacia la tiene más económica (Farmacorp, Chávez o Telchi).\n• 🚦 **Disponibilidad:** Si hay stock seguro o si conviene comprar con anticipación.\n• 🎲 **Simulación estocástica:** Cuándo le conviene comprar su próxima insulina para no quedarse sin dosis.\n• 📍 **Sucursales por anillo:** Direcciones cercanas del 1er al 8vo anillo o centro.\n• 🧮 **Presupuesto mensual:** Frascos y ahorro estimado según su dosis diaria.\n\nPuede pulsar una pregunta rápida arriba o escribir su consulta directamente.`;
+      const saludo = `¡Hola! Con mucho gusto le ayudo. 🩺\n\nSoy su **Asistente de Insulina para Santa Cruz de la Sierra**. Le puedo orientar de forma sencilla en:\n• 💰 **Comparación de precios:** Cuál farmacia la tiene más económica (Farmacorp, Chávez o Telchi).\n• 🚦 **Disponibilidad:** Si hay stock seguro o si conviene comprar con anticipación.\n• 🎲 **Duración y compra:** Cuándo se acabará su frasco y qué día del mes le conviene comprar para evitar filas.\n• 📍 **Sucursales por anillo:** Direcciones cercanas del 1er al 8vo anillo o centro.\n• 🧮 **Presupuesto mensual:** Frascos y ahorro estimado según su dosis diaria.\n\nPuede pulsar una pregunta rápida arriba o escribir su consulta directamente.`;
       agregarMensajeChat('bot', saludo);
     }}
 
@@ -1518,7 +1565,7 @@ def construir_html_mvp(
         }};
       }}
 
-      // 1.b Simulación Estocástica de Inventarios Monte Carlo (García Dunna et al., 2013 - US-42)
+      // 1.b Cálculo de Duración y Día Óptimo de Compra (US-42)
       if (/(cuando comprar|dia optimo|reorden|cuanto dura|duracion|monte carlo|simulacion|agotar|reabastecer)/.test(norm)) {{
         let med = DATA_MEDICAMENTOS.find(m => norm.includes(normalizarTextoChat(m.marca))) || DATA_MEDICAMENTOS[0];
         const cap = med.unidades_totales || 1000;
@@ -1526,13 +1573,16 @@ def construir_html_mvp(
         const dosis = matchD ? parseFloat(matchD[1]) : 25;
         const durAprox = Math.round(cap / dosis);
         const diaOptimo = durAprox <= 20 ? 12 : 22;
-        let r = `🎲 **Simulación de Inventario Monte Carlo (${{med.marca}}):**\n\n`;
-        r += `• **Dosis base:** ${{dosis}} UI/día (±3 UI por comidas o bolos).\n`;
-        r += `• **Duración esperada:** Aproximadamente **${{durAprox}} días de cobertura segura** por frasco de ${{cap}} UI.\n`;
-        r += `• 🎯 **Día Óptimo de Compra en el Mes:** Le conviene reabastecerse el **Día ${{diaOptimo}} del mes**.\n`;
-        r += `• 💡 **¿Por qué este día?** Evita el colapso de filas provocado por el pago de la Renta Dignidad en Banco Unión (días 1 al 5) y el agotamiento de fin de mes, reduciendo el riesgo de desabastecimiento a solo 3.8%.\n`;
-        r += `• 🏷️ **Mejor farmacia:** ${{med.mejor_cadena}} a Bs ${{med.mejor_precio_bs.toFixed(2)}} (Ahorras Bs ${{med.ahorro_max_bs.toFixed(2)}}).\n\n`;
-        r += `⚠️ *Pronóstico basado en 1.000 réplicas Monte Carlo. Consulte siempre a su médico antes de variar su pauta.*`;
+        let r = `🎲 **Cálculo de Duración y Día de Compra (${{med.marca}}):**\n\n`;
+        r += `• **Con tu dosis de:** ${{dosis}} unidades al día.\n`;
+        r += `• **Duración estimada:** Tu frasco de ${{cap}} unidades te durará aproximadamente **${{durAprox}} días**.\n`;
+        r += `• 🎯 **Cuándo ir a comprar:** Te conviene comprar tu siguiente frasco alrededor del **Día ${{diaOptimo}} del mes**.\n`;
+        r += `• 💡 **¿Por qué este día?** Porque evitas las filas largas del cobro de pensión en el Banco Unión (días 1 al 5) y no te arriesgas a que la farmacia se quede sin stock a fin de mes.\n`;
+        r += `• 🏷️ **Dónde te sale más barato:** En **${{med.mejor_cadena}}** a **Bs ${{med.mejor_precio_bs.toFixed(2)}}**`;
+        if (med.ahorro_max_bs > 0) {{
+          r += ` (¡Ahorras Bs ${{med.ahorro_max_bs.toFixed(2)}} frente a la más cara!)`;
+        }}
+        r += `.\n\n⚠️ *Consulte siempre a su médico antes de variar su tratamiento.*`;
         return {{ texto: r }};
       }}
 

@@ -82,6 +82,23 @@ class TestAudioYSimulacionWeb(unittest.TestCase):
             self.assertIn('id="panelResultadosMonteCarlo"', content, f"Falta panel Monte Carlo en {path_name}")
             self.assertIn('id="btnDetenerChatHeader"', content, f"Falta detener chat en {path_name}")
 
+    def test_07_audio_bienvenida_y_lenguaje_humano(self) -> None:
+        """Verifica que el botón de bienvenida de voz esté presente y con lenguaje empático para el jubilado."""
+        self.assertIn('id="btnAudioBienvenida"', self.contenido_root)
+        self.assertIn("leerResumenVoz()", self.contenido_root)
+        self.assertIn("¡Hola abuelito o familiar cuidador!", self.contenido_root)
+        self.assertIn("Tu Plan de Duración y Compra Tranquila", self.contenido_root)
+        self.assertIn("¿Cuánto te durará tu frasco?", self.contenido_root)
+        self.assertIn("¿Cuándo se acabará tu frasco y qué día te conviene comprar?", self.contenido_root)
+
+    def test_08_panel_trazabilidad_en_footer_y_sin_indisponible(self) -> None:
+        """Verifica que la trazabilidad esté en el footer y que no muestre texto crudo 'No disponible'."""
+        self.assertIn('aria-label="Trazabilidad de los datos"', self.contenido_root)
+        self.assertIn('insulina_precios_stock_', self.contenido_root)
+        self.assertNotIn("Fecha efectiva de los datos: No disponible", self.contenido_root)
+        self.assertNotIn("Snapshot fuente: No disponible", self.contenido_root)
+        self.assertNotIn("Fecha de generación del bundle: No disponible", self.contenido_root)
+
 
 if __name__ == "__main__":
     unittest.main()
